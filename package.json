@@ -13,14 +13,12 @@
     "devDependencies": {
         "prettier": "^1.19.1",
         "rimraf": "^3.0.0",
-        "rollup": "^1.27.2",
-        "rollup-plugin-typescript": "^1.0.1",
         "tslib": "^1.10.0",
         "typescript": "^3.7.2"
     },
     "scripts": {
         "clean": "rimraf dist",
-        "build": "rollup --config",
-        "start": "tsc --project . --watch"
+        "build": "tsc --project .",
+        "start": "yarn build --watch"
     }
 }
