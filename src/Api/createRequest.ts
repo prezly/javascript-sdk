@@ -28,7 +28,13 @@ function extractResponse(response: FetchResponse) {
     };
 }
 
-function createFakeErrorPayload({ status, statusText }: { status: number; statusText: string }) {
+export function createFakeErrorPayload({
+    status,
+    statusText,
+}: {
+    status?: number;
+    statusText?: string;
+}) {
     return {
         status: 'error',
         code: status,
