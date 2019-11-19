@@ -4,7 +4,6 @@
         "target": "es5",
         "module": "commonjs",
         "lib": ["esnext"],
-        "allowJs": true,
         "outDir": "./dist",
         "removeComments": true,
         "inlineSourceMap": true,
@@ -18,7 +17,8 @@
         "baseUrl": "./src",
         "rootDir": "./src",
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true
     },
     "include": ["./src"]
 }
