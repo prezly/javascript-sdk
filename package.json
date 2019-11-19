@@ -21,7 +21,8 @@
     "scripts": {
         "clean": "rimraf dist",
         "build": "tsc --project .",
-        "start": "yarn build --watch"
+        "start": "yarn build --watch",
+        "prettier": "prettier --write './src/**/*.{ts,js}'"
     },
     "dependencies": {
         "node-fetch": "^2.6.0",
