@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "incremental": true,
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["esnext"],
+        "allowJs": true,
+        "outDir": "./dist",
+        "removeComments": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "downlevelIteration": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "moduleResolution": "node",
+        "baseUrl": "./src",
+        "rootDir": "./src",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["./src"]
+}

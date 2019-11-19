@@ -1,0 +1,26 @@
+{
+    "name": "@prezly/sdk",
+    "version": "1.0.0",
+    "description": "Prezly API SDK",
+    "main": "dist/sdk.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/prezly/sdk.git"
+    },
+    "author": "Prezly Team <hello@prezly.com> (https://www.prezly.com)",
+    "license": "MIT",
+    "private": false,
+    "devDependencies": {
+        "prettier": "^1.19.1",
+        "rimraf": "^3.0.0",
+        "rollup": "^1.27.2",
+        "rollup-plugin-typescript": "^1.0.1",
+        "tslib": "^1.10.0",
+        "typescript": "^3.7.2"
+    },
+    "scripts": {
+        "clean": "rimraf dist",
+        "build": "rollup --config",
+        "start": "tsc --project . --watch"
+    }
+}
