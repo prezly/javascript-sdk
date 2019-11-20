@@ -1,1 +1,3 @@
-export { default } from './Sdk';
+import { default as PrezlySdk } from './Sdk';
+
+module.exports = PrezlySdk;
