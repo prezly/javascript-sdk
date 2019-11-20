@@ -5,7 +5,7 @@
     "main": "dist/index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/prezly/sdk.git"
+        "url": "https://github.com/prezly/javascript-sdk.git"
     },
     "author": "Prezly Team <hello@prezly.com> (https://www.prezly.com)",
     "license": "MIT",
