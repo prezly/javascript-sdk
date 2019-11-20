@@ -16,7 +16,7 @@ const DEFAULT_REQUEST_PROPS = {
     },
 };
 
-function successJSONResponse(body: object) {
+function successJsonResponse(body: object) {
     return new Response(JSON.stringify(body), {
         status: 200,
         statusText: 'OK',
@@ -42,7 +42,7 @@ describe('Api', () => {
             foo: 'bar',
         };
 
-        const expectedResponse = successJSONResponse(expectedPayload);
+        const expectedResponse = successJsonResponse(expectedPayload);
         global.fetch.mockResolvedValueOnce(expectedResponse);
 
         const actualResponse = await Api.get(API_URL_CORRECT);
@@ -84,7 +84,7 @@ describe('Api', () => {
     });
 
     it('should create a GET request', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
 
         global.fetch.mockResolvedValueOnce(response);
 
@@ -99,7 +99,7 @@ describe('Api', () => {
     });
 
     it('should create a GET request with query params', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
         global.fetch.mockResolvedValueOnce(response);
 
         const query = { foo: 'bar' };
@@ -114,7 +114,7 @@ describe('Api', () => {
     });
 
     it('should create a POST request', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
         global.fetch.mockResolvedValueOnce(response);
 
         const query = {
@@ -137,7 +137,7 @@ describe('Api', () => {
     });
 
     it('should create a PUT request', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
         global.fetch.mockResolvedValueOnce(response);
 
         const query = {
@@ -160,7 +160,7 @@ describe('Api', () => {
     });
 
     it('should create a PATCH request', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
         global.fetch.mockResolvedValueOnce(response);
 
         const query = {
@@ -183,7 +183,7 @@ describe('Api', () => {
     });
 
     it('should create a DELETE request', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
         global.fetch.mockResolvedValueOnce(response);
 
         const query = {
@@ -201,7 +201,7 @@ describe('Api', () => {
     });
 
     it('should create a DELETE request (with body)', async () => {
-        const response = successJSONResponse({});
+        const response = successJsonResponse({});
         global.fetch.mockResolvedValueOnce(response);
 
         const query = {
