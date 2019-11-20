@@ -2,8 +2,7 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        /* Using "dom" lib because jest-fetch-mock relies on it for types. */
-        "lib": ["esnext", "dom"],
+        "lib": ["esnext"],
         "outDir": "./dist",
         "removeComments": true,
         "inlineSourceMap": true,
