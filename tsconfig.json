@@ -13,12 +13,7 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "moduleResolution": "node",
-        "baseUrl": "./src",
         "rootDir": "./src",
-        "paths": {
-            "Api": ["./Api"],
-            "types": ["./types"]
-        },
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "declaration": true
