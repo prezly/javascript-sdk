@@ -22,15 +22,15 @@
         "tslib": "^1.10.0",
         "typescript": "^3.7.2"
     },
+    "dependencies": {
+        "node-fetch": "^2.6.0",
+        "query-string": "^6.9.0"
+    },
     "scripts": {
         "clean": "rimraf dist",
         "build": "tsc --project .",
         "start": "yarn build --incremental --watch",
         "test": "jest",
         "prettier": "prettier --write './src/**/*.{ts,js}'"
-    },
-    "dependencies": {
-        "node-fetch": "^2.6.0",
-        "query-string": "^6.9.0"
     }
 }
