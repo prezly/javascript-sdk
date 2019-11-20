@@ -25,7 +25,7 @@
     "scripts": {
         "clean": "rimraf dist",
         "build": "tsc --project .",
-        "start": "yarn build --watch",
+        "start": "yarn build --incremental --watch",
         "test": "jest",
         "prettier": "prettier --write './src/**/*.{ts,js}'"
     },
