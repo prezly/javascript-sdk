@@ -3,6 +3,7 @@ import { Response } from 'node-fetch';
 import { createUrlWithQuery } from './lib';
 import { createFakeErrorPayload } from './createRequest';
 import Api from './Api';
+import { Method } from './types';
 
 const API_URL_CORRECT = 'http://rock.prezly.test/api/v1/contacts';
 const API_URL_INCORRECT = 'htp:/rock.prezly.test/api/v1/contacts';
@@ -35,7 +36,7 @@ function errorJSONResponse(body: object) {
     });
 }
 
-describe('Api.js', () => {
+describe('Api', () => {
     it('should resolve with correct payload', async () => {
         const expectedPayload = {
             foo: 'bar',
@@ -93,7 +94,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'GET',
+            method: Method.GET,
         });
     });
 
@@ -108,7 +109,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'GET',
+            method: Method.GET,
         });
     });
 
@@ -130,7 +131,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'POST',
+            method: Method.POST,
             body: JSON.stringify(payload),
         });
     });
@@ -153,7 +154,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'PUT',
+            method: Method.PUT,
             body: JSON.stringify(payload),
         });
     });
@@ -176,7 +177,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'PATCH',
+            method: Method.PATCH,
             body: JSON.stringify(payload),
         });
     });
@@ -195,7 +196,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'DELETE',
+            method: Method.DELETE,
         });
     });
 
@@ -217,7 +218,7 @@ describe('Api.js', () => {
 
         expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
-            method: 'DELETE',
+            method: Method.DELETE,
             body: JSON.stringify(payload),
         });
     });
