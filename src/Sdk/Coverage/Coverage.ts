@@ -5,8 +5,10 @@ import { coverageUrl } from '../routing';
 import { getItemId } from '../utils';
 
 import {
+    CoverageCreateRequest,
     CoverageListResponse,
     CoverageSearchOptions,
+    CoverageUpdateRequest,
 } from './types';
 
 interface Options {
@@ -50,12 +52,23 @@ export default class CoverageSdk {
         return coverage[0] || null;
     }
 
-    async create(): Promise<Coverage> {
-        throw new Error('Not implemented!');
+    async create(payload: CoverageCreateRequest): Promise<Coverage> {
+        const response = await Api.post<{ coverage: Coverage }>(this.url, {
+            accessToken: this.accessToken,
+            payload,
+        });
+        return response.payload.coverage;
     }
 
-    async update(): Promise<Coverage> {
-        throw new Error('Not implemented!');
+    async update(
+        itemOrItemId: string | Coverage,
+        payload: CoverageUpdateRequest,
+    ): Promise<Coverage> {
+        const response = await Api.patch<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
+            accessToken: this.accessToken,
+            payload,
+        });
+        return response.payload.coverage;
     }
 
     async delete(itemOrItemId: string | Coverage): Promise<void> {
