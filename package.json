@@ -12,6 +12,9 @@
     },
     "author": "Prezly Team <hello@prezly.com> (https://www.prezly.com)",
     "license": "MIT",
+    "engines": {
+        "node": ">= 8.16.0"
+    },
     "devDependencies": {
         "@babel/core": "^7.7.2",
         "@babel/preset-env": "^7.7.1",
