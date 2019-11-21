@@ -1,6 +1,3 @@
-/**
- * @see UserLicense::toApiArray()
- */
 export default interface UserAccountRef {
     id: number;
     username: string;

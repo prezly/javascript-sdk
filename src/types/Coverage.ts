@@ -1,5 +1,5 @@
 import Contact from './Contact';
-import { Entity } from './EntitiesMap';
+import Entity from './Entity';
 import Story from './Story';
 import UserRef from './UserRef';
 import RoomRef from './RoomRef';

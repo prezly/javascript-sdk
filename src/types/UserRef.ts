@@ -1,6 +1,3 @@
-/**
- * @see sfGuardUser::toApiReferenceArray()
- */
 export default interface UserRef {
     id: number;
     username: string;

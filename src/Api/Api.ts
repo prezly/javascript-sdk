@@ -1,13 +1,13 @@
 import { Method, HeadersMap, Response } from './types';
 import createRequest from './createRequest';
 
-const withAccessToken = (headers?: HeadersMap, accessToken?: string): HeadersMap => ({
+const withAccessToken = (headers: HeadersMap = {}, accessToken: string): HeadersMap => ({
     ...headers,
-    ...(accessToken ? { 'x-access-token': accessToken } : {}),
+    'x-access-token': accessToken,
 });
 
 interface Params {
-    accessToken?: string;
+    accessToken: string;
     headers?: HeadersMap;
     query?: object;
 }
@@ -17,10 +17,7 @@ interface ParamsWithPayload extends Params {
 }
 
 const Api = {
-    get: <P = any>(
-        url: string,
-        { accessToken, headers, query }: Params = {},
-    ): Promise<Response<P>> =>
+    get: <P = any>(url: string, { accessToken, headers, query }: Params): Promise<Response<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
             method: Method.GET,
@@ -29,7 +26,7 @@ const Api = {
 
     post: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload = {},
+        { accessToken, headers, payload, query }: ParamsWithPayload,
     ): Promise<Response<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
@@ -40,7 +37,7 @@ const Api = {
 
     put: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload = {},
+        { accessToken, headers, payload, query }: ParamsWithPayload,
     ): Promise<Response<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
@@ -51,7 +48,7 @@ const Api = {
 
     patch: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload = {},
+        { accessToken, headers, payload, query }: ParamsWithPayload,
     ): Promise<Response<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
@@ -62,7 +59,7 @@ const Api = {
 
     delete: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload = {},
+        { accessToken, headers, payload, query }: ParamsWithPayload,
     ): Promise<Response<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),

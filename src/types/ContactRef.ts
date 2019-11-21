@@ -1,4 +1,4 @@
-import { Entity } from './EntitiesMap';
+import Entity from './Entity';
 
 export default interface ContactRef extends Entity {
     contact_type: 'person' | 'organisation';

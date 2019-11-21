@@ -1,17 +1,21 @@
 import { Api } from '../../Api';
 import { Coverage } from '../../types';
 
-import { Options } from '../types';
 import { coverageUrl } from '../routing';
 import { getItemId } from '../utils';
 
 import { CoverageListResponse } from './types';
 
-export default class Coverages {
+interface Options {
+    accessToken: string;
+    baseUrl: string;
+}
+
+export default class CoverageSdk {
     private readonly accessToken: string;
     private readonly url: string;
 
-    constructor({ accessToken, baseUrl }: Required<Options>) {
+    constructor({ accessToken, baseUrl }: Options) {
         this.accessToken = accessToken;
         this.url = `${baseUrl}/${coverageUrl}`;
     }
