@@ -4,7 +4,10 @@ import { Coverage } from '../../types';
 import { coverageUrl } from '../routing';
 import { getItemId } from '../utils';
 
-import { CoverageListResponse } from './types';
+import {
+    CoverageListResponse,
+    CoverageSearchOptions,
+} from './types';
 
 interface Options {
     accessToken: string;
@@ -20,9 +23,16 @@ export default class CoverageSdk {
         this.url = `${baseUrl}/${coverageUrl}`;
     }
 
-    async list(): Promise<CoverageListResponse> {
+    async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
+        const { jsonQuery, page, pageSize, sortOrder } = options;
         const response = await Api.get<CoverageListResponse>(this.url, {
             accessToken: this.accessToken,
+            query: {
+                page,
+                pageSize,
+                query: jsonQuery,
+                sort: sortOrder,
+            },
         });
         return response.payload;
     }
