@@ -2,7 +2,7 @@ import { Api } from '../../Api';
 import { Coverage } from '../../types';
 
 import { coverageUrl } from '../routing';
-import { getItemId } from '../utils';
+import BaseSdk, { Options } from '../BaseSdk';
 
 import {
     CoverageCreateRequest,
@@ -11,24 +11,15 @@ import {
     CoverageUpdateRequest,
 } from './types';
 
-interface Options {
-    accessToken: string;
-    baseUrl: string;
-}
-
-export default class CoverageSdk {
-    private readonly accessToken: string;
-    private readonly url: string;
-
-    constructor({ accessToken, baseUrl }: Options) {
-        this.accessToken = accessToken;
-        this.url = `${baseUrl}/${coverageUrl}`;
+export default class CoverageSdk extends BaseSdk<Coverage> {
+    constructor(options: Options) {
+        super(options, coverageUrl);
     }
 
     async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
         const { jsonQuery, page, pageSize, sortOrder } = options;
         const response = await Api.get<CoverageListResponse>(this.url, {
-            accessToken: this.accessToken,
+            headers: this.getHeaders(),
             query: {
                 page,
                 pageSize,
@@ -41,7 +32,7 @@ export default class CoverageSdk {
 
     async get(itemOrItemId: string | Coverage): Promise<Coverage> {
         const response = await Api.get<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
-            accessToken: this.accessToken,
+            headers: this.getHeaders(),
         });
         return response.payload.coverage;
     }
@@ -54,7 +45,7 @@ export default class CoverageSdk {
 
     async create(payload: CoverageCreateRequest): Promise<Coverage> {
         const response = await Api.post<{ coverage: Coverage }>(this.url, {
-            accessToken: this.accessToken,
+            headers: this.getHeaders(),
             payload,
         });
         return response.payload.coverage;
@@ -65,7 +56,7 @@ export default class CoverageSdk {
         payload: CoverageUpdateRequest,
     ): Promise<Coverage> {
         const response = await Api.patch<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
-            accessToken: this.accessToken,
+            headers: this.getHeaders(),
             payload,
         });
         return response.payload.coverage;
@@ -73,12 +64,7 @@ export default class CoverageSdk {
 
     async remove(itemOrItemId: string | Coverage): Promise<void> {
         await Api.delete<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
-            accessToken: this.accessToken,
+            headers: this.getHeaders(),
         });
-    }
-
-    private getUrlWithId(itemOrItemId: string | Coverage): string {
-        const itemId: string = getItemId<string, Coverage>(itemOrItemId);
-        return `${this.url}/${itemId}`;
     }
 }
