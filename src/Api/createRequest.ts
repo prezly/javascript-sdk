@@ -1,4 +1,4 @@
-import fetch, { Headers, Response as FetchResponse } from 'node-fetch';
+import fetch from 'cross-fetch';
 
 import { createUrlWithQuery } from './lib';
 import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
@@ -20,7 +20,7 @@ function extractHeaders(headers: Headers): HeadersMap {
     return result;
 }
 
-function extractResponse(response: FetchResponse) {
+function extractResponse(response: Response) {
     return {
         status: response.status,
         statusText: response.statusText,
