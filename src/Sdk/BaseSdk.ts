@@ -1,5 +1,7 @@
 import { Entity } from '../types';
 
+import { DEFAULT_USER_AGENT } from './constants';
+
 export interface Options {
     accessToken: string;
     baseUrl: string;
@@ -16,6 +18,7 @@ export default class BaseSdk<T extends Entity<number | string>> {
 
     protected getHeaders(): { [key: string]: string } {
         return {
+            'User-Agent': DEFAULT_USER_AGENT,
             'x-access-token': this.accessToken,
         };
     }
