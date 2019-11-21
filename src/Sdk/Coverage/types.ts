@@ -14,9 +14,7 @@ export interface CoverageUpdateRequest {
     url?: string | null;
 }
 
-export interface CoverageCreateRequest extends CoverageUpdateRequest {
-    author: Contact['id'] | string;
-}
+export interface CoverageCreateRequest extends CoverageUpdateRequest {}
 
 export interface CoverageSearchOptions {
     jsonQuery?: string;
