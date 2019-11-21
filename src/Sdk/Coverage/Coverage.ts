@@ -11,7 +11,7 @@ interface Options {
     baseUrl: string;
 }
 
-export default class Coverages {
+export default class CoverageSdk {
     private readonly accessToken: string;
     private readonly url: string;
 
