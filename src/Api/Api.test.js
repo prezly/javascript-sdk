@@ -8,15 +8,18 @@ import { Method } from './types';
 const API_URL_CORRECT = 'http://rock.prezly.test/api/v1/contacts';
 const API_URL_INCORRECT = 'htp:/rock.prezly.test/api/v1/contacts';
 
+const ACCESS_TOKEN = 'example-access-token';
+
 const DEFAULT_REQUEST_PROPS = {
     body: undefined,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=utf-8',
+        'x-access-token': ACCESS_TOKEN,
     },
 };
 
-function successJsonResponse(body: object) {
+function successJsonResponse(body) {
     return new Response(JSON.stringify(body), {
         status: 200,
         statusText: 'OK',
@@ -26,7 +29,7 @@ function successJsonResponse(body: object) {
     });
 }
 
-function errorJSONResponse(body: object) {
+function errorJSONResponse(body) {
     return new Response(JSON.stringify(body), {
         status: 500,
         statusText: 'Internal Server Error',
@@ -37,6 +40,10 @@ function errorJSONResponse(body: object) {
 }
 
 describe('Api', () => {
+    beforeEach(() => {
+        global.fetch.resetMocks();
+    });
+
     it('should resolve with correct payload', async () => {
         const expectedPayload = {
             foo: 'bar',
@@ -45,7 +52,7 @@ describe('Api', () => {
         const expectedResponse = successJsonResponse(expectedPayload);
         global.fetch.mockResolvedValueOnce(expectedResponse);
 
-        const actualResponse = await Api.get(API_URL_CORRECT);
+        const actualResponse = await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
 
         expect(actualResponse.status).toEqual(200);
         expect(actualResponse.payload).toEqual(expectedPayload);
@@ -60,7 +67,7 @@ describe('Api', () => {
         global.fetch.mockResolvedValueOnce(expectedResponse);
 
         try {
-            await Api.get(API_URL_CORRECT);
+            await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
         } catch ({ status, payload }) {
             expect(status).toEqual(500);
             expect(payload).toEqual(expectedPayload);
@@ -72,7 +79,7 @@ describe('Api', () => {
         // Fetch mock doesn't validate the URL so we mock the error.
         global.fetch.mockRejectOnce(new Error(errorMessage));
         try {
-            await Api.get(API_URL_INCORRECT);
+            await Api.get(API_URL_INCORRECT, { accessToken: ACCESS_TOKEN });
         } catch ({ payload }) {
             const expectedErrorResponse = createFakeErrorPayload({
                 status: undefined,
@@ -88,7 +95,7 @@ describe('Api', () => {
 
         global.fetch.mockResolvedValueOnce(response);
 
-        await Api.get(API_URL_CORRECT);
+        await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT);
 
@@ -103,7 +110,10 @@ describe('Api', () => {
         global.fetch.mockResolvedValueOnce(response);
 
         const query = { foo: 'bar' };
-        await Api.get(API_URL_CORRECT, { query });
+        await Api.get(API_URL_CORRECT, {
+            accessToken: ACCESS_TOKEN,
+            query,
+        });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
 
@@ -125,7 +135,11 @@ describe('Api', () => {
             foo: 'bar',
         };
 
-        await Api.post(API_URL_CORRECT, { query, payload });
+        await Api.post(API_URL_CORRECT, {
+            accessToken: ACCESS_TOKEN,
+            payload,
+            query,
+        });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
 
@@ -148,7 +162,11 @@ describe('Api', () => {
             foo: 'bar',
         };
 
-        await Api.put(API_URL_CORRECT, { query, payload });
+        await Api.put(API_URL_CORRECT, {
+            accessToken: ACCESS_TOKEN,
+            payload,
+            query,
+        });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
 
@@ -171,7 +189,11 @@ describe('Api', () => {
             foo: 'bar',
         };
 
-        await Api.patch(API_URL_CORRECT, { query, payload });
+        await Api.patch(API_URL_CORRECT, {
+            accessToken: ACCESS_TOKEN,
+            payload,
+            query,
+        });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
 
@@ -190,7 +212,10 @@ describe('Api', () => {
             foo: 'bar',
         };
 
-        await Api.delete(API_URL_CORRECT, { query });
+        await Api.delete(API_URL_CORRECT, {
+            accessToken: ACCESS_TOKEN,
+            query,
+        });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
 
@@ -212,7 +237,11 @@ describe('Api', () => {
             foo: 'bar',
         };
 
-        await Api.delete(API_URL_CORRECT, { query, payload });
+        await Api.delete(API_URL_CORRECT, {
+            accessToken: ACCESS_TOKEN,
+            payload,
+            query,
+        });
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
 

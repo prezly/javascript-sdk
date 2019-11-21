@@ -13,9 +13,11 @@
     "author": "Prezly Team <hello@prezly.com> (https://www.prezly.com)",
     "license": "MIT",
     "devDependencies": {
-        "@types/jest": "^24.0.23",
+        "@babel/core": "^7.7.2",
+        "@babel/preset-env": "^7.7.1",
         "@types/node": "^12.12.9",
         "@types/node-fetch": "^2.5.3",
+        "babel-jest": "^24.9.0",
         "jest": "^24.9.0",
         "jest-fetch-mock": "^2.1.2",
         "np": "^5.1.3",
