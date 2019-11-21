@@ -1,7 +1,7 @@
 import fetch, { Headers, Response as FetchResponse } from 'node-fetch';
 
 import { createUrlWithQuery } from './lib';
-import { HttpCodes, Method, HeadersMap, Response } from './types';
+import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
 import ApiError from './ApiError';
 
 import {
@@ -63,7 +63,7 @@ export default async function createRequest<P = any>(
         payload?: object;
         query?: object;
     },
-): Promise<Response<P>> {
+): Promise<ApiResponse<P>> {
     try {
         const urlWithQuery = createUrlWithQuery(url, query);
         const response = await fetch(urlWithQuery, {

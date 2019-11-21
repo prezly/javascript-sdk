@@ -1,4 +1,4 @@
-import { Method, HeadersMap, Response } from './types';
+import { Method, HeadersMap, ApiResponse } from './types';
 import createRequest from './createRequest';
 
 const withAccessToken = (headers: HeadersMap = {}, accessToken: string): HeadersMap => ({
@@ -17,7 +17,7 @@ interface ParamsWithPayload extends Params {
 }
 
 const Api = {
-    get: <P = any>(url: string, { accessToken, headers, query }: Params): Promise<Response<P>> =>
+    get: <P = any>(url: string, { accessToken, headers, query }: Params): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
             method: Method.GET,
@@ -27,7 +27,7 @@ const Api = {
     post: <P = any>(
         url: string,
         { accessToken, headers, payload, query }: ParamsWithPayload,
-    ): Promise<Response<P>> =>
+    ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
             method: Method.POST,
@@ -38,7 +38,7 @@ const Api = {
     put: <P = any>(
         url: string,
         { accessToken, headers, payload, query }: ParamsWithPayload,
-    ): Promise<Response<P>> =>
+    ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
             method: Method.PUT,
@@ -49,7 +49,7 @@ const Api = {
     patch: <P = any>(
         url: string,
         { accessToken, headers, payload, query }: ParamsWithPayload,
-    ): Promise<Response<P>> =>
+    ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
             method: Method.PATCH,
@@ -60,7 +60,7 @@ const Api = {
     delete: <P = any>(
         url: string,
         { accessToken, headers, payload, query }: ParamsWithPayload,
-    ): Promise<Response<P>> =>
+    ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers: withAccessToken(headers, accessToken),
             method: Method.DELETE,
