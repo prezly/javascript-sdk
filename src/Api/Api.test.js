@@ -6,14 +6,11 @@ import { Method } from './types';
 const API_URL_CORRECT = 'http://rock.prezly.test/api/v1/contacts';
 const API_URL_INCORRECT = 'htp:/rock.prezly.test/api/v1/contacts';
 
-const ACCESS_TOKEN = 'example-access-token';
-
 const DEFAULT_REQUEST_PROPS = {
     body: undefined,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=utf-8',
-        'x-access-token': ACCESS_TOKEN,
     },
 };
 
@@ -50,7 +47,7 @@ describe('Api', () => {
         const expectedResponse = successJsonResponse(expectedPayload);
         fetch.mockResolvedValueOnce(expectedResponse);
 
-        const actualResponse = await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
+        const actualResponse = await Api.get(API_URL_CORRECT);
 
         expect(actualResponse.status).toEqual(200);
         expect(actualResponse.payload).toEqual(expectedPayload);
@@ -65,7 +62,7 @@ describe('Api', () => {
         fetch.mockResolvedValueOnce(expectedResponse);
 
         try {
-            await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
+            await Api.get(API_URL_CORRECT);
         } catch ({ status, payload }) {
             expect(status).toEqual(500);
             expect(payload).toEqual(expectedPayload);
@@ -77,7 +74,7 @@ describe('Api', () => {
         // Fetch mock doesn't validate the URL so we mock the error.
         fetch.mockRejectOnce(new Error(errorMessage));
         try {
-            await Api.get(API_URL_INCORRECT, { accessToken: ACCESS_TOKEN });
+            await Api.get(API_URL_INCORRECT);
         } catch ({ payload }) {
             const expectedErrorResponse = createFakeErrorPayload({
                 status: undefined,
@@ -93,7 +90,7 @@ describe('Api', () => {
 
         fetch.mockResolvedValueOnce(response);
 
-        await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
+        await Api.get(API_URL_CORRECT);
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT).href;
 
@@ -109,7 +106,6 @@ describe('Api', () => {
 
         const query = { foo: 'bar' };
         await Api.get(API_URL_CORRECT, {
-            accessToken: ACCESS_TOKEN,
             query,
         });
 
@@ -134,7 +130,6 @@ describe('Api', () => {
         };
 
         await Api.post(API_URL_CORRECT, {
-            accessToken: ACCESS_TOKEN,
             payload,
             query,
         });
@@ -161,7 +156,6 @@ describe('Api', () => {
         };
 
         await Api.put(API_URL_CORRECT, {
-            accessToken: ACCESS_TOKEN,
             payload,
             query,
         });
@@ -188,7 +182,6 @@ describe('Api', () => {
         };
 
         await Api.patch(API_URL_CORRECT, {
-            accessToken: ACCESS_TOKEN,
             payload,
             query,
         });
@@ -211,7 +204,6 @@ describe('Api', () => {
         };
 
         await Api.delete(API_URL_CORRECT, {
-            accessToken: ACCESS_TOKEN,
             query,
         });
 
@@ -236,7 +228,6 @@ describe('Api', () => {
         };
 
         await Api.delete(API_URL_CORRECT, {
-            accessToken: ACCESS_TOKEN,
             payload,
             query,
         });

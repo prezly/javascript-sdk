@@ -1,13 +1,7 @@
 import { Method, HeadersMap, ApiResponse } from './types';
 import createRequest from './createRequest';
 
-const withAccessToken = (headers: HeadersMap = {}, accessToken: string): HeadersMap => ({
-    ...headers,
-    'x-access-token': accessToken,
-});
-
 interface Params {
-    accessToken: string;
     headers?: HeadersMap;
     query?: object;
 }
@@ -17,19 +11,19 @@ interface ParamsWithPayload extends Params {
 }
 
 const Api = {
-    get: <P = any>(url: string, { accessToken, headers, query }: Params): Promise<ApiResponse<P>> =>
+    get: <P = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<P>> =>
         createRequest(url, {
-            headers: withAccessToken(headers, accessToken),
+            headers,
             method: Method.GET,
             query,
         }),
 
     post: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
-            headers: withAccessToken(headers, accessToken),
+            headers,
             method: Method.POST,
             payload,
             query,
@@ -37,10 +31,10 @@ const Api = {
 
     put: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
-            headers: withAccessToken(headers, accessToken),
+            headers,
             method: Method.PUT,
             payload,
             query,
@@ -48,10 +42,10 @@ const Api = {
 
     patch: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload,
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
-            headers: withAccessToken(headers, accessToken),
+            headers,
             method: Method.PATCH,
             payload,
             query,
@@ -59,10 +53,10 @@ const Api = {
 
     delete: <P = any>(
         url: string,
-        { accessToken, headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload,
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
-            headers: withAccessToken(headers, accessToken),
+            headers,
             method: Method.DELETE,
             payload,
             query,
