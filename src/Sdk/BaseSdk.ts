@@ -8,6 +8,15 @@ export interface Options {
     headers: HeadersMap;
 }
 
+/**
+ * Remove heading and trailing slashes.
+ * Examples:
+ *  - https://example.com/ -> https://example.com
+ *  - /v2/path -> v2/path
+ *  - /v2/path/ -> v2/path
+ */
+const sanitizeUrl = (url: string): string => url.replace(/^\/|\/$/g, '');
+
 export default class BaseSdk<T extends Entity<number | string>> {
     protected readonly accessToken: string;
     protected readonly url: string;
@@ -16,7 +25,7 @@ export default class BaseSdk<T extends Entity<number | string>> {
     constructor({ accessToken, baseUrl, headers }: Options, sdkUrl: string) {
         this.accessToken = accessToken;
         this.headers = headers;
-        this.url = `${baseUrl}/${sdkUrl}`;
+        this.url = `${sanitizeUrl(baseUrl)}/${sanitizeUrl(sdkUrl)}`;
     }
 
     protected getHeaders(): { [key: string]: string } {
