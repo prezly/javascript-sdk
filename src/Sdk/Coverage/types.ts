@@ -1,4 +1,4 @@
-import { Coverage, Pagination } from 'types';
+import { Coverage, Pagination } from '../../types';
 
 export interface CoverageListResponse {
     coverage: Coverage[];

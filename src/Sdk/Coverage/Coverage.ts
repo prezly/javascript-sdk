@@ -1,5 +1,5 @@
-import { Api } from 'Api';
-import { Coverage } from 'types';
+import { Api } from '../../Api';
+import { Coverage } from '../../types';
 
 import { coverageUrl } from '../routing';
 import { getItemId } from '../utils';

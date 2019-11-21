@@ -1,1 +1,1 @@
-export { default as Sdk } from './Sdk';
+export { default } from './Sdk';

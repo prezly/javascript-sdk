@@ -13,7 +13,6 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "moduleResolution": "node",
-        "baseUrl": "./src",
         "rootDir": "./src",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,

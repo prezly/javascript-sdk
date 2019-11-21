@@ -1,14 +1,6 @@
 import { createUrlWithQuery } from './lib';
 
-interface UrlData {
-    protocol: string;
-    hostname: string;
-    pathname: string;
-    search: string;
-    href: string;
-}
-
-const URL_DATA: UrlData = {
+const URL_DATA = {
     protocol: 'http:',
     hostname: 'rock.prezly.test',
     pathname: '/api/v1/contacts',
@@ -19,8 +11,8 @@ const URL_DATA: UrlData = {
 const API_URL = `${URL_DATA.protocol}//${URL_DATA.hostname}${URL_DATA.pathname}${URL_DATA.search}`;
 URL_DATA.href = API_URL;
 
-function assertURLStructure(actual: UrlData, expected = URL_DATA) {
-    const keys = Object.keys(expected) as (keyof UrlData)[];
+function assertURLStructure(actual, expected = URL_DATA) {
+    const keys = Object.keys(expected);
     keys.forEach((key) => expect(actual[key]).toBe(expected[key]));
 }
 
@@ -46,7 +38,7 @@ describe('createUrlWithQuery', () => {
 
     it('should skip the query if the value is null or not an object', () => {
         const invalidQueries = [null, 'a=1', 1, true];
-        invalidQueries.forEach((query: any) => {
+        invalidQueries.forEach((query) => {
             assertURLStructure(createUrlWithQuery(API_URL, query));
         });
     });
