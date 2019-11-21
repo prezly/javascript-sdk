@@ -44,6 +44,12 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
+    async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
+        const jsonQuery = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
+        const { coverage } = await this.list({ jsonQuery });
+        return coverage[0] || null;
+    }
+
     async create(): Promise<Coverage> {
         throw new Error('Not implemented!');
     }
