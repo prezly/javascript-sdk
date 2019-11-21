@@ -41,8 +41,8 @@ describe('Sdk', () => {
             pagination: {
                 offset: 0,
                 limit: 20,
-                matched_records_number: 0,
-                total_records_number: 0,
+                matched_records_number: coverage.length,
+                total_records_number: coverage.length,
             },
             coverage,
         });
