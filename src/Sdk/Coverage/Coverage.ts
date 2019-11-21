@@ -71,7 +71,7 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
-    async delete(itemOrItemId: string | Coverage): Promise<void> {
+    async remove(itemOrItemId: string | Coverage): Promise<void> {
         await Api.delete<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
             accessToken: this.accessToken,
         });
