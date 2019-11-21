@@ -1,5 +1,5 @@
 import Category from './Category';
-import { Entity } from './EntitiesMap';
+import Entity from './Entity';
 import Culture from './Culture';
 import RoomRef from './RoomRef';
 import StoryLifecycleStatus from './StoryLifecycleStatus';

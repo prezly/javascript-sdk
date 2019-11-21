@@ -1,4 +1,4 @@
-import { Entity } from './EntitiesMap';
+import Entity from './Entity';
 import ContactRef from './ContactRef';
 import ContactDuplicateSuggestion from './ContactDuplicateSuggestion';
 
