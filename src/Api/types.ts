@@ -1,3 +1,5 @@
+import { HeadersMap } from '../types';
+
 export enum HttpCodes {
     ACCEPTED = 202,
     NO_CONTENT = 204,
@@ -12,10 +14,6 @@ export enum Method {
     PATCH = 'PATCH',
     POST = 'POST',
     PUT = 'PUT',
-}
-
-export interface HeadersMap {
-    [name: string]: string;
 }
 
 export interface ApiErrorMessage {

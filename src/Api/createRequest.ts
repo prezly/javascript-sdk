@@ -1,9 +1,10 @@
 import fetch from 'cross-fetch';
 
-import { createUrlWithQuery } from './lib';
-import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
-import ApiError from './ApiError';
+import { HeadersMap } from '../types';
 
+import { createUrlWithQuery } from './lib';
+import { HttpCodes, Method, ApiResponse } from './types';
+import ApiError from './ApiError';
 import {
     CONTENT_TYPE,
     INVALID_URL_ERROR_MESSAGE,
