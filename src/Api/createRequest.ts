@@ -66,7 +66,7 @@ export default async function createRequest<P = any>(
 ): Promise<ApiResponse<P>> {
     try {
         const urlWithQuery = createUrlWithQuery(url, query);
-        const response = await fetch(urlWithQuery, {
+        const response = await fetch(urlWithQuery.href, {
             method,
             headers: {
                 Accept: 'application/json',

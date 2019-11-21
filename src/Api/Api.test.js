@@ -95,7 +95,7 @@ describe('Api', () => {
 
         await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
@@ -113,7 +113,7 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
@@ -139,7 +139,7 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
@@ -166,7 +166,7 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
@@ -193,7 +193,7 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
@@ -215,7 +215,7 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
@@ -241,7 +241,7 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
         expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
