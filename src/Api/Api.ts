@@ -42,7 +42,7 @@ const Api = {
 
     patch: <P = any>(
         url: string,
-        { headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers,
@@ -53,7 +53,7 @@ const Api = {
 
     delete: <P = any>(
         url: string,
-        { headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers,
