@@ -18,6 +18,15 @@ export interface HeadersMap {
     [name: string]: string;
 }
 
+export interface Params {
+    headers?: HeadersMap;
+    query?: object;
+}
+
+export interface ParamsWithPayload extends Params {
+    payload?: object;
+}
+
 export interface ApiErrorMessage {
     code: string;
     message: string;

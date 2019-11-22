@@ -1,4 +1,4 @@
-import { HeadersMap } from '../types';
+import { HeadersMap } from '../Api';
 
 export interface Options {
     accessToken: string;

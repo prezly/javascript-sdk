@@ -1,14 +1,5 @@
-import { Method, HeadersMap, ApiResponse } from './types';
+import { ApiResponse, Method, Params, ParamsWithPayload } from './types';
 import createRequest from './createRequest';
-
-interface Params {
-    headers?: HeadersMap;
-    query?: object;
-}
-
-interface ParamsWithPayload extends Params {
-    payload?: object;
-}
 
 const Api = {
     get: <P = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<P>> =>
