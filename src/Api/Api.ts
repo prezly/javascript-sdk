@@ -1,16 +1,5 @@
-import { HeadersMap } from '../types';
-
-import { Method, ApiResponse } from './types';
+import { ApiResponse, Method, Params, ParamsWithPayload } from './types';
 import createRequest from './createRequest';
-
-interface Params {
-    headers?: HeadersMap;
-    query?: object;
-}
-
-interface ParamsWithPayload extends Params {
-    payload?: object;
-}
 
 const Api = {
     get: <P = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<P>> =>
@@ -44,7 +33,7 @@ const Api = {
 
     patch: <P = any>(
         url: string,
-        { headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers,
@@ -55,7 +44,7 @@ const Api = {
 
     delete: <P = any>(
         url: string,
-        { headers, payload, query }: ParamsWithPayload,
+        { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> =>
         createRequest(url, {
             headers,

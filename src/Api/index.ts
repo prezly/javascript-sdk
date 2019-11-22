@@ -1,2 +1,2 @@
 export { default as Api } from './Api';
-export { Method } from './types';
+export { ApiResponse, HeadersMap, Method, Params, ParamsWithPayload } from './types';
