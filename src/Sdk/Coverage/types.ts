@@ -3,10 +3,10 @@ import { Contact, Coverage, Pagination, RoomRef, Story } from '../../types';
 export interface CoverageUpdateRequest {
     attachment_plaintext_content?: string | null;
     attachment?: string | null;
-    author?: Contact['id'] | string;
+    author?: Contact['id'] | string | null;
     external_reference_id?: string;
     newsroom?: RoomRef['id'] | null;
-    note_content?: string;
+    note_content?: string | { json: string } | { text: string };
     organisation?: Contact['id'] | string | null;
     original_metadata_source?: string;
     published_at?: string;
