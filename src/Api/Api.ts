@@ -1,6 +1,4 @@
-import { HeadersMap } from '../types';
-
-import { Method, ApiResponse } from './types';
+import { Method, HeadersMap, ApiResponse } from './types';
 import createRequest from './createRequest';
 
 interface Params {
