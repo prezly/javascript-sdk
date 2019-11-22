@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-
 import { createUrlWithQuery } from './lib';
 import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
 import ApiError from './ApiError';
