@@ -1,7 +1,5 @@
-import fetch, { Headers, Response as FetchResponse } from 'node-fetch';
-
 import { createUrlWithQuery } from './lib';
-import { HttpCodes, Method, HeadersMap, Response } from './types';
+import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
 import ApiError from './ApiError';
 
 import {
@@ -20,7 +18,7 @@ function extractHeaders(headers: Headers): HeadersMap {
     return result;
 }
 
-function extractResponse(response: FetchResponse) {
+function extractResponse(response: Response) {
     return {
         status: response.status,
         statusText: response.statusText,
@@ -63,10 +61,10 @@ export default async function createRequest<P = any>(
         payload?: object;
         query?: object;
     },
-): Promise<Response<P>> {
+): Promise<ApiResponse<P>> {
     try {
         const urlWithQuery = createUrlWithQuery(url, query);
-        const response = await fetch(urlWithQuery, {
+        const response = await fetch(urlWithQuery.href, {
             method,
             headers: {
                 Accept: 'application/json',

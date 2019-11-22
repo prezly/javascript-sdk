@@ -1,5 +1,3 @@
-import { Response } from 'node-fetch';
-
 import { createUrlWithQuery } from './lib';
 import { createFakeErrorPayload } from './createRequest';
 import Api from './Api';
@@ -41,7 +39,7 @@ function errorJSONResponse(body) {
 
 describe('Api', () => {
     beforeEach(() => {
-        global.fetch.resetMocks();
+        fetch.resetMocks();
     });
 
     it('should resolve with correct payload', async () => {
@@ -50,7 +48,7 @@ describe('Api', () => {
         };
 
         const expectedResponse = successJsonResponse(expectedPayload);
-        global.fetch.mockResolvedValueOnce(expectedResponse);
+        fetch.mockResolvedValueOnce(expectedResponse);
 
         const actualResponse = await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
 
@@ -64,7 +62,7 @@ describe('Api', () => {
         };
 
         const expectedResponse = errorJSONResponse(expectedPayload);
-        global.fetch.mockResolvedValueOnce(expectedResponse);
+        fetch.mockResolvedValueOnce(expectedResponse);
 
         try {
             await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
@@ -77,7 +75,7 @@ describe('Api', () => {
     it('should reject with Invalid URL provided', async () => {
         const errorMessage = 'Invalid URL provided';
         // Fetch mock doesn't validate the URL so we mock the error.
-        global.fetch.mockRejectOnce(new Error(errorMessage));
+        fetch.mockRejectOnce(new Error(errorMessage));
         try {
             await Api.get(API_URL_INCORRECT, { accessToken: ACCESS_TOKEN });
         } catch ({ payload }) {
@@ -93,13 +91,13 @@ describe('Api', () => {
     it('should create a GET request', async () => {
         const response = successJsonResponse({});
 
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         await Api.get(API_URL_CORRECT, { accessToken: ACCESS_TOKEN });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.GET,
         });
@@ -107,7 +105,7 @@ describe('Api', () => {
 
     it('should create a GET request with query params', async () => {
         const response = successJsonResponse({});
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         const query = { foo: 'bar' };
         await Api.get(API_URL_CORRECT, {
@@ -115,9 +113,9 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.GET,
         });
@@ -125,7 +123,7 @@ describe('Api', () => {
 
     it('should create a POST request', async () => {
         const response = successJsonResponse({});
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         const query = {
             foo: 'bar',
@@ -141,9 +139,9 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.POST,
             body: JSON.stringify(payload),
@@ -152,7 +150,7 @@ describe('Api', () => {
 
     it('should create a PUT request', async () => {
         const response = successJsonResponse({});
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         const query = {
             foo: 'bar',
@@ -168,9 +166,9 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.PUT,
             body: JSON.stringify(payload),
@@ -179,7 +177,7 @@ describe('Api', () => {
 
     it('should create a PATCH request', async () => {
         const response = successJsonResponse({});
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         const query = {
             foo: 'bar',
@@ -195,9 +193,9 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.PATCH,
             body: JSON.stringify(payload),
@@ -206,7 +204,7 @@ describe('Api', () => {
 
     it('should create a DELETE request', async () => {
         const response = successJsonResponse({});
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         const query = {
             foo: 'bar',
@@ -217,9 +215,9 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.DELETE,
         });
@@ -227,7 +225,7 @@ describe('Api', () => {
 
     it('should create a DELETE request (with body)', async () => {
         const response = successJsonResponse({});
-        global.fetch.mockResolvedValueOnce(response);
+        fetch.mockResolvedValueOnce(response);
 
         const query = {
             foo: 'bar',
@@ -243,9 +241,9 @@ describe('Api', () => {
             query,
         });
 
-        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query);
+        const expectedUrl = createUrlWithQuery(API_URL_CORRECT, query).href;
 
-        expect(global.fetch).toHaveBeenCalledWith(expectedUrl, {
+        expect(fetch).toHaveBeenCalledWith(expectedUrl, {
             ...DEFAULT_REQUEST_PROPS,
             method: Method.DELETE,
             body: JSON.stringify(payload),
