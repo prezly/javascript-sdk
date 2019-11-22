@@ -4,7 +4,12 @@ import { Coverage } from '../../types';
 import { coverageUrl } from '../routing';
 import { getItemId } from '../utils';
 
-import { CoverageListResponse } from './types';
+import {
+    CoverageCreateRequest,
+    CoverageListResponse,
+    CoverageSearchOptions,
+    CoverageUpdateRequest,
+} from './types';
 
 interface Options {
     accessToken: string;
@@ -20,9 +25,16 @@ export default class CoverageSdk {
         this.url = `${baseUrl}/${coverageUrl}`;
     }
 
-    async list(): Promise<CoverageListResponse> {
+    async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
+        const { jsonQuery, page, pageSize, sortOrder } = options;
         const response = await Api.get<CoverageListResponse>(this.url, {
             accessToken: this.accessToken,
+            query: {
+                page,
+                pageSize,
+                query: jsonQuery,
+                sort: sortOrder,
+            },
         });
         return response.payload;
     }
@@ -34,15 +46,32 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
-    async create(): Promise<Coverage> {
-        throw new Error('Not implemented!');
+    async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
+        const jsonQuery = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
+        const { coverage } = await this.list({ jsonQuery });
+        return coverage[0] || null;
     }
 
-    async update(): Promise<Coverage> {
-        throw new Error('Not implemented!');
+    async create(payload: CoverageCreateRequest): Promise<Coverage> {
+        const response = await Api.post<{ coverage: Coverage }>(this.url, {
+            accessToken: this.accessToken,
+            payload,
+        });
+        return response.payload.coverage;
     }
 
-    async delete(itemOrItemId: string | Coverage): Promise<void> {
+    async update(
+        itemOrItemId: string | Coverage,
+        payload: CoverageUpdateRequest,
+    ): Promise<Coverage> {
+        const response = await Api.patch<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
+            accessToken: this.accessToken,
+            payload,
+        });
+        return response.payload.coverage;
+    }
+
+    async remove(itemOrItemId: string | Coverage): Promise<void> {
         await Api.delete<{ coverage: Coverage }>(this.getUrlWithId(itemOrItemId), {
             accessToken: this.accessToken,
         });
