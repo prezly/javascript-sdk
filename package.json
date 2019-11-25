@@ -1,6 +1,6 @@
 {
     "name": "@prezly/sdk",
-    "version": "1.0.0-4",
+    "version": "1.0.0-6",
     "description": "Prezly API SDK",
     "main": "dist/index.js",
     "files": [
@@ -8,10 +8,13 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/prezly/javascript-sdk.git"
+        "url": "https://github.com/prezly/javascript-sdk"
     },
     "author": "Prezly Team <hello@prezly.com> (https://www.prezly.com)",
     "license": "MIT",
+    "engines": {
+        "node": ">= 8.16.0"
+    },
     "devDependencies": {
         "@babel/core": "^7.7.2",
         "@babel/preset-env": "^7.7.1",
@@ -30,6 +33,7 @@
     },
     "scripts": {
         "clean": "rimraf dist",
+        "prebuild": "npm run clean",
         "build": "tsc --project .",
         "start": "npm run build --incremental --watch",
         "test": "jest",
