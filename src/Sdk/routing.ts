@@ -1,1 +1,5 @@
-export const coverageUrl = '/v2/coverage';
+const routing = {
+    coverageUrl: '/v2/coverage',
+};
+
+export default routing;

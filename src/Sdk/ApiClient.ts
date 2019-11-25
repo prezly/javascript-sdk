@@ -1,22 +1,13 @@
 import { Api, ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../Api';
-import { Entity } from '../types';
 
 import { DEFAULT_USER_AGENT } from './constants';
+import { stripSlashes } from './utils';
 
 export interface Options {
     accessToken: string;
     baseUrl: string;
     headers: HeadersMap;
 }
-
-/**
- * Remove heading and trailing slashes.
- * Examples:
- *  - https://example.com/ -> https://example.com
- *  - /v2/path -> v2/path
- *  - /v2/path/ -> v2/path
- */
-const stripSlashes = (url: string): string => url.replace(/^\/|\/$/g, '');
 
 export default class ApiClient {
     private readonly baseUrl: string;
@@ -31,17 +22,11 @@ export default class ApiClient {
         };
     }
 
-    public buildUrl(sdkUrl: string): string {
-        return `${stripSlashes(this.baseUrl)}/${stripSlashes(sdkUrl)}`;
-    }
-
-    public buildUrlWithId(sdkUrl: string, itemOrItemId: string | Entity<number | string>): string {
-        const itemId = typeof itemOrItemId === 'object' ? itemOrItemId.id : itemOrItemId;
-        return `${this.buildUrl(sdkUrl)}/${itemId}`;
-    }
-
-    public get<P = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<P>> {
-        return Api.get<P>(url, {
+    public get<P = any>(
+        endpointUri: string,
+        { headers, query }: Params = {},
+    ): Promise<ApiResponse<P>> {
+        return Api.get<P>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -51,10 +36,10 @@ export default class ApiClient {
     }
 
     public post<P = any>(
-        url: string,
+        endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> {
-        return Api.post<P>(url, {
+        return Api.post<P>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -65,10 +50,10 @@ export default class ApiClient {
     }
 
     public put<P = any>(
-        url: string,
+        endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> {
-        return Api.put<P>(url, {
+        return Api.put<P>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -79,10 +64,10 @@ export default class ApiClient {
     }
 
     public patch<P = any>(
-        url: string,
+        endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> {
-        return Api.patch<P>(url, {
+        return Api.patch<P>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -93,10 +78,10 @@ export default class ApiClient {
     }
 
     public delete<P = any>(
-        url: string,
+        endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<P>> {
-        return Api.delete<P>(url, {
+        return Api.delete<P>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -104,5 +89,9 @@ export default class ApiClient {
             payload,
             query,
         });
+    }
+
+    private buildEndpointUrl(endpointUri: string): string {
+        return `${stripSlashes(this.baseUrl)}/${stripSlashes(endpointUri)}`;
     }
 }
