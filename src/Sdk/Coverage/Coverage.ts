@@ -2,6 +2,7 @@ import { Coverage } from '../../types';
 
 import { coverageUrl } from '../routing';
 import ApiClient from '../ApiClient';
+import { buildUrl, buildUrlWithId } from '../utils';
 
 import {
     CoverageCreateRequest,
@@ -21,7 +22,7 @@ export default class CoverageSdk {
     async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
         const { jsonQuery, page, pageSize, sortOrder } = options;
         const response = await this.apiClient.get<CoverageListResponse>(
-            this.apiClient.buildUrl(this.sdkUrl),
+            buildUrl(this.apiClient.baseUrl, this.sdkUrl),
             {
                 query: {
                     page,
@@ -36,7 +37,7 @@ export default class CoverageSdk {
 
     async get(itemOrItemId: string | Coverage): Promise<Coverage> {
         const response = await this.apiClient.get<{ coverage: Coverage }>(
-            this.apiClient.buildUrlWithId(this.sdkUrl, itemOrItemId),
+            buildUrlWithId(this.apiClient.baseUrl, this.sdkUrl, itemOrItemId),
         );
         return response.payload.coverage;
     }
@@ -49,7 +50,7 @@ export default class CoverageSdk {
 
     async create(payload: CoverageCreateRequest): Promise<Coverage> {
         const response = await this.apiClient.post<{ coverage: Coverage }>(
-            this.apiClient.buildUrl(this.sdkUrl),
+            buildUrl(this.apiClient.baseUrl, this.sdkUrl),
             { payload },
         );
         return response.payload.coverage;
@@ -60,13 +61,15 @@ export default class CoverageSdk {
         payload: CoverageUpdateRequest,
     ): Promise<Coverage> {
         const response = await this.apiClient.patch<{ coverage: Coverage }>(
-            this.apiClient.buildUrlWithId(this.sdkUrl, itemOrItemId),
+            buildUrlWithId(this.apiClient.baseUrl, this.sdkUrl, itemOrItemId),
             { payload },
         );
         return response.payload.coverage;
     }
 
     async remove(itemOrItemId: string | Coverage): Promise<void> {
-        await this.apiClient.delete(this.apiClient.buildUrlWithId(this.sdkUrl, itemOrItemId));
+        await this.apiClient.delete(
+            buildUrlWithId(this.apiClient.baseUrl, this.sdkUrl, itemOrItemId),
+        );
     }
 }

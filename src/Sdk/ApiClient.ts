@@ -1,5 +1,4 @@
 import { Api, ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../Api';
-import { Entity } from '../types';
 
 import { DEFAULT_USER_AGENT } from './constants';
 
@@ -9,17 +8,8 @@ export interface Options {
     headers: HeadersMap;
 }
 
-/**
- * Remove heading and trailing slashes.
- * Examples:
- *  - https://example.com/ -> https://example.com
- *  - /v2/path -> v2/path
- *  - /v2/path/ -> v2/path
- */
-const stripSlashes = (url: string): string => url.replace(/^\/|\/$/g, '');
-
 export default class ApiClient {
-    private readonly baseUrl: string;
+    public readonly baseUrl: string;
     private readonly headers: HeadersMap;
 
     constructor({ accessToken, baseUrl, headers }: Options) {
@@ -29,15 +19,6 @@ export default class ApiClient {
             'x-access-token': accessToken,
             ...headers,
         };
-    }
-
-    public buildUrl(sdkUrl: string): string {
-        return `${stripSlashes(this.baseUrl)}/${stripSlashes(sdkUrl)}`;
-    }
-
-    public buildUrlWithId(sdkUrl: string, itemOrItemId: string | Entity<number | string>): string {
-        const itemId = typeof itemOrItemId === 'object' ? itemOrItemId.id : itemOrItemId;
-        return `${this.buildUrl(sdkUrl)}/${itemId}`;
     }
 
     public get<P = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<P>> {
