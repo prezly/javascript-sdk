@@ -11,9 +11,9 @@ const DEFAULT_REQUEST_PROPS = {
     body: undefined,
     headers: {
         Accept: 'application/json',
+        authorization: `Bearer ${ACCESS_TOKEN}`,
         'Content-Type': 'application/json;charset=utf-8',
         'User-Agent': DEFAULT_USER_AGENT,
-        'x-access-token': ACCESS_TOKEN,
     },
 };
 

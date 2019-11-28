@@ -16,8 +16,8 @@ export default class ApiClient {
     constructor({ accessToken, baseUrl, headers }: Options) {
         this.baseUrl = baseUrl;
         this.headers = {
+            authorization: `Bearer ${accessToken}`,
             'User-Agent': DEFAULT_USER_AGENT,
-            'x-access-token': accessToken,
             ...headers,
         };
     }
