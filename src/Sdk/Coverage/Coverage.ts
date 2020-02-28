@@ -11,6 +11,8 @@ import {
     CoverageUpdateRequest,
 } from './types';
 
+type CoverageId = Coverage['id'];
+
 export default class CoverageSdk {
     private readonly apiClient: ApiClient;
 
@@ -32,7 +34,7 @@ export default class CoverageSdk {
         return response.payload;
     }
 
-    async get(itemOrItemId: number | Coverage, includeDeleted = false): Promise<Coverage> {
+    async get(itemOrItemId: CoverageId | Coverage, includeDeleted = false): Promise<Coverage> {
         const url = buildUriWithId(routing.coverageUrl, itemOrItemId);
         const response = await this.apiClient.get<{ coverage: Coverage }>(url, {
             query: {
@@ -59,7 +61,7 @@ export default class CoverageSdk {
     }
 
     async update(
-        itemOrItemId: number | Coverage,
+        itemOrItemId: CoverageId | Coverage,
         payload: CoverageUpdateRequest,
     ): Promise<Coverage> {
         const response = await this.apiClient.patch<{ coverage: Coverage }>(
@@ -69,7 +71,7 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
-    async remove(itemOrItemId: string | Coverage): Promise<void> {
+    async remove(itemOrItemId: CoverageId | Coverage): Promise<void> {
         await this.apiClient.delete(buildUriWithId(routing.coverageUrl, itemOrItemId));
     }
 }
