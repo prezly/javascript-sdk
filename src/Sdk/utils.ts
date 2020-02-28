@@ -11,7 +11,7 @@ export const stripSlashes = (url: string): string => url.replace(/^\/|\/$/g, '')
 
 export function buildUriWithId(
     sdkUrl: string,
-    itemOrItemId: string | Entity<number | string>,
+    itemOrItemId: number | string | Entity<number | string>,
 ): string {
     const itemId = typeof itemOrItemId === 'object' ? itemOrItemId.id : itemOrItemId;
     return `${sdkUrl}/${itemId}`;

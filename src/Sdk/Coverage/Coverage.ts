@@ -11,6 +11,8 @@ import {
     CoverageUpdateRequest,
 } from './types';
 
+type CoverageId = Coverage['id'];
+
 export default class CoverageSdk {
     private readonly apiClient: ApiClient;
 
@@ -19,11 +21,12 @@ export default class CoverageSdk {
     }
 
     async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
-        const { jsonQuery, page, pageSize, sortOrder } = options;
+        const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
         const response = await this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
             query: {
+                include_deleted: includeDeleted ? 'on' : undefined,
                 page,
-                pageSize,
+                limit: pageSize,
                 query: jsonQuery,
                 sort: sortOrder,
             },
@@ -31,16 +34,22 @@ export default class CoverageSdk {
         return response.payload;
     }
 
-    async get(itemOrItemId: string | Coverage): Promise<Coverage> {
-        const response = await this.apiClient.get<{ coverage: Coverage }>(
-            buildUriWithId(routing.coverageUrl, itemOrItemId),
-        );
+    async get(itemOrItemId: CoverageId | Coverage, includeDeleted = false): Promise<Coverage> {
+        const url = buildUriWithId(routing.coverageUrl, itemOrItemId);
+        const response = await this.apiClient.get<{ coverage: Coverage }>(url, {
+            query: {
+                include_deleted: includeDeleted ? 'on' : undefined,
+            },
+        });
         return response.payload.coverage;
     }
 
     async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
         const jsonQuery = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
-        const { coverage } = await this.list({ jsonQuery });
+        const { coverage } = await this.list({
+            includeDeleted: true,
+            jsonQuery,
+        });
         return coverage[0] || null;
     }
 
@@ -52,7 +61,7 @@ export default class CoverageSdk {
     }
 
     async update(
-        itemOrItemId: string | Coverage,
+        itemOrItemId: CoverageId | Coverage,
         payload: CoverageUpdateRequest,
     ): Promise<Coverage> {
         const response = await this.apiClient.patch<{ coverage: Coverage }>(
@@ -62,7 +71,7 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
-    async remove(itemOrItemId: string | Coverage): Promise<void> {
+    async remove(itemOrItemId: CoverageId | Coverage): Promise<void> {
         await this.apiClient.delete(buildUriWithId(routing.coverageUrl, itemOrItemId));
     }
 }
