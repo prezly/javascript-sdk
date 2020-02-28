@@ -17,6 +17,7 @@ export default interface Coverage extends Entity<number> {
     } | null;
     author_contact: Contact | null;
     headline: string;
+    is_deleted: boolean;
     organisation_contact: Contact | null;
     newsroom: RoomRef | null;
     note_content_html: string;

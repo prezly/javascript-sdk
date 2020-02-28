@@ -19,9 +19,10 @@ export default class CoverageSdk {
     }
 
     async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
-        const { jsonQuery, page, pageSize, sortOrder } = options;
+        const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
         const response = await this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
             query: {
+                include_deleted: includeDeleted ? '✓' : undefined,
                 page,
                 pageSize,
                 query: jsonQuery,
@@ -31,16 +32,22 @@ export default class CoverageSdk {
         return response.payload;
     }
 
-    async get(itemOrItemId: number | Coverage): Promise<Coverage> {
-        const response = await this.apiClient.get<{ coverage: Coverage }>(
-            buildUriWithId(routing.coverageUrl, itemOrItemId),
-        );
+    async get(itemOrItemId: number | Coverage, includeDeleted = false): Promise<Coverage> {
+        const url = buildUriWithId(routing.coverageUrl, itemOrItemId);
+        const response = await this.apiClient.get<{ coverage: Coverage }>(url, {
+            query: {
+                include_deleted: includeDeleted ? '✓' : undefined,
+            },
+        });
         return response.payload.coverage;
     }
 
     async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
         const jsonQuery = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
-        const { coverage } = await this.list({ jsonQuery });
+        const { coverage } = await this.list({
+            includeDeleted: true,
+            jsonQuery,
+        });
         return coverage[0] || null;
     }
 

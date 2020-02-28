@@ -18,6 +18,7 @@ export interface CoverageUpdateRequest {
 export interface CoverageCreateRequest extends CoverageUpdateRequest {}
 
 export interface CoverageSearchOptions {
+    includeDeleted?: boolean;
     jsonQuery?: string;
     page?: number;
     pageSize?: number;
