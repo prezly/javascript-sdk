@@ -22,7 +22,7 @@ export default class CoverageSdk {
         const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
         const response = await this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
             query: {
-                include_deleted: includeDeleted ? '✓' : undefined,
+                include_deleted: includeDeleted ? 'on' : undefined,
                 page,
                 limit: pageSize,
                 query: jsonQuery,
@@ -36,7 +36,7 @@ export default class CoverageSdk {
         const url = buildUriWithId(routing.coverageUrl, itemOrItemId);
         const response = await this.apiClient.get<{ coverage: Coverage }>(url, {
             query: {
-                include_deleted: includeDeleted ? '✓' : undefined,
+                include_deleted: includeDeleted ? 'on' : undefined,
             },
         });
         return response.payload.coverage;
