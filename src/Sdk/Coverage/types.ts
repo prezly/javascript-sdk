@@ -10,7 +10,7 @@ export interface CoverageUpdateRequest {
     note_content?: string | { json: string } | { text: string };
     organisation?: Contact['id'] | string | null;
     original_metadata_source?: string;
-    published_at?: string;
+    published_at?: string | null;
     story?: Story['id'] | null;
     url?: string | null;
 }

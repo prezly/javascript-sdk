@@ -24,10 +24,10 @@ export default interface Coverage extends Entity<number> {
     note_content_text: string;
     created_at: string;
     edited_at: string | null;
-    published_at: string;
+    published_at: string | null;
     story: Story | null;
     updated_at: string;
-    url: string;
+    url: string | null;
     user: UserRef;
     view_url: string;
 }
