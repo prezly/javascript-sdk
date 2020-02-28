@@ -4,7 +4,7 @@ import Story from './Story';
 import UserRef from './UserRef';
 import RoomRef from './RoomRef';
 
-export default interface Coverage extends Entity<string> {
+export default interface Coverage extends Entity<number> {
     attachment: {
         cdnUrl: string;
         download_url: string;

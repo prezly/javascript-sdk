@@ -31,7 +31,7 @@ export default class CoverageSdk {
         return response.payload;
     }
 
-    async get(itemOrItemId: string | Coverage): Promise<Coverage> {
+    async get(itemOrItemId: number | Coverage): Promise<Coverage> {
         const response = await this.apiClient.get<{ coverage: Coverage }>(
             buildUriWithId(routing.coverageUrl, itemOrItemId),
         );
@@ -52,7 +52,7 @@ export default class CoverageSdk {
     }
 
     async update(
-        itemOrItemId: string | Coverage,
+        itemOrItemId: number | Coverage,
         payload: CoverageUpdateRequest,
     ): Promise<Coverage> {
         const response = await this.apiClient.patch<{ coverage: Coverage }>(
