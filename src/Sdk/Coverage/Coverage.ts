@@ -24,7 +24,7 @@ export default class CoverageSdk {
             query: {
                 include_deleted: includeDeleted ? '✓' : undefined,
                 page,
-                pageSize,
+                limit: pageSize,
                 query: jsonQuery,
                 sort: sortOrder,
             },
