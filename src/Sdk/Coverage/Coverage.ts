@@ -2,7 +2,6 @@ import { Coverage } from '../../types';
 
 import routing from '../routing';
 import ApiClient from '../ApiClient';
-import { buildUriWithId } from '../utils';
 
 import {
     CoverageCreateRequest,
@@ -34,8 +33,8 @@ export default class CoverageSdk {
         return response.payload;
     }
 
-    async get(itemOrItemId: CoverageId | Coverage, includeDeleted = false): Promise<Coverage> {
-        const url = buildUriWithId(routing.coverageUrl, itemOrItemId);
+    async get(id: CoverageId, includeDeleted = false): Promise<Coverage> {
+        const url = `${routing.coverageUrl}/${id}`;
         const response = await this.apiClient.get<{ coverage: Coverage }>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
@@ -60,18 +59,15 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
-    async update(
-        itemOrItemId: CoverageId | Coverage,
-        payload: CoverageUpdateRequest,
-    ): Promise<Coverage> {
+    async update(id: CoverageId, payload: CoverageUpdateRequest): Promise<Coverage> {
         const response = await this.apiClient.patch<{ coverage: Coverage }>(
-            buildUriWithId(routing.coverageUrl, itemOrItemId),
+            `${routing.coverageUrl}/${id}`,
             { payload },
         );
         return response.payload.coverage;
     }
 
-    async remove(itemOrItemId: CoverageId | Coverage): Promise<void> {
-        await this.apiClient.delete(buildUriWithId(routing.coverageUrl, itemOrItemId));
+    async remove(id: CoverageId): Promise<void> {
+        await this.apiClient.delete(`${routing.coverageUrl}/${id}`);
     }
 }
