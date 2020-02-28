@@ -5,6 +5,7 @@ export interface CoverageUpdateRequest {
     attachment?: string | null;
     author?: Contact['id'] | string | null;
     external_reference_id?: string;
+    headline?: string;
     newsroom?: RoomRef['id'] | null;
     note_content?: string | { json: string } | { text: string };
     organisation?: Contact['id'] | string | null;
