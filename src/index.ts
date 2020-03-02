@@ -1,4 +1,11 @@
-export { default } from './Sdk/Sdk';
+export {
+    default,
+    ClientOptions,
+    CoverageCreateRequest,
+    CoverageListResponse,
+    CoverageSearchOptions,
+    CoverageUpdateRequest,
+} from './Sdk';
 export {
     Contact,
     Coverage,
@@ -6,13 +13,4 @@ export {
     Pagination,
     RoomRef,
     Story,
-} from './types'
-export {
-    Options as ClientOptions,
-} from './Sdk/types'
-export {
-    CoverageCreateRequest,
-    CoverageListResponse,
-    CoverageSearchOptions,
-    CoverageUpdateRequest,
-} from './Sdk/Coverage/types'
+} from './types';
