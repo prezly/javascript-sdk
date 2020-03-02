@@ -1,6 +1,7 @@
 import { Contact, Coverage, Pagination, RoomRef, Story } from '../../types';
 
 export interface CoverageUpdateRequest {
+    attachment_oembed?: OEmbedInfo | null;
     attachment_plaintext_content?: string | null;
     attachment?: string | null;
     author?: Contact['id'] | string | null;
@@ -13,7 +14,6 @@ export interface CoverageUpdateRequest {
     published_at?: string | null;
     story?: Story['id'] | null;
     url?: string | null;
-    attachment_oembed?: OEmbedInfo | null;
 }
 
 export interface CoverageCreateRequest extends CoverageUpdateRequest {}
