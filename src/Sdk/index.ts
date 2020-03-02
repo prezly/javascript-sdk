@@ -5,6 +5,4 @@ export {
     CoverageSearchOptions,
     CoverageUpdateRequest,
 } from './Coverage';
-export {
-    Options as ClientOptions,
-} from './types';
+export { Options as ClientOptions } from './types';
