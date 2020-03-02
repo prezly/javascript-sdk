@@ -4,5 +4,6 @@ export {
     CoverageListResponse,
     CoverageSearchOptions,
     CoverageUpdateRequest,
+    OEmbedInfo,
 } from './Coverage';
 export { Options as ClientOptions } from './types';
