@@ -3,7 +3,7 @@ export { default as Contact } from './Contact';
 export { default as Coverage } from './Coverage';
 export { NewsroomRef } from './Newsroom';
 export {
-    Story,
+    default as Story,
     StoryRef,
     ExtendedStory,
     FormatVersion as StoryFormatVersion,
@@ -15,7 +15,7 @@ export {
 // Secondary entities
 export { default as Category } from './Category';
 export { default as Culture } from './Culture';
-export { OEmbedInfo } from './OEmbedInfo';
+export { default as OEmbedInfo } from './OEmbedInfo';
 export { default as Pagination } from './Pagination';
 
 // Support

@@ -1,4 +1,4 @@
-export interface OEmbedInfo {
+export default interface OEmbedInfo {
     version: '1.0';
     url: string;
     type: 'video' | 'photo' | 'rich' | 'link';

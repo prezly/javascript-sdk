@@ -2,7 +2,7 @@ import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
 import { NewsroomRef } from './Newsroom';
-import { OEmbedInfo } from './OEmbedInfo';
+import OEmbedInfo from './OEmbedInfo';
 import UserAccountRef from './UserAccountRef';
 
 export enum FormatVersion {
@@ -56,7 +56,7 @@ export interface StoryRef {
     };
 }
 
-export interface Story extends Entity<number> {
+export default interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
