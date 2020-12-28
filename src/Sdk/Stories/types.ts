@@ -1,5 +1,17 @@
 import { Category, Culture, NewsroomRef, Pagination, Story, StoryFormatVersion, StoryVisibility } from '../../types';
 
+export interface StoriesListRequest {
+    limit?: number;
+    offset?: number;
+    sortOrder?: string;
+}
+export interface StoriesSearchRequest extends StoriesListRequest {
+    /**
+     * Filter query using Prezly JSON Query Language
+     */
+    jsonQuery?: string;
+}
+
 export interface StoriesListResponse {
     stories: Story[];
     pagination: Pagination;
