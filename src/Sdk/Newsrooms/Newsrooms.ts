@@ -18,9 +18,9 @@ export default class Newsrooms {
         this.apiClient = apiClient;
     }
 
-    async list(
-        { limit, offset, search, sortOrder }: NewsroomListRequest = {},
-    ): Promise<NewsroomListResponse> {
+    async list({ limit, offset, search, sortOrder }: NewsroomListRequest = {}): Promise<
+        NewsroomListResponse
+    > {
         const response = await this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
             query: {
                 limit,
@@ -33,9 +33,13 @@ export default class Newsrooms {
         return response.payload;
     }
 
-    async search(
-        { jsonQuery, limit, offset, search, sortOrder }: NewsroomSearchRequest = {},
-    ): Promise<NewsroomListResponse> {
+    async search({
+        jsonQuery,
+        limit,
+        offset,
+        search,
+        sortOrder,
+    }: NewsroomSearchRequest = {}): Promise<NewsroomListResponse> {
         const response = await this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
             query: {
                 query: jsonQuery,
@@ -63,10 +67,7 @@ export default class Newsrooms {
         return response.payload.newsroom;
     }
 
-    async update(
-        id: Newsroom['id'],
-        payload: NewsroomUpdateRequest,
-    ): Promise<Newsroom> {
+    async update(id: Newsroom['id'], payload: NewsroomUpdateRequest): Promise<Newsroom> {
         const response = await this.apiClient.patch<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
             {

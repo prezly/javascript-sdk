@@ -17,9 +17,9 @@ export default class Stories {
         this.apiClient = apiClient;
     }
 
-    async list(
-        { limit, offset, sortOrder }: StoriesListRequest = {},
-    ): Promise<StoriesListResponse> {
+    async list({ limit, offset, sortOrder }: StoriesListRequest = {}): Promise<
+        StoriesListResponse
+    > {
         const response = await this.apiClient.get<StoriesListResponse>(routing.storiesUrl, {
             query: {
                 limit,
@@ -30,9 +30,9 @@ export default class Stories {
         return response.payload;
     }
 
-    async search(
-        { jsonQuery, limit, offset, sortOrder }: StoriesSearchRequest = {},
-    ): Promise<StoriesListResponse> {
+    async search({ jsonQuery, limit, offset, sortOrder }: StoriesSearchRequest = {}): Promise<
+        StoriesListResponse
+    > {
         const response = await this.apiClient.post<StoriesListResponse>(routing.storiesSearchUrl, {
             payload: {
                 query: jsonQuery,
@@ -52,12 +52,9 @@ export default class Stories {
     }
 
     async create(payload: StoryCreateRequest): Promise<ExtendedStory> {
-        const response = await this.apiClient.post<{ story: ExtendedStory }>(
-            routing.storiesUrl,
-            {
-                payload,
-            },
-        );
+        const response = await this.apiClient.post<{ story: ExtendedStory }>(routing.storiesUrl, {
+            payload,
+        });
         return response.payload.story;
     }
 }

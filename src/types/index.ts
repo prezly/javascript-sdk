@@ -1,10 +1,7 @@
 // Primary entities
 export { default as Contact } from './Contact';
 export { default as Coverage } from './Coverage';
-export {
-    default as Newsroom,
-    NewsroomRef,
-} from './Newsroom';
+export { default as Newsroom, NewsroomRef } from './Newsroom';
 export {
     default as Story,
     StoryRef,
