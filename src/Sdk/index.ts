@@ -13,4 +13,6 @@ export {
     HtmlStoryCreateRequest,
     SlateStoryCreateRequest,
 } from './Stories';
+export {
+} from './Newsrooms';
 export { Options as ClientOptions } from './types';
