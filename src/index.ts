@@ -7,4 +7,15 @@ export {
     CoverageUpdateRequest,
     OEmbedInfo,
 } from './Sdk';
-export { Contact, Coverage, Entity, Pagination, RoomRef, Story } from './types';
+export {
+    Contact,
+    Coverage,
+    Entity,
+    Pagination,
+    Story,
+    StoryRef,
+    StoryVisibility,
+    StoryPublicationStatus,
+    StoryLifecycleStatus,
+    RoomRef,
+} from './types';

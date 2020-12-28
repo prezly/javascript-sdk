@@ -2,9 +2,15 @@ import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
 import RoomRef from './RoomRef';
-import StoryLifecycleStatus from './StoryLifecycleStatus';
-import StoryRef from './StoryRef';
 import UserAccountRef from './UserAccountRef';
+
+export enum LifecycleStatus {
+    Uninitialized = 'uninitialized',
+    Draft = 'draft',
+    Scheduled = 'scheduled',
+    Embargo = 'embargo',
+    Published = 'published',
+}
 
 export enum PublicationStatus {
     NEW = 'new',
@@ -18,7 +24,24 @@ export enum Visibility {
     PRIVATE = 'private',
 }
 
-export default interface Story extends Entity {
+export interface StoryRef {
+    id: number;
+    title: string;
+    culture: Culture;
+    created_at: string;
+    author: UserAccountRef | null;
+    room: RoomRef;
+    lifecycle_status: LifecycleStatus;
+    links: {
+        edit: string;
+        newsroom_view: string;
+        report: string;
+    };
+    visibility: Visibility;
+}
+
+
+export default interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
@@ -54,7 +77,7 @@ export default interface Story extends Entity {
     published_at: string | null;
     scheduled_at: string | null;
 
-    lifecycle_status: StoryLifecycleStatus;
+    lifecycle_status: LifecycleStatus;
     is_archived: boolean;
     is_finalized: boolean;
     is_published: boolean;
