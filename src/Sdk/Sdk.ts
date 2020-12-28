@@ -1,8 +1,8 @@
 import { Options } from './types';
 import ApiClient from './ApiClient';
-import { Coverage } from './Coverage';
-import { Stories } from './Stories';
-import { Newsrooms } from './Newsrooms';
+import Coverage from './Coverage';
+import Stories from './Stories';
+import Newsrooms from './Newsrooms';
 
 const BASE_URL = 'https://api.prezly.com';
 

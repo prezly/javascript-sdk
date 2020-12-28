@@ -1,4 +1,4 @@
-export { default as Coverage } from './Coverage';
+export { default } from './Coverage';
 export {
     CoverageCreateRequest,
     CoverageListResponse,

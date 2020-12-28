@@ -1,4 +1,4 @@
-export { default as Newsrooms } from './Newsrooms';
+export { default } from './Newsrooms';
 export {
     NewsroomCreateRequest,
     NewsroomUpdateRequest,
