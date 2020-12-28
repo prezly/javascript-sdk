@@ -1,7 +1,7 @@
 import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
-import RoomRef from './RoomRef';
+import { NewsroomRef } from './Newsroom';
 import UserAccountRef from './UserAccountRef';
 
 export enum LifecycleStatus {
@@ -30,7 +30,7 @@ export interface StoryRef {
     culture: Culture;
     created_at: string;
     author: UserAccountRef | null;
-    room: RoomRef;
+    newsroom: NewsroomRef;
     lifecycle_status: LifecycleStatus;
     links: {
         edit: string;
@@ -67,7 +67,7 @@ export default interface Story extends Entity<number> {
         translate: string | null;
     };
 
-    room: RoomRef;
+    newsroom: NewsroomRef;
     categories: Category[];
     translations: StoryRef[];
 

@@ -1,8 +1,8 @@
 import Contact from './Contact';
 import Entity from './Entity';
+import { NewsroomRef } from './Newsroom';
 import Story from './Story';
 import UserRef from './UserRef';
-import RoomRef from './RoomRef';
 
 export default interface Coverage extends Entity<number> {
     attachment: {
@@ -19,7 +19,7 @@ export default interface Coverage extends Entity<number> {
     headline: string;
     is_deleted: boolean;
     organisation_contact: Contact | null;
-    newsroom: RoomRef | null;
+    newsroom: NewsroomRef | null;
     note_content_html: string;
     note_content_json: string;
     note_content_text: string;

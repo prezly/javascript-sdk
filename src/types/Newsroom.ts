@@ -1,4 +1,4 @@
-export default interface RoomRef {
+export interface NewsroomRef {
     id: number;
     display_name: string;
     thumbnail_url: string;

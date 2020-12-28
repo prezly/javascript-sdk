@@ -11,11 +11,11 @@ export {
     Contact,
     Coverage,
     Entity,
+    NewsroomRef,
     Pagination,
     Story,
     StoryRef,
     StoryVisibility,
     StoryPublicationStatus,
     StoryLifecycleStatus,
-    RoomRef,
 } from './types';
