@@ -13,5 +13,11 @@ export {
     HtmlStoryCreateRequest,
     SlateStoryCreateRequest,
 } from './Stories';
-export {} from './Newsrooms';
+export {
+    NewsroomCreateRequest,
+    NewsroomListRequest,
+    NewsroomListResponse,
+    NewsroomSearchRequest,
+    NewsroomUpdateRequest,
+} from './Newsrooms';
 export { Options as ClientOptions } from './types';
