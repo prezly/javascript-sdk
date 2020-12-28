@@ -2,6 +2,7 @@ import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
 import { NewsroomRef } from './Newsroom';
+import { OEmbedInfo } from './OEmbedInfo';
 import UserAccountRef from './UserAccountRef';
 
 export enum LifecycleStatus {
@@ -27,21 +28,30 @@ export enum Visibility {
 export interface StoryRef {
     id: number;
     title: string;
-    culture: Culture;
+    publication_status: PublicationStatus;
+    lifecycle_status: LifecycleStatus;
+    visibility: Visibility;
+
+    thumbnail_url: string;
+
     created_at: string;
+    updated_at: string;
+    published_at: string | null;
+    scheduled_at: string | null;
+
+    culture: Culture;
     author: UserAccountRef | null;
     newsroom: NewsroomRef;
-    lifecycle_status: LifecycleStatus;
+    oembed: OEmbedInfo;
+
     links: {
         edit: string;
         newsroom_view: string;
         report: string;
     };
-    visibility: Visibility;
 }
 
-
-export default interface Story extends Entity<number> {
+export interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
@@ -90,4 +100,26 @@ export default interface Story extends Entity<number> {
 
     publication_status: PublicationStatus;
     visibility: Visibility;
+}
+
+export interface ExtendedStory extends Story {
+    /**
+     * HTML content for v1 stories.
+     * Slate JSON content for v3 stories.
+     */
+    content: string;
+    /**
+     * Uploadcare image JSON.
+     */
+    header_image: string | null;
+    /**
+     * Uploadcare image JSON.
+     */
+    preview_image: string | null;
+    /**
+     * Uploadcare image JSON.
+     */
+    social_image: string | null;
+    social_text: string;
+    tag_names: string[];
 }

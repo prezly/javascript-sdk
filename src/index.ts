@@ -5,13 +5,13 @@ export {
     CoverageListResponse,
     CoverageSearchOptions,
     CoverageUpdateRequest,
-    OEmbedInfo,
 } from './Sdk';
 export {
     Contact,
     Coverage,
     Entity,
     NewsroomRef,
+    OEmbedInfo,
     Pagination,
     Story,
     StoryRef,

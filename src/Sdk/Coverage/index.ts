@@ -4,5 +4,4 @@ export {
     CoverageListResponse,
     CoverageSearchOptions,
     CoverageUpdateRequest,
-    OEmbedInfo,
 } from './types';
