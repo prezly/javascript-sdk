@@ -5,12 +5,17 @@ import { NewsroomRef } from './Newsroom';
 import { OEmbedInfo } from './OEmbedInfo';
 import UserAccountRef from './UserAccountRef';
 
+export enum FormatVersion {
+    HTML = 1,
+    SLATEJS = 3,
+}
+
 export enum LifecycleStatus {
-    Uninitialized = 'uninitialized',
-    Draft = 'draft',
-    Scheduled = 'scheduled',
-    Embargo = 'embargo',
-    Published = 'published',
+    UNINITIALIZED = 'uninitialized',
+    DRAFT = 'draft',
+    SCHEDULED = 'scheduled',
+    EMBARGO = 'embargo',
+    PUBLISHED = 'published',
 }
 
 export enum PublicationStatus {
@@ -55,7 +60,7 @@ export interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
-    format_version: number;
+    format_version: FormatVersion;
     culture: Culture;
     author: UserAccountRef | null;
 
