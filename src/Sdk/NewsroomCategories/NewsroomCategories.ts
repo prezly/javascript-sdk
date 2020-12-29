@@ -16,7 +16,7 @@ export default class NewsroomCategories {
         this.apiClient = apiClient;
     }
 
-    async list(
+    public async list(
         newsroomId: Newsroom['id'],
         { sortOrder }: NewsroomCategoriesListOptions = {},
     ): Promise<Category[]> {
@@ -29,7 +29,7 @@ export default class NewsroomCategories {
         return response.payload.categories;
     }
 
-    async create(
+    public async create(
         newsroomId: Newsroom['id'],
         payload: NewsroomCategoryCreateRequest,
     ): Promise<Category> {
@@ -40,7 +40,7 @@ export default class NewsroomCategories {
         return response.payload.category;
     }
 
-    async update(
+    public async update(
         newsroomId: Newsroom['id'],
         payload: NewsroomCategoryUpdateRequest,
     ): Promise<Category> {
@@ -51,10 +51,7 @@ export default class NewsroomCategories {
         return response.payload.category;
     }
 
-    async remove(
-        newsroomId: Newsroom['id'],
-        categoryId: Category['id'],
-    ): Promise<void> {
+    public async remove(newsroomId: Newsroom['id'], categoryId: Category['id']): Promise<void> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete<{ category: Category }>(`${url}/${categoryId}`);
     }
