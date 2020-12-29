@@ -1,4 +1,6 @@
-export default interface RoomRef {
+import Culture from './Culture';
+
+export interface NewsroomRef {
     id: number;
     display_name: string;
     thumbnail_url: string;
@@ -8,8 +10,16 @@ export default interface RoomRef {
     is_active: boolean;
     is_archived: boolean;
     is_multilingual: boolean;
+    /**
+     * @deprecated Please use `is_online` instead.
+     * @see is_online
+     */
     is_offline: boolean;
+    is_online: boolean;
     url: string;
+    /**
+     * @deprecated Do not rely on these.
+     */
     links: {
         media_gallery_api: string;
         room_contacts_api: string;
@@ -27,4 +37,13 @@ export default interface RoomRef {
         privacy_settings: string;
         widget_settings: string;
     };
+}
+
+export default interface Newsroom extends NewsroomRef {
+    domain: string;
+    is_hub: boolean;
+    // extended details
+    cultures: Culture[];
+    campaigns_number: number;
+    stories_number: number;
 }

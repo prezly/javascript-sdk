@@ -4,6 +4,20 @@ export {
     CoverageListResponse,
     CoverageSearchOptions,
     CoverageUpdateRequest,
-    OEmbedInfo,
 } from './Coverage';
+export {
+    StoriesListRequest,
+    StoriesListResponse,
+    StoriesSearchRequest,
+    StoryCreateRequest,
+    HtmlStoryCreateRequest,
+    SlateStoryCreateRequest,
+} from './Stories';
+export {
+    NewsroomCreateRequest,
+    NewsroomListRequest,
+    NewsroomListResponse,
+    NewsroomSearchRequest,
+    NewsroomUpdateRequest,
+} from './Newsrooms';
 export { Options as ClientOptions } from './types';

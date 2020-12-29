@@ -1,10 +1,22 @@
 import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
-import RoomRef from './RoomRef';
-import StoryLifecycleStatus from './StoryLifecycleStatus';
-import StoryRef from './StoryRef';
+import { NewsroomRef } from './Newsroom';
+import OEmbedInfo from './OEmbedInfo';
 import UserAccountRef from './UserAccountRef';
+
+export enum FormatVersion {
+    HTML = 1,
+    SLATEJS = 3,
+}
+
+export enum LifecycleStatus {
+    UNINITIALIZED = 'uninitialized',
+    DRAFT = 'draft',
+    SCHEDULED = 'scheduled',
+    EMBARGO = 'embargo',
+    PUBLISHED = 'published',
+}
 
 export enum PublicationStatus {
     NEW = 'new',
@@ -18,11 +30,37 @@ export enum Visibility {
     PRIVATE = 'private',
 }
 
-export default interface Story extends Entity {
+export interface StoryRef {
+    id: number;
+    title: string;
+    publication_status: PublicationStatus;
+    lifecycle_status: LifecycleStatus;
+    visibility: Visibility;
+
+    thumbnail_url: string;
+
+    created_at: string;
+    updated_at: string;
+    published_at: string | null;
+    scheduled_at: string | null;
+
+    culture: Culture;
+    author: UserAccountRef | null;
+    newsroom: NewsroomRef;
+    oembed: OEmbedInfo;
+
+    links: {
+        edit: string;
+        newsroom_view: string;
+        report: string;
+    };
+}
+
+export default interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
-    format_version: number;
+    format_version: FormatVersion;
     culture: Culture;
     author: UserAccountRef | null;
 
@@ -44,7 +82,7 @@ export default interface Story extends Entity {
         translate: string | null;
     };
 
-    room: RoomRef;
+    newsroom: NewsroomRef;
     categories: Category[];
     translations: StoryRef[];
 
@@ -54,7 +92,7 @@ export default interface Story extends Entity {
     published_at: string | null;
     scheduled_at: string | null;
 
-    lifecycle_status: StoryLifecycleStatus;
+    lifecycle_status: LifecycleStatus;
     is_archived: boolean;
     is_finalized: boolean;
     is_published: boolean;
@@ -67,4 +105,26 @@ export default interface Story extends Entity {
 
     publication_status: PublicationStatus;
     visibility: Visibility;
+}
+
+export interface ExtendedStory extends Story {
+    /**
+     * HTML content for v1 stories.
+     * Slate JSON content for v3 stories.
+     */
+    content: string;
+    /**
+     * Uploadcare image JSON.
+     */
+    header_image: string | null;
+    /**
+     * Uploadcare image JSON.
+     */
+    preview_image: string | null;
+    /**
+     * Uploadcare image JSON.
+     */
+    social_image: string | null;
+    social_text: string;
+    tag_names: string[];
 }
