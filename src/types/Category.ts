@@ -4,7 +4,7 @@ export default interface Category {
     display_description: string | null;
     display_name: string;
     i18n: {
-        [cultureCode: string]: {
+        [localeCode: string]: {
             description: string | null;
             locale: Culture;
             name: string;
