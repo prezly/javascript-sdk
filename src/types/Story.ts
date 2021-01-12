@@ -60,6 +60,7 @@ export default interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
+    slug: string;
     format_version: FormatVersion;
     culture: Culture;
     author: UserAccountRef | null;
