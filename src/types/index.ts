@@ -4,6 +4,7 @@ export { default as Contact } from './Contact';
 export { default as Coverage } from './Coverage';
 export { default as Culture } from './Culture';
 export { default as Newsroom, NewsroomRef } from './Newsroom';
+export { default as NewsroomContact } from './NewsroomContact';
 export {
     default as Story,
     StoryRef,

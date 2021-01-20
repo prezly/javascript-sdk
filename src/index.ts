@@ -11,6 +11,7 @@ export {
     Coverage,
     Entity,
     NewsroomRef,
+    NewsroomContact,
     OEmbedInfo,
     Pagination,
     Story,
