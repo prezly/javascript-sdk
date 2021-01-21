@@ -25,4 +25,10 @@ export {
     NewsroomCategoryCreateRequest,
     NewsroomCategoryUpdateRequest,
 } from './NewsroomCategories';
+export {
+    NewsroomContactsListRequestOptions,
+    NewsroomContactsSearchRequestOptions,
+    NewsroomContactCreateRequest,
+    NewsroomContactUpdateRequest,
+} from './NewsroomContacts';
 export { Options as ClientOptions } from './types';

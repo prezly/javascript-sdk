@@ -2,8 +2,8 @@ import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
 import { NewsroomRef } from './Newsroom';
-import OEmbedInfo from './OEmbedInfo';
 import UserAccountRef from './UserAccountRef';
+import { OEmbedInfo } from './common';
 
 export enum FormatVersion {
     HTML = 1,
