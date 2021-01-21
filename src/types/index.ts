@@ -1,4 +1,3 @@
-// Primary entities
 export { default as Category } from './Category';
 export { default as Contact } from './Contact';
 export { default as Coverage } from './Coverage';
@@ -15,7 +14,6 @@ export {
     Visibility as StoryVisibility,
 } from './Story';
 
-// Secondary entities
 export {
     UploadcareFile,
     UploadcareImage,
@@ -23,7 +21,7 @@ export {
     Pagination,
     SelectionMode,
     SelectionValue,
-} from './secondary';
+} from './common';
 
 // Support
 export { default as Entity } from './Entity';

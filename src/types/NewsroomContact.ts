@@ -1,5 +1,5 @@
 import Culture from './Culture';
-import { UploadcareImage } from './secondary';
+import { UploadcareImage } from './common';
 
 export default interface NewsroomContact {
     id: number;
