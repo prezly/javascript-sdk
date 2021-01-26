@@ -1,7 +1,7 @@
-import ApiClient from "../ApiClient";
-import {Newsroom} from "../../types";
-import {NewsroomSubscriptionCreateRequest} from "./types";
-import routing from "../routing";
+import ApiClient from '../ApiClient';
+import { Newsroom } from '../../types';
+import { NewsroomSubscriptionCreateRequest } from './types';
+import routing from '../routing';
 
 export default class NewsroomSubscriptions {
     private readonly apiClient: ApiClient;
