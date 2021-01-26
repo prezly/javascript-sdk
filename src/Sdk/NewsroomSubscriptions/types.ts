@@ -3,17 +3,35 @@ import { Contact, UploadcareImage } from '../../types';
 export interface NewsroomSubscriptionCreateRequest {
     email_address: string;
     locale?: string;
-    url?: string | null;
-    ip_address?: string | null;
-    visitor_uid?: string | null;
-    session_uid?: string | null;
+    url?: string;
+    ip_address?: string;
+    visitor_uid?: string;
+    session_uid?: string;
     contact?: {
         contact_type: Contact['contact_type'];
-        company_name: Contact['company_name'];
+        /**
+         * Required only when contact_type === 'organisation'
+         */
+        company_name?: Contact['company_name'];
+        /**
+         * Required only when contact_type === 'person'
+         */
         first_name?: Contact['first_name'];
+        /**
+         * Required only when contact_type === 'person'
+         */
         last_name?: Contact['last_name'];
+        /**
+         * Required only when contact_type === 'person'
+         */
         gender?: Contact['gender'];
+        /**
+         * Required only when contact_type === 'person'
+         */
         function_name?: Contact['function_name'];
+        /**
+         * Required only when contact_type === 'person'
+         */
         organisations?: string[];
         avatar_image?: UploadcareImage | null;
         languages?: string[];

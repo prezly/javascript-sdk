@@ -10,7 +10,7 @@ export default class NewsroomSubscriptions {
         this.apiClient = apiClient;
     }
 
-    public async create(
+    public async subscribe(
         newsroomId: Newsroom['id'],
         payload: NewsroomSubscriptionCreateRequest,
     ): Promise<void> {
