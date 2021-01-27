@@ -2,6 +2,10 @@ import Culture from './Culture';
 
 export interface NewsroomRef {
     id: number;
+    /**
+     * UUID is going to replace numeric `id` in future.
+     */
+    uuid: string;
     display_name: string;
     thumbnail_url: string;
     name: string;
