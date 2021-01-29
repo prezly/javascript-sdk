@@ -4,6 +4,7 @@ import Culture from './Culture';
 import { NewsroomRef } from './Newsroom';
 import UserAccountRef from './UserAccountRef';
 import { OEmbedInfo } from './common';
+import { DocumentNode } from '@prezly/slate-types';
 
 export enum FormatVersion {
     HTML = 1,
@@ -118,10 +119,10 @@ export default interface Story extends Entity<number> {
 
 export interface ExtendedStory extends Story {
     /**
-     * HTML content for v1 stories.
      * Slate JSON content for v3 stories.
+     * HTML content for v1 stories.
      */
-    content: string;
+    content: DocumentNode | string;
     /**
      * Uploadcare image JSON.
      */
