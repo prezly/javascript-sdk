@@ -67,7 +67,10 @@ export default class Newsrooms {
         return response.payload.newsroom;
     }
 
-    async update(id: Newsroom['uuid'] | Newsroom['id'], payload: NewsroomUpdateRequest): Promise<Newsroom> {
+    async update(
+        id: Newsroom['uuid'] | Newsroom['id'],
+        payload: NewsroomUpdateRequest,
+    ): Promise<Newsroom> {
         const response = await this.apiClient.patch<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
             {

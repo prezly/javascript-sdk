@@ -57,7 +57,10 @@ export default class CoverageSdk {
         return response.payload.coverage;
     }
 
-    async update(id: Coverage['uuid'] | Coverage['id'], payload: CoverageUpdateRequest): Promise<Coverage> {
+    async update(
+        id: Coverage['uuid'] | Coverage['id'],
+        payload: CoverageUpdateRequest,
+    ): Promise<Coverage> {
         const response = await this.apiClient.patch<{ coverage: Coverage }>(
             `${routing.coverageUrl}/${id}`,
             { payload },
