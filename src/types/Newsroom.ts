@@ -1,15 +1,12 @@
 import Culture from './Culture';
 
 export interface NewsroomRef {
+    uuid: string;
     /**
      * @deprecated Please use `uuid` instead.
      * @see uuid
      */
     id: number;
-    /**
-     * UUID is going to replace numeric `id` in future.
-     */
-    uuid: string;
     display_name: string;
     thumbnail_url: string;
     name: string;

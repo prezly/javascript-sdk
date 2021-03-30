@@ -32,11 +32,12 @@ export enum Visibility {
 }
 
 export interface StoryRef {
-    id: number;
-    /**
-     * UUID is going to replace numeric `id` in future.
-     */
     uuid: string;
+    /**
+     * @deprecated Please use `uuid` as an identifier instead.
+     * @see uuid
+     */
+    id: number;
     title: string;
     publication_status: PublicationStatus;
     lifecycle_status: LifecycleStatus;
@@ -62,15 +63,12 @@ export interface StoryRef {
 }
 
 export default interface Story extends Entity<number> {
+    uuid: string;
     /**
-     * @deprecated Please use `uuid` as an idenfier instead.
+     * @deprecated Please use `uuid` as an identifier instead.
      * @see uuid
      */
     id: number;
-    /**
-     * UUID is going to replace numeric `id` in future.
-     */
-    uuid: string;
     title: string;
     subtitle: string;
     intro: string;
