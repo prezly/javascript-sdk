@@ -10,6 +10,8 @@ import {
     NewsroomContactUpdateRequest,
 } from './types';
 
+type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
+
 export default class NewsroomContacts {
     private readonly apiClient: ApiClient;
 
@@ -18,7 +20,7 @@ export default class NewsroomContacts {
     }
 
     public async list(
-        newsroomId: Newsroom['id'],
+        newsroomId: NewsroomId,
         { search }: NewsroomContactsListRequestOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -29,7 +31,7 @@ export default class NewsroomContacts {
     }
 
     public async search(
-        newsroomId: Newsroom['id'],
+        newsroomId: NewsroomId,
         { search, query }: NewsroomContactsSearchRequestOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -40,7 +42,7 @@ export default class NewsroomContacts {
     }
 
     public async create(
-        newsroomId: Newsroom['id'],
+        newsroomId: NewsroomId,
         payload: NewsroomContactCreateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -51,7 +53,7 @@ export default class NewsroomContacts {
     }
 
     public async update(
-        newsroomId: Newsroom['id'],
+        newsroomId: NewsroomId,
         payload: NewsroomContactUpdateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -62,8 +64,8 @@ export default class NewsroomContacts {
     }
 
     public async remove(
-        newsroomId: Newsroom['id'],
-        contactId: NewsroomContact['id'],
+        newsroomId: NewsroomId,
+        contactId: NewsroomContact['uuid'] | NewsroomContact['id'],
     ): Promise<void> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete(`${url}/${contactId}`);

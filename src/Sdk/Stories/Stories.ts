@@ -10,6 +10,8 @@ import {
     StoryCreateRequest,
 } from './types';
 
+type StoryId = Story['uuid'] | Story['id'];
+
 export default class Stories {
     private readonly apiClient: ApiClient;
 
@@ -44,9 +46,9 @@ export default class Stories {
         return response.payload;
     }
 
-    async get(storyId: Story['id']): Promise<ExtendedStory> {
+    async get(id: StoryId): Promise<ExtendedStory> {
         const response = await this.apiClient.get<{ story: ExtendedStory }>(
-            `${routing.storiesUrl}/${storyId}`,
+            `${routing.storiesUrl}/${id}`,
         );
         return response.payload.story;
     }

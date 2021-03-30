@@ -5,6 +5,12 @@ import Story from './Story';
 import UserRef from './UserRef';
 
 export default interface Coverage extends Entity<number> {
+    uuid: string;
+    /**
+     * @deprecated Please use `uuid` as identifier.
+     * @see uuid
+     */
+    id: number;
     attachment: {
         cdnUrl: string;
         download_url: string;

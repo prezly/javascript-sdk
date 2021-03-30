@@ -10,7 +10,7 @@ import {
     CoverageUpdateRequest,
 } from './types';
 
-type CoverageId = Coverage['id'];
+type CoverageId = Coverage['uuid'] | Coverage['id'];
 
 export default class CoverageSdk {
     private readonly apiClient: ApiClient;
