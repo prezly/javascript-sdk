@@ -11,7 +11,7 @@ export default class NewsroomSubscriptions {
     }
 
     public async subscribe(
-        newsroomId: Newsroom['id'],
+        newsroomId: Newsroom['uuid'] | Newsroom['id'],
         payload: NewsroomSubscriptionCreateRequest,
     ): Promise<void> {
         const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));

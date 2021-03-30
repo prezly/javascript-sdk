@@ -18,7 +18,7 @@ export default class NewsroomContacts {
     }
 
     public async list(
-        newsroomId: Newsroom['id'],
+        newsroomId: Newsroom['uuid'] | Newsroom['id'],
         { search }: NewsroomContactsListRequestOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -29,7 +29,7 @@ export default class NewsroomContacts {
     }
 
     public async search(
-        newsroomId: Newsroom['id'],
+        newsroomId: Newsroom['uuid'] | Newsroom['id'],
         { search, query }: NewsroomContactsSearchRequestOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -40,7 +40,7 @@ export default class NewsroomContacts {
     }
 
     public async create(
-        newsroomId: Newsroom['id'],
+        newsroomId: Newsroom['uuid'] | Newsroom['id'],
         payload: NewsroomContactCreateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -51,7 +51,7 @@ export default class NewsroomContacts {
     }
 
     public async update(
-        newsroomId: Newsroom['id'],
+        newsroomId: Newsroom['uuid'] | Newsroom['id'],
         payload: NewsroomContactUpdateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
@@ -62,7 +62,7 @@ export default class NewsroomContacts {
     }
 
     public async remove(
-        newsroomId: Newsroom['id'],
+        newsroomId: Newsroom['uuid'] | Newsroom['id'],
         contactId: NewsroomContact['id'],
     ): Promise<void> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
