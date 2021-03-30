@@ -1,6 +1,10 @@
 import Culture from './Culture';
 
 export interface NewsroomRef {
+    /**
+     * @deprecated Please use `uuid` instead.
+     * @see uuid
+     */
     id: number;
     /**
      * UUID is going to replace numeric `id` in future.

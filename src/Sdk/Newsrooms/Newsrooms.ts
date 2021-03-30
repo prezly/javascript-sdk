@@ -53,7 +53,7 @@ export default class Newsrooms {
         return response.payload;
     }
 
-    async get(id: Newsroom['id']): Promise<Newsroom> {
+    async get(id: Newsroom['uuid'] | Newsroom['id']): Promise<Newsroom> {
         const response = await this.apiClient.get<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
         );
@@ -67,7 +67,7 @@ export default class Newsrooms {
         return response.payload.newsroom;
     }
 
-    async update(id: Newsroom['id'], payload: NewsroomUpdateRequest): Promise<Newsroom> {
+    async update(id: Newsroom['uuid'] | Newsroom['id'], payload: NewsroomUpdateRequest): Promise<Newsroom> {
         const response = await this.apiClient.patch<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
             {
@@ -77,32 +77,32 @@ export default class Newsrooms {
         return response.payload.newsroom;
     }
 
-    async archive(id: Newsroom['id']): Promise<Newsroom> {
+    async archive(id: Newsroom['uuid'] | Newsroom['id']): Promise<Newsroom> {
         const response = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/archive`,
         );
         return response.payload.newsroom;
     }
 
-    async unarchive(id: Newsroom['id']): Promise<Newsroom> {
+    async unarchive(id: Newsroom['uuid'] | Newsroom['id']): Promise<Newsroom> {
         const response = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/unarchive`,
         );
         return response.payload.newsroom;
     }
 
-    async remove(id: Newsroom['id']): Promise<void> {
+    async remove(id: Newsroom['uuid'] | Newsroom['id']): Promise<void> {
         await this.apiClient.delete(`${routing.newsroomsUrl}/${id}`);
     }
 
-    async takeOffline(id: Newsroom['id']): Promise<Newsroom> {
+    async takeOffline(id: Newsroom['uuid'] | Newsroom['id']): Promise<Newsroom> {
         const response = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/offline`,
         );
         return response.payload.newsroom;
     }
 
-    async takeOnline(id: Newsroom['id']): Promise<Newsroom> {
+    async takeOnline(id: Newsroom['uuid'] | Newsroom['id']): Promise<Newsroom> {
         const response = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/online`,
         );
