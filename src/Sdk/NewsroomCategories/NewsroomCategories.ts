@@ -53,10 +53,7 @@ export default class NewsroomCategories {
         return response.payload.category;
     }
 
-    public async remove(
-        newsroomId: NewsroomId,
-        categoryId: Category['id'],
-    ): Promise<void> {
+    public async remove(newsroomId: NewsroomId, categoryId: Category['id']): Promise<void> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete<{ category: Category }>(`${url}/${categoryId}`);
     }
