@@ -9,6 +9,8 @@ import {
     NewsroomCategoryUpdateRequest,
 } from './types';
 
+type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
+
 export default class NewsroomCategories {
     private readonly apiClient: ApiClient;
 
@@ -17,7 +19,7 @@ export default class NewsroomCategories {
     }
 
     public async list(
-        newsroomId: Newsroom['uuid'] | Newsroom['id'],
+        newsroomId: NewsroomId,
         { sortOrder }: NewsroomCategoriesListOptions = {},
     ): Promise<Category[]> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
@@ -30,7 +32,7 @@ export default class NewsroomCategories {
     }
 
     public async create(
-        newsroomId: Newsroom['uuid'] | Newsroom['id'],
+        newsroomId: NewsroomId,
         payload: NewsroomCategoryCreateRequest,
     ): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
@@ -41,7 +43,7 @@ export default class NewsroomCategories {
     }
 
     public async update(
-        newsroomId: Newsroom['uuid'] | Newsroom['id'],
+        newsroomId: NewsroomId,
         payload: NewsroomCategoryUpdateRequest,
     ): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
@@ -52,7 +54,7 @@ export default class NewsroomCategories {
     }
 
     public async remove(
-        newsroomId: Newsroom['uuid'] | Newsroom['id'],
+        newsroomId: NewsroomId,
         categoryId: Category['id'],
     ): Promise<void> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
