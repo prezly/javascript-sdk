@@ -44,7 +44,7 @@ export default class Stories {
         return response.payload;
     }
 
-    async get(storyId: Story['id']): Promise<ExtendedStory> {
+    async get(storyId: Story['uuid'] | Story['id']): Promise<ExtendedStory> {
         const response = await this.apiClient.get<{ story: ExtendedStory }>(
             `${routing.storiesUrl}/${storyId}`,
         );

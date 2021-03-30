@@ -63,6 +63,11 @@ export interface StoryRef {
 
 export default interface Story extends Entity<number> {
     /**
+     * @deprecated Please use `uuid` as an idenfier instead.
+     * @see uuid
+     */
+    id: number;
+    /**
      * UUID is going to replace numeric `id` in future.
      */
     uuid: string;
