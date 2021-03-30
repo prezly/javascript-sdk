@@ -63,7 +63,7 @@ export default class NewsroomContacts {
 
     public async remove(
         newsroomId: Newsroom['uuid'] | Newsroom['id'],
-        contactId: NewsroomContact['id'],
+        contactId: NewsroomContact['uuid'] | NewsroomContact['id'],
     ): Promise<void> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete(`${url}/${contactId}`);

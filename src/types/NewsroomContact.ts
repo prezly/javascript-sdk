@@ -2,6 +2,11 @@ import Culture from './Culture';
 import { UploadcareImage } from './common';
 
 export default interface NewsroomContact {
+    uuid: string;
+    /**
+     * @deprecated Please use `uuid` as identifier.
+     * @see uuid
+     */
     id: number;
     name: string;
     email: string | null;
