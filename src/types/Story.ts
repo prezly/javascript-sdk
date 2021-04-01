@@ -98,6 +98,7 @@ export default interface Story extends Entity<number> {
     newsroom: NewsroomRef;
     categories: Category[];
     translations: StoryRef[];
+    oembed: OEmbedInfo;
 
     thumbnail_url: string;
     created_at: string;
