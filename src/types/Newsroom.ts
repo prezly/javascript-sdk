@@ -1,4 +1,5 @@
 import Culture from './Culture';
+import { UploadcareImageStoragePayload } from '@prezly/slate-types';
 
 export interface NewsroomRef {
     uuid: string;
@@ -51,4 +52,7 @@ export default interface Newsroom extends NewsroomRef {
     cultures: Culture[];
     campaigns_number: number;
     stories_number: number;
+    // assets
+    square_logo: UploadcareImageStoragePayload | null;
+    newsroom_logo: UploadcareImageStoragePayload | null;
 }
