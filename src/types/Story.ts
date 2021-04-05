@@ -4,7 +4,6 @@ import Culture from './Culture';
 import { NewsroomRef } from './Newsroom';
 import UserAccountRef from './UserAccountRef';
 import { OEmbedInfo } from './common';
-import { DocumentNode } from '@prezly/slate-types';
 
 export enum FormatVersion {
     HTML = 1,
@@ -123,10 +122,11 @@ export default interface Story extends Entity<number> {
 
 export interface ExtendedStory extends Story {
     /**
-     * Slate JSON content for v3 stories.
-     * HTML content for v1 stories.
+     * Depending on `format_version` this field can contain:
+     * - HTML content for v1 stories (deprecated)
+     * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
      */
-    content: DocumentNode | string;
+    content: string;
     /**
      * Uploadcare image JSON.
      */
