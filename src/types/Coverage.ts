@@ -13,6 +13,7 @@ export default interface Coverage extends Entity<number> {
      * @see uuid
      */
     id: number;
+    display_name: string;
     is_deleted: boolean;
     headline: string;
     user: UserRef;
@@ -31,6 +32,10 @@ export default interface Coverage extends Entity<number> {
     created_at: string;
     updated_at: string;
     edited_at: string | null;
+    /**
+     * @deprecated Please don't rely on this prop. It will be removed in future.
+     */
+    avatar_url: string;
     /**
      * @deprecated Please don't rely on this prop. It will be removed in future.
      */
