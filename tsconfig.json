@@ -4,7 +4,7 @@
         "module": "commonjs",
         "lib": ["esnext", "dom"],
         "outDir": "./dist",
-        "removeComments": true,
+        "removeComments": false,
         "inlineSourceMap": true,
         "inlineSources": true,
         "downlevelIteration": true,
