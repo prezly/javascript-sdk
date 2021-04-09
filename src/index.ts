@@ -21,6 +21,10 @@ export {
     NewsroomContactsSearchRequestOptions,
     NewsroomContactCreateRequest,
     NewsroomContactUpdateRequest,
+    // Newsroom Languages SDK
+    NewsroomLanguagesListRequest,
+    NewsroomLanguagesListResponse,
+    NewsroomLanguageSettingsUpdateRequest,
     // Stories SDK
     StoriesListRequest,
     StoriesListResponse,
@@ -34,7 +38,9 @@ export {
     Coverage,
     Entity,
     NewsroomRef,
+    NewsroomCompanyInformation,
     NewsroomContact,
+    NewsroomLanguageSettings,
     OEmbedInfo,
     Pagination,
     Story,
