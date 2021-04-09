@@ -31,4 +31,9 @@ export {
     NewsroomContactCreateRequest,
     NewsroomContactUpdateRequest,
 } from './NewsroomContacts';
+export {
+    NewsroomLanguagesListRequest,
+    NewsroomLanguagesListResponse,
+    NewsroomLanguageSettingsUpdateRequest,
+} from './NewsroomLanguages';
 export { Options as ClientOptions } from './types';
