@@ -22,7 +22,7 @@ export interface UnsafeNewsroomUpdateErrorResponse {
     errors: {
         ':global': [
             {
-                code: 'will_update_stories' | string;
+                code: 'will_update_stories' | 'will_overwrite_company_information' | string;
                 message: string;
             },
         ];
