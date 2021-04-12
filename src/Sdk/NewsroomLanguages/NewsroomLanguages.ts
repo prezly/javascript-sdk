@@ -7,7 +7,9 @@ import {
     NewsroomLanguageSettingsUpdateRequest,
     NewsroomLanguagesListRequest,
     NewsroomLanguagesListResponse,
+    UnsafeNewsroomUpdateErrorResponse,
 } from './types';
+import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -47,6 +49,26 @@ export default class NewsroomLanguages {
         return response.payload.language;
     }
 
+    async enable(
+        newsroomId: NewsroomId,
+        localeCode: Culture['code'],
+        payload: NewsroomLanguageSettingsUpdateRequest = {},
+    ): Promise<NewsroomLanguageSettings> {
+        const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.put<{ language: NewsroomLanguageSettings }>(
+            `${url}/${localeCode}`,
+            {
+                payload,
+            },
+        );
+        return response.payload.language;
+    }
+
+    async disable(newsroomId: NewsroomId, localeCode: Culture['code']): Promise<void> {
+        const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
+        await this.apiClient.delete<{ language: NewsroomLanguageSettings }>(`${url}/${localeCode}`);
+    }
+
     async update(
         newsroomId: NewsroomId,
         localeCode: Culture['code'],
@@ -60,5 +82,39 @@ export default class NewsroomLanguages {
             },
         );
         return response.payload.language;
+    }
+
+    async makeDefault(
+        newsroomId: NewsroomId,
+        localeCode: Culture['code'],
+    ): Promise<NewsroomLanguageSettings> {
+        return await this.update(newsroomId, localeCode, { is_default: true });
+    }
+
+    /**
+     * This operation should be used for single-language newsrooms
+     * to switch default language to another code.
+     *
+     * This will also move all linked stories, if any, to the new language code,
+     * but will require a confirmation.
+     */
+    async switchDefaultLanguage(
+        newsroomId: NewsroomId,
+        localeCode: Culture['code'],
+        newLocaleCode: Culture['code'],
+    ): Promise<
+        | { status: 'success'; language: NewsroomLanguageSettings }
+        | UnsafeNewsroomUpdateErrorResponse
+    > {
+        try {
+            const language = await this.update(newsroomId, localeCode, { code: newLocaleCode });
+            return { status: 'success', language };
+        } catch (error) {
+            if (isUnsafeNewsroomUpdateErrorResponse(error)) {
+                return error;
+            }
+
+            throw error;
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
+import { Culture, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
 
 export interface NewsroomLanguagesListRequest {
     sortOrder?: string;
@@ -10,5 +10,21 @@ export interface NewsroomLanguagesListResponse {
 }
 
 export interface NewsroomLanguageSettingsUpdateRequest {
-    company_information: Partial<NewsroomCompanyInformation>;
+    is_default?: true;
+    code?: Culture['code'];
+    company_information?: Partial<NewsroomCompanyInformation>;
+}
+
+export interface UnsafeNewsroomUpdateErrorResponse {
+    status: 'error';
+    code: 'unsafe';
+    message: string;
+    errors: {
+        ':global': [
+            {
+                code: 'will_update_stories' | string;
+                message: string;
+            },
+        ];
+    };
 }
