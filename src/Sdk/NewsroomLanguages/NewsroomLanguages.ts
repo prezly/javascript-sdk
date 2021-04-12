@@ -73,11 +73,14 @@ export default class NewsroomLanguages {
         newsroomId: NewsroomId,
         localeCode: Culture['code'],
         payload: NewsroomLanguageSettingsUpdateRequest,
+        options: { force?: boolean } = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
+        const force = Boolean(options.force);
         const response = await this.apiClient.patch<{ language: NewsroomLanguageSettings }>(
             `${url}/${localeCode}`,
             {
+                query: { force: force ? true : undefined },
                 payload,
             },
         );
@@ -102,12 +105,18 @@ export default class NewsroomLanguages {
         newsroomId: NewsroomId,
         localeCode: Culture['code'],
         newLocaleCode: Culture['code'],
+        forceUnsafeOperation: boolean = false,
     ): Promise<
         | { status: 'success'; language: NewsroomLanguageSettings }
         | UnsafeNewsroomUpdateErrorResponse
     > {
         try {
-            const language = await this.update(newsroomId, localeCode, { code: newLocaleCode });
+            const language = await this.update(
+                newsroomId,
+                localeCode,
+                { code: newLocaleCode },
+                { force: forceUnsafeOperation },
+            );
             return { status: 'success', language };
         } catch (error) {
             if (isUnsafeNewsroomUpdateErrorResponse(error)) {
