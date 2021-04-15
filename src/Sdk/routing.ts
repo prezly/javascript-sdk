@@ -5,6 +5,7 @@ const routing = {
     newsroomContactsUrl: '/v2/newsrooms/:newsroom_id/contacts',
     newsroomLanguagesUrl: '/v2/newsrooms/:newsroom_id/languages',
     newsroomSubscriptionsUrl: '/v2/newsrooms/:newsroom_id/subscriptions',
+    newsroomWebhooksUrl: '/v2/newsrooms/:newsroom_id/webhooks',
     storiesUrl: '/v2/stories',
     storiesSearchUrl: '/v2/stories/search',
 };
