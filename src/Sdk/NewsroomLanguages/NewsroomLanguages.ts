@@ -64,9 +64,20 @@ export default class NewsroomLanguages {
         return response.payload.language;
     }
 
-    async disable(newsroomId: NewsroomId, localeCode: Culture['code']): Promise<void> {
+    async disable(
+        newsroomId: NewsroomId,
+        localeCode: Culture['code'],
+        { replacement }: { replacement?: Culture['code'] },
+    ): Promise<void> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
-        await this.apiClient.delete<{ language: NewsroomLanguageSettings }>(`${url}/${localeCode}`);
+        await this.apiClient.delete<{ language: NewsroomLanguageSettings }>(
+            `${url}/${localeCode}`,
+            {
+                payload: {
+                    replacement,
+                },
+            },
+        );
     }
 
     async update(
