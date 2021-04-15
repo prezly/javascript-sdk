@@ -3,6 +3,6 @@ export default interface NewsroomWebhook {
     name: string;
     url: string;
     events: string[];
-    secret: string|null;
+    secret: string | null;
     is_active: boolean;
 }
