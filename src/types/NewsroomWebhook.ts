@@ -1,4 +1,4 @@
-import { Event } from "./enums";
+import { Event } from './enums';
 
 export default interface NewsroomWebhook {
     id: string;

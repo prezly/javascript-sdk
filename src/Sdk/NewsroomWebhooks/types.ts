@@ -1,4 +1,4 @@
-import { Event } from "../../types/enums";
+import { Event } from '../../types/enums';
 
 export interface NewsroomWebhookCreateRequest {
     name: string;
