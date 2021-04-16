@@ -1,9 +1,9 @@
-import { Event } from '../../types/enums';
+import { WebhookEvent } from '../../types';
 
 export interface NewsroomWebhookCreateRequest {
     name: string;
     url: string;
-    events?: Event[];
+    events?: WebhookEvent[];
     secret?: string | null;
     is_active?: boolean;
 }
@@ -11,7 +11,7 @@ export interface NewsroomWebhookCreateRequest {
 export interface NewsroomWebhookUpdateRequest {
     name?: string;
     url?: string;
-    events?: Event[];
+    events?: WebhookEvent[];
     secret?: string | null;
     is_active?: boolean;
 }
