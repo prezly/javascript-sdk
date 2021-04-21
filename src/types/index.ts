@@ -6,6 +6,8 @@ export { default as Newsroom, NewsroomRef } from './Newsroom';
 export { default as NewsroomContact } from './NewsroomContact';
 export { default as NewsroomCompanyInformation } from './NewsroomCompanyInformation';
 export { default as NewsroomLanguageSettings } from './NewsroomLanguageSettings';
+export { default as NewsroomWebhook } from './NewsroomWebhook';
+export { default as WebhookEvent } from './WebhookEvent';
 export {
     default as Story,
     StoryRef,
