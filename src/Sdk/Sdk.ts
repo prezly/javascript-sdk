@@ -6,7 +6,7 @@ import Newsrooms from './Newsrooms';
 import NewsroomCategories from './NewsroomCategories';
 import NewsroomContacts from './NewsroomContacts';
 import NewsroomLanguages from './NewsroomLanguages';
-import NewsroomWebhooks from "./NewsroomWebhooks";
+import NewsroomWebhooks from './NewsroomWebhooks';
 
 const BASE_URL = 'https://api.prezly.com';
 
