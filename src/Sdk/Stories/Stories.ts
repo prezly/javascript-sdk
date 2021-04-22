@@ -21,7 +21,7 @@ export default class Stories {
 
     async list<
         I extends keyof ExtraStoryFields = never,
-        S extends Story = Story & Pick<ExtraStoryFields, I>,
+        S extends Story = Story & Pick<ExtraStoryFields, I>
     >(options?: StoriesListRequest<I>): Promise<StoriesListResponse<S>> {
         const { limit, offset, sortOrder, include } = options || {};
         const response = await this.apiClient.get<StoriesListResponse<S>>(routing.storiesUrl, {
@@ -37,18 +37,21 @@ export default class Stories {
 
     async search<
         I extends keyof ExtraStoryFields = never,
-        S extends Story = Story & Pick<ExtraStoryFields, I>,
+        S extends Story = Story & Pick<ExtraStoryFields, I>
     >(options?: StoriesSearchRequest<I>): Promise<StoriesListResponse<S>> {
         const { limit, offset, sortOrder, include, jsonQuery } = options || {};
-        const response = await this.apiClient.post<StoriesListResponse<S>>(routing.storiesSearchUrl, {
-            payload: {
-                query: jsonQuery,
-                limit,
-                offset,
-                sort: sortOrder,
-                include: include ? include.join(',') : undefined,
+        const response = await this.apiClient.post<StoriesListResponse<S>>(
+            routing.storiesSearchUrl,
+            {
+                payload: {
+                    query: jsonQuery,
+                    limit,
+                    offset,
+                    sort: sortOrder,
+                    include: include ? include.join(',') : undefined,
+                },
             },
-        });
+        );
         return response.payload;
     }
 

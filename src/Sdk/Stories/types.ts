@@ -12,41 +12,38 @@ import {
 /**
  * @see https://github.com/microsoft/TypeScript/issues/13298#issuecomment-707364842
  */
-type UnionToTuple<T> = (
-    (
-        (
-            T extends any
-                ? (t: T) => T
-                : never
-            ) extends infer U
-            ? (U extends any
-            ? (u: U) => any
-            : never
-                ) extends (v: infer V) => any
-            ? V
-            : never
-            : never
-        ) extends (_: any) => infer W
-        ? [...UnionToTuple<Exclude<T, W>>, W]
-        : []
-    );
+type UnionToTuple<T> = ((T extends any
+  ? (t: T) => T
+  : never) extends infer U
+  ? (U extends any
+      ? (u: U) => any
+      : never) extends (v: infer V) => any
+      ? V
+      : never
+  : never) extends (_: any) => infer W
+    ? [...UnionToTuple<Exclude<T, W>>, W]
+    : [];
 
 export type StoriesSearchRequest<I extends keyof ExtraStoryFields = never> = {
     jsonQuery?: string;
     limit?: number;
     offset?: number;
     sortOrder?: string;
-} & (
-    /**
-     * Note: [I] extends [never] is required here (see https://stackoverflow.com/a/65492934).
-     */
-    [I] extends [never] ? {
-        include?: never;
-    } : {
-        include: UnionToTuple<I>;
-    });
+} & /**
+ * Note: [I] extends [never] is required here (see https://stackoverflow.com/a/65492934).
+ */
+([I] extends [never]
+    ? {
+          include?: never;
+      }
+    : {
+          include: UnionToTuple<I>;
+      });
 
-export type StoriesListRequest<I extends keyof ExtraStoryFields = never> = Omit<StoriesSearchRequest<I>, 'jsonQuery'>;
+export type StoriesListRequest<I extends keyof ExtraStoryFields = never> = Omit<
+    StoriesSearchRequest<I>,
+    'jsonQuery'
+>;
 
 export interface StoriesListResponse<S extends Story = Story> {
     stories: S[];
