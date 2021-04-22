@@ -12,6 +12,7 @@ export {
     default as Story,
     StoryRef,
     ExtendedStory,
+    ExtraStoryFields,
     FormatVersion as StoryFormatVersion,
     LifecycleStatus as StoryLifecycleStatus,
     PublicationStatus as StoryPublicationStatus,

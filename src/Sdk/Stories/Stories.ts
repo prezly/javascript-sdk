@@ -1,4 +1,4 @@
-import { ExtendedStory, Story } from '../../types';
+import { ExtendedStory, ExtraStoryFields, Story } from '../../types';
 
 import routing from '../routing';
 import ApiClient from '../ApiClient';
@@ -19,28 +19,34 @@ export default class Stories {
         this.apiClient = apiClient;
     }
 
-    async list({ limit, offset, sortOrder }: StoriesListRequest = {}): Promise<
-        StoriesListResponse
-    > {
-        const response = await this.apiClient.get<StoriesListResponse>(routing.storiesUrl, {
+    async list<
+        I extends keyof ExtraStoryFields = never,
+        S extends Story = Story & Pick<ExtraStoryFields, I>,
+    >(options?: StoriesListRequest<I>): Promise<StoriesListResponse<S>> {
+        const { limit, offset, sortOrder, include } = options || {};
+        const response = await this.apiClient.get<StoriesListResponse<S>>(routing.storiesUrl, {
             query: {
                 limit,
                 offset,
                 sort: sortOrder,
+                include: include ? include.join(',') : undefined,
             },
         });
         return response.payload;
     }
 
-    async search({ jsonQuery, limit, offset, sortOrder }: StoriesSearchRequest = {}): Promise<
-        StoriesListResponse
-    > {
-        const response = await this.apiClient.post<StoriesListResponse>(routing.storiesSearchUrl, {
+    async search<
+        I extends keyof ExtraStoryFields = never,
+        S extends Story = Story & Pick<ExtraStoryFields, I>,
+    >(options?: StoriesSearchRequest<I>): Promise<StoriesListResponse<S>> {
+        const { limit, offset, sortOrder, include, jsonQuery } = options || {};
+        const response = await this.apiClient.post<StoriesListResponse<S>>(routing.storiesSearchUrl, {
             payload: {
                 query: jsonQuery,
                 limit,
                 offset,
                 sort: sortOrder,
+                include: include ? include.join(',') : undefined,
             },
         });
         return response.payload;

@@ -1,6 +1,7 @@
 import {
     Category,
     Culture,
+    ExtraStoryFields,
     NewsroomRef,
     Pagination,
     Story,
@@ -8,20 +9,47 @@ import {
     StoryVisibility,
 } from '../../types';
 
-export interface StoriesListRequest {
+/**
+ * @see https://github.com/microsoft/TypeScript/issues/13298#issuecomment-707364842
+ */
+type UnionToTuple<T> = (
+    (
+        (
+            T extends any
+                ? (t: T) => T
+                : never
+            ) extends infer U
+            ? (U extends any
+            ? (u: U) => any
+            : never
+                ) extends (v: infer V) => any
+            ? V
+            : never
+            : never
+        ) extends (_: any) => infer W
+        ? [...UnionToTuple<Exclude<T, W>>, W]
+        : []
+    );
+
+export type StoriesSearchRequest<I extends keyof ExtraStoryFields = never> = {
+    jsonQuery?: string;
     limit?: number;
     offset?: number;
     sortOrder?: string;
-}
-export interface StoriesSearchRequest extends StoriesListRequest {
+} & (
     /**
-     * Filter query using Prezly JSON Query Language
+     * Note: [I] extends [never] is required here (see https://stackoverflow.com/a/65492934).
      */
-    jsonQuery?: string;
-}
+    [I] extends [never] ? {
+        include?: never;
+    } : {
+        include: UnionToTuple<I>;
+    });
 
-export interface StoriesListResponse {
-    stories: Story[];
+export type StoriesListRequest<I extends keyof ExtraStoryFields = never> = Omit<StoriesSearchRequest<I>, 'jsonQuery'>;
+
+export interface StoriesListResponse<S extends Story = Story> {
+    stories: S[];
     pagination: Pagination;
     sort: string;
 }
