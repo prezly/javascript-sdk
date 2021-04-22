@@ -29,10 +29,7 @@ export type StoriesSearchRequest<I extends keyof ExtraStoryFields = never> = {
     limit?: number;
     offset?: number;
     sortOrder?: string;
-} & /**
- * Note: [I] extends [never] is required here (see https://stackoverflow.com/a/65492934).
- */
-([I] extends [never]
+} & ([I] extends [never] // Note: [I] extends [never] is required (see https://stackoverflow.com/a/65492934)
     ? {
           include?: never;
       }
