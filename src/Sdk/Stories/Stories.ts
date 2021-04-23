@@ -27,14 +27,17 @@ export default class Stories {
             : Story
     >(options?: Options): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options || {};
-        const response = await this.apiClient.get<StoriesListResponse<StoryRecord>>(routing.storiesUrl, {
-            query: {
-                limit,
-                offset,
-                sort: sortOrder,
-                include: include ? include.join(',') : undefined,
+        const response = await this.apiClient.get<StoriesListResponse<StoryRecord>>(
+            routing.storiesUrl,
+            {
+                query: {
+                    limit,
+                    offset,
+                    sort: sortOrder,
+                    include: include ? include.join(',') : undefined,
+                },
             },
-        });
+        );
         return response.payload;
     }
 
