@@ -99,3 +99,4 @@ const PrezlySdk = require('@prezly/sdk').default;
 ```
 
 We recommend referring to the [official `cross-fetch` module documentation](https://www.npmjs.com/package/cross-fetch) for more information.
+
