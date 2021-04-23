@@ -20,11 +20,14 @@ export default class Stories {
     }
 
     async list<
-        I extends keyof ExtraStoryFields = never,
-        S extends Story = Story & Pick<ExtraStoryFields, I>
-    >(options?: StoriesListRequest<I>): Promise<StoriesListResponse<S>> {
+        Include extends readonly (keyof ExtraStoryFields)[],
+        Options extends StoriesListRequest<Include>,
+        StoryRecord extends Story = Options['include'] extends Include
+            ? Story & Pick<ExtraStoryFields, Options['include'][number]>
+            : Story
+    >(options?: Options): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options || {};
-        const response = await this.apiClient.get<StoriesListResponse<S>>(routing.storiesUrl, {
+        const response = await this.apiClient.get<StoriesListResponse<StoryRecord>>(routing.storiesUrl, {
             query: {
                 limit,
                 offset,
@@ -36,11 +39,14 @@ export default class Stories {
     }
 
     async search<
-        I extends keyof ExtraStoryFields = never,
-        S extends Story = Story & Pick<ExtraStoryFields, I>
-    >(options?: StoriesSearchRequest<I>): Promise<StoriesListResponse<S>> {
+        Include extends readonly (keyof ExtraStoryFields)[],
+        Options extends StoriesListRequest<Include>,
+        StoryRecord extends Story = Options['include'] extends Include
+            ? Story & Pick<ExtraStoryFields, Options['include'][number]>
+            : Story
+    >(options?: StoriesSearchRequest<Include>): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, jsonQuery } = options || {};
-        const response = await this.apiClient.post<StoriesListResponse<S>>(
+        const response = await this.apiClient.post<StoriesListResponse<StoryRecord>>(
             routing.storiesSearchUrl,
             {
                 payload: {

@@ -9,36 +9,15 @@ import {
     StoryVisibility,
 } from '../../types';
 
-/**
- * @see https://github.com/microsoft/TypeScript/issues/13298#issuecomment-707364842
- */
-type UnionToTuple<T> = ((T extends any
-  ? (t: T) => T
-  : never) extends infer U
-  ? (U extends any
-      ? (u: U) => any
-      : never) extends (v: infer V) => any
-      ? V
-      : never
-  : never) extends (_: any) => infer W
-    ? [...UnionToTuple<Exclude<T, W>>, W]
-    : [];
-
-export type StoriesSearchRequest<I extends keyof ExtraStoryFields = never> = {
+export type StoriesSearchRequest<Include extends readonly (keyof ExtraStoryFields)[]> = {
     jsonQuery?: string;
     limit?: number;
     offset?: number;
     sortOrder?: string;
-} & ([I] extends [never] // Note: [I] extends [never] is required (see https://stackoverflow.com/a/65492934)
-    ? {
-          include?: never;
-      }
-    : {
-          include: UnionToTuple<I>;
-      });
-
-export type StoriesListRequest<I extends keyof ExtraStoryFields = never> = Omit<
-    StoriesSearchRequest<I>,
+    include?: Include;
+};
+export type StoriesListRequest<Include extends readonly (keyof ExtraStoryFields)[]> = Omit<
+    StoriesSearchRequest<Include>,
     'jsonQuery'
 >;
 
