@@ -1,6 +1,7 @@
 import {
     Category,
     Culture,
+    ExtraStoryFields,
     NewsroomRef,
     Pagination,
     Story,
@@ -8,20 +9,20 @@ import {
     StoryVisibility,
 } from '../../types';
 
-export interface StoriesListRequest {
+export type StoriesSearchRequest<Include extends readonly (keyof ExtraStoryFields)[]> = {
+    jsonQuery?: string;
     limit?: number;
     offset?: number;
     sortOrder?: string;
-}
-export interface StoriesSearchRequest extends StoriesListRequest {
-    /**
-     * Filter query using Prezly JSON Query Language
-     */
-    jsonQuery?: string;
-}
+    include?: Include;
+};
+export type StoriesListRequest<Include extends readonly (keyof ExtraStoryFields)[]> = Omit<
+    StoriesSearchRequest<Include>,
+    'jsonQuery'
+>;
 
-export interface StoriesListResponse {
-    stories: Story[];
+export interface StoriesListResponse<S extends Story = Story> {
+    stories: S[];
     pagination: Pagination;
     sort: string;
 }

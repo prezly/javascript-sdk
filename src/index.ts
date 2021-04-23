@@ -44,6 +44,8 @@ export {
     OEmbedInfo,
     Pagination,
     Story,
+    ExtendedStory,
+    ExtraStoryFields,
     StoryRef,
     StoryVisibility,
     StoryPublicationStatus,

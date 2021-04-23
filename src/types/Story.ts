@@ -120,7 +120,7 @@ export default interface Story extends Entity<number> {
     visibility: Visibility;
 }
 
-export interface ExtendedStory extends Story {
+export interface ExtraStoryFields {
     /**
      * Depending on `format_version` this field can contain:
      * - HTML content for v1 stories (deprecated)
@@ -142,3 +142,5 @@ export interface ExtendedStory extends Story {
     social_text: string;
     tag_names: string[];
 }
+
+export interface ExtendedStory extends Story, ExtraStoryFields {}
