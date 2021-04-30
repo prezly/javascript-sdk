@@ -34,9 +34,12 @@ export {
     SlateStoryCreateRequest,
 } from './Sdk';
 export {
+    Category,
     Contact,
     Coverage,
     Entity,
+    StoryFormatVersion,
+    Newsroom,
     NewsroomRef,
     NewsroomCompanyInformation,
     NewsroomContact,
