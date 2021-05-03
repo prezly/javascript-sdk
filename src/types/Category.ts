@@ -12,4 +12,5 @@ export default interface Category {
         };
     };
     id: number;
+    stories_number: number;
 }
