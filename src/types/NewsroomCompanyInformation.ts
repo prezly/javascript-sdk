@@ -13,6 +13,7 @@ export default interface NewsroomCompanyInformation {
     pinterest: string | null;
     youtube: string | null;
     instagram: string | null;
+    tiktok: string | null;
     // advanced GDPR-related settings
     /**
      * Only admins are allowed to update this field.
