@@ -1,7 +1,7 @@
 import nodeUrl from 'url';
 import queryString, { ParsedQuery } from 'query-string';
 
-const URL = typeof window !== 'undefined' ? window.URL : nodeUrl.URL;
+const URL = typeof window === 'undefined' ? nodeUrl.URL : window.URL;
 
 const parseUrlParams = (query: string): ParsedQuery =>
     queryString.parse(query, { arrayFormat: 'bracket' });
