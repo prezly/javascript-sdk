@@ -54,9 +54,12 @@ export default class NewsroomCategories {
         payload: NewsroomCategoryUpdateRequest,
     ): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ category: Category }>(`${url}/${categoryId}`, {
-            payload,
-        });
+        const response = await this.apiClient.patch<{ category: Category }>(
+            `${url}/${categoryId}`,
+            {
+                payload,
+            },
+        );
         return response.payload.category;
     }
 
