@@ -67,7 +67,7 @@ export default class NewsroomContacts {
         payload: NewsroomContactUpdateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ contact: NewsroomContact }>(
+        const response = await this.apiClient.patch<{ contact: NewsroomContact }>(
             `${url}/${contactId}`,
             { payload },
         );
