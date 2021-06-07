@@ -8,7 +8,8 @@ export default interface UserRef {
      */
     username: string;
     email: string;
-    first_name: string | null;
+    first_name: string;
+    last_name: string;
 
     is_terms_of_service_accepted: boolean;
     sign_in_flow: 'google' | 'password' | 'sso';
