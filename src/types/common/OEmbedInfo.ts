@@ -6,6 +6,7 @@ export default interface OEmbedInfo {
     // generic properties
     title?: string;
     description?: string;
+    screenshot_url?: string;
     thumbnail_url?: string;
     thumbnail_width?: string;
     thumbnail_height?: string;
