@@ -63,12 +63,14 @@ export default class NewsroomContacts {
 
     public async update(
         newsroomId: NewsroomId,
+        contactId: NewsroomContactId,
         payload: NewsroomContactUpdateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ contact: NewsroomContact }>(url, {
-            payload,
-        });
+        const response = await this.apiClient.post<{ contact: NewsroomContact }>(
+            `${url}/${contactId}`,
+            { payload },
+        );
         return response.payload.contact;
     }
 
