@@ -11,6 +11,7 @@ import {
 } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
+type ContactId = NewsroomContact['uuid'] | NewsroomContact['id'];
 
 export default class NewsroomContacts {
     private readonly apiClient: ApiClient;
@@ -28,6 +29,14 @@ export default class NewsroomContacts {
             query: { search },
         });
         return response.payload.contacts;
+    }
+
+    async get(newsroomId: NewsroomId, contactId: ContactId): Promise<NewsroomContact> {
+        const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ contact: NewsroomContact }>(
+            `${url}/${contactId}`,
+        );
+        return response.payload.contact;
     }
 
     public async search(
@@ -63,10 +72,7 @@ export default class NewsroomContacts {
         return response.payload.contact;
     }
 
-    public async remove(
-        newsroomId: NewsroomId,
-        contactId: NewsroomContact['uuid'] | NewsroomContact['id'],
-    ): Promise<void> {
+    public async remove(newsroomId: NewsroomId, contactId: ContactId): Promise<void> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete(`${url}/${contactId}`);
     }
