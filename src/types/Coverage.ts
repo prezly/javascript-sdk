@@ -35,7 +35,7 @@ export default interface Coverage extends Entity<number> {
     /**
      * @deprecated Please don't rely on this prop. It will be removed in future.
      */
-    avatar_url: string;
+    avatar_url: string | null;
     /**
      * @deprecated Please don't rely on this prop. It will be removed in future.
      */
