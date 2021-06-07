@@ -39,7 +39,6 @@ export interface NewsroomRef {
         hub_settings: string;
         languages: string;
         look_and_feel_settings: string;
-        manual_subscription_management: string;
         privacy_settings: string;
         widget_settings: string;
     };
