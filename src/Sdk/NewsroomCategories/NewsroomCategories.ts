@@ -31,6 +31,12 @@ export default class NewsroomCategories {
         return response.payload.categories;
     }
 
+    public async get(newsroomId: NewsroomId, categoryId: Category['id']): Promise<Category> {
+        const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ category: Category }>(`${url}/${categoryId}`);
+        return response.payload.category;
+    }
+
     public async create(
         newsroomId: NewsroomId,
         payload: NewsroomCategoryCreateRequest,
@@ -44,10 +50,11 @@ export default class NewsroomCategories {
 
     public async update(
         newsroomId: NewsroomId,
+        categoryId: Category['id'],
         payload: NewsroomCategoryUpdateRequest,
     ): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ category: Category }>(url, {
+        const response = await this.apiClient.post<{ category: Category }>(`${url}/${categoryId}`, {
             payload,
         });
         return response.payload.category;
