@@ -50,10 +50,11 @@ export default class NewsroomCategories {
 
     public async update(
         newsroomId: NewsroomId,
+        categoryId: Category['id'],
         payload: NewsroomCategoryUpdateRequest,
     ): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ category: Category }>(url, {
+        const response = await this.apiClient.post<{ category: Category }>(`${url}/${categoryId}`, {
             payload,
         });
         return response.payload.category;
