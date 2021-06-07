@@ -2,7 +2,7 @@ import Category from './Category';
 import Entity from './Entity';
 import Culture from './Culture';
 import { NewsroomRef } from './Newsroom';
-import UserAccountRef from './UserAccountRef';
+import UserRef from './UserRef';
 import { OEmbedInfo } from './common';
 
 export enum FormatVersion {
@@ -50,7 +50,7 @@ export interface StoryRef {
     scheduled_at: string | null;
 
     culture: Culture;
-    author: UserAccountRef | null;
+    author: UserRef | null;
     newsroom: NewsroomRef;
     oembed: OEmbedInfo;
 
@@ -74,7 +74,7 @@ export default interface Story extends Entity<number> {
     slug: string;
     format_version: FormatVersion;
     culture: Culture;
-    author: UserAccountRef | null;
+    author: UserRef | null;
 
     links: {
         // backend app urls

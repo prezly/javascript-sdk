@@ -1,16 +1,19 @@
 export default interface UserRef {
     id: number;
+    display_name: string;
+    avatar_url: string;
     /**
      * @deprecated Please use `email` instead.
      * @see email
      */
     username: string;
     email: string;
-    display_name: string;
     first_name: string | null;
-    avatar_url: string;
-    /**
-     * Last time the user was active. ISO-8601 format.
-     */
+
+    is_terms_of_service_accepted: boolean;
+    sign_in_flow: 'google' | 'password' | 'sso';
+    use_case_answer: string;
+
+    created_at: string;
     last_seen_at: string | null;
 }
