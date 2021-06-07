@@ -7,7 +7,6 @@ export { default as NewsroomContact } from './NewsroomContact';
 export { default as NewsroomCompanyInformation } from './NewsroomCompanyInformation';
 export { default as NewsroomLanguageSettings } from './NewsroomLanguageSettings';
 export { default as NewsroomWebhook } from './NewsroomWebhook';
-export { default as WebhookEvent } from './WebhookEvent';
 export {
     default as Story,
     StoryRef,
@@ -18,6 +17,8 @@ export {
     PublicationStatus as StoryPublicationStatus,
     Visibility as StoryVisibility,
 } from './Story';
+export { default as UserRef } from './UserRef';
+export { default as WebhookEvent } from './WebhookEvent';
 
 export {
     UploadcareFile,

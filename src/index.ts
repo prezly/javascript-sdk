@@ -53,4 +53,5 @@ export {
     StoryVisibility,
     StoryPublicationStatus,
     StoryLifecycleStatus,
+    UserRef,
 } from './types';
