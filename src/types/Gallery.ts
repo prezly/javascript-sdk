@@ -1,10 +1,11 @@
 import GalleryImage from "./GalleryImage";
+import GalleryStatus from "./GalleryStatus";
 
 export default interface Gallery {
     id: number;
     title: string;
     description: string;
-    status: 'private' | 'public';
+    status: GalleryStatus;
     created_at: string;
     updated_at: string;
     links: {
