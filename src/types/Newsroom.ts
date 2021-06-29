@@ -12,10 +12,16 @@ export interface NewsroomRef {
     thumbnail_url: string;
     name: string;
     subdomain: string;
-    timezone?: string;
+
     is_active: boolean;
     is_archived: boolean;
     is_multilingual: boolean;
+    is_indexable: boolean;
+
+    timezone: string;
+    time_format: string;
+    date_format: string;
+
     /**
      * @deprecated Please use `is_online` instead.
      * @see is_online
@@ -54,4 +60,5 @@ export default interface Newsroom extends NewsroomRef {
     // assets
     square_logo: UploadcareImageStoragePayload | null;
     newsroom_logo: UploadcareImageStoragePayload | null;
+    icon: UploadcareImageStoragePayload | null;
 }

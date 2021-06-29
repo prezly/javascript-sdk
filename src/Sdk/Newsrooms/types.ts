@@ -51,6 +51,9 @@ export interface NewsroomUpdateRequest {
     subdomain?: string;
     cultures?: Culture['code'][];
     default_culture?: Culture['code'];
+
+    is_indexable?: boolean;
+
     /**
      * Uploadcare Image JSON
      */
@@ -59,4 +62,15 @@ export interface NewsroomUpdateRequest {
      * Uploadcare Image JSON
      */
     square_logo?: string;
+    /**
+     * Uploadcare Image JSON
+     */
+    icon?: string;
+
+    google_analytics_id?: string | null;
+    segment_analytics_id?: string | null;
+
+    time_format?: string;
+    date_format?: string;
+    timezone?: string;
 }
