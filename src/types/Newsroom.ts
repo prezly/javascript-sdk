@@ -18,8 +18,17 @@ export interface NewsroomRef {
     is_multilingual: boolean;
     is_indexable: boolean;
 
+    /**
+     * Timezone name in the ICANN tz database.
+     */
     timezone: string;
+    /**
+     * Moment.js time format.
+     */
     time_format: string;
+    /**
+     * Moment.js date format.
+     */
     date_format: string;
 
     /**
