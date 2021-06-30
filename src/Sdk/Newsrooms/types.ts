@@ -51,6 +51,9 @@ export interface NewsroomUpdateRequest {
     subdomain?: string;
     cultures?: Culture['code'][];
     default_culture?: Culture['code'];
+
+    is_indexable?: boolean;
+
     /**
      * Uploadcare Image JSON
      */
@@ -59,4 +62,25 @@ export interface NewsroomUpdateRequest {
      * Uploadcare Image JSON
      */
     square_logo?: string;
+    /**
+     * Uploadcare Image JSON
+     */
+    icon?: string;
+
+    google_analytics_id?: string | null;
+    segment_analytics_id?: string | null;
+
+    /**
+     * Accepts valid PHP or Moment.js time formats.
+     */
+    time_format?: string;
+    /**
+     * Accepts "ampm" or "24" or valid PHP time formats ("h:i a", "H:i")
+     * or valid Moment.js time formats ("hh:mm a", "HH:mm")
+     */
+    date_format?: string;
+    /**
+     * Timezone name in the ICANN tz database.
+     */
+    timezone?: string;
 }
