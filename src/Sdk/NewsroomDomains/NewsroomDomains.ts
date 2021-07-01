@@ -13,6 +13,16 @@ export default class NewsroomDomains {
         this.apiClient = apiClient;
     }
 
+    public async get(
+        newsroomId: NewsroomId,
+        domain: string,
+    ): Promise<NewsroomDomain> {
+        const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ domain: NewsroomDomain }>(`${url}/${domain}`);
+
+        return response.payload.domain;
+    }
+
     public async list(newsroomId: NewsroomId): Promise<NewsroomDomain[]> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.get<{ domains: NewsroomDomain[] }>(url);
