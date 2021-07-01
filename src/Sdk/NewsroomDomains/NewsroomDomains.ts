@@ -2,7 +2,7 @@ import { NewsroomDomain, Newsroom } from '../../types';
 
 import routing from '../routing';
 import ApiClient from '../ApiClient';
-import { NewsroomDomainLinkRequest } from "./types";
+import { NewsroomDomainLinkRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -13,10 +13,7 @@ export default class NewsroomDomains {
         this.apiClient = apiClient;
     }
 
-    public async get(
-        newsroomId: NewsroomId,
-        domain: string,
-    ): Promise<NewsroomDomain> {
+    public async get(newsroomId: NewsroomId, domain: string): Promise<NewsroomDomain> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.get<{ domain: NewsroomDomain }>(`${url}/${domain}`);
 
@@ -36,16 +33,13 @@ export default class NewsroomDomains {
     ): Promise<NewsroomDomain> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.post<{ domain: NewsroomDomain }>(url, {
-            payload
+            payload,
         });
 
         return response.payload.domain;
     }
 
-    public async unlink(
-        newsroomId: NewsroomId,
-        domain: string,
-    ): Promise<void> {
+    public async unlink(newsroomId: NewsroomId, domain: string): Promise<void> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete(`${url}/${domain}`);
     }
