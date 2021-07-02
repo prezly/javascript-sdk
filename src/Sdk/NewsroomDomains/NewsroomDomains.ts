@@ -43,4 +43,11 @@ export default class NewsroomDomains {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete(`${url}/${domain}`);
     }
+
+    public async check(newsroomId: NewsroomId, domain: string): Promise<NewsroomDomain> {
+        const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ domain: NewsroomDomain }>(`${url}/${domain}/check`);
+
+        return response.payload.domain;
+    }
 }
