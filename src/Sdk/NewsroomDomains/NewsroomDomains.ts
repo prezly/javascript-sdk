@@ -46,7 +46,7 @@ export default class NewsroomDomains {
 
     public async check(newsroomId: NewsroomId, domain: string): Promise<NewsroomDomain> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ domain: NewsroomDomain }>(`${url}/${domain}/check`);
+        const response = await this.apiClient.post<{ domain: NewsroomDomain }>(`${url}/${domain}/check`);
 
         return response.payload.domain;
     }
