@@ -13,10 +13,17 @@ export default class NewsroomThemes {
         this.apiClient = apiClient;
     }
 
-    public async list(newsroomId: NewsroomId): Promise<NewsroomThemePreset[]> {
+    public async apply(
+        newsroomId: NewsroomId,
+        themeId: NewsroomThemeId,
+        settings: NewsroomThemePreset['settings'],
+    ): Promise<NewsroomThemePreset> {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ themes: NewsroomThemePreset[] }>(url);
-        return response.payload.themes;
+        const response = await this.apiClient.post<{ theme: NewsroomThemePreset }>(
+            `${url}/${themeId}`,
+            { payload: settings },
+        );
+        return response.payload.theme;
     }
 
     public async get(
@@ -34,5 +41,11 @@ export default class NewsroomThemes {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.get<{ theme: NewsroomThemePreset }>(`${url}/active`);
         return response.payload.theme;
+    }
+
+    public async list(newsroomId: NewsroomId): Promise<NewsroomThemePreset[]> {
+        const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ themes: NewsroomThemePreset[] }>(url);
+        return response.payload.themes;
     }
 }
