@@ -18,4 +18,10 @@ export default class NewsroomThemes {
         const response = await this.apiClient.get<{ themes: NewsroomThemePreset[] }>(url);
         return response.payload.themes;
     }
+
+    public async getActive(newsroomId: NewsroomId): Promise<NewsroomThemePreset> {
+        const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ theme: NewsroomThemePreset }>(`${url}/active`);
+        return response.payload.theme;
+    }
 }
