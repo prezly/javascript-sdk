@@ -19,6 +19,17 @@ export default class NewsroomThemes {
         return response.payload.themes;
     }
 
+    public async get(
+        newsroomId: NewsroomId,
+        themeId: NewsroomThemeId,
+    ): Promise<NewsroomThemePreset> {
+        const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.get<{ theme: NewsroomThemePreset }>(
+            `${url}/${themeId}`,
+        );
+        return response.payload.theme;
+    }
+
     public async getActive(newsroomId: NewsroomId): Promise<NewsroomThemePreset> {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.get<{ theme: NewsroomThemePreset }>(`${url}/active`);
