@@ -5,7 +5,7 @@ export interface NewsroomTheme {
     name: string;
     description: string;
     features: string[];
-    preview_image: UploadcareImage;
+    preview_image: UploadcareImage | null;
 }
 
 export default interface NewsroomThemePreset {
