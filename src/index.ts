@@ -44,6 +44,8 @@ export {
     NewsroomCompanyInformation,
     NewsroomContact,
     NewsroomLanguageSettings,
+    NewsroomTheme,
+    NewsroomThemePreset,
     OEmbedInfo,
     Pagination,
     Story,
