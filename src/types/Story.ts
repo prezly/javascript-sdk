@@ -99,6 +99,10 @@ export default interface Story extends Entity<number> {
     translations: StoryRef[];
     oembed: OEmbedInfo;
 
+    coverage_number: number;
+    language: string;
+    last_coverage_at: string | null;
+
     thumbnail_url: string;
     created_at: string;
     updated_at: string;

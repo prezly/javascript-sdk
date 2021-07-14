@@ -1,5 +1,14 @@
 export { default as Category } from './Category';
-export { default as Contact } from './Contact';
+export {
+    default as Contact,
+    ContactType,
+    Gender,
+    MediumType,
+    Periodicity,
+    PhoneNumber,
+    PhoneNumberType,
+    SocialNetwork,
+} from './Contact';
 export { default as Coverage } from './Coverage';
 export { default as Culture } from './Culture';
 export { default as Newsroom, NewsroomRef } from './Newsroom';

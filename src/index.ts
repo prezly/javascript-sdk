@@ -36,6 +36,13 @@ export {
 export {
     Category,
     Contact,
+    ContactType,
+    Gender,
+    MediumType,
+    Periodicity,
+    PhoneNumber,
+    PhoneNumberType,
+    SocialNetwork,
     Coverage,
     Entity,
     StoryFormatVersion,

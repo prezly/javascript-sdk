@@ -1,6 +1,7 @@
 import Entity from './Entity';
 import ContactRef from './ContactRef';
 import ContactDuplicateSuggestion from './ContactDuplicateSuggestion';
+import { UploadcareImage } from './common';
 
 export enum ContactType {
     PERSON = 'person',
@@ -47,11 +48,14 @@ export enum MediumType {
 }
 
 export enum SocialNetwork {
+    DISCORD = 'discord',
     FACEBOOK = 'facebook',
     INSTAGRAM = 'instagram',
     LINKEDIN = 'linkedin',
     PINTEREST = 'pinterest',
+    SKYPE = 'skype',
     SNAPCHAT = 'snapchat',
+    TWITCH = 'twitch',
     TWITTER = 'twitter',
     YOUTUBE = 'youtube',
 }
@@ -79,6 +83,7 @@ export default interface Contact extends Entity {
 
     display_name: string;
     avatar_url: string;
+    avatar_image: UploadcareImage | null;
     salutation: string;
     gender: Gender;
     periodicity: Periodicity | null;
@@ -112,6 +117,9 @@ export default interface Contact extends Entity {
         stars: number;
     };
 
+    coverage_number: number;
+    last_coverage_at: string | null;
+
     organisations_number: number;
     organisations: ContactRef[];
 
@@ -124,7 +132,7 @@ export default interface Contact extends Entity {
     is_duplicated: boolean;
     is_unsubscribed: boolean;
     is_unsubscribed_from_all_communications: boolean;
-    unsubscribed_rooms: string[];
+    unsubscribed_newsrooms: string[];
     duplicate_contacts: ContactDuplicateSuggestion[];
 
     created_at: string | null; // there are contacts in DB that do have `created_at = null`
