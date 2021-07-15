@@ -29,6 +29,8 @@ export {
 } from './Story';
 export { default as UserRef } from './UserRef';
 export { default as WebhookEvent } from './WebhookEvent';
+export { default as Gallery } from './Gallery';
+export { default as GalleryStatus } from './GalleryStatus';
 
 export {
     UploadcareFile,
