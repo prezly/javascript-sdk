@@ -1,5 +1,19 @@
 import { UploadcareImage } from './common';
 
+interface EditableSettings {
+    additionalProperties: boolean;
+    properties: Record<
+        string,
+        {
+            enum?: (string | null)[];
+            'prezly:feature'?: string;
+            type: string | (string | null)[];
+        }
+    >;
+    required: string[];
+    type: string;
+}
+
 export interface NewsroomTheme {
     id: string;
     name: string;
@@ -10,7 +24,7 @@ export interface NewsroomTheme {
 
 export default interface NewsroomThemePreset {
     theme: NewsroomTheme;
-    editable_settings: Record<string, string>;
+    editable_settings: EditableSettings;
     settings: Record<string, any>;
     is_active: boolean;
 }
