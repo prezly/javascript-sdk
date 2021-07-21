@@ -1,11 +1,21 @@
 export { default as Category } from './Category';
-export { default as Contact } from './Contact';
+export {
+    default as Contact,
+    ContactType,
+    Gender,
+    MediumType,
+    Periodicity,
+    PhoneNumber,
+    PhoneNumberType,
+    SocialNetwork,
+} from './Contact';
 export { default as Coverage } from './Coverage';
 export { default as Culture } from './Culture';
 export { default as Newsroom, NewsroomRef } from './Newsroom';
 export { default as NewsroomContact } from './NewsroomContact';
 export { default as NewsroomCompanyInformation } from './NewsroomCompanyInformation';
 export { default as NewsroomLanguageSettings } from './NewsroomLanguageSettings';
+export { default as NewsroomThemePreset, NewsroomTheme } from './NewsroomThemePreset';
 export { default as NewsroomWebhook } from './NewsroomWebhook';
 export { default as NewsroomDomain } from './NewsroomDomain';
 export {
