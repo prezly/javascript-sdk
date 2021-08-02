@@ -9,7 +9,7 @@ import NewsroomLanguages from './NewsroomLanguages';
 import NewsroomThemes from './NewsroomThemes';
 import NewsroomWebhooks from './NewsroomWebhooks';
 import NewsroomDomains from './NewsroomDomains';
-import NewsroomEmailSubscriptions from "./NewsroomEmailSubscriptions";
+import NewsroomEmailSubscriptions from './NewsroomEmailSubscriptions';
 
 const BASE_URL = 'https://api.prezly.com';
 

@@ -1,6 +1,10 @@
 import ApiClient from '../ApiClient';
-import {EmailSubscription, Newsroom} from '../../types';
-import {NewsroomSubscribeRequest, NewsroomUnsubscribeRequest, NewsroomUpdateUnsubscribeExtraRequest} from './types';
+import { EmailSubscription, Newsroom } from '../../types';
+import {
+    NewsroomSubscribeRequest,
+    NewsroomUnsubscribeRequest,
+    NewsroomUpdateUnsubscribeExtraRequest,
+} from './types';
 import routing from '../routing';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
@@ -46,7 +50,7 @@ export default class NewsroomEmailSubscriptions {
             `${url}/${subscriptionId}`,
             {
                 payload,
-            }
+            },
         );
 
         return response.payload.subscription;
