@@ -5,6 +5,9 @@ import routing from '../routing';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
+/**
+ * @deprecated Use NewsroomEmailSubscriptions instead
+ */
 export default class NewsroomSubscriptions {
     private readonly apiClient: ApiClient;
 
