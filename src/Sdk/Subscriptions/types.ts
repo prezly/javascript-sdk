@@ -1,4 +1,4 @@
-import {Contact, UnsubscribeReason, UploadcareImage} from '../../types';
+import { Contact, UnsubscribeReason, UploadcareImage } from '../../types';
 
 export interface NewsroomSubscribeRequest {
     email_address: string;
