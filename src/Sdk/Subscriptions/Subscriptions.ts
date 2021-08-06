@@ -3,20 +3,20 @@ import { EmailSubscription, Newsroom } from '../../types';
 import {
     NewsroomSubscribeRequest,
     NewsroomUnsubscribeRequest,
-    NewsroomUpdateUnsubscribeExtraRequest,
+    UpdateNewsroomUnsubscribeDetailsRequest,
 } from './types';
 import routing from '../routing';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export default class NewsroomEmailSubscriptions {
+export default class Subscriptions {
     private readonly apiClient: ApiClient;
 
     constructor({ apiClient }: { apiClient: ApiClient }) {
         this.apiClient = apiClient;
     }
 
-    public async subscribe(
+    public async subscribeToNewsroom(
         newsroomId: NewsroomId,
         payload: NewsroomSubscribeRequest,
     ): Promise<EmailSubscription> {
@@ -28,7 +28,7 @@ export default class NewsroomEmailSubscriptions {
         return response.payload.subscription;
     }
 
-    public async unsubscribe(
+    public async unsubscribeFromNewsroom(
         newsroomId: NewsroomId,
         payload: NewsroomUnsubscribeRequest,
     ): Promise<EmailSubscription> {
@@ -40,10 +40,10 @@ export default class NewsroomEmailSubscriptions {
         return response.payload.subscription;
     }
 
-    public async updateUnsubscribeExtra(
+    public async updateNewsroomUnsubscribeDetails(
         newsroomId: NewsroomId,
         subscriptionId: EmailSubscription['id'],
-        payload: NewsroomUpdateUnsubscribeExtraRequest,
+        payload: UpdateNewsroomUnsubscribeDetailsRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.patch<{ subscription: EmailSubscription }>(

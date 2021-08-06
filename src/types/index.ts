@@ -31,6 +31,7 @@ export {
 } from './Story';
 export { default as UserRef } from './UserRef';
 export { default as WebhookEvent } from './WebhookEvent';
+export { default as UnsubscribeReason } from './UnsubscribeReason';
 
 export {
     UploadcareFile,

@@ -1,4 +1,4 @@
-import { Contact, UploadcareImage } from '../../types';
+import {Contact, UnsubscribeReason, UploadcareImage} from '../../types';
 
 export interface NewsroomSubscribeRequest {
     email_address: string;
@@ -6,6 +6,7 @@ export interface NewsroomSubscribeRequest {
     url?: string;
     visitor_uid?: string;
     session_uid?: string;
+    comment?: string;
     contact?: {
         contact_type: Contact['contact_type'];
         /**
@@ -58,17 +59,17 @@ export interface NewsroomUnsubscribeRequest {
     email_address: string;
     locale?: string;
     url?: string;
-    ip_address?: string;
     visitor_uid?: string;
     session_uid?: string;
     comment?: string;
+    reason?: UnsubscribeReason;
 }
 
-export interface NewsroomUpdateUnsubscribeExtraRequest {
+export interface UpdateNewsroomUnsubscribeDetailsRequest {
     locale?: string;
     url?: string;
-    ip_address?: string;
     visitor_uid?: string;
     session_uid?: string;
     comment?: string;
+    reason?: UnsubscribeReason;
 }
