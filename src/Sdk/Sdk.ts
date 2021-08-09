@@ -9,6 +9,7 @@ import NewsroomLanguages from './NewsroomLanguages';
 import NewsroomThemes from './NewsroomThemes';
 import NewsroomWebhooks from './NewsroomWebhooks';
 import NewsroomDomains from './NewsroomDomains';
+import Subscriptions from './Subscriptions';
 
 const BASE_URL = 'https://api.prezly.com';
 
@@ -21,6 +22,7 @@ export default class Sdk {
     public newsroomThemes: NewsroomThemes;
     public newsroomWebhooks: NewsroomWebhooks;
     public newsroomDomains: NewsroomDomains;
+    public subscriptions: Subscriptions;
     public stories: Stories;
 
     constructor({ accessToken, baseUrl = BASE_URL, headers = {} }: Options) {
@@ -38,6 +40,7 @@ export default class Sdk {
         this.newsroomThemes = new NewsroomThemes({ apiClient });
         this.newsroomWebhooks = new NewsroomWebhooks({ apiClient });
         this.newsroomDomains = new NewsroomDomains({ apiClient });
+        this.subscriptions = new Subscriptions({ apiClient });
         this.stories = new Stories({ apiClient });
     }
 }

@@ -18,6 +18,7 @@ export { default as NewsroomLanguageSettings } from './NewsroomLanguageSettings'
 export { default as NewsroomThemePreset, NewsroomTheme } from './NewsroomThemePreset';
 export { default as NewsroomWebhook } from './NewsroomWebhook';
 export { default as NewsroomDomain } from './NewsroomDomain';
+export { default as EmailSubscription } from './EmailSubscription';
 export {
     default as Story,
     StoryRef,
@@ -30,6 +31,7 @@ export {
 } from './Story';
 export { default as UserRef } from './UserRef';
 export { default as WebhookEvent } from './WebhookEvent';
+export { default as UnsubscribeReason } from './UnsubscribeReason';
 
 export {
     UploadcareFile,
