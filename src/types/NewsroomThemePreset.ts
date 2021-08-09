@@ -20,6 +20,7 @@ export interface NewsroomTheme {
     description: string;
     features: string[];
     preview_image: UploadcareImage | null;
+    is_custom: boolean;
 }
 
 export default interface NewsroomThemePreset {
