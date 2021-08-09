@@ -15,10 +15,11 @@ interface EditableSettings {
 }
 
 export interface NewsroomTheme {
-    id: string;
-    name: string;
     description: string;
     features: string[];
+    id: string;
+    is_custom: boolean;
+    name: string;
     preview_image: UploadcareImage | null;
 }
 
