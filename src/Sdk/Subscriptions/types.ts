@@ -1,6 +1,7 @@
-import {Contact, ContactType, UnsubscribeReason, UploadcareImage} from '../../types';
+import { Contact, ContactType, UnsubscribeReason, UploadcareImage } from '../../types';
 
 interface Person {
+    contact_type: ContactType.PERSON;
     first_name?: Contact['first_name'];
     last_name?: Contact['last_name'];
     gender?: Contact['gender'];
@@ -9,6 +10,7 @@ interface Person {
 }
 
 interface Organisation {
+    contact_type: ContactType.ORGANISATION;
     company_name: Contact['company_name'];
 }
 
@@ -20,7 +22,6 @@ export interface NewsroomSubscribeRequest<Type extends ContactType> {
     session_uid?: string;
     comment?: string;
     contact?: (Type extends ContactType.PERSON ? Person : Organisation) & {
-        contact_type: Contact['contact_type'];
         avatar_image?: UploadcareImage | null;
         languages?: string[];
         emails?: Contact['emails'];

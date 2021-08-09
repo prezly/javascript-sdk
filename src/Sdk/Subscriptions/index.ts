@@ -1,2 +1,6 @@
 export { default } from './Subscriptions';
-export { NewsroomSubscribeRequest } from './types';
+export {
+    NewsroomSubscribeRequest,
+    NewsroomUnsubscribeRequest,
+    UpdateNewsroomUnsubscribeDetailsRequest,
+} from './types';

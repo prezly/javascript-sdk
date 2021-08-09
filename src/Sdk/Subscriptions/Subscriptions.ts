@@ -1,5 +1,5 @@
 import ApiClient from '../ApiClient';
-import {ContactType, EmailSubscription, Newsroom} from '../../types';
+import { ContactType, EmailSubscription, Newsroom } from '../../types';
 import {
     NewsroomSubscribeRequest,
     NewsroomUnsubscribeRequest,
