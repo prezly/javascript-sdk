@@ -1,5 +1,5 @@
 import ApiClient from '../ApiClient';
-import { EmailSubscription, Newsroom } from '../../types';
+import {ContactType, EmailSubscription, Newsroom} from '../../types';
 import {
     NewsroomSubscribeRequest,
     NewsroomUnsubscribeRequest,
@@ -18,7 +18,7 @@ export default class Subscriptions {
 
     public async subscribeToNewsroom(
         newsroomId: NewsroomId,
-        payload: NewsroomSubscribeRequest,
+        payload: NewsroomSubscribeRequest<ContactType.PERSON | ContactType.ORGANISATION>,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomSubscribeUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {

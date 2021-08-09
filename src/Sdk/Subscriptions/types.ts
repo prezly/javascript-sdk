@@ -1,38 +1,26 @@
-import { Contact, UnsubscribeReason, UploadcareImage } from '../../types';
+import {Contact, ContactType, UnsubscribeReason, UploadcareImage} from '../../types';
 
-export interface NewsroomSubscribeRequest {
+interface Person {
+    first_name?: Contact['first_name'];
+    last_name?: Contact['last_name'];
+    gender?: Contact['gender'];
+    function_name?: Contact['function_name'];
+    organisations?: string[];
+}
+
+interface Organisation {
+    company_name: Contact['company_name'];
+}
+
+export interface NewsroomSubscribeRequest<Type extends ContactType> {
     email_address: string;
     locale?: string;
     url?: string;
     visitor_uid?: string;
     session_uid?: string;
     comment?: string;
-    contact?: {
+    contact?: (Type extends ContactType.PERSON ? Person : Organisation) & {
         contact_type: Contact['contact_type'];
-        /**
-         * Required only when contact_type === 'organisation'
-         */
-        company_name?: Contact['company_name'];
-        /**
-         * Required only when contact_type === 'person'
-         */
-        first_name?: Contact['first_name'];
-        /**
-         * Required only when contact_type === 'person'
-         */
-        last_name?: Contact['last_name'];
-        /**
-         * Required only when contact_type === 'person'
-         */
-        gender?: Contact['gender'];
-        /**
-         * Required only when contact_type === 'person'
-         */
-        function_name?: Contact['function_name'];
-        /**
-         * Required only when contact_type === 'person'
-         */
-        organisations?: string[];
         avatar_image?: UploadcareImage | null;
         languages?: string[];
         emails?: Contact['emails'];
