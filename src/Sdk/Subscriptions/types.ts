@@ -32,15 +32,7 @@ export interface NewsroomSubscribeRequest<Type extends ContactType> {
         periodicity?: Contact['periodicity'];
         medium_types?: Contact['medium_types'];
         salutation?: Contact['salutation'];
-        address?: {
-            street?: Contact['address']['street'];
-            number?: Contact['address']['number'];
-            box?: Contact['address']['box'];
-            zip?: Contact['address']['zip'];
-            city?: Contact['address']['city'];
-            region?: Contact['address']['region'];
-            country?: Contact['address']['country'];
-        };
+        address?: Partial<Contact['address']>;
     };
 }
 
