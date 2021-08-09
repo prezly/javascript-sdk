@@ -16,9 +16,9 @@ export default class Subscriptions {
         this.apiClient = apiClient;
     }
 
-    public async subscribeToNewsroom(
+    public async subscribeToNewsroom<Type extends ContactType>(
         newsroomId: NewsroomId,
-        payload: NewsroomSubscribeRequest<ContactType.PERSON | ContactType.ORGANISATION>,
+        payload: NewsroomSubscribeRequest<Type>,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomSubscribeUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
