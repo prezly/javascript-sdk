@@ -1,10 +1,6 @@
 import ApiClient from '../ApiClient';
 import { ContactType, EmailSubscription, Newsroom } from '../../types';
-import {
-    SubscribeRequest,
-    UnsubscribeRequest,
-    UpdateUnsubscribeDetailsRequest,
-} from './types';
+import { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest } from './types';
 import routing from '../routing';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
@@ -56,9 +52,7 @@ export default class Subscriptions {
         return response.payload.subscription;
     }
 
-    public async unsubscribeFromLicense(
-        payload: UnsubscribeRequest,
-    ): Promise<EmailSubscription> {
+    public async unsubscribeFromLicense(payload: UnsubscribeRequest): Promise<EmailSubscription> {
         const url = routing.licenseUnsubscribeUrl;
         const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
             payload,
