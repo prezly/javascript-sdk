@@ -14,7 +14,7 @@ interface Organisation {
     company_name: Contact['company_name'];
 }
 
-export interface NewsroomSubscribeRequest<Type extends ContactType> {
+export interface SubscribeRequest<Type extends ContactType> {
     email_address: string;
     locale?: string;
     url?: string;
