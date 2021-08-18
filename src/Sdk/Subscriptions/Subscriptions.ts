@@ -2,8 +2,8 @@ import ApiClient from '../ApiClient';
 import { ContactType, EmailSubscription, Newsroom } from '../../types';
 import {
     NewsroomSubscribeRequest,
-    NewsroomUnsubscribeRequest,
-    UpdateNewsroomUnsubscribeDetailsRequest,
+    UnsubscribeRequest,
+    UpdateUnsubscribeDetailsRequest,
 } from './types';
 import routing from '../routing';
 
@@ -30,7 +30,7 @@ export default class Subscriptions {
 
     public async unsubscribeFromNewsroom(
         newsroomId: NewsroomId,
-        payload: NewsroomUnsubscribeRequest,
+        payload: UnsubscribeRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
@@ -43,7 +43,7 @@ export default class Subscriptions {
     public async updateNewsroomUnsubscribeDetails(
         newsroomId: NewsroomId,
         subscriptionId: EmailSubscription['id'],
-        payload: UpdateNewsroomUnsubscribeDetailsRequest,
+        payload: UpdateUnsubscribeDetailsRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.patch<{ subscription: EmailSubscription }>(

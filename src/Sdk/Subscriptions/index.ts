@@ -1,6 +1,6 @@
 export { default } from './Subscriptions';
 export {
     NewsroomSubscribeRequest,
-    NewsroomUnsubscribeRequest,
-    UpdateNewsroomUnsubscribeDetailsRequest,
+    UnsubscribeRequest,
+    UpdateUnsubscribeDetailsRequest,
 } from './types';
