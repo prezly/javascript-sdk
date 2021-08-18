@@ -1,6 +1,2 @@
 export { default } from './Subscriptions';
-export {
-    NewsroomSubscribeRequest,
-    NewsroomUnsubscribeRequest,
-    UpdateNewsroomUnsubscribeDetailsRequest,
-} from './types';
+export { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest } from './types';

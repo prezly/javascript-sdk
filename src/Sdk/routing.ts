@@ -1,5 +1,6 @@
 const routing = {
     coverageUrl: '/v2/coverage',
+    licenseUnsubscribeUrl: '/v2/unsubscribe',
     newsroomsUrl: '/v2/newsrooms',
     newsroomCategoriesUrl: '/v2/newsrooms/:newsroom_id/categories',
     newsroomContactsUrl: '/v2/newsrooms/:newsroom_id/contacts',

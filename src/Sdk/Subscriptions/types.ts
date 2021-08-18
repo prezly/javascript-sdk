@@ -14,7 +14,7 @@ interface Organisation {
     company_name: Contact['company_name'];
 }
 
-export interface NewsroomSubscribeRequest<Type extends ContactType> {
+export interface SubscribeRequest<Type extends ContactType> {
     email_address: string;
     locale?: string;
     url?: string;
@@ -36,7 +36,7 @@ export interface NewsroomSubscribeRequest<Type extends ContactType> {
     };
 }
 
-export interface NewsroomUnsubscribeRequest {
+export interface UnsubscribeRequest {
     email_address: string;
     locale?: string;
     url?: string;
@@ -46,7 +46,7 @@ export interface NewsroomUnsubscribeRequest {
     reason?: UnsubscribeReason;
 }
 
-export interface UpdateNewsroomUnsubscribeDetailsRequest {
+export interface UpdateUnsubscribeDetailsRequest {
     locale?: string;
     url?: string;
     visitor_uid?: string;
