@@ -55,4 +55,30 @@ export default class Subscriptions {
 
         return response.payload.subscription;
     }
+
+    public async unsubscribeFromLicense(
+        payload: UnsubscribeRequest,
+    ): Promise<EmailSubscription> {
+        const url = routing.licenseUnsubscribeUrl;
+        const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
+            payload,
+        });
+
+        return response.payload.subscription;
+    }
+
+    public async updateLicenseUnsubscribeDetails(
+        subscriptionId: EmailSubscription['id'],
+        payload: UpdateUnsubscribeDetailsRequest,
+    ): Promise<EmailSubscription> {
+        const url = routing.licenseUnsubscribeUrl;
+        const response = await this.apiClient.patch<{ subscription: EmailSubscription }>(
+            `${url}/${subscriptionId}`,
+            {
+                payload,
+            },
+        );
+
+        return response.payload.subscription;
+    }
 }
