@@ -50,6 +50,7 @@ export {
     NewsroomRef,
     NewsroomCompanyInformation,
     NewsroomContact,
+    NewsroomDomain,
     NewsroomLanguageSettings,
     NewsroomTheme,
     NewsroomThemePreset,
