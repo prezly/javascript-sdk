@@ -37,6 +37,8 @@ export {
     Category,
     Contact,
     ContactType,
+    DnsConfigurationInstruction,
+    DnsRecordType,
     Gender,
     MediumType,
     Periodicity,
