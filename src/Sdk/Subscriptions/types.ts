@@ -1,5 +1,5 @@
 import { Contact, ContactType, UnsubscribeReason, UploadcareImage } from '../../types';
-import Utm from "../../types/Utm";
+import Utm from '../../types/Utm';
 
 interface Person {
     contact_type: ContactType.PERSON;
