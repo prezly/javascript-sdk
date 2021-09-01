@@ -1,4 +1,5 @@
 import { Contact, ContactType, UnsubscribeReason, UploadcareImage } from '../../types';
+import Utm from "../../types/Utm";
 
 interface Person {
     contact_type: ContactType.PERSON;
@@ -37,7 +38,11 @@ export interface SubscribeRequest<Type extends ContactType> {
 }
 
 export interface UnsubscribeRequest {
-    email_address: string;
+    /**
+     * Either utm.utm_id or email_address must be provided
+     */
+    email_address?: string;
+    utm?: Utm;
     locale?: string;
     url?: string;
     visitor_uid?: string;
