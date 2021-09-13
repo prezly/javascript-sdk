@@ -53,6 +53,7 @@ export {
     NewsroomCompanyInformation,
     NewsroomContact,
     NewsroomDomain,
+    NewsroomDomainShareInstructions,
     NewsroomLanguageSettings,
     NewsroomTheme,
     NewsroomThemePreset,

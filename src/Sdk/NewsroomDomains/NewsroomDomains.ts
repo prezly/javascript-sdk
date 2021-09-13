@@ -1,4 +1,4 @@
-import { NewsroomDomain, Newsroom } from '../../types';
+import { NewsroomDomain, Newsroom, NewsroomDomainShareInstructions } from '../../types';
 
 import routing from '../routing';
 import ApiClient from '../ApiClient';
@@ -51,5 +51,17 @@ export default class NewsroomDomains {
         );
 
         return response.payload.domain;
+    }
+
+    public async shareDnsInstructions(
+        newsroomId: NewsroomId,
+        domain: string,
+    ): Promise<NewsroomDomainShareInstructions> {
+        const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
+        const response = await this.apiClient.post<{
+            sharable_dns_instructions: NewsroomDomainShareInstructions;
+        }>(`${url}/${domain}/share`);
+
+        return response.payload.sharable_dns_instructions;
     }
 }
