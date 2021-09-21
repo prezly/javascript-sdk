@@ -1,7 +1,7 @@
 import Culture from './Culture';
 import { UploadcareImageStoragePayload } from '@prezly/slate-types';
-import EmailBranding from "./EmailBranding";
-import EmailBrandingMode from "./EmailBrandingMode";
+import EmailBranding from './EmailBranding';
+import EmailBrandingMode from './EmailBrandingMode';
 
 export interface NewsroomRef {
     uuid: string;

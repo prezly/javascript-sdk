@@ -1,4 +1,4 @@
-import {Culture, EmailBranding, EmailBrandingMode, Newsroom, Pagination} from '../../types';
+import { Culture, EmailBranding, EmailBrandingMode, Newsroom, Pagination } from '../../types';
 
 export interface NewsroomListRequest {
     limit?: number;
