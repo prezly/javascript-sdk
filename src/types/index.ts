@@ -37,6 +37,8 @@ export {
 export { default as UserRef } from './UserRef';
 export { default as WebhookEvent } from './WebhookEvent';
 export { default as UnsubscribeReason } from './UnsubscribeReason';
+export { default as EmailBranding } from './EmailBranding';
+export { default as EmailBrandingMode } from './EmailBrandingMode';
 
 export {
     UploadcareFile,

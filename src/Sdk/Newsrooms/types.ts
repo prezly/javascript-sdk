@@ -1,4 +1,4 @@
-import { Culture, Newsroom, Pagination } from '../../types';
+import { Culture, EmailBranding, EmailBrandingMode, Newsroom, Pagination } from '../../types';
 
 export interface NewsroomListRequest {
     limit?: number;
@@ -83,4 +83,7 @@ export interface NewsroomUpdateRequest {
      * Timezone name in the ICANN tz database.
      */
     timezone?: string;
+
+    email_branding_mode?: EmailBrandingMode;
+    email_branding?: EmailBranding;
 }
