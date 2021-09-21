@@ -1,5 +1,7 @@
 import Culture from './Culture';
 import { UploadcareImageStoragePayload } from '@prezly/slate-types';
+import EmailBranding from "./EmailBranding";
+import EmailBrandingMode from "./EmailBrandingMode";
 
 export interface NewsroomRef {
     uuid: string;
@@ -74,4 +76,7 @@ export default interface Newsroom extends NewsroomRef {
     square_logo: UploadcareImageStoragePayload | null;
     newsroom_logo: UploadcareImageStoragePayload | null;
     icon: UploadcareImageStoragePayload | null;
+
+    email_branding_mode: EmailBrandingMode;
+    email_branding: EmailBranding;
 }
