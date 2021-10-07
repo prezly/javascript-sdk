@@ -12,6 +12,7 @@ const routing = {
     newsroomThemesUrl: '/v2/newsrooms/:newsroom_id/themes',
     newsroomWebhooksUrl: '/v2/newsrooms/:newsroom_id/webhooks',
     newsroomDomainsUrl: '/v2/newsrooms/:newsroom_id/domains',
+    senderAddressesUrl: '/v2/sender-addresses',
     storiesUrl: '/v2/stories',
     storiesSearchUrl: '/v2/stories/search',
 };

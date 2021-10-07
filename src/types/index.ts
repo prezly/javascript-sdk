@@ -24,6 +24,8 @@ export { default as NewsroomWebhook } from './NewsroomWebhook';
 export { default as NewsroomDomain } from './NewsroomDomain';
 export { default as NewsroomDomainShareInstructions } from './NewsroomDomainShareInstructions';
 export { default as EmailSubscription } from './EmailSubscription';
+export { default as SenderAddress, SenderAddressType } from './SenderAddress';
+export { default as SenderDomain, SenderDomainVerificationFlowVersion } from './SenderDomain';
 export {
     default as Story,
     StoryRef,
