@@ -8,4 +8,3 @@ export interface SenderAddressUpdateRequest {
     sender_name?: string;
     is_default?: true;
 }
-

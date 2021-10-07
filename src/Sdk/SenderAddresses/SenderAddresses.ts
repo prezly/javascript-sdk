@@ -19,9 +19,7 @@ export default class SenderAddresses {
         return response.payload.senders;
     }
 
-    public async create(
-        payload: SenderAddressCreateRequest,
-    ): Promise<SenderAddress> {
+    public async create(payload: SenderAddressCreateRequest): Promise<SenderAddress> {
         const response = await this.apiClient.post<{ sender: SenderAddress }>(
             routing.senderAddressesUrl,
             { payload },
@@ -29,11 +27,9 @@ export default class SenderAddresses {
         return response.payload.sender;
     }
 
-    public async get(
-        senderId: SenderAddress['id'],
-    ): Promise<SenderAddress> {
+    public async get(senderId: SenderAddress['id']): Promise<SenderAddress> {
         const response = await this.apiClient.get<{ sender: SenderAddress }>(
-            `${(routing.senderAddressesUrl)}/${senderId}`,
+            `${routing.senderAddressesUrl}/${senderId}`,
         );
         return response.payload.sender;
     }
@@ -43,7 +39,7 @@ export default class SenderAddresses {
         payload: SenderAddressUpdateRequest,
     ): Promise<SenderAddress> {
         const response = await this.apiClient.patch<{ sender: SenderAddress }>(
-            `${(routing.senderAddressesUrl)}/${senderId}`,
+            `${routing.senderAddressesUrl}/${senderId}`,
             { payload },
         );
         return response.payload.sender;
