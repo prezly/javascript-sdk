@@ -5,6 +5,7 @@ export {
     CoverageSearchOptions,
     CoverageUpdateRequest,
 } from './Coverage';
+export { SenderAddressCreateRequest, SenderAddressUpdateRequest } from './SenderAddresses';
 export {
     StoriesListRequest,
     StoriesListResponse,

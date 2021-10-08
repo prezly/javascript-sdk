@@ -25,6 +25,9 @@ export {
     NewsroomLanguagesListRequest,
     NewsroomLanguagesListResponse,
     NewsroomLanguageSettingsUpdateRequest,
+    // Sender Addresses SDK
+    SenderAddressCreateRequest,
+    SenderAddressUpdateRequest,
     // Stories SDK
     StoriesListRequest,
     StoriesListResponse,
@@ -59,6 +62,10 @@ export {
     NewsroomThemePreset,
     OEmbedInfo,
     Pagination,
+    SenderAddress,
+    SenderAddressType,
+    SenderDomain,
+    SenderDomainVerificationFlowVersion,
     Story,
     ExtendedStory,
     ExtraStoryFields,
