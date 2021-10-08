@@ -11,11 +11,13 @@ import NewsroomWebhooks from './NewsroomWebhooks';
 import NewsroomDomains from './NewsroomDomains';
 import SenderAddresses from './SenderAddresses';
 import Subscriptions from './Subscriptions';
+import Jobs from './Jobs';
 
 const BASE_URL = 'https://api.prezly.com';
 
 export default class Sdk {
     public coverage: Coverage;
+    public jobs: Jobs;
     public newsrooms: Newsrooms;
     public newsroomCategories: NewsroomCategories;
     public newsroomContacts: NewsroomContacts;
@@ -35,6 +37,7 @@ export default class Sdk {
         });
 
         this.coverage = new Coverage({ apiClient });
+        this.jobs = new Jobs({ apiClient });
         this.newsrooms = new Newsrooms({ apiClient });
         this.newsroomCategories = new NewsroomCategories({ apiClient });
         this.newsroomContacts = new NewsroomContacts({ apiClient });
