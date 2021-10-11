@@ -37,6 +37,13 @@ export {
     SlateStoryCreateRequest,
 } from './Sdk';
 export {
+    // Campaigns SDK
+    Campaign,
+    CampaignLifecycleStatus,
+    SenderDomainVerificationStatus,
+    StoryAlignment,
+    StoryAppearance,
+
     Category,
     Contact,
     ContactType,

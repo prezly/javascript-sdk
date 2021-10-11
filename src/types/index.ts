@@ -1,3 +1,10 @@
+export {
+    default as Campaign,
+    CampaignLifecycleStatus,
+    SenderDomainVerificationStatus,
+    StoryAlignment,
+    StoryAppearance,
+} from './Campaign';
 export { default as Category } from './Category';
 export {
     default as Contact,
