@@ -16,6 +16,11 @@ export interface CoverageUpdateRequest {
     published_at?: string | null;
     story?: Story['id'] | null;
     url?: string | null;
+    /**
+     * For now, it will be automatically calculated whenever not provided.
+     * Automatic calculation will be dropped in future when it starts being
+     * required in coverage create requests.
+     */
     type?: CoverageType;
     culture?: string | null;
     country?: string | null;
