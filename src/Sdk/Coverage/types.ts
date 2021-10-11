@@ -1,4 +1,6 @@
 import { Contact, Coverage, NewsroomRef, OEmbedInfo, Pagination, Story } from '../../types';
+import CoverageType from "../../types/CoverageType";
+import CoverageProvider from "../../types/CoverageProvider";
 
 export interface CoverageUpdateRequest {
     attachment_oembed?: OEmbedInfo | null;
@@ -14,6 +16,27 @@ export interface CoverageUpdateRequest {
     published_at?: string | null;
     story?: Story['id'] | null;
     url?: string | null;
+    type?: CoverageType;
+    culture?: string | null;
+    country?: string | null;
+    management_url?: string | null;
+    provider?: CoverageProvider | null;
+    /**
+     * For tv/radio types. Fragment duration in seconds.
+     */
+    fragment_duration?: number | null;
+    /**
+     * For tv/radio types. Accepts ISO 8601 date format.
+     */
+    fragment_start_time?: string | null;
+    /**
+     * For tv/radio types. Accepts ISO 8601 date format.
+     */
+    fragment_end_time?: string | null;
+    /**
+     * For print type.
+     */
+    page?: number | null;
 }
 
 export interface CoverageCreateRequest extends CoverageUpdateRequest {}
