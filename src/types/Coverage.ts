@@ -5,6 +5,10 @@ import Story from './Story';
 import UserRef from './UserRef';
 import { UploadcareImageStoragePayload } from '@prezly/slate-types';
 import { OEmbedInfo } from './common';
+import CoverageType from "./CoverageType";
+import CountryRef from "./CountryRef";
+import CultureRef from "./CultureRef";
+import CoverageProvider from "./CoverageProvider";
 
 export default interface Coverage extends Entity<number> {
     uuid: string;
@@ -40,4 +44,13 @@ export default interface Coverage extends Entity<number> {
      * @deprecated Please don't rely on this prop. It will be removed in future.
      */
     view_url: string;
+    type: CoverageType;
+    country: CountryRef | null;
+    culture: CultureRef | null;
+    management_url: string | null;
+    provider: CoverageProvider | null;
+    fragment_duration: number | null;
+    fragment_start_time: string | null;
+    fragment_end_time: string | null;
+    page: number | null;
 }

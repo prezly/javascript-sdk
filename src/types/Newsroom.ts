@@ -1,4 +1,4 @@
-import Culture from './Culture';
+import CultureRef from './CultureRef';
 import { UploadcareImageStoragePayload } from '@prezly/slate-types';
 import EmailBranding from './EmailBranding';
 import EmailBrandingMode from './EmailBrandingMode';
@@ -69,7 +69,7 @@ export default interface Newsroom extends NewsroomRef {
     domain: string;
     is_hub: boolean;
     // extended details
-    cultures: Culture[];
+    cultures: CultureRef[];
     campaigns_number: number;
     stories_number: number;
     // assets
