@@ -43,6 +43,8 @@ export {
     DnsConfigurationInstruction,
     DnsRecordType,
     Gender,
+    JobStatus,
+    JobState,
     MediumType,
     Periodicity,
     PhoneNumber,
