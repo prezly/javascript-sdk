@@ -1,6 +1,8 @@
 import { Contact, Coverage, NewsroomRef, OEmbedInfo, Pagination, Story } from '../../types';
 import CoverageType from '../../types/CoverageType';
 import CoverageProvider from '../../types/CoverageProvider';
+import CultureRef from "../../types/CultureRef";
+import CountryRef from "../../types/CountryRef";
 
 export interface CoverageUpdateRequest {
     attachment_oembed?: OEmbedInfo | null;
@@ -22,8 +24,8 @@ export interface CoverageUpdateRequest {
      * required in coverage create requests.
      */
     type?: CoverageType;
-    culture?: string | null;
-    country?: string | null;
+    culture?: CultureRef['code'] | null;
+    country?: CountryRef['code'] | null;
     management_url?: string | null;
     provider?: CoverageProvider | null;
     /**
