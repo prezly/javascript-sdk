@@ -1,6 +1,6 @@
 import { Contact, Coverage, NewsroomRef, OEmbedInfo, Pagination, Story } from '../../types';
-import CoverageType from "../../types/CoverageType";
-import CoverageProvider from "../../types/CoverageProvider";
+import CoverageType from '../../types/CoverageType';
+import CoverageProvider from '../../types/CoverageProvider';
 
 export interface CoverageUpdateRequest {
     attachment_oembed?: OEmbedInfo | null;
