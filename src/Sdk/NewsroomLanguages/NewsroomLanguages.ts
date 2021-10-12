@@ -1,4 +1,4 @@
-import { Culture, Newsroom, NewsroomLanguageSettings } from '../../types';
+import { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
 
 import routing from '../routing';
 import ApiClient from '../ApiClient';
@@ -36,7 +36,7 @@ export default class NewsroomLanguages {
 
     async get(
         newsroomId: NewsroomId,
-        localeCode: Culture['code'],
+        localeCode: CultureRef['code'],
         { fallback }: { fallback?: true | false } = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
@@ -51,7 +51,7 @@ export default class NewsroomLanguages {
 
     async enable(
         newsroomId: NewsroomId,
-        localeCode: Culture['code'],
+        localeCode: CultureRef['code'],
         payload: NewsroomLanguageSettingsUpdateRequest = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
@@ -66,8 +66,8 @@ export default class NewsroomLanguages {
 
     async disable(
         newsroomId: NewsroomId,
-        localeCode: Culture['code'],
-        { replacement }: { replacement?: Culture['code'] },
+        localeCode: CultureRef['code'],
+        { replacement }: { replacement?: CultureRef['code'] },
     ): Promise<void> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
         await this.apiClient.delete<{ language: NewsroomLanguageSettings }>(
@@ -82,7 +82,7 @@ export default class NewsroomLanguages {
 
     async update(
         newsroomId: NewsroomId,
-        localeCode: Culture['code'],
+        localeCode: CultureRef['code'],
         payload: NewsroomLanguageSettingsUpdateRequest,
         options: { force?: boolean } = {},
     ): Promise<NewsroomLanguageSettings> {
@@ -100,7 +100,7 @@ export default class NewsroomLanguages {
 
     async makeDefault(
         newsroomId: NewsroomId,
-        localeCode: Culture['code'],
+        localeCode: CultureRef['code'],
     ): Promise<NewsroomLanguageSettings> {
         return await this.update(newsroomId, localeCode, { is_default: true });
     }
@@ -114,8 +114,8 @@ export default class NewsroomLanguages {
      */
     async switchDefaultLanguage(
         newsroomId: NewsroomId,
-        localeCode: Culture['code'],
-        newLocaleCode: Culture['code'],
+        localeCode: CultureRef['code'],
+        newLocaleCode: CultureRef['code'],
         forceUnsafeOperation: boolean = false,
     ): Promise<
         | { status: 'success'; language: NewsroomLanguageSettings }

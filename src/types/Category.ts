@@ -1,4 +1,4 @@
-import Culture from './Culture';
+import CultureRef from './CultureRef';
 
 export default interface Category {
     display_description: string | null;
@@ -6,7 +6,7 @@ export default interface Category {
     i18n: {
         [localeCode: string]: {
             description: string | null;
-            locale: Culture;
+            locale: CultureRef;
             name: string;
             slug: string | null;
         };

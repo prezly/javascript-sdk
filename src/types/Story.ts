@@ -1,6 +1,6 @@
 import Category from './Category';
 import Entity from './Entity';
-import Culture from './Culture';
+import CultureRef from './CultureRef';
 import { NewsroomRef } from './Newsroom';
 import UserRef from './UserRef';
 import { OEmbedInfo } from './common';
@@ -49,7 +49,7 @@ export interface StoryRef {
     published_at: string | null;
     scheduled_at: string | null;
 
-    culture: Culture;
+    culture: CultureRef;
     author: UserRef | null;
     newsroom: NewsroomRef;
     oembed: OEmbedInfo;
@@ -73,7 +73,7 @@ export default interface Story extends Entity<number> {
     intro: string;
     slug: string;
     format_version: FormatVersion;
-    culture: Culture;
+    culture: CultureRef;
     author: UserRef | null;
 
     links: {

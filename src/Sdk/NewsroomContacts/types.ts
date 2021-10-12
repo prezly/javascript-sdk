@@ -1,4 +1,4 @@
-import { Culture, UploadcareImage } from '../../types';
+import { CultureRef, UploadcareImage } from '../../types';
 
 export interface NewsroomContactsListRequestOptions {
     /**
@@ -30,7 +30,7 @@ export interface NewsroomContactCreateRequest {
     facebook?: string | null;
     avatar_image?: UploadcareImage | null;
     is_featured?: boolean;
-    display_locales?: Culture['code'][];
+    display_locales?: CultureRef['code'][];
 }
 
 export type NewsroomContactUpdateRequest = Partial<NewsroomContactCreateRequest>;

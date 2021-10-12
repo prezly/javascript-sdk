@@ -3,9 +3,10 @@ export enum TextDirection {
     RTL = 'rtl',
 }
 
-export default interface Culture {
+export default interface CultureRef {
     code: string;
     locale: string;
     name: string;
     direction: TextDirection;
+    language_code: string;
 }

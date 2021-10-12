@@ -1,4 +1,4 @@
-import { Culture, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
+import { CultureRef, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
 
 export interface NewsroomLanguagesListRequest {
     sortOrder?: string;
@@ -11,7 +11,7 @@ export interface NewsroomLanguagesListResponse {
 
 export interface NewsroomLanguageSettingsUpdateRequest {
     is_default?: true;
-    code?: Culture['code'];
+    code?: CultureRef['code'];
     company_information?: Partial<NewsroomCompanyInformation>;
 }
 

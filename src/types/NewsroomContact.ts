@@ -1,4 +1,4 @@
-import Culture from './Culture';
+import CultureRef from './CultureRef';
 import { UploadcareImage } from './common';
 
 export default interface NewsroomContact {
@@ -25,5 +25,5 @@ export default interface NewsroomContact {
     /**
      * List of locales this contact can be displayed for.
      */
-    display_locales: Culture[];
+    display_locales: CultureRef[];
 }
