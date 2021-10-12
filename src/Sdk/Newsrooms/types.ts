@@ -1,4 +1,4 @@
-import { Culture, EmailBranding, EmailBrandingMode, Newsroom, Pagination } from '../../types';
+import { CultureRef, EmailBranding, EmailBrandingMode, Newsroom, Pagination } from '../../types';
 
 export interface NewsroomListRequest {
     limit?: number;
@@ -30,8 +30,8 @@ export interface NewsroomCreateRequest {
      * {subdomain}.prezly.com
      */
     subdomain: string;
-    cultures: Culture['code'][];
-    default_culture?: Culture['code'];
+    cultures: CultureRef['code'][];
+    default_culture?: CultureRef['code'];
     /**
      * Uploadcare Image JSON
      */
@@ -49,8 +49,8 @@ export interface NewsroomUpdateRequest {
      * {subdomain}.prezly.com
      */
     subdomain?: string;
-    cultures?: Culture['code'][];
-    default_culture?: Culture['code'];
+    cultures?: CultureRef['code'][];
+    default_culture?: CultureRef['code'];
 
     is_indexable?: boolean;
 

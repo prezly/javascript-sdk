@@ -10,7 +10,7 @@ export {
     SocialNetwork,
 } from './Contact';
 export { default as Coverage } from './Coverage';
-export { default as Culture } from './CultureRef';
+export { default as CultureRef } from './CultureRef';
 export {
     default as DnsConfigurationInstruction,
     DnsRecordType,

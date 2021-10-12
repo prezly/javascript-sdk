@@ -1,6 +1,6 @@
 import {
     Category,
-    Culture,
+    CultureRef,
     ExtraStoryFields,
     NewsroomRef,
     Pagination,
@@ -29,7 +29,7 @@ export interface StoriesListResponse<S extends Story = Story> {
 
 interface GenericStoryCreateRequest {
     newsroom?: NewsroomRef['id'];
-    culture?: Culture['code'];
+    culture?: CultureRef['code'];
     categories?: Category['id'][];
     tags?: string[];
 
