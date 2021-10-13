@@ -87,20 +87,15 @@ export default class Campaigns {
         return campaign;
     }
 
-    async create(payload: CampaignCreateRequest): ProgressPromise<
-        CampaignRecipientsOperationResponse,
-        { recipients_number: number }
-    > {
-        return this.apiClient.post<CampaignRecipientsOperationResponse>(
-            routing.campaignsUrl,
-            { payload },
-        );
+    async create(
+        payload: CampaignCreateRequest,
+    ): ProgressPromise<CampaignRecipientsOperationResponse, { recipients_number: number }> {
+        return this.apiClient.post<CampaignRecipientsOperationResponse>(routing.campaignsUrl, {
+            payload,
+        });
     }
 
     async update(id: Campaign['id'], payload: CampaignUpdateRequest): Promise<CampaignResponse> {
-        return this.apiClient.patch<CampaignResponse>(
-            `${routing.campaignsUrl}/${id}`,
-            { payload },
-        );
+        return this.apiClient.patch<CampaignResponse>(`${routing.campaignsUrl}/${id}`, { payload });
     }
 }

@@ -16,15 +16,24 @@ function pad(num: number): string {
  * @see https://stackoverflow.com/a/17415677/1895069
  */
 export function toIso8601(date: Date): string {
-    const offset = - date.getTimezoneOffset();
+    const offset = -date.getTimezoneOffset();
     const sign = offset >= 0 ? '+' : '-';
 
-    return date.getFullYear() +
-        '-' + pad(date.getMonth() + 1) +
-        '-' + pad(date.getDate()) +
-        'T' + pad(date.getHours()) +
-        ':' + pad(date.getMinutes()) +
-        ':' + pad(date.getSeconds()) +
-        sign + pad(offset / 60) +
-        ':' + pad(offset % 60);
+    return (
+        date.getFullYear() +
+        '-' +
+        pad(date.getMonth() + 1) +
+        '-' +
+        pad(date.getDate()) +
+        'T' +
+        pad(date.getHours()) +
+        ':' +
+        pad(date.getMinutes()) +
+        ':' +
+        pad(date.getSeconds()) +
+        sign +
+        pad(offset / 60) +
+        ':' +
+        pad(offset % 60)
+    );
 }

@@ -41,7 +41,7 @@ export default class Sdk {
             }),
         );
 
-        this.campaigns = new Campaigns(({ apiClient }));
+        this.campaigns = new Campaigns({ apiClient });
         this.coverage = new Coverage({ apiClient });
         this.jobs = new Jobs({ apiClient });
         this.newsrooms = new Newsrooms({ apiClient });

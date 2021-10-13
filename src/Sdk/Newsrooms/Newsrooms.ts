@@ -59,9 +59,12 @@ export default class Newsrooms {
     }
 
     async create(payload: NewsroomCreateRequest): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(routing.newsroomsUrl, {
-            payload,
-        });
+        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
+            routing.newsroomsUrl,
+            {
+                payload,
+            },
+        );
         return newsroom;
     }
 

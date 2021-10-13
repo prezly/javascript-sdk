@@ -19,9 +19,12 @@ export default class Subscriptions {
         payload: SubscribeRequest<Type>,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomSubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
-            payload,
-        });
+        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
+            url,
+            {
+                payload,
+            },
+        );
 
         return subscription;
     }
@@ -31,9 +34,12 @@ export default class Subscriptions {
         payload: UnsubscribeRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
-            payload,
-        });
+        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
+            url,
+            {
+                payload,
+            },
+        );
 
         return subscription;
     }
@@ -56,9 +62,12 @@ export default class Subscriptions {
 
     public async unsubscribeFromLicense(payload: UnsubscribeRequest): Promise<EmailSubscription> {
         const url = routing.licenseUnsubscribeUrl;
-        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
-            payload,
-        });
+        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
+            url,
+            {
+                payload,
+            },
+        );
 
         return subscription;
     }

@@ -27,17 +27,14 @@ export default class Stories {
             : Story
     >(options?: Options): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options || {};
-        return this.apiClient.get<StoriesListResponse<StoryRecord>>(
-            routing.storiesUrl,
-            {
-                query: {
-                    limit,
-                    offset,
-                    sort: sortOrder,
-                    include: include ? include.join(',') : undefined,
-                },
+        return this.apiClient.get<StoriesListResponse<StoryRecord>>(routing.storiesUrl, {
+            query: {
+                limit,
+                offset,
+                sort: sortOrder,
+                include: include ? include.join(',') : undefined,
             },
-        );
+        });
     }
 
     async search<
@@ -48,18 +45,15 @@ export default class Stories {
             : Story
     >(options?: StoriesSearchRequest<Include>): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, jsonQuery } = options || {};
-        return this.apiClient.post<StoriesListResponse<StoryRecord>>(
-            routing.storiesSearchUrl,
-            {
-                payload: {
-                    query: jsonQuery,
-                    limit,
-                    offset,
-                    sort: sortOrder,
-                    include: include ? include.join(',') : undefined,
-                },
+        return this.apiClient.post<StoriesListResponse<StoryRecord>>(routing.storiesSearchUrl, {
+            payload: {
+                query: jsonQuery,
+                limit,
+                offset,
+                sort: sortOrder,
+                include: include ? include.join(',') : undefined,
             },
-        );
+        });
     }
 
     async get(id: StoryId): Promise<ExtendedStory> {

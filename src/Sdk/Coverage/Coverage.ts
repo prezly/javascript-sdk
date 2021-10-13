@@ -52,9 +52,12 @@ export default class CoverageSdk {
     }
 
     async create(payload: CoverageCreateRequest): Promise<Coverage> {
-        const { coverage } = await this.apiClient.post<{ coverage: Coverage }>(routing.coverageUrl, {
-            payload,
-        });
+        const { coverage } = await this.apiClient.post<{ coverage: Coverage }>(
+            routing.coverageUrl,
+            {
+                payload,
+            },
+        );
         return coverage;
     }
 

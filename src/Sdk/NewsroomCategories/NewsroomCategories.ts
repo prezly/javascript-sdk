@@ -33,7 +33,9 @@ export default class NewsroomCategories {
 
     public async get(newsroomId: NewsroomId, categoryId: Category['id']): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const { category } = await this.apiClient.get<{ category: Category }>(`${url}/${categoryId}`);
+        const { category } = await this.apiClient.get<{ category: Category }>(
+            `${url}/${categoryId}`,
+        );
         return category;
     }
 

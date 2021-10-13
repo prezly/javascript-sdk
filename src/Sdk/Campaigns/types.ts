@@ -9,7 +9,7 @@ export interface CampaignCreateRequest {
     story_appearance?: Campaign['story_appearance'];
     recipients?: {
         query: Query;
-    },
+    };
 }
 
 export interface CampaignUpdateRequest {
