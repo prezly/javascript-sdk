@@ -43,7 +43,6 @@ export {
     SenderDomainVerificationStatus,
     StoryAlignment,
     StoryAppearance,
-
     Category,
     Contact,
     ContactType,

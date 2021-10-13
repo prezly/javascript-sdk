@@ -4,11 +4,21 @@ export enum JobStatus {
     REJECTED = 'rejected',
 }
 
-export default interface JobState {
-    status: JobStatus;
-    /**
-     * Integer between 0 and 100, inclusive.
-     */
-    progress: number;
-    value: object | null;
-}
+type JobState<V = object | null, P = object | null, E = object | null> =
+    | {
+          status: JobStatus.RESOLVED;
+          progress: number;
+          value: V;
+      }
+    | {
+          status: JobStatus.PENDING;
+          progress: number;
+          value: P;
+      }
+    | {
+          status: JobStatus.REJECTED;
+          progress: number;
+          value: E;
+      };
+
+export default JobState;
