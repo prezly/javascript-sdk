@@ -1,2 +1,3 @@
 export { default as Api } from './Api';
-export { ApiResponse, HeadersMap, Method, Params, ParamsWithPayload } from './types';
+export { isDeferredJobResponse } from './lib';
+export { ApiResponse, HeadersMap, HttpCodes, Method, Params, ParamsWithPayload } from './types';
