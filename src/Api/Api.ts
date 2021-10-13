@@ -2,17 +2,17 @@ import { ApiResponse, Method, Params, ParamsWithPayload } from './types';
 import createRequest from './createRequest';
 
 const Api = {
-    get: <P = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<P>> =>
+    get: <V = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<V>> =>
         createRequest(url, {
             headers,
             method: Method.GET,
             query,
         }),
 
-    post: <P = any>(
+    post: <V = any>(
         url: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> =>
+    ): Promise<ApiResponse<V>> =>
         createRequest(url, {
             headers,
             method: Method.POST,
@@ -20,10 +20,10 @@ const Api = {
             query,
         }),
 
-    put: <P = any>(
+    put: <V = any>(
         url: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> =>
+    ): Promise<ApiResponse<V>> =>
         createRequest(url, {
             headers,
             method: Method.PUT,
@@ -31,10 +31,10 @@ const Api = {
             query,
         }),
 
-    patch: <P = any>(
+    patch: <V = any>(
         url: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> =>
+    ): Promise<ApiResponse<V>> =>
         createRequest(url, {
             headers,
             method: Method.PATCH,
@@ -42,10 +42,10 @@ const Api = {
             query,
         }),
 
-    delete: <P = any>(
+    delete: <V = any>(
         url: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> =>
+    ): Promise<ApiResponse<V>> =>
         createRequest(url, {
             headers,
             method: Method.DELETE,

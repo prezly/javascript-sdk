@@ -54,8 +54,8 @@ export interface ApiErrorPayload {
     }[];
 }
 
-export interface ApiResponse<P = any> {
-    payload: P;
+export interface ApiResponse<V = any> {
+    payload: V;
     headers: HeadersMap;
     status: number | undefined;
     statusText: string;
