@@ -1,6 +1,6 @@
 import { Newsroom, NewsroomWebhook } from '../../types';
 
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
 
 import { NewsroomWebhookCreateRequest, NewsroomWebhookUpdateRequest } from './types';
@@ -8,16 +8,16 @@ import { NewsroomWebhookCreateRequest, NewsroomWebhookUpdateRequest } from './ty
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
 export default class NewsroomWebhooks {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
     public async list(newsroomId: NewsroomId): Promise<NewsroomWebhook[]> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ webhooks: NewsroomWebhook[] }>(url);
-        return response.payload.webhooks;
+        const { webhooks } = await this.apiClient.get<{ webhooks: NewsroomWebhook[] }>(url);
+        return webhooks;
     }
 
     public async create(
@@ -25,10 +25,10 @@ export default class NewsroomWebhooks {
         payload: NewsroomWebhookCreateRequest,
     ): Promise<NewsroomWebhook> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ webhook: NewsroomWebhook }>(url, {
+        const { webhook } = await this.apiClient.post<{ webhook: NewsroomWebhook }>(url, {
             payload,
         });
-        return response.payload.webhook;
+        return webhook;
     }
 
     public async get(
@@ -36,10 +36,10 @@ export default class NewsroomWebhooks {
         webhookId: NewsroomWebhook['id'],
     ): Promise<NewsroomWebhook> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ webhook: NewsroomWebhook }>(
+        const { webhook } = await this.apiClient.get<{ webhook: NewsroomWebhook }>(
             `${url}/${webhookId}`,
         );
-        return response.payload.webhook;
+        return webhook;
     }
 
     public async update(
@@ -48,17 +48,17 @@ export default class NewsroomWebhooks {
         payload: NewsroomWebhookUpdateRequest,
     ): Promise<NewsroomWebhook> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.patch<{ webhook: NewsroomWebhook }>(
+        const { webhook } = await this.apiClient.patch<{ webhook: NewsroomWebhook }>(
             `${url}/${webhookId}`,
             {
                 payload,
             },
         );
-        return response.payload.webhook;
+        return webhook;
     }
 
     public async remove(newsroomId: NewsroomId, webhookId: NewsroomWebhook['id']): Promise<void> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
-        await this.apiClient.delete(`${url}/${webhookId}`);
+        return this.apiClient.delete(`${url}/${webhookId}`);
     }
 }

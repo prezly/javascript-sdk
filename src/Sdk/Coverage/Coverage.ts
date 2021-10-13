@@ -1,7 +1,7 @@
 import { Coverage } from '../../types';
 
 import routing from '../routing';
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 
 import {
     CoverageCreateRequest,
@@ -13,15 +13,15 @@ import {
 type CoverageId = Coverage['uuid'] | Coverage['id'];
 
 export default class CoverageSdk {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
     async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
         const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
-        const response = await this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
+        return this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 page,
@@ -30,17 +30,16 @@ export default class CoverageSdk {
                 sort: sortOrder,
             },
         });
-        return response.payload;
     }
 
     async get(id: CoverageId, includeDeleted = false): Promise<Coverage> {
         const url = `${routing.coverageUrl}/${id}`;
-        const response = await this.apiClient.get<{ coverage: Coverage }>(url, {
+        const { coverage } = await this.apiClient.get<{ coverage: Coverage }>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
             },
         });
-        return response.payload.coverage;
+        return coverage;
     }
 
     async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
@@ -53,21 +52,21 @@ export default class CoverageSdk {
     }
 
     async create(payload: CoverageCreateRequest): Promise<Coverage> {
-        const response = await this.apiClient.post<{ coverage: Coverage }>(routing.coverageUrl, {
+        const { coverage } = await this.apiClient.post<{ coverage: Coverage }>(routing.coverageUrl, {
             payload,
         });
-        return response.payload.coverage;
+        return coverage;
     }
 
     async update(id: CoverageId, payload: CoverageUpdateRequest): Promise<Coverage> {
-        const response = await this.apiClient.patch<{ coverage: Coverage }>(
+        const { coverage } = await this.apiClient.patch<{ coverage: Coverage }>(
             `${routing.coverageUrl}/${id}`,
             { payload },
         );
-        return response.payload.coverage;
+        return coverage;
     }
 
     async remove(id: CoverageId): Promise<void> {
-        await this.apiClient.delete(`${routing.coverageUrl}/${id}`);
+        return this.apiClient.delete(`${routing.coverageUrl}/${id}`);
     }
 }

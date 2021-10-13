@@ -1,15 +1,15 @@
 import { NewsroomDomain, Newsroom, NewsroomDomainShareInstructions } from '../../types';
 
 import routing from '../routing';
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import { NewsroomDomainLinkRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
 export default class NewsroomDomains {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
@@ -17,14 +17,14 @@ export default class NewsroomDomains {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.get<{ domain: NewsroomDomain }>(`${url}/${domain}`);
 
-        return response.payload.domain;
+        return response.domain;
     }
 
     public async list(newsroomId: NewsroomId): Promise<NewsroomDomain[]> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ domains: NewsroomDomain[] }>(url);
+        const { domains } = await this.apiClient.get<{ domains: NewsroomDomain[] }>(url);
 
-        return response.payload.domains;
+        return domains;
     }
 
     public async link(
@@ -32,16 +32,16 @@ export default class NewsroomDomains {
         payload: NewsroomDomainLinkRequest,
     ): Promise<NewsroomDomain> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ domain: NewsroomDomain }>(url, {
+        const { domain } = await this.apiClient.post<{ domain: NewsroomDomain }>(url, {
             payload,
         });
 
-        return response.payload.domain;
+        return domain;
     }
 
     public async unlink(newsroomId: NewsroomId, domain: string): Promise<void> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
-        await this.apiClient.delete(`${url}/${domain}`);
+        return this.apiClient.delete(`${url}/${domain}`);
     }
 
     public async check(newsroomId: NewsroomId, domain: string): Promise<NewsroomDomain> {
@@ -50,7 +50,7 @@ export default class NewsroomDomains {
             `${url}/${domain}/check`,
         );
 
-        return response.payload.domain;
+        return response.domain;
     }
 
     public async shareDnsInstructions(
@@ -62,6 +62,6 @@ export default class NewsroomDomains {
             sharable_dns_instructions: NewsroomDomainShareInstructions;
         }>(`${url}/${domain}/share`);
 
-        return response.payload.sharable_dns_instructions;
+        return response.sharable_dns_instructions;
     }
 }

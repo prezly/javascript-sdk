@@ -1,6 +1,7 @@
 import { Options } from './types';
 import ApiClient from './ApiClient';
 import Coverage from './Coverage';
+import DeferredJobsApiClient from './DeferredJobsApiClient';
 import Stories from './Stories';
 import Newsrooms from './Newsrooms';
 import NewsroomCategories from './NewsroomCategories';
@@ -30,11 +31,13 @@ export default class Sdk {
     public subscriptions: Subscriptions;
 
     constructor({ accessToken, baseUrl = BASE_URL, headers = {} }: Options) {
-        const apiClient = new ApiClient({
-            accessToken,
-            baseUrl,
-            headers,
-        });
+        const apiClient = new DeferredJobsApiClient(
+            new ApiClient({
+                accessToken,
+                baseUrl,
+                headers,
+            }),
+        );
 
         this.coverage = new Coverage({ apiClient });
         this.jobs = new Jobs({ apiClient });

@@ -1,7 +1,7 @@
 import { ExtendedStory, ExtraStoryFields, Story } from '../../types';
 
 import routing from '../routing';
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 
 import {
     StoriesListRequest,
@@ -13,9 +13,9 @@ import {
 type StoryId = Story['uuid'] | Story['id'];
 
 export default class Stories {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
@@ -27,7 +27,7 @@ export default class Stories {
             : Story
     >(options?: Options): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options || {};
-        const response = await this.apiClient.get<StoriesListResponse<StoryRecord>>(
+        return this.apiClient.get<StoriesListResponse<StoryRecord>>(
             routing.storiesUrl,
             {
                 query: {
@@ -38,7 +38,6 @@ export default class Stories {
                 },
             },
         );
-        return response.payload;
     }
 
     async search<
@@ -49,7 +48,7 @@ export default class Stories {
             : Story
     >(options?: StoriesSearchRequest<Include>): Promise<StoriesListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, jsonQuery } = options || {};
-        const response = await this.apiClient.post<StoriesListResponse<StoryRecord>>(
+        return this.apiClient.post<StoriesListResponse<StoryRecord>>(
             routing.storiesSearchUrl,
             {
                 payload: {
@@ -61,20 +60,19 @@ export default class Stories {
                 },
             },
         );
-        return response.payload;
     }
 
     async get(id: StoryId): Promise<ExtendedStory> {
-        const response = await this.apiClient.get<{ story: ExtendedStory }>(
+        const { story } = await this.apiClient.get<{ story: ExtendedStory }>(
             `${routing.storiesUrl}/${id}`,
         );
-        return response.payload.story;
+        return story;
     }
 
     async create(payload: StoryCreateRequest): Promise<ExtendedStory> {
-        const response = await this.apiClient.post<{ story: ExtendedStory }>(routing.storiesUrl, {
+        const { story } = await this.apiClient.post<{ story: ExtendedStory }>(routing.storiesUrl, {
             payload,
         });
-        return response.payload.story;
+        return story;
     }
 }
