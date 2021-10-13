@@ -1,3 +1,5 @@
+import ProgressPromise from '@prezly/progress-promise';
+
 import { Campaign } from '../../types';
 
 import routing from '../routing';
@@ -85,7 +87,10 @@ export default class Campaigns {
         return campaign;
     }
 
-    async create(payload: CampaignCreateRequest): Promise<CampaignRecipientsOperationResponse> {
+    async create(payload: CampaignCreateRequest): ProgressPromise<
+        CampaignRecipientsOperationResponse,
+        { recipients_number: number }
+    > {
         return this.apiClient.post<CampaignRecipientsOperationResponse>(
             routing.campaignsUrl,
             { payload },
