@@ -1,4 +1,5 @@
 const routing = {
+    campaignsUrl: '/v2/campaigns',
     coverageUrl: '/v2/coverage',
     jobsUrl: '/v2/jobs',
     licenseUnsubscribeUrl: '/v2/unsubscribe',

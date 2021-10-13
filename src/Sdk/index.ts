@@ -1,5 +1,13 @@
 export { default } from './Sdk';
 export {
+    CampaignCreateRequest,
+    CampaignUpdateRequest,
+    CampaignResponse,
+    CampaignRecipientsOperationResponse,
+    CampaignsListResponse,
+    CampaignsSearchOptions,
+} from './Campaigns';
+export {
     CoverageCreateRequest,
     CoverageListResponse,
     CoverageSearchOptions,

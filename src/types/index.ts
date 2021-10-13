@@ -51,12 +51,15 @@ export { default as EmailBranding } from './EmailBranding';
 export { default as EmailBrandingMode } from './EmailBrandingMode';
 
 export {
+    Notification,
     UploadcareFile,
     UploadcareImage,
     OEmbedInfo,
     Pagination,
+    Query,
     SelectionMode,
     SelectionValue,
+    Warning,
 } from './common';
 
 // Support

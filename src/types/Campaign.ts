@@ -34,6 +34,11 @@ export default interface Campaign {
     author: UserRef;
     lifecycle_status: CampaignLifecycleStatus;
     subject: string;
+    /**
+     * JSON-serialized document in Prezly Content Format
+     * @see https://developers.prezly.com/docs/api/docs/07-prezly-content-format.md
+     */
+    content: string;
     thumbnail_url: string;
 
     // Attached story

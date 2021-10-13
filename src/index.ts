@@ -1,6 +1,13 @@
 export {
     default,
     ClientOptions,
+    // Campaigns SDK
+    CampaignCreateRequest,
+    CampaignUpdateRequest,
+    CampaignResponse,
+    CampaignRecipientsOperationResponse,
+    CampaignsListResponse,
+    CampaignsSearchOptions,
     // Coverage SDK
     CoverageCreateRequest,
     CoverageListResponse,
@@ -43,6 +50,7 @@ export {
     SenderDomainVerificationStatus,
     StoryAlignment,
     StoryAppearance,
+    //
     Category,
     Contact,
     ContactType,
@@ -58,7 +66,7 @@ export {
     SocialNetwork,
     Coverage,
     Entity,
-    StoryFormatVersion,
+    // Newsrooms SDK
     Newsroom,
     NewsroomRef,
     NewsroomCompanyInformation,
@@ -74,6 +82,7 @@ export {
     SenderAddressType,
     SenderDomain,
     SenderDomainVerificationFlowVersion,
+    // Stories SDK
     Story,
     ExtendedStory,
     ExtraStoryFields,
@@ -81,5 +90,6 @@ export {
     StoryVisibility,
     StoryPublicationStatus,
     StoryLifecycleStatus,
+    StoryFormatVersion,
     UserRef,
 } from './types';
