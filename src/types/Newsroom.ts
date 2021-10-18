@@ -79,4 +79,6 @@ export default interface Newsroom extends NewsroomRef {
 
     email_branding_mode: EmailBrandingMode;
     email_branding: EmailBranding;
+
+    is_privacy_portal_enabled: boolean;
 }
