@@ -1,4 +1,5 @@
 import { UploadcareImage } from './common';
+import ThemeFeature from "./ThemeFeature";
 
 interface EditableSettings {
     additionalProperties: boolean;
@@ -16,7 +17,7 @@ interface EditableSettings {
 
 export interface NewsroomTheme {
     description: string;
-    features: string[];
+    features: ThemeFeature[];
     id: string;
     is_custom: boolean;
     name: string;
