@@ -1,5 +1,5 @@
 import { UploadcareImage } from './common';
-import ThemeFeature from "./ThemeFeature";
+import ThemeFeature from './ThemeFeature';
 
 interface EditableSettings {
     additionalProperties: boolean;
