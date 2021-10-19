@@ -62,6 +62,7 @@ export {
     NewsroomLanguageSettings,
     NewsroomTheme,
     NewsroomThemePreset,
+    ThemeFeature,
     OEmbedInfo,
     Pagination,
     SenderAddress,
