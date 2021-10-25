@@ -1,5 +1,6 @@
 export { default } from './Sdk';
 export {
+    CoverageScope,
     CoverageCreateRequest,
     CoverageListResponse,
     CoverageSearchOptions,

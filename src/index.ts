@@ -2,6 +2,7 @@ export {
     default,
     ClientOptions,
     // Coverage SDK
+    CoverageScope,
     CoverageCreateRequest,
     CoverageListResponse,
     CoverageSearchOptions,
