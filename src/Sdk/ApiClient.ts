@@ -22,11 +22,11 @@ export default class ApiClient {
         };
     }
 
-    public get<P = any>(
+    public get<V = any>(
         endpointUri: string,
         { headers, query }: Params = {},
-    ): Promise<ApiResponse<P>> {
-        return Api.get<P>(this.buildEndpointUrl(endpointUri), {
+    ): Promise<ApiResponse<V>> {
+        return Api.get<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -35,25 +35,11 @@ export default class ApiClient {
         });
     }
 
-    public post<P = any>(
+    public post<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> {
-        return Api.post<P>(this.buildEndpointUrl(endpointUri), {
-            headers: {
-                ...this.headers,
-                ...headers,
-            },
-            payload,
-            query,
-        });
-    }
-
-    public put<P = any>(
-        endpointUri: string,
-        { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> {
-        return Api.put<P>(this.buildEndpointUrl(endpointUri), {
+    ): Promise<ApiResponse<V>> {
+        return Api.post<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -63,11 +49,11 @@ export default class ApiClient {
         });
     }
 
-    public patch<P = any>(
+    public put<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> {
-        return Api.patch<P>(this.buildEndpointUrl(endpointUri), {
+    ): Promise<ApiResponse<V>> {
+        return Api.put<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -77,11 +63,25 @@ export default class ApiClient {
         });
     }
 
-    public delete<P = any>(
+    public patch<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
-    ): Promise<ApiResponse<P>> {
-        return Api.delete<P>(this.buildEndpointUrl(endpointUri), {
+    ): Promise<ApiResponse<V>> {
+        return Api.patch<V>(this.buildEndpointUrl(endpointUri), {
+            headers: {
+                ...this.headers,
+                ...headers,
+            },
+            payload,
+            query,
+        });
+    }
+
+    public delete<V = any>(
+        endpointUri: string,
+        { headers, payload, query }: ParamsWithPayload = {},
+    ): Promise<ApiResponse<V>> {
+        return Api.delete<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,

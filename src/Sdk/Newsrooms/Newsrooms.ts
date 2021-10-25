@@ -1,7 +1,7 @@
 import { Newsroom } from '../../types';
 
 import routing from '../routing';
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 
 import {
     NewsroomCreateRequest,
@@ -14,16 +14,16 @@ import {
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
 export default class Newsrooms {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
     async list({ limit, offset, search, sortOrder }: NewsroomListRequest = {}): Promise<
         NewsroomListResponse
     > {
-        const response = await this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
+        return this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
             query: {
                 limit,
                 offset,
@@ -31,8 +31,6 @@ export default class Newsrooms {
                 sort: sortOrder,
             },
         });
-
-        return response.payload;
     }
 
     async search({
@@ -42,7 +40,7 @@ export default class Newsrooms {
         search,
         sortOrder,
     }: NewsroomSearchRequest = {}): Promise<NewsroomListResponse> {
-        const response = await this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
+        return this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
             query: {
                 query: jsonQuery,
                 limit,
@@ -51,63 +49,64 @@ export default class Newsrooms {
                 sort: sortOrder,
             },
         });
-
-        return response.payload;
     }
 
     async get(id: NewsroomId): Promise<Newsroom> {
-        const response = await this.apiClient.get<{ newsroom: Newsroom }>(
+        const { newsroom } = await this.apiClient.get<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
         );
-        return response.payload.newsroom;
+        return newsroom;
     }
 
     async create(payload: NewsroomCreateRequest): Promise<Newsroom> {
-        const response = await this.apiClient.post<{ newsroom: Newsroom }>(routing.newsroomsUrl, {
-            payload,
-        });
-        return response.payload.newsroom;
+        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
+            routing.newsroomsUrl,
+            {
+                payload,
+            },
+        );
+        return newsroom;
     }
 
     async update(id: NewsroomId, payload: NewsroomUpdateRequest): Promise<Newsroom> {
-        const response = await this.apiClient.patch<{ newsroom: Newsroom }>(
+        const { newsroom } = await this.apiClient.patch<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
             {
                 payload,
             },
         );
-        return response.payload.newsroom;
+        return newsroom;
     }
 
     async archive(id: NewsroomId): Promise<Newsroom> {
-        const response = await this.apiClient.post<{ newsroom: Newsroom }>(
+        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/archive`,
         );
-        return response.payload.newsroom;
+        return newsroom;
     }
 
     async unarchive(id: NewsroomId): Promise<Newsroom> {
-        const response = await this.apiClient.post<{ newsroom: Newsroom }>(
+        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/unarchive`,
         );
-        return response.payload.newsroom;
+        return newsroom;
     }
 
     async remove(id: NewsroomId): Promise<void> {
-        await this.apiClient.delete(`${routing.newsroomsUrl}/${id}`);
+        return this.apiClient.delete(`${routing.newsroomsUrl}/${id}`);
     }
 
     async takeOffline(id: NewsroomId): Promise<Newsroom> {
-        const response = await this.apiClient.post<{ newsroom: Newsroom }>(
+        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/offline`,
         );
-        return response.payload.newsroom;
+        return newsroom;
     }
 
     async takeOnline(id: NewsroomId): Promise<Newsroom> {
-        const response = await this.apiClient.post<{ newsroom: Newsroom }>(
+        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/online`,
         );
-        return response.payload.newsroom;
+        return newsroom;
     }
 }

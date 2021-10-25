@@ -27,6 +27,14 @@ export interface ParamsWithPayload extends Params {
     payload?: object;
 }
 
+export interface DeferredJobResponse {
+    status: 'accepted';
+    progress: {
+        id: string;
+        links: string[];
+    };
+}
+
 export interface ApiErrorMessage {
     code: string;
     message: string;
@@ -54,8 +62,8 @@ export interface ApiErrorPayload {
     }[];
 }
 
-export interface ApiResponse<P = any> {
-    payload: P;
+export interface ApiResponse<V = any> {
+    payload: V;
     headers: HeadersMap;
     status: number | undefined;
     statusText: string;

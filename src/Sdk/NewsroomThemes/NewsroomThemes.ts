@@ -1,15 +1,15 @@
 import { Newsroom, NewsroomTheme, NewsroomThemePreset } from '../../types';
 
 import routing from '../routing';
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type NewsroomThemeId = NewsroomTheme['id'];
 
 export default class NewsroomThemes {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
@@ -19,11 +19,11 @@ export default class NewsroomThemes {
         settings: NewsroomThemePreset['settings'],
     ): Promise<NewsroomThemePreset> {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ theme: NewsroomThemePreset }>(
+        const { theme } = await this.apiClient.post<{ theme: NewsroomThemePreset }>(
             `${url}/${themeId}`,
             { payload: settings },
         );
-        return response.payload.theme;
+        return theme;
     }
 
     public async get(
@@ -31,21 +31,21 @@ export default class NewsroomThemes {
         themeId: NewsroomThemeId,
     ): Promise<NewsroomThemePreset> {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ theme: NewsroomThemePreset }>(
+        const { theme } = await this.apiClient.get<{ theme: NewsroomThemePreset }>(
             `${url}/${themeId}`,
         );
-        return response.payload.theme;
+        return theme;
     }
 
     public async getActive(newsroomId: NewsroomId): Promise<NewsroomThemePreset> {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ theme: NewsroomThemePreset }>(`${url}/active`);
-        return response.payload.theme;
+        const { theme } = await this.apiClient.get<{ theme: NewsroomThemePreset }>(`${url}/active`);
+        return theme;
     }
 
     public async list(newsroomId: NewsroomId): Promise<NewsroomThemePreset[]> {
         const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ themes: NewsroomThemePreset[] }>(url);
-        return response.payload.themes;
+        const { themes } = await this.apiClient.get<{ themes: NewsroomThemePreset[] }>(url);
+        return themes;
     }
 }

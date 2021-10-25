@@ -1,3 +1,10 @@
+export {
+    default as Campaign,
+    CampaignLifecycleStatus,
+    SenderDomainVerificationStatus,
+    StoryAlignment,
+    StoryAppearance,
+} from './Campaign';
 export { default as Category } from './Category';
 export {
     default as Contact,
@@ -46,12 +53,17 @@ export { default as EmailBranding } from './EmailBranding';
 export { default as EmailBrandingMode } from './EmailBrandingMode';
 
 export {
+    Notification,
+    NotificationAction,
+    NotificationStyle,
     UploadcareFile,
     UploadcareImage,
     OEmbedInfo,
     Pagination,
+    Query,
     SelectionMode,
     SelectionValue,
+    Warning,
 } from './common';
 
 // Support

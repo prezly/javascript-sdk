@@ -1,6 +1,13 @@
 export {
     default,
     ClientOptions,
+    // Campaigns SDK
+    CampaignCreateRequest,
+    CampaignUpdateRequest,
+    CampaignResponse,
+    CampaignRecipientsOperationResponse,
+    CampaignsListResponse,
+    CampaignsSearchOptions,
     // Coverage SDK
     CoverageScope,
     CoverageCreateRequest,
@@ -38,6 +45,25 @@ export {
     SlateStoryCreateRequest,
 } from './Sdk';
 export {
+    // common
+    OEmbedInfo,
+    Notification,
+    NotificationAction,
+    NotificationStyle,
+    Pagination,
+    Query,
+    SelectionValue,
+    SelectionMode,
+    Warning,
+    UploadcareImage,
+    UploadcareFile,
+    // Campaigns SDK
+    Campaign,
+    CampaignLifecycleStatus,
+    SenderDomainVerificationStatus,
+    StoryAlignment,
+    StoryAppearance,
+    //
     Category,
     Contact,
     ContactType,
@@ -54,7 +80,7 @@ export {
     PhoneNumberType,
     SocialNetwork,
     Entity,
-    StoryFormatVersion,
+    // Newsrooms SDK
     Newsroom,
     NewsroomRef,
     NewsroomCompanyInformation,
@@ -65,12 +91,11 @@ export {
     NewsroomTheme,
     NewsroomThemePreset,
     ThemeFeature,
-    OEmbedInfo,
-    Pagination,
     SenderAddress,
     SenderAddressType,
     SenderDomain,
     SenderDomainVerificationFlowVersion,
+    // Stories SDK
     Story,
     ExtendedStory,
     ExtraStoryFields,
@@ -78,5 +103,6 @@ export {
     StoryVisibility,
     StoryPublicationStatus,
     StoryLifecycleStatus,
+    StoryFormatVersion,
     UserRef,
 } from './types';

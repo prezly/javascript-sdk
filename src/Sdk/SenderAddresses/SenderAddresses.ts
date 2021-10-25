@@ -1,51 +1,51 @@
 import { SenderAddress } from '../../types';
 
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
 
 import { SenderAddressCreateRequest, SenderAddressUpdateRequest } from './types';
 
 export default class SenderAddresses {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
     public async list(): Promise<SenderAddress[]> {
-        const response = await this.apiClient.get<{ senders: SenderAddress[] }>(
+        const { senders } = await this.apiClient.get<{ senders: SenderAddress[] }>(
             routing.senderAddressesUrl,
         );
-        return response.payload.senders;
+        return senders;
     }
 
     public async create(payload: SenderAddressCreateRequest): Promise<SenderAddress> {
-        const response = await this.apiClient.post<{ sender: SenderAddress }>(
+        const { sender } = await this.apiClient.post<{ sender: SenderAddress }>(
             routing.senderAddressesUrl,
             { payload },
         );
-        return response.payload.sender;
+        return sender;
     }
 
     public async get(senderId: SenderAddress['id']): Promise<SenderAddress> {
-        const response = await this.apiClient.get<{ sender: SenderAddress }>(
+        const { sender } = await this.apiClient.get<{ sender: SenderAddress }>(
             `${routing.senderAddressesUrl}/${senderId}`,
         );
-        return response.payload.sender;
+        return sender;
     }
 
     public async update(
         senderId: SenderAddress['id'],
         payload: SenderAddressUpdateRequest,
     ): Promise<SenderAddress> {
-        const response = await this.apiClient.patch<{ sender: SenderAddress }>(
+        const { sender } = await this.apiClient.patch<{ sender: SenderAddress }>(
             `${routing.senderAddressesUrl}/${senderId}`,
             { payload },
         );
-        return response.payload.sender;
+        return sender;
     }
 
     public async remove(senderId: SenderAddress['id']): Promise<void> {
-        await this.apiClient.delete(`${routing.senderAddressesUrl}/${senderId}`);
+        return this.apiClient.delete(`${routing.senderAddressesUrl}/${senderId}`);
     }
 }

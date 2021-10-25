@@ -1,7 +1,7 @@
 import { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
 
 import routing from '../routing';
-import ApiClient from '../ApiClient';
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 
 import {
     NewsroomLanguageSettingsUpdateRequest,
@@ -14,9 +14,9 @@ import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
 export default class NewsroomLanguages {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
@@ -25,13 +25,11 @@ export default class NewsroomLanguages {
         { sortOrder }: NewsroomLanguagesListRequest = {},
     ): Promise<NewsroomLanguagesListResponse> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<NewsroomLanguagesListResponse>(url, {
+        return this.apiClient.get<NewsroomLanguagesListResponse>(url, {
             query: {
                 sort: sortOrder,
             },
         });
-
-        return response.payload;
     }
 
     async get(
@@ -40,13 +38,13 @@ export default class NewsroomLanguages {
         { fallback }: { fallback?: true | false } = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.get<{ language: NewsroomLanguageSettings }>(
+        const { language } = await this.apiClient.get<{ language: NewsroomLanguageSettings }>(
             `${url}/${localeCode}`,
             {
                 query: { fallback: fallback || undefined },
             },
         );
-        return response.payload.language;
+        return language;
     }
 
     async enable(
@@ -55,13 +53,13 @@ export default class NewsroomLanguages {
         payload: NewsroomLanguageSettingsUpdateRequest = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.put<{ language: NewsroomLanguageSettings }>(
+        const { language } = await this.apiClient.put<{ language: NewsroomLanguageSettings }>(
             `${url}/${localeCode}`,
             {
                 payload,
             },
         );
-        return response.payload.language;
+        return language;
     }
 
     async disable(
@@ -70,14 +68,11 @@ export default class NewsroomLanguages {
         { replacement }: { replacement?: CultureRef['code'] },
     ): Promise<void> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
-        await this.apiClient.delete<{ language: NewsroomLanguageSettings }>(
-            `${url}/${localeCode}`,
-            {
-                payload: {
-                    replacement,
-                },
+        return this.apiClient.delete(`${url}/${localeCode}`, {
+            payload: {
+                replacement,
             },
-        );
+        });
     }
 
     async update(
@@ -88,21 +83,21 @@ export default class NewsroomLanguages {
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
         const force = Boolean(options.force);
-        const response = await this.apiClient.patch<{ language: NewsroomLanguageSettings }>(
+        const { language } = await this.apiClient.patch<{ language: NewsroomLanguageSettings }>(
             `${url}/${localeCode}`,
             {
                 query: { force: force ? true : undefined },
                 payload,
             },
         );
-        return response.payload.language;
+        return language;
     }
 
     async makeDefault(
         newsroomId: NewsroomId,
         localeCode: CultureRef['code'],
     ): Promise<NewsroomLanguageSettings> {
-        return await this.update(newsroomId, localeCode, { is_default: true });
+        return this.update(newsroomId, localeCode, { is_default: true });
     }
 
     /**

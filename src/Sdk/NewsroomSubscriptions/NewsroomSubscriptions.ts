@@ -1,7 +1,9 @@
-import ApiClient from '../ApiClient';
 import { Newsroom } from '../../types';
-import { NewsroomSubscriptionCreateRequest } from './types';
+
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
+
+import { NewsroomSubscriptionCreateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -9,9 +11,9 @@ type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
  * @deprecated Use Subscriptions instead
  */
 export default class NewsroomSubscriptions {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
@@ -20,7 +22,7 @@ export default class NewsroomSubscriptions {
         payload: NewsroomSubscriptionCreateRequest,
     ): Promise<void> {
         const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));
-        await this.apiClient.post(url, {
+        return this.apiClient.post(url, {
             payload,
         });
     }

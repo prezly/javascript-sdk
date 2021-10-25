@@ -1,14 +1,16 @@
-import ApiClient from '../ApiClient';
 import { ContactType, EmailSubscription, Newsroom } from '../../types';
-import { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest } from './types';
+
+import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
+
+import { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
 export default class Subscriptions {
-    private readonly apiClient: ApiClient;
+    private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: ApiClient }) {
+    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
         this.apiClient = apiClient;
     }
 
@@ -17,11 +19,14 @@ export default class Subscriptions {
         payload: SubscribeRequest<Type>,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomSubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
-            payload,
-        });
+        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
+            url,
+            {
+                payload,
+            },
+        );
 
-        return response.payload.subscription;
+        return subscription;
     }
 
     public async unsubscribeFromNewsroom(
@@ -29,11 +34,14 @@ export default class Subscriptions {
         payload: UnsubscribeRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
-            payload,
-        });
+        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
+            url,
+            {
+                payload,
+            },
+        );
 
-        return response.payload.subscription;
+        return subscription;
     }
 
     public async updateNewsroomUnsubscribeDetails(
@@ -42,23 +50,26 @@ export default class Subscriptions {
         payload: UpdateUnsubscribeDetailsRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const response = await this.apiClient.patch<{ subscription: EmailSubscription }>(
+        const { subscription } = await this.apiClient.patch<{ subscription: EmailSubscription }>(
             `${url}/${subscriptionId}`,
             {
                 payload,
             },
         );
 
-        return response.payload.subscription;
+        return subscription;
     }
 
     public async unsubscribeFromLicense(payload: UnsubscribeRequest): Promise<EmailSubscription> {
         const url = routing.licenseUnsubscribeUrl;
-        const response = await this.apiClient.post<{ subscription: EmailSubscription }>(url, {
-            payload,
-        });
+        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
+            url,
+            {
+                payload,
+            },
+        );
 
-        return response.payload.subscription;
+        return subscription;
     }
 
     public async updateLicenseUnsubscribeDetails(
@@ -66,13 +77,13 @@ export default class Subscriptions {
         payload: UpdateUnsubscribeDetailsRequest,
     ): Promise<EmailSubscription> {
         const url = routing.licenseUnsubscribeUrl;
-        const response = await this.apiClient.patch<{ subscription: EmailSubscription }>(
+        const { subscription } = await this.apiClient.patch<{ subscription: EmailSubscription }>(
             `${url}/${subscriptionId}`,
             {
                 payload,
             },
         );
 
-        return response.payload.subscription;
+        return subscription;
     }
 }
