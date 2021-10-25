@@ -1,3 +1,5 @@
+import ProgressPromise from '@prezly/progress-promise';
+
 import { Coverage, SelectionValue } from '../../types';
 
 import routing from '../routing';
@@ -85,10 +87,9 @@ export default class CoverageSdk {
             selection: SelectionValue;
             jsonQuery: string;
         }>,
-    ): Promise<void> {
+    ): ProgressPromise<{ records_deleted_number: number }> {
         const { selection, jsonQuery } = options;
-        // TODO: Add Deferred Job API support (see #75)
-        await this.apiClient.delete(routing.coverageUrl, {
+        return this.apiClient.delete(routing.coverageUrl, {
             payload: {
                 selection,
                 query: jsonQuery,
