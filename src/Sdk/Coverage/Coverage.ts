@@ -26,7 +26,7 @@ export default class CoverageSdk {
     ): Promise<CoverageListResponse> {
         const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
         const url = scope?.story
-            ? routing.storyCoverageUrl.replace('story_id', String(scope.story))
+            ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
             : routing.coverageUrl;
         const response = await this.apiClient.get<CoverageListResponse>(url, {
             query: {
