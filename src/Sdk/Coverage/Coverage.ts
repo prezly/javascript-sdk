@@ -85,8 +85,8 @@ export default class CoverageSdk {
         }>,
     ): Promise<void> {
         const { selection, jsonQuery } = options;
-        // TODO: Add Deferred Job API support (see #78)
-        this.apiClient.delete(routing.coverageUrl, {
+        // TODO: Add Deferred Job API support (see #75)
+        await this.apiClient.delete(routing.coverageUrl, {
             payload: {
                 selection,
                 query: jsonQuery,
