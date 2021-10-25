@@ -24,15 +24,17 @@ export const createUrlWithQuery = (url = '', query?: object): URL => {
     return urlWithQuery;
 };
 
-export function isDeferredJobResponse(value: any): value is DeferredJobResponse {
+function isObject(value: unknown): value is Record<string, unknown> {
+    return value !== null && typeof value === 'object';
+}
+
+export function isDeferredJobResponse(value: unknown): value is DeferredJobResponse {
     return (
-        value &&
-        typeof value === 'object' &&
+        isObject(value) &&
         typeof value.status === 'string' &&
-        value.progress &&
-        typeof value.progress === 'object' &&
+        isObject(value.progress) &&
         typeof value.progress.id === 'string' &&
         Array.isArray(value.progress.links) &&
-        value.progress.links.every((link: any) => typeof link === 'string')
+        value.progress.links.every((link: unknown) => typeof link === 'string')
     );
 }
