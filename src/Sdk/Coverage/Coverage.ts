@@ -6,6 +6,7 @@ import ApiClient from '../ApiClient';
 import {
     CoverageCreateRequest,
     CoverageListResponse,
+    CoverageScope,
     CoverageSearchOptions,
     CoverageUpdateRequest,
 } from './types';
@@ -19,9 +20,16 @@ export default class CoverageSdk {
         this.apiClient = apiClient;
     }
 
-    async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
+    async list(
+        options: CoverageSearchOptions = {},
+        scope?: CoverageScope | null,
+    ): Promise<CoverageListResponse> {
         const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
-        const response = await this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
+        const url =
+            scope && scope.story
+                ? routing.storyCoverageUrl.replace('story_id', scope.story)
+                : routing.coverageUrl;
+        const response = await this.apiClient.get<CoverageListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 page,
