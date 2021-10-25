@@ -1,4 +1,4 @@
-import { Coverage } from '../../types';
+import { Coverage, SelectionValue } from '../../types';
 
 import routing from '../routing';
 import ApiClient from '../ApiClient';
@@ -76,5 +76,21 @@ export default class CoverageSdk {
 
     async remove(id: CoverageId): Promise<void> {
         await this.apiClient.delete(`${routing.coverageUrl}/${id}`);
+    }
+
+    async bulkRemove(
+        options: Partial<{
+            selection: SelectionValue;
+            jsonQuery: string;
+        }>,
+    ): Promise<void> {
+        const { selection, jsonQuery } = options;
+        // TODO: Add Deferred Job API support (see #75)
+        await this.apiClient.delete(routing.coverageUrl, {
+            payload: {
+                selection,
+                query: jsonQuery,
+            },
+        });
     }
 }
