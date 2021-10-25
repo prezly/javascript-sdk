@@ -17,6 +17,7 @@ const routing = {
     senderAddressesUrl: '/v2/sender-addresses',
     storiesUrl: '/v2/stories',
     storiesSearchUrl: '/v2/stories/search',
+    storyCoverageUrl: '/v1/stories/:story_id/reports/coverage',
 };
 
 export default routing;

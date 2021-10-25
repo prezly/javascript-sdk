@@ -1,4 +1,4 @@
-import { Coverage } from '../../types';
+import { Coverage, SelectionValue } from '../../types';
 
 import routing from '../routing';
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
@@ -6,6 +6,7 @@ import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import {
     CoverageCreateRequest,
     CoverageListResponse,
+    CoverageScope,
     CoverageSearchOptions,
     CoverageUpdateRequest,
 } from './types';
@@ -19,9 +20,15 @@ export default class CoverageSdk {
         this.apiClient = apiClient;
     }
 
-    async list(options: CoverageSearchOptions = {}): Promise<CoverageListResponse> {
+    async list(
+        options: CoverageSearchOptions = {},
+        scope?: CoverageScope,
+    ): Promise<CoverageListResponse> {
         const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
-        return this.apiClient.get<CoverageListResponse>(routing.coverageUrl, {
+        const url = scope?.story
+            ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
+            : routing.coverageUrl;
+        return this.apiClient.get<CoverageListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 page,
@@ -71,5 +78,21 @@ export default class CoverageSdk {
 
     async remove(id: CoverageId): Promise<void> {
         return this.apiClient.delete(`${routing.coverageUrl}/${id}`);
+    }
+
+    async bulkRemove(
+        options: Partial<{
+            selection: SelectionValue;
+            jsonQuery: string;
+        }>,
+    ): Promise<void> {
+        const { selection, jsonQuery } = options;
+        // TODO: Add Deferred Job API support (see #75)
+        await this.apiClient.delete(routing.coverageUrl, {
+            payload: {
+                selection,
+                query: jsonQuery,
+            },
+        });
     }
 }

@@ -9,6 +9,7 @@ export {
     CampaignsListResponse,
     CampaignsSearchOptions,
     // Coverage SDK
+    CoverageScope,
     CoverageCreateRequest,
     CoverageListResponse,
     CoverageSearchOptions,
@@ -54,6 +55,8 @@ export {
     Category,
     Contact,
     ContactType,
+    Coverage,
+    CoverageType,
     DnsConfigurationInstruction,
     DnsRecordType,
     Gender,
@@ -64,7 +67,6 @@ export {
     PhoneNumber,
     PhoneNumberType,
     SocialNetwork,
-    Coverage,
     Entity,
     // Newsrooms SDK
     Newsroom,
@@ -76,6 +78,7 @@ export {
     NewsroomLanguageSettings,
     NewsroomTheme,
     NewsroomThemePreset,
+    ThemeFeature,
     OEmbedInfo,
     Pagination,
     SenderAddress,
