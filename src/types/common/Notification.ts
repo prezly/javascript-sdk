@@ -1,20 +1,20 @@
-enum Style {
+export enum NotificationStyle {
     SUCCESS = 'success',
     INFO = 'info',
     WARNING = 'warning',
     DANGER = 'danger',
 }
 
-interface Action {
+export interface NotificationAction {
     target: string;
     name: string;
 }
 
-export default interface Notification {
+export interface Notification {
     id: string;
     type: string;
-    style: Style;
+    style: NotificationStyle;
     title: string;
     description: string;
-    actions: Action[];
+    actions: NotificationAction[];
 }

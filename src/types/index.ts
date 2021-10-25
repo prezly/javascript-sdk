@@ -54,6 +54,8 @@ export { default as EmailBrandingMode } from './EmailBrandingMode';
 
 export {
     Notification,
+    NotificationAction,
+    NotificationStyle,
     UploadcareFile,
     UploadcareImage,
     OEmbedInfo,

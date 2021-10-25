@@ -45,6 +45,18 @@ export {
     SlateStoryCreateRequest,
 } from './Sdk';
 export {
+    // common
+    OEmbedInfo,
+    Notification,
+    NotificationAction,
+    NotificationStyle,
+    Pagination,
+    Query,
+    SelectionValue,
+    SelectionMode,
+    Warning,
+    UploadcareImage,
+    UploadcareFile,
     // Campaigns SDK
     Campaign,
     CampaignLifecycleStatus,
@@ -79,8 +91,6 @@ export {
     NewsroomTheme,
     NewsroomThemePreset,
     ThemeFeature,
-    OEmbedInfo,
-    Pagination,
     SenderAddress,
     SenderAddressType,
     SenderDomain,
