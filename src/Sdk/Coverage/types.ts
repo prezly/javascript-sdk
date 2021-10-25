@@ -4,6 +4,8 @@ import CoverageProvider from '../../types/CoverageProvider';
 import CultureRef from '../../types/CultureRef';
 import CountryRef from '../../types/CountryRef';
 
+export type CoverageScope = { story: Story['id'] } | null;
+
 export interface CoverageUpdateRequest {
     attachment_oembed?: OEmbedInfo | null;
     attachment_plaintext_content?: string | null;
