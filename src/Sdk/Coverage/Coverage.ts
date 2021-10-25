@@ -22,13 +22,12 @@ export default class CoverageSdk {
 
     async list(
         options: CoverageSearchOptions = {},
-        scope?: CoverageScope | null,
+        scope?: CoverageScope,
     ): Promise<CoverageListResponse> {
         const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
-        const url =
-            scope && scope.story
-                ? routing.storyCoverageUrl.replace('story_id', String(scope.story))
-                : routing.coverageUrl;
+        const url = scope?.story
+            ? routing.storyCoverageUrl.replace('story_id', String(scope.story))
+            : routing.coverageUrl;
         const response = await this.apiClient.get<CoverageListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
