@@ -74,7 +74,11 @@ export default class NewsroomContacts {
         return contact;
     }
 
-    public async remove(newsroomId: NewsroomId, contactId: NewsroomContactId, force = false): Promise<void> {
+    public async remove(
+        newsroomId: NewsroomId,
+        contactId: NewsroomContactId,
+        force = false,
+    ): Promise<void> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const query = force ? { force: true } : {};
 
