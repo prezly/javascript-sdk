@@ -74,8 +74,10 @@ export default class NewsroomContacts {
         return contact;
     }
 
-    public async remove(newsroomId: NewsroomId, contactId: NewsroomContactId): Promise<void> {
+    public async remove(newsroomId: NewsroomId, contactId: NewsroomContactId, force = false): Promise<void> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
-        return this.apiClient.delete(`${url}/${contactId}`);
+        const payload = force ? { force: true } : {};
+
+        return this.apiClient.delete(`${url}/${contactId}`, { payload });
     }
 }
