@@ -38,6 +38,7 @@ export interface StoryRef {
      */
     id: number;
     title: string;
+    slug: string;
     publication_status: PublicationStatus;
     lifecycle_status: LifecycleStatus;
     visibility: Visibility;
