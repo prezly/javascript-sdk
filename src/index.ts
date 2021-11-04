@@ -91,6 +91,8 @@ export {
     NewsroomTheme,
     NewsroomThemePreset,
     ThemeFeature,
+    EmailBranding,
+    EmailBrandingMode,
     SenderAddress,
     SenderAddressType,
     SenderDomain,
