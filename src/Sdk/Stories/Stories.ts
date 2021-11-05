@@ -7,7 +7,8 @@ import {
     StoriesListRequest,
     StoriesListResponse,
     StoriesSearchRequest,
-    StoryCreateRequest, StoryUpdateRequest,
+    StoryCreateRequest,
+    StoryUpdateRequest,
 } from './types';
 
 /**
