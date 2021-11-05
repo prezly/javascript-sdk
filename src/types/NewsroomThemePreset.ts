@@ -1,7 +1,7 @@
 import { UploadcareImage } from './common';
 import { ThemeFeature } from './ThemeFeature';
 
-interface EditableSettings {
+interface JsonSchema {
     additionalProperties: boolean;
     properties: Record<
         string,
@@ -26,7 +26,7 @@ export interface NewsroomTheme {
 
 export interface NewsroomThemePreset {
     theme: NewsroomTheme;
-    editable_settings: EditableSettings;
+    editable_settings: JsonSchema;
     settings: Record<string, any>;
     is_active: boolean;
 }

@@ -1,10 +1,17 @@
-import { WebhookEvent } from './WebhookEvent';
+export enum NewsroomWebhookEvent {
+    STORY_CREATED = 'story.created',
+    STORY_UPDATED = 'story.updated',
+    STORY_DELETED = 'story.deleted',
+    CATEGORY_CREATED = 'category.created',
+    CATEGORY_UPDATED = 'category.updated',
+    CATEGORY_DELETED = 'category.deleted',
+}
 
 export interface NewsroomWebhook {
     id: string;
     name: string;
     url: string;
-    events: WebhookEvent[];
+    events: NewsroomWebhookEvent[];
     secret: string | null;
     is_active: boolean;
 }

@@ -6,10 +6,28 @@ import { Entity } from './Entity';
 import { NewsroomRef } from './Newsroom';
 import { Story } from './Story';
 import { UserRef } from './UserRef';
-import { CoverageType } from './CoverageType';
 import { CountryRef } from './CountryRef';
 import { CultureRef } from './CultureRef';
-import { CoverageProvider } from './CoverageProvider';
+
+export enum CoverageType {
+    ONLINE = 'online',
+    SOCIAL = 'social',
+    PRINT = 'print',
+    RADIO = 'radio',
+    TELEVISION = 'television',
+}
+
+export enum CoverageProvider {
+    AMMCO = 'ammco',
+    AUXIPRESS = 'auxipress',
+    BELGA = 'belga',
+    FEED = 'feed',
+    KANTAR = 'kantar',
+    KNEWIN = 'knewin',
+    MEDIAWEB = 'mediaweb',
+    MELTWATER = 'meltwater',
+    MANUAL = 'manual',
+}
 
 export interface Coverage extends Entity<number> {
     uuid: string;
