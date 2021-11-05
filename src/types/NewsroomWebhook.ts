@@ -1,6 +1,6 @@
-import WebhookEvent from './WebhookEvent';
+import { WebhookEvent } from './WebhookEvent';
 
-export default interface NewsroomWebhook {
+export interface NewsroomWebhook {
     id: string;
     name: string;
     url: string;

@@ -4,7 +4,7 @@ export enum JobStatus {
     REJECTED = 'rejected',
 }
 
-type JobState<V = object | null, P = object | null, E = object | null> =
+export type JobState<V = object | null, P = object | null, E = object | null> =
     | {
           status: JobStatus.RESOLVED;
           progress: number;
@@ -20,5 +20,3 @@ type JobState<V = object | null, P = object | null, E = object | null> =
           progress: number;
           value: E;
       };
-
-export default JobState;

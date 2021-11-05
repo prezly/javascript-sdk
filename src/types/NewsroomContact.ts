@@ -1,7 +1,7 @@
-import CultureRef from './CultureRef';
+import { CultureRef } from './CultureRef';
 import { UploadcareImage } from './common';
 
-export default interface NewsroomContact {
+export interface NewsroomContact {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as identifier.

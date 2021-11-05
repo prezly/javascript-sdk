@@ -1,8 +1,8 @@
 import { NewsroomRef } from './Newsroom';
-import UserRef from './UserRef';
-import SenderAddress from './SenderAddress';
+import { SenderAddress } from './SenderAddress';
 import { SenderDomainVerificationFlowVersion } from './SenderDomain';
 import { StoryRef } from './Story';
+import { UserRef } from './UserRef';
 
 export enum CampaignLifecycleStatus {
     DRAFT = 'draft',
@@ -29,7 +29,7 @@ export enum SenderDomainVerificationStatus {
     NOT_APPLICABLE = 'not-applicable',
 }
 
-export default interface Campaign {
+export interface Campaign {
     id: number;
     author: UserRef;
     lifecycle_status: CampaignLifecycleStatus;

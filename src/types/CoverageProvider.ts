@@ -1,4 +1,4 @@
-enum CoverageProvider {
+export enum CoverageProvider {
     AMMCO = 'ammco',
     AUXIPRESS = 'auxipress',
     BELGA = 'belga',
@@ -9,5 +9,3 @@ enum CoverageProvider {
     MELTWATER = 'meltwater',
     MANUAL = 'manual',
 }
-
-export default CoverageProvider;

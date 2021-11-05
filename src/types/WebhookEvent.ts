@@ -1,4 +1,4 @@
-enum WebhookEvent {
+export enum WebhookEvent {
     STORY_CREATED = 'story.created',
     STORY_UPDATED = 'story.updated',
     STORY_DELETED = 'story.deleted',
@@ -6,5 +6,3 @@ enum WebhookEvent {
     CATEGORY_UPDATED = 'category.updated',
     CATEGORY_DELETED = 'category.deleted',
 }
-
-export default WebhookEvent;

@@ -1,4 +1,4 @@
-export default interface NewsroomCompanyInformation {
+export interface NewsroomCompanyInformation {
     name: string;
     about: string;
     // contact info

@@ -1,6 +1,6 @@
-import Entity from './Entity';
-import ContactRef from './ContactRef';
-import ContactDuplicateSuggestion from './ContactDuplicateSuggestion';
+import { Entity } from './Entity';
+import { ContactRef } from './ContactRef';
+import { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
 import { UploadcareImage } from './common';
 
 export enum ContactType {
@@ -70,7 +70,7 @@ export interface PhoneNumber {
     type: PhoneNumberType;
 }
 
-export default interface Contact extends Entity {
+export interface Contact extends Entity {
     id: number;
     contact_type: ContactType;
     is_deleted: boolean;

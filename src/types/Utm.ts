@@ -1,4 +1,4 @@
-export default interface Utm {
+export interface Utm {
     utm_id?: string;
     utm_source?: string;
     utm_campaign?: string;
