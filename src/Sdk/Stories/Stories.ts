@@ -7,9 +7,12 @@ import {
     StoriesListRequest,
     StoriesListResponse,
     StoriesSearchRequest,
-    StoryCreateRequest,
+    StoryCreateRequest, StoryUpdateRequest,
 } from './types';
 
+/**
+ * `uuid` is the preferred way of targeting a Story. Numeric `id` is considered deprecated.
+ */
 type StoryId = Story['uuid'] | Story['id'];
 
 export default class Stories {
@@ -65,6 +68,14 @@ export default class Stories {
 
     async create(payload: StoryCreateRequest): Promise<ExtendedStory> {
         const { story } = await this.apiClient.post<{ story: ExtendedStory }>(routing.storiesUrl, {
+            payload,
+        });
+        return story;
+    }
+
+    async update(id: StoryId, payload: StoryUpdateRequest): Promise<ExtendedStory> {
+        let url = `${routing.storiesUrl}/${id}`;
+        const { story } = await this.apiClient.patch<{ story: ExtendedStory }>(url, {
             payload,
         });
         return story;

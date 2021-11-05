@@ -16,12 +16,18 @@ export {
 } from './Coverage';
 export { SenderAddressCreateRequest, SenderAddressUpdateRequest } from './SenderAddresses';
 export {
+    // Stories List API
     StoriesListRequest,
     StoriesListResponse,
     StoriesSearchRequest,
+    // Story Create API
     StoryCreateRequest,
     HtmlStoryCreateRequest,
     SlateStoryCreateRequest,
+    // Story Update API
+    StoryUpdateRequest,
+    HtmlStoryUpdateRequest,
+    SlateStoryUpdateRequest,
 } from './Stories';
 export {
     NewsroomCreateRequest,
