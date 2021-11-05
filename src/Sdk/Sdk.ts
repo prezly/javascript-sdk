@@ -1,4 +1,4 @@
-import { Options } from './types';
+import { ClientOptions } from './types';
 import ApiClient from './ApiClient';
 import Campaigns from './Campaigns';
 import Coverage from './Coverage';
@@ -32,7 +32,7 @@ export default class Sdk {
     public stories: Stories;
     public subscriptions: Subscriptions;
 
-    constructor({ accessToken, baseUrl = BASE_URL, headers = {} }: Options) {
+    constructor({ accessToken, baseUrl = BASE_URL, headers = {} }: ClientOptions) {
         const apiClient = new DeferredJobsApiClient(
             new ApiClient({
                 accessToken,
