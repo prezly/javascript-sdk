@@ -5,6 +5,7 @@ export * from './Entity';
 export * from './Campaign';
 export * from './Category';
 export * from './Contact';
+export * from './CountryRef';
 export * from './Coverage';
 export * from './CultureRef';
 export * from './DnsConfigurationInstruction';
