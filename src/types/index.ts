@@ -52,19 +52,8 @@ export { default as UnsubscribeReason } from './UnsubscribeReason';
 export { default as EmailBranding } from './EmailBranding';
 export { default as EmailBrandingMode } from './EmailBrandingMode';
 
-export {
-    Notification,
-    NotificationAction,
-    NotificationStyle,
-    UploadcareFile,
-    UploadcareImage,
-    OEmbedInfo,
-    Pagination,
-    Query,
-    SelectionMode,
-    SelectionValue,
-    Warning,
-} from './common';
+export * from './common';
+export * from './scopes';
 
 // Support
 export { default as Entity } from './Entity';
