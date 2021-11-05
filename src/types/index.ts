@@ -24,6 +24,7 @@ export {
     DnsRecordType,
 } from './DnsConfigurationInstruction';
 export { JobStatus, default as JobState } from './JobState';
+export * from './EmailRecipient';
 export { default as Newsroom, NewsroomRef } from './Newsroom';
 export { default as NewsroomContact } from './NewsroomContact';
 export { default as NewsroomCompanyInformation } from './NewsroomCompanyInformation';
