@@ -7,6 +7,7 @@ export {
     CampaignsListResponse,
     CampaignsSearchOptions,
 } from './Campaigns';
+export * from './CampaignRecipients';
 export {
     CoverageScope,
     CoverageCreateRequest,

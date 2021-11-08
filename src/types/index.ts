@@ -24,6 +24,7 @@ export {
     DnsRecordType,
 } from './DnsConfigurationInstruction';
 export { JobStatus, default as JobState } from './JobState';
+export * from './EmailRecipient';
 export { default as Newsroom, NewsroomRef } from './Newsroom';
 export { default as NewsroomContact } from './NewsroomContact';
 export { default as NewsroomCompanyInformation } from './NewsroomCompanyInformation';
@@ -52,19 +53,8 @@ export { default as UnsubscribeReason } from './UnsubscribeReason';
 export { default as EmailBranding } from './EmailBranding';
 export { default as EmailBrandingMode } from './EmailBrandingMode';
 
-export {
-    Notification,
-    NotificationAction,
-    NotificationStyle,
-    UploadcareFile,
-    UploadcareImage,
-    OEmbedInfo,
-    Pagination,
-    Query,
-    SelectionMode,
-    SelectionValue,
-    Warning,
-} from './common';
+export * from './common';
+export * from './scopes';
 
 // Support
 export { default as Entity } from './Entity';

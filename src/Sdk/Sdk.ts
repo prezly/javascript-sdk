@@ -1,6 +1,7 @@
 import { Options } from './types';
 import ApiClient from './ApiClient';
 import Campaigns from './Campaigns';
+import CampaignRecipients from './CampaignRecipients';
 import Coverage from './Coverage';
 import DeferredJobsApiClient from './DeferredJobsApiClient';
 import Stories from './Stories';
@@ -19,6 +20,7 @@ const BASE_URL = 'https://api.prezly.com';
 
 export default class Sdk {
     public campaigns: Campaigns;
+    public campaignRecipients: CampaignRecipients;
     public coverage: Coverage;
     public jobs: Jobs;
     public newsrooms: Newsrooms;
@@ -42,6 +44,7 @@ export default class Sdk {
         );
 
         this.campaigns = new Campaigns({ apiClient });
+        this.campaignRecipients = new CampaignRecipients({ apiClient });
         this.coverage = new Coverage({ apiClient });
         this.jobs = new Jobs({ apiClient });
         this.newsrooms = new Newsrooms({ apiClient });
