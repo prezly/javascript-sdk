@@ -1,11 +1,11 @@
-import SenderDomain from './SenderDomain';
+import { SenderDomain } from './SenderDomain';
 
 export enum SenderAddressType {
     CUSTOM = 'custom',
     PREZLYMAIL = 'prezly_mail',
 }
 
-export default interface SenderAddress {
+export interface SenderAddress {
     id: number;
     sender_email: string;
     sender_name: string;

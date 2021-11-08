@@ -1,6 +1,6 @@
-import CultureRef from './CultureRef';
+import { CultureRef } from './CultureRef';
 
-export default interface Category {
+export interface Category {
     display_description: string | null;
     display_name: string;
     i18n: {

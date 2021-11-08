@@ -1,5 +1,5 @@
 import { SelectionValue } from '../common';
-import Contact from '../Contact';
+import { Contact } from '../Contact';
 
 export interface AllContactsScope {
     type: 'scope:contacts';

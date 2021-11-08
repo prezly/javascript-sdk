@@ -1,16 +1,16 @@
-import Category from './Category';
-import Entity from './Entity';
-import CultureRef from './CultureRef';
+import { Category } from './Category';
+import { Entity } from './Entity';
+import { CultureRef } from './CultureRef';
 import { NewsroomRef } from './Newsroom';
-import UserRef from './UserRef';
+import { UserRef } from './UserRef';
 import { OEmbedInfo } from './common';
 
-export enum FormatVersion {
+export enum StoryFormatVersion {
     HTML = 1,
     SLATEJS = 3,
 }
 
-export enum LifecycleStatus {
+export enum StoryLifecycleStatus {
     UNINITIALIZED = 'uninitialized',
     DRAFT = 'draft',
     SCHEDULED = 'scheduled',
@@ -18,13 +18,13 @@ export enum LifecycleStatus {
     PUBLISHED = 'published',
 }
 
-export enum PublicationStatus {
+export enum StoryPublicationStatus {
     NEW = 'new',
     DRAFT = 'draft',
     PUBLISHED = 'published',
 }
 
-export enum Visibility {
+export enum StoryVisibility {
     PUBLIC = 'public',
     EMBARGO = 'embargo',
     PRIVATE = 'private',
@@ -39,9 +39,9 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
-    publication_status: PublicationStatus;
-    lifecycle_status: LifecycleStatus;
-    visibility: Visibility;
+    publication_status: StoryPublicationStatus;
+    lifecycle_status: StoryLifecycleStatus;
+    visibility: StoryVisibility;
 
     thumbnail_url: string;
 
@@ -62,7 +62,7 @@ export interface StoryRef {
     };
 }
 
-export default interface Story extends Entity<number> {
+export interface Story extends Entity<number> {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as an identifier instead.
@@ -73,7 +73,7 @@ export default interface Story extends Entity<number> {
     subtitle: string;
     intro: string;
     slug: string;
-    format_version: FormatVersion;
+    format_version: StoryFormatVersion;
     culture: CultureRef;
     author: UserRef | null;
 
@@ -110,7 +110,7 @@ export default interface Story extends Entity<number> {
     published_at: string | null;
     scheduled_at: string | null;
 
-    lifecycle_status: LifecycleStatus;
+    lifecycle_status: StoryLifecycleStatus;
     is_archived: boolean;
     is_finalized: boolean;
     is_published: boolean;
@@ -121,8 +121,8 @@ export default interface Story extends Entity<number> {
     is_sharable: boolean;
     is_analytics_available: boolean;
 
-    publication_status: PublicationStatus;
-    visibility: Visibility;
+    publication_status: StoryPublicationStatus;
+    visibility: StoryVisibility;
 }
 
 export interface ExtraStoryFields {

@@ -1,7 +1,7 @@
-import CultureRef from './CultureRef';
+import { CultureRef } from './CultureRef';
 import { UploadcareImageStoragePayload } from '@prezly/slate-types';
-import EmailBranding from './EmailBranding';
-import EmailBrandingMode from './EmailBrandingMode';
+import { EmailBranding } from './EmailBranding';
+import { EmailBrandingMode } from './EmailBrandingMode';
 
 export interface NewsroomRef {
     uuid: string;
@@ -65,7 +65,7 @@ export interface NewsroomRef {
     };
 }
 
-export default interface Newsroom extends NewsroomRef {
+export interface Newsroom extends NewsroomRef {
     domain: string;
     is_hub: boolean;
     // extended details

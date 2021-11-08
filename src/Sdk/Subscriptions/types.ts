@@ -1,5 +1,12 @@
 import { Contact, ContactType, UnsubscribeReason, UploadcareImage } from '../../types';
-import Utm from '../../types/Utm';
+
+interface Utm {
+    utm_id?: string;
+    utm_source?: string;
+    utm_campaign?: string;
+    utm_term?: string;
+    utm_content?: string;
+}
 
 interface Person {
     contact_type: ContactType.PERSON;

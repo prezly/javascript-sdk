@@ -1,6 +1,6 @@
 export type DnsRecordType = 'mx' | 'txt' | 'cname';
 
-export default interface DnsConfigurationInstruction {
+export interface DnsConfigurationInstruction {
     domain_name: string;
     type: DnsRecordType;
     recommended_value: string | null;

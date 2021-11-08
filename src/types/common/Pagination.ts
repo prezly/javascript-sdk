@@ -1,7 +1,7 @@
 /**
  * @see https://api.prezly.com/v2/common/schema.json#/definitions/Pagination
  */
-export default interface Pagination {
+export interface Pagination {
     matched_records_number: number;
     total_records_number: number;
 }

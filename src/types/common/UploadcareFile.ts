@@ -1,4 +1,4 @@
-export default interface UploadcareFile {
+export interface UploadcareFile {
     /**
      * File unique UUID
      */

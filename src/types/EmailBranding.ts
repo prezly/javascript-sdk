@@ -1,4 +1,4 @@
-export default interface EmailBranding {
+export interface EmailBranding {
     background_color: string;
     title_color: string;
     text_color: string;

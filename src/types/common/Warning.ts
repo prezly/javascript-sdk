@@ -1,4 +1,4 @@
-export default interface Warning {
+export interface Warning {
     field: string;
     code: string;
     message: string;

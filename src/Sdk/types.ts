@@ -1,6 +1,6 @@
 import { HeadersMap } from '../Api';
 
-export interface Options {
+export interface ClientOptions {
     accessToken: string;
     baseUrl?: string;
     headers?: HeadersMap;
