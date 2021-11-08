@@ -3,5 +3,6 @@ export interface EmailBranding {
     title_color: string;
     text_color: string;
     link_color: string;
-    link_hover_color: string;
+    /** @deprecated This is not used in email styling */
+    link_hover_color?: string;
 }
