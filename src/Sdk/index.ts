@@ -1,5 +1,6 @@
 export { default } from './Sdk';
 export * from './Campaigns';
+export * from './CampaignRecipients';
 export * from './Coverage';
 export * from './SenderAddresses';
 export * from './Stories';

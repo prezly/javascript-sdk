@@ -43,5 +43,8 @@ export {
     StoryCreateRequest,
     HtmlStoryCreateRequest,
     SlateStoryCreateRequest,
+    StoryUpdateRequest,
+    HtmlStoryUpdateRequest,
+    SlateStoryUpdateRequest,
 } from './Sdk';
 export * from './types';

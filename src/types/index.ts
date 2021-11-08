@@ -1,5 +1,6 @@
 // Common
 export * from './common';
+export * from './scopes';
 export * from './Entity';
 // Entities
 export * from './Campaign';
@@ -19,6 +20,7 @@ export * from './ThemeFeature';
 export * from './NewsroomWebhook';
 export * from './NewsroomDomain';
 export * from './NewsroomDomainShareInstructions';
+export * from './EmailRecipient';
 export * from './EmailSubscription';
 export * from './SenderAddress';
 export * from './SenderDomain';
