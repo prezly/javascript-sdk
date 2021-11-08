@@ -1,7 +1,7 @@
-import CultureRef from './CultureRef';
-import NewsroomCompanyInformation from './NewsroomCompanyInformation';
+import { CultureRef } from './CultureRef';
+import { NewsroomCompanyInformation } from './NewsroomCompanyInformation';
 
-export default interface NewsroomLanguageSettings {
+export interface NewsroomLanguageSettings {
     categories_count: number;
     code: CultureRef['code'];
     company_information: NewsroomCompanyInformation;

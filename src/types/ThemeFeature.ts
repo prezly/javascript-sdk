@@ -1,4 +1,4 @@
-enum ThemeFeature {
+export enum ThemeFeature {
     CATEGORIES = 'categories',
     SEARCH = 'search',
     MEDIA_GALLERIES = 'media_galleries',
@@ -7,5 +7,3 @@ enum ThemeFeature {
     CUSTOM_COLORS = 'custom_colors',
     OPTIONAL_PRIVACY_PORTAL = 'optional_privacy_portal',
 }
-
-export default ThemeFeature;

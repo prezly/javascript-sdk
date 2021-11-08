@@ -9,6 +9,20 @@ import {
     StoryVisibility,
 } from '../../types';
 
+/**
+ * Uploadcare image JSON string.
+ */
+type UploadedImage = string;
+type Iso8601DateTime = string;
+/**
+ * Raw HTML string.
+ */
+type Html = string;
+/**
+ * String containing Prezly Content Format JSON structure.
+ */
+type PrezlyContentFormat = string;
+
 export type StoriesSearchRequest<Include extends readonly (keyof ExtraStoryFields)[]> = {
     jsonQuery?: string;
     limit?: number;
@@ -29,60 +43,71 @@ export interface StoriesListResponse<S extends Story = Story> {
 
 interface GenericStoryCreateRequest {
     newsroom?: NewsroomRef['id'];
-    culture?: CultureRef['code'];
-    categories?: Category['id'][];
-    tags?: string[];
 
     title?: string;
     subtitle?: string;
-    /**
-     * Uploadcare image JSON string.
-     */
-    header_image?: string;
-    /**
-     * Uploadcare image JSON string.
-     */
-    preview_image?: string;
-    /**
-     * Uploadcare image JSON string.
-     */
-    social_image?: string;
-    social_text?: string;
+    published_at?: Iso8601DateTime;
     visibility?: StoryVisibility;
-    /**
-     * ISO 8601 formatted datetime string.
-     */
-    published_at?: string;
+    culture?: CultureRef['code'];
+
+    header_image?: UploadedImage;
+    preview_image?: UploadedImage;
+    social_image?: UploadedImage;
+    social_text?: string;
+
+    categories?: Category['id'][];
+    tags?: string[];
+}
+
+interface GenericStoryUpdateRequest {
+    title?: string;
+    subtitle?: string;
+    published_at?: Iso8601DateTime;
+    visibility?: StoryVisibility;
+    culture?: CultureRef['code'];
+
+    header_image?: UploadedImage;
+    preview_image?: UploadedImage;
+    social_image?: UploadedImage;
+    social_text?: string;
+
+    categories?: Category['id'][];
+    tags?: string[];
 }
 
 export interface HtmlStoryCreateRequest extends GenericStoryCreateRequest {
     /**
-     * If field is omitted, license default editor version will be implied.
+     * If format version is omitted, license default editor version will be implied.
      */
     format_version?: StoryFormatVersion.HTML;
-    /**
-     * Intro field is only supported for HTML stories.
-     */
-    intro: string;
-    /**
-     * Content HTML string.
-     */
-    content: string;
+    intro: Html;
+    content: Html;
 }
 
 export interface SlateStoryCreateRequest extends GenericStoryCreateRequest {
     /**
-     * If field is omitted, license default editor version will be implied.
+     * If format version is omitted, license default editor version will be implied.
      */
     format_version?: StoryFormatVersion.SLATEJS;
     /**
-     * Intro field is not supported for Slate stories.
+     * Intro field is not supported for Prezly Content Format stories.
      */
     intro: never;
+    content: PrezlyContentFormat;
+}
+
+export interface HtmlStoryUpdateRequest extends GenericStoryUpdateRequest {
+    intro: Html;
+    content: Html;
+}
+
+export interface SlateStoryUpdateRequest extends GenericStoryUpdateRequest {
     /**
-     * Content JSON string.
+     * Intro field is not supported for Prezly Content Format stories.
      */
-    content: string;
+    intro: never;
+    content: PrezlyContentFormat;
 }
 
 export type StoryCreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
+export type StoryUpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;

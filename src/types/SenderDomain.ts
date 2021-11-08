@@ -4,7 +4,7 @@ export enum SenderDomainVerificationFlowVersion {
     V3 = 'v3',
 }
 
-export default interface SenderDomain {
+export interface SenderDomain {
     domain_name: string;
     /**
      * Whether all required DNS records are properly set.

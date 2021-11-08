@@ -1,8 +1,15 @@
-import { Contact, Coverage, NewsroomRef, OEmbedInfo, Pagination, Story } from '../../types';
-import CoverageType from '../../types/CoverageType';
-import CoverageProvider from '../../types/CoverageProvider';
-import CultureRef from '../../types/CultureRef';
-import CountryRef from '../../types/CountryRef';
+import {
+    CoverageType,
+    CoverageProvider,
+    CultureRef,
+    CountryRef,
+    Contact,
+    Coverage,
+    NewsroomRef,
+    OEmbedInfo,
+    Pagination,
+    Story,
+} from '../../types';
 
 export type CoverageScope = { story: Story['id'] } | null;
 

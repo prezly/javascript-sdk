@@ -1,4 +1,4 @@
-import ContactRef from './ContactRef';
+import { ContactRef } from './ContactRef';
 
 export enum Status {
     UNSEEN = 'unseen',
@@ -6,7 +6,7 @@ export enum Status {
     DECLINED = 'declined',
 }
 
-export default interface ContactDuplicateSuggestion {
+export interface ContactDuplicateSuggestion {
     contact: ContactRef;
     /**
      * Value in range 0.0 ... 1.0.

@@ -1,4 +1,4 @@
-export default interface UserRef {
+export interface UserRef {
     id: number;
     display_name: string;
     avatar_url: string;
