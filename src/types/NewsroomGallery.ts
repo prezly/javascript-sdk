@@ -1,7 +1,7 @@
-import GalleryStatus from './GalleryStatus';
-import NewsroomGalleryImage from './NewsroomGalleryImage';
+import { GalleryStatus } from './GalleryStatus';
+import { NewsroomGalleryImage } from './NewsroomGalleryImage';
 
-export default interface NewsroomGallery {
+export interface NewsroomGallery {
     id: number;
     uuid: string;
     title: string;

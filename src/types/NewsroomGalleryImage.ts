@@ -1,6 +1,6 @@
 import { UploadcareImage } from './common';
 
-export default interface NewsroomGalleryImage {
+export interface NewsroomGalleryImage {
     id: number;
     caption: string;
     created_at: string;

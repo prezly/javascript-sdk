@@ -2,7 +2,7 @@ import { Newsroom } from '../../types';
 
 import routing from '../routing';
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
-import NewsroomGallery from '../../types/NewsroomGallery';
+import { NewsroomGallery } from '../../types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
