@@ -1,6 +1,6 @@
-import Campaign from '../Campaign';
 import { SelectionValue } from '../common';
-import Contact from '../Contact';
+import { Campaign } from '../Campaign';
+import { Contact } from '../Contact';
 
 export interface CampaignReportScope {
     type: 'scope:campaign_recipients';

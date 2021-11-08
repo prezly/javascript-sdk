@@ -1,5 +1,5 @@
-import Contact from '../Contact';
 import { SelectionValue } from '../common';
+import { Contact } from '../Contact';
 
 export interface ContactEmployeesScope {
     type: 'scope:contact_organisations';

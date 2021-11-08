@@ -1,5 +1,5 @@
-import Campaign from '../Campaign';
 import { SelectionValue } from '../common';
+import { Campaign } from '../Campaign';
 import { EmailRecipient } from '../EmailRecipient';
 
 export interface CampaignRecipientsScope {

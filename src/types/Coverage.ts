@@ -1,16 +1,35 @@
-import Contact from './Contact';
-import Entity from './Entity';
-import { NewsroomRef } from './Newsroom';
-import Story from './Story';
-import UserRef from './UserRef';
 import { UploadcareImageStoragePayload } from '@prezly/slate-types';
-import { OEmbedInfo } from './common';
-import CoverageType from './CoverageType';
-import CountryRef from './CountryRef';
-import CultureRef from './CultureRef';
-import CoverageProvider from './CoverageProvider';
 
-export default interface Coverage extends Entity<number> {
+import { OEmbedInfo } from './common';
+import { Contact } from './Contact';
+import { Entity } from './Entity';
+import { NewsroomRef } from './Newsroom';
+import { Story } from './Story';
+import { UserRef } from './UserRef';
+import { CountryRef } from './CountryRef';
+import { CultureRef } from './CultureRef';
+
+export enum CoverageType {
+    ONLINE = 'online',
+    SOCIAL = 'social',
+    PRINT = 'print',
+    RADIO = 'radio',
+    TELEVISION = 'television',
+}
+
+export enum CoverageProvider {
+    AMMCO = 'ammco',
+    AUXIPRESS = 'auxipress',
+    BELGA = 'belga',
+    FEED = 'feed',
+    KANTAR = 'kantar',
+    KNEWIN = 'knewin',
+    MEDIAWEB = 'mediaweb',
+    MELTWATER = 'meltwater',
+    MANUAL = 'manual',
+}
+
+export interface Coverage extends Entity<number> {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as identifier.

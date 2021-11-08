@@ -1,3 +1,3 @@
-export default interface Entity<T extends number | string = number> {
+export interface Entity<T extends number | string = number> {
     id: T;
 }
