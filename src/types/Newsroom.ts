@@ -72,6 +72,7 @@ export interface Newsroom extends NewsroomRef {
     cultures: CultureRef[];
     campaigns_number: number;
     stories_number: number;
+    public_galleries_number: number;
     // assets
     square_logo: UploadcareImageStoragePayload | null;
     newsroom_logo: UploadcareImageStoragePayload | null;
