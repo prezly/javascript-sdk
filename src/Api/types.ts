@@ -20,7 +20,7 @@ export interface HeadersMap {
 
 export interface Params {
     headers?: HeadersMap;
-    query?: object;
+    query?: Record<string, undefined | boolean | number | string | number[] | string[]>;
 }
 
 export interface ParamsWithPayload extends Params {
