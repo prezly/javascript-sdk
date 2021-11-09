@@ -1,5 +1,6 @@
 import { UploadcareImage } from './common';
 import { ThemeFeature } from './ThemeFeature';
+import { EmailBranding } from './EmailBranding';
 
 interface JsonSchema {
     additionalProperties: boolean;
@@ -29,4 +30,5 @@ export interface NewsroomThemePreset {
     editable_settings: JsonSchema;
     settings: Record<string, any>;
     is_active: boolean;
+    email_branding: EmailBranding;
 }
