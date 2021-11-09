@@ -28,9 +28,16 @@ export default class NewsroomGalleries {
         newsroomId: NewsroomId,
         payload: NewsroomGalleriesListRequest = {},
     ): Promise<NewsroomGalleriesListResponse> {
+        const { scope, query, sort, limit, offset } = payload;
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<NewsroomGalleriesListResponse>(url, {
-            query: payload,
+            query: {
+                scope: scope ? JSON.stringify(scope) : undefined,
+                query: query ? JSON.stringify(query) : undefined,
+                sort: sort,
+                limit: limit,
+                offset: offset,
+            },
         });
     }
 }
