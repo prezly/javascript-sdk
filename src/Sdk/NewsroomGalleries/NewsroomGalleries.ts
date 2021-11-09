@@ -3,6 +3,7 @@ import { Newsroom } from '../../types';
 import routing from '../routing';
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import { NewsroomGallery } from '../../types';
+import {NewsroomGalleriesListRequest, NewsroomGalleriesListResponse} from "./types";
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -23,10 +24,10 @@ export default class NewsroomGalleries {
         return response.gallery;
     }
 
-    public async list(newsroomId: NewsroomId): Promise<NewsroomGallery[]> {
+    public async list(newsroomId: NewsroomId, payload: NewsroomGalleriesListRequest = {}): Promise<NewsroomGalleriesListResponse> {
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
-        const { galleries } = await this.apiClient.get<{ galleries: NewsroomGallery[] }>(url);
-
-        return galleries;
+        return this.apiClient.get<NewsroomGalleriesListResponse>(url, {
+            query: payload,
+        });
     }
 }
