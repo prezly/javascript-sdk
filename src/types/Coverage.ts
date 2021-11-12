@@ -1,6 +1,4 @@
-import { UploadcareImageStoragePayload } from '@prezly/slate-types';
-
-import { OEmbedInfo } from './common';
+import { OEmbedInfo, UploadedFile } from './common';
 import { Contact } from './Contact';
 import { Entity } from './Entity';
 import { NewsroomRef } from './Newsroom';
@@ -48,7 +46,7 @@ export interface Coverage extends Entity<number> {
     note_content_html: string;
     note_content_json: string;
     note_content_text: string;
-    attachment: UploadcareImageStoragePayload;
+    attachment: UploadedFile | null;
     attachment_oembed: OEmbedInfo | null;
 
     published_at: string | null;
