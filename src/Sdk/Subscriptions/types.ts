@@ -1,4 +1,4 @@
-import { Contact, ContactType, UnsubscribeReason, UploadcareImage } from '../../types';
+import { Contact, ContactType, UnsubscribeReason, UploadedImage } from '../../types';
 
 interface Utm {
     utm_id?: string;
@@ -30,7 +30,7 @@ export interface SubscribeRequest<Type extends ContactType> {
     session_uid?: string;
     comment?: string;
     contact?: (Type extends ContactType.PERSON ? Person : Organisation) & {
-        avatar_image?: UploadcareImage | null;
+        avatar_image?: UploadedImage | null;
         languages?: string[];
         emails?: Contact['emails'];
         phone_numbers?: Contact['phone_numbers'];

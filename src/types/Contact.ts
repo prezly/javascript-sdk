@@ -1,7 +1,7 @@
 import { Entity } from './Entity';
 import { ContactRef } from './ContactRef';
 import { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
-import { UploadcareImage } from './common';
+import { UploadedImage } from './common';
 
 export enum ContactType {
     PERSON = 'person',
@@ -83,7 +83,7 @@ export interface Contact extends Entity {
 
     display_name: string;
     avatar_url: string;
-    avatar_image: UploadcareImage | null;
+    avatar_image: UploadedImage | null;
     salutation: string;
     gender: Gender;
     periodicity: Periodicity | null;

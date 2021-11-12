@@ -1,4 +1,4 @@
-export interface UploadcareFile {
+export interface UploadedFile {
     /**
      * File unique UUID
      */

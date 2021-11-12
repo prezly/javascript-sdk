@@ -1,4 +1,4 @@
-import { UploadcareImage } from './common';
+import { UploadedImage } from './common';
 import { ThemeFeature } from './ThemeFeature';
 import { EmailBranding } from './EmailBranding';
 
@@ -22,7 +22,7 @@ export interface NewsroomTheme {
     id: string;
     is_custom: boolean;
     name: string;
-    preview_image: UploadcareImage | null;
+    preview_image: UploadedImage | null;
 }
 
 export interface NewsroomThemePreset {

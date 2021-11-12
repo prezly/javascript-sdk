@@ -1,4 +1,4 @@
-import { CultureRef, UploadcareImage } from '../../types';
+import { CultureRef, UploadedImage } from '../../types';
 
 export interface NewsroomContactsListRequestOptions {
     /**
@@ -28,7 +28,7 @@ export interface NewsroomContactCreateRequest {
     website?: string | null;
     twitter?: string | null;
     facebook?: string | null;
-    avatar_image?: UploadcareImage | null;
+    avatar_image?: UploadedImage | null;
     is_featured?: boolean;
     display_locales?: CultureRef['code'][];
 }

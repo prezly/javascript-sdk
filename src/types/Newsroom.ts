@@ -1,5 +1,4 @@
 import { CultureRef } from './CultureRef';
-import { UploadcareImageStoragePayload } from '@prezly/slate-types';
 import { EmailBranding } from './EmailBranding';
 import { EmailBrandingMode } from './EmailBrandingMode';
 

@@ -1,6 +1,6 @@
-import { UploadcareFile } from './UploadcareFile';
+import { UploadedFile } from './UploadedFile';
 
-export interface UploadcareImage extends UploadcareFile {
+export interface UploadedImage extends UploadedFile {
     /**
      * Original image width in pixels (before transformations applied).
      */
