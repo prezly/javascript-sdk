@@ -1,4 +1,6 @@
-import { Contact, UploadedImage } from '../../types';
+import { UploadedImage } from '@prezly/uploads';
+
+import { Contact } from '../../types';
 
 export interface NewsroomSubscriptionCreateRequest {
     email_address: string;

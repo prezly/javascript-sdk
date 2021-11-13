@@ -1,4 +1,5 @@
-import { UploadedImage } from './common';
+import { UploadedImage } from '@prezly/uploads';
+
 import { ThemeFeature } from './ThemeFeature';
 import { EmailBranding } from './EmailBranding';
 

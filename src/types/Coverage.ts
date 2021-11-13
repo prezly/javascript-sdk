@@ -1,4 +1,6 @@
-import { OEmbedInfo, UploadedFile } from './common';
+import { UploadedFile } from '@prezly/uploads';
+
+import { OEmbedInfo } from './common';
 import { Contact } from './Contact';
 import { Entity } from './Entity';
 import { NewsroomRef } from './Newsroom';

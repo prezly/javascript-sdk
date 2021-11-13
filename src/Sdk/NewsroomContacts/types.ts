@@ -1,4 +1,6 @@
-import { CultureRef, UploadedImage } from '../../types';
+import { UploadedImage } from '@prezly/uploads';
+
+import { CultureRef } from '../../types';
 
 export interface NewsroomContactsListRequestOptions {
     /**

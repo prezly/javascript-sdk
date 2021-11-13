@@ -1,7 +1,8 @@
+import { UploadedImage } from '@prezly/uploads';
+
 import { Entity } from './Entity';
 import { ContactRef } from './ContactRef';
 import { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
-import { UploadedImage } from './common';
 
 export enum ContactType {
     PERSON = 'person',

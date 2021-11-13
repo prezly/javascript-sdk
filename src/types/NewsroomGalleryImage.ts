@@ -1,4 +1,4 @@
-import { UploadedImage } from './common';
+import { UploadedImage } from '@prezly/uploads';
 
 export interface NewsroomGalleryImage {
     id: number;

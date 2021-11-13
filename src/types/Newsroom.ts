@@ -1,7 +1,8 @@
+import { UploadedImage } from '@prezly/uploads';
+
 import { CultureRef } from './CultureRef';
 import { EmailBranding } from './EmailBranding';
 import { EmailBrandingMode } from './EmailBrandingMode';
-import { UploadedImage } from './common';
 
 export interface NewsroomRef {
     uuid: string;

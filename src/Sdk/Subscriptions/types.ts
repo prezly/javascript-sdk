@@ -1,4 +1,6 @@
-import { Contact, ContactType, UnsubscribeReason, UploadedImage } from '../../types';
+import { UploadedImage } from '@prezly/uploads';
+
+import { Contact, ContactType, UnsubscribeReason } from '../../types';
 
 interface Utm {
     utm_id?: string;

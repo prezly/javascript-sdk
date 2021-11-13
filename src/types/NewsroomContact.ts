@@ -1,5 +1,6 @@
+import { UploadedImage } from '@prezly/uploads';
+
 import { CultureRef } from './CultureRef';
-import { UploadedImage } from './common';
 
 export interface NewsroomContact {
     uuid: string;
