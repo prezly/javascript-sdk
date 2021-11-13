@@ -1,4 +1,6 @@
-import { Contact, UploadcareImage } from '../../types';
+import { UploadedImage } from '@prezly/uploads';
+
+import { Contact } from '../../types';
 
 export interface NewsroomSubscriptionCreateRequest {
     email_address: string;
@@ -33,7 +35,7 @@ export interface NewsroomSubscriptionCreateRequest {
          * Required only when contact_type === 'person'
          */
         organisations?: string[];
-        avatar_image?: UploadcareImage | null;
+        avatar_image?: UploadedImage | null;
         languages?: string[];
         emails?: Contact['emails'];
         phone_numbers?: Contact['phone_numbers'];

@@ -1,5 +1,6 @@
+import { UploadedImage } from '@prezly/uploads';
+
 import { CultureRef } from './CultureRef';
-import { UploadcareImage } from './common';
 
 export interface NewsroomContact {
     uuid: string;
@@ -17,7 +18,7 @@ export interface NewsroomContact {
     website: string | null;
     twitter: string | null;
     facebook: string | null;
-    avatar_image: UploadcareImage | null;
+    avatar_image: UploadedImage | null;
     /**
      * Featured contacts are listed on the newsroom homepage.
      */

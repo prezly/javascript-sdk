@@ -1,5 +1,6 @@
+import { UploadedImage } from '@prezly/uploads';
+
 import { CultureRef } from './CultureRef';
-import { UploadcareImageStoragePayload } from '@prezly/slate-types';
 import { EmailBranding } from './EmailBranding';
 import { EmailBrandingMode } from './EmailBrandingMode';
 
@@ -74,9 +75,9 @@ export interface Newsroom extends NewsroomRef {
     stories_number: number;
     public_galleries_number: number;
     // assets
-    square_logo: UploadcareImageStoragePayload | null;
-    newsroom_logo: UploadcareImageStoragePayload | null;
-    icon: UploadcareImageStoragePayload | null;
+    square_logo: UploadedImage | null;
+    newsroom_logo: UploadedImage | null;
+    icon: UploadedImage | null;
 
     email_branding_mode: EmailBrandingMode;
     email_branding: EmailBranding;
