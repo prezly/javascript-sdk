@@ -22,6 +22,7 @@ export interface NewsroomTheme {
     features: ThemeFeature[];
     id: string;
     is_custom: boolean;
+    is_legacy: boolean;
     name: string;
     preview_image: UploadedImage | null;
 }
