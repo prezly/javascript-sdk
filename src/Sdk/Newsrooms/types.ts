@@ -88,4 +88,9 @@ export interface NewsroomUpdateRequest {
     email_branding?: EmailBranding;
 
     is_privacy_portal_enabled?: boolean;
+    /**
+     * Available only when license has
+     * "custom_privacy_policy_link" feature flag
+     */
+    custom_privacy_policy_link?: string | null;
 }

@@ -83,4 +83,5 @@ export interface Newsroom extends NewsroomRef {
     email_branding: EmailBranding;
 
     is_privacy_portal_enabled: boolean;
+    custom_privacy_policy_link: string | null;
 }
