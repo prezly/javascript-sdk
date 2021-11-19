@@ -1,6 +1,6 @@
 import { UploadedImage } from '@prezly/uploads';
 
-import {Contact, ContactType, UnsubscribeReason, Utm} from '../../types';
+import { Contact, ContactType, UnsubscribeReason, Utm } from '../../types';
 
 interface Person {
     contact_type: ContactType.PERSON;
