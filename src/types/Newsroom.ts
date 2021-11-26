@@ -3,6 +3,7 @@ import { UploadedImage } from '@prezly/uploads';
 import { CultureRef } from './CultureRef';
 import { EmailBranding } from './EmailBranding';
 import { EmailBrandingMode } from './EmailBrandingMode';
+import {TrackingPolicy} from "./TrackingPolicy";
 
 export interface NewsroomRef {
     uuid: string;
@@ -84,4 +85,10 @@ export interface Newsroom extends NewsroomRef {
 
     is_privacy_portal_enabled: boolean;
     custom_privacy_policy_link: string | null;
+
+    tracking_policy: TrackingPolicy;
+    cookiepro: {
+        is_enabled: boolean;
+        category: string | null;
+    }
 }
