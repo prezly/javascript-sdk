@@ -8,8 +8,8 @@ export interface OEmbedInfo {
     description?: string;
     screenshot_url?: string;
     thumbnail_url?: string;
-    thumbnail_width?: string;
-    thumbnail_height?: string;
+    thumbnail_width?: number;
+    thumbnail_height?: number;
     author_name?: string;
     author_url?: string;
     provider_name?: string;
