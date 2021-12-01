@@ -25,6 +25,7 @@ export interface NewsroomTheme {
     is_legacy: boolean;
     name: string;
     preview_image: UploadedImage | null;
+    demo_url: string | null;
 }
 
 export interface NewsroomThemePreset {
