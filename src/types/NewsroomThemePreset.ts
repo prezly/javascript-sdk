@@ -2,7 +2,7 @@ import { UploadedImage } from '@prezly/uploads';
 
 import { ThemeFeature } from './ThemeFeature';
 import { EmailBranding } from './EmailBranding';
-import {ThemeStage} from "./ThemeStage";
+import { ThemeStage } from './ThemeStage';
 
 interface JsonSchema {
     additionalProperties: boolean;
