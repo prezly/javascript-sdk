@@ -18,6 +18,7 @@ export * from './NewsroomLanguageSettings';
 export * from './NewsroomThemePreset';
 export * from './TrackingPolicy';
 export * from './ThemeFeature';
+export * from './ThemeStage';
 export * from './NewsroomWebhook';
 export * from './NewsroomDomain';
 export * from './NewsroomDomainShareInstructions';
