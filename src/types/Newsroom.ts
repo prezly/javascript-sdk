@@ -91,4 +91,6 @@ export interface Newsroom extends NewsroomRef {
         is_enabled: boolean;
         category: string | null;
     };
+
+    is_subscription_form_enabled: boolean;
 }
