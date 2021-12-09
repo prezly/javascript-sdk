@@ -2,6 +2,7 @@ import { UploadedImage } from '@prezly/uploads';
 
 import { ThemeFeature } from './ThemeFeature';
 import { EmailBranding } from './EmailBranding';
+import { ThemeStatus } from './ThemeStatus';
 
 interface JsonSchema {
     additionalProperties: boolean;
@@ -26,6 +27,7 @@ export interface NewsroomTheme {
     name: string;
     preview_image: UploadedImage | null;
     demo_url: string | null;
+    status: ThemeStatus;
 }
 
 export interface NewsroomThemePreset {
