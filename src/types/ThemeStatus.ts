@@ -1,4 +1,4 @@
-export enum ThemeStage {
+export enum ThemeStatus {
     BETA = 'beta',
     STABLE = 'stable',
 }
