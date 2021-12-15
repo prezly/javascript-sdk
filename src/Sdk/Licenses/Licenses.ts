@@ -12,9 +12,7 @@ export default class Licenses {
 
     public async get(): Promise<License> {
         const url = routing.licenseUrl;
-        const { license } = await this.apiClient.get<{ license: License }>(
-            `${url}/self`,
-        );
+        const { license } = await this.apiClient.get<{ license: License }>(`${url}/self`);
         return license;
     }
 }

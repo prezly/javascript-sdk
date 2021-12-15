@@ -16,7 +16,7 @@ import SenderAddresses from './SenderAddresses';
 import Subscriptions from './Subscriptions';
 import Jobs from './Jobs';
 import NewsroomGalleries from './NewsroomGalleries';
-import Licenses from "./Licenses";
+import Licenses from './Licenses';
 
 const BASE_URL = 'https://api.prezly.com';
 
@@ -51,7 +51,7 @@ export default class Sdk {
         this.campaignRecipients = new CampaignRecipients({ apiClient });
         this.coverage = new Coverage({ apiClient });
         this.jobs = new Jobs({ apiClient });
-        this.licenses = new Licenses({apiClient});
+        this.licenses = new Licenses({ apiClient });
         this.newsrooms = new Newsrooms({ apiClient });
         this.newsroomCategories = new NewsroomCategories({ apiClient });
         this.newsroomContacts = new NewsroomContacts({ apiClient });
