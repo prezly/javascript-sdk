@@ -11,6 +11,8 @@ export * from './Coverage';
 export * from './CultureRef';
 export * from './DnsConfigurationInstruction';
 export * from './JobState';
+export * from './License';
+export * from './LicenseStatus';
 export * from './Newsroom';
 export * from './NewsroomContact';
 export * from './NewsroomCompanyInformation';

@@ -4,6 +4,7 @@ export * from './CampaignRecipients';
 export * from './Coverage';
 export * from './SenderAddresses';
 export * from './Stories';
+export * from './Licenses';
 export * from './Newsrooms';
 export * from './NewsroomCategories';
 export * from './NewsroomContacts';
