@@ -28,6 +28,7 @@ export enum StoryVisibility {
     PUBLIC = 'public',
     EMBARGO = 'embargo',
     PRIVATE = 'private',
+    CONFIDENTIAL = 'confidential',
 }
 
 export interface StoryRef {
