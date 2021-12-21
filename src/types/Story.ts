@@ -136,6 +136,10 @@ export interface ExtraStoryFields {
     /**
      * Uploadcare image JSON.
      */
+    thumbnail_image: string | null;
+    /**
+     * Uploadcare image JSON.
+     */
     header_image: string | null;
     /**
      * Uploadcare image JSON.
