@@ -8,4 +8,5 @@ export interface NewsroomLanguageSettings {
     is_default: boolean;
     locale: CultureRef;
     stories_count: number;
+    public_stories_count: number;
 }
