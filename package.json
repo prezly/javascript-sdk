@@ -38,7 +38,7 @@
         "prebuild": "npm run clean",
         "build": "tsc --project .",
         "start": "npm run build --incremental --watch",
-        "test": "npm tun test:build && npm run test:unit",
+        "test": "npm run test:build && npm run test:unit",
         "test:unit": "jest",
         "test:build": "node dist/index.js && tsc --noEmit dist/index.d.ts",
         "snapshot": "jest --updateSnapshot",
