@@ -11,6 +11,7 @@ import NewsroomContacts from './NewsroomContacts';
 import NewsroomLanguages from './NewsroomLanguages';
 import NewsroomThemes from './NewsroomThemes';
 import NewsroomWebhooks from './NewsroomWebhooks';
+import NewsroomPrivacyRequests from './NewsroomPrivacyRequests';
 import NewsroomDomains from './NewsroomDomains';
 import SenderAddresses from './SenderAddresses';
 import Subscriptions from './Subscriptions';
@@ -32,6 +33,7 @@ export default class Sdk {
     public newsroomLanguages: NewsroomLanguages;
     public newsroomThemes: NewsroomThemes;
     public newsroomWebhooks: NewsroomWebhooks;
+    public newsroomPrivacyRequests: NewsroomPrivacyRequests;
     public newsroomDomains: NewsroomDomains;
     public newsroomGalleries: NewsroomGalleries;
     public senderAddresses: SenderAddresses;
@@ -58,6 +60,7 @@ export default class Sdk {
         this.newsroomLanguages = new NewsroomLanguages({ apiClient });
         this.newsroomThemes = new NewsroomThemes({ apiClient });
         this.newsroomWebhooks = new NewsroomWebhooks({ apiClient });
+        this.newsroomPrivacyRequests = new NewsroomPrivacyRequests({ apiClient });
         this.newsroomDomains = new NewsroomDomains({ apiClient });
         this.newsroomGalleries = new NewsroomGalleries({ apiClient });
         this.senderAddresses = new SenderAddresses({ apiClient });
