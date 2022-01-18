@@ -15,6 +15,7 @@ const routing = {
     newsroomUnsubscribeUrl: '/v2/newsrooms/:newsroom_id/unsubscribe',
     newsroomThemesUrl: '/v2/newsrooms/:newsroom_id/themes',
     newsroomWebhooksUrl: '/v2/newsrooms/:newsroom_id/webhooks',
+    newsroomPrivacyRequestsUrl: '/v2/newsrooms/:newsroom_id/privacy-requests',
     newsroomDomainsUrl: '/v2/newsrooms/:newsroom_id/domains',
     newsroomGalleriesUrl: '/v2/newsrooms/:newsroom_id/galleries',
     senderAddressesUrl: '/v2/sender-addresses',
