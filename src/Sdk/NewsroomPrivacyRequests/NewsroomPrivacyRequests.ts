@@ -4,8 +4,6 @@ import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
 import { NewsroomPrivacyRequestCreateRequest } from './types';
 
-type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
-
 export default class NewsroomPrivacyRequests {
     private readonly apiClient: DeferredJobsApiClient;
 
@@ -14,7 +12,7 @@ export default class NewsroomPrivacyRequests {
     }
 
     public async create(
-        newsroomId: NewsroomId,
+        newsroomId: Newsroom['uuid'],
         payload: NewsroomPrivacyRequestCreateRequest,
     ): Promise<PrivacyRequest> {
         const url = routing.newsroomPrivacyRequestsUrl.replace(':newsroom_id', String(newsroomId));
@@ -28,7 +26,7 @@ export default class NewsroomPrivacyRequests {
     }
 
     public async confirm(
-        newsroomId: NewsroomId,
+        newsroomId: Newsroom['uuid'],
         privacyRequestId: PrivacyRequest['id'],
     ): Promise<PrivacyRequest> {
         const url = routing.newsroomPrivacyRequestsUrl.replace(':newsroom_id', String(newsroomId));
