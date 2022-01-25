@@ -1,15 +1,29 @@
 import { PrivacyRequestType } from '../../types';
 
-export interface NewsroomPrivacyRequestCreateRequest {
+export interface DeletePrivacyRequestCreateRequest {
     email: string;
     type: PrivacyRequestType;
-    /**
-     * Required for "delete", "correct" and "other"
-     * privacy request types
-     */
+    message: string;
+    extra_message?: string;
+}
+
+export interface ExportPrivacyRequestCreateRequest {
+    email: string;
+    type: PrivacyRequestType;
     message?: string;
-    /**
-     * Required for "correct" privacy request type
-     */
+    extra_message?: string;
+}
+
+export interface CorrectPrivacyRequestCreateRequest {
+    email: string;
+    type: PrivacyRequestType;
+    message: string;
+    extra_message: string;
+}
+
+export interface OtherPrivacyRequestCreateRequest {
+    email: string;
+    type: PrivacyRequestType;
+    message: string;
     extra_message?: string;
 }

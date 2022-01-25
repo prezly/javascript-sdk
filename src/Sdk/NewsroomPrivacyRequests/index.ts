@@ -1,2 +1,7 @@
 export { default } from './NewsroomPrivacyRequests';
-export { NewsroomPrivacyRequestCreateRequest } from './types';
+export {
+    DeletePrivacyRequestCreateRequest,
+    ExportPrivacyRequestCreateRequest,
+    CorrectPrivacyRequestCreateRequest,
+    OtherPrivacyRequestCreateRequest,
+} from './types';

@@ -2,7 +2,12 @@ import { Newsroom, PrivacyRequest } from '../../types';
 
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
-import { NewsroomPrivacyRequestCreateRequest } from './types';
+import {
+    DeletePrivacyRequestCreateRequest,
+    ExportPrivacyRequestCreateRequest,
+    CorrectPrivacyRequestCreateRequest,
+    OtherPrivacyRequestCreateRequest,
+} from './types';
 
 export default class NewsroomPrivacyRequests {
     private readonly apiClient: DeferredJobsApiClient;
@@ -13,7 +18,11 @@ export default class NewsroomPrivacyRequests {
 
     public async create(
         newsroomId: Newsroom['uuid'],
-        payload: NewsroomPrivacyRequestCreateRequest,
+        payload:
+            | DeletePrivacyRequestCreateRequest
+            | ExportPrivacyRequestCreateRequest
+            | CorrectPrivacyRequestCreateRequest
+            | OtherPrivacyRequestCreateRequest,
     ): Promise<PrivacyRequest> {
         const url = routing.newsroomPrivacyRequestsUrl.replace(':newsroom_id', String(newsroomId));
         const { privacy_request } = await this.apiClient.post<{ privacy_request: PrivacyRequest }>(
