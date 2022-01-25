@@ -36,3 +36,4 @@ export * from './UserRef';
 export * from './UnsubscribeReason';
 export * from './EmailBranding';
 export * from './EmailBrandingMode';
+export * from './PrivacyRequest';
