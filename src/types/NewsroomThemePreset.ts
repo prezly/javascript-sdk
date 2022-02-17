@@ -37,4 +37,5 @@ export interface NewsroomThemePreset {
     settings: Record<string, any>;
     is_active: boolean;
     email_branding: EmailBranding;
+    preview_url: string | null;
 }
