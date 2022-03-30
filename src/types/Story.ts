@@ -73,6 +73,7 @@ export interface Story extends Entity<number> {
     title: string;
     subtitle: string;
     intro: string;
+    summary: string;
     slug: string;
     format_version: StoryFormatVersion;
     culture: CultureRef;
