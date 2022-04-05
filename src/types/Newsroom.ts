@@ -85,6 +85,7 @@ export interface Newsroom extends NewsroomRef {
 
     is_privacy_portal_enabled: boolean;
     custom_privacy_policy_link: string | null;
+    custom_data_request_link: string | null;
 
     tracking_policy: TrackingPolicy;
     cookiepro: {
