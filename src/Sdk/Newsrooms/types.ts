@@ -95,6 +95,11 @@ export interface NewsroomUpdateRequest {
     custom_privacy_policy_link?: string | null;
     /**
      * Available only when license has
+     * "custom_data_request_link" feature flag
+     */
+    custom_data_request_link?: string | null;
+    /**
+     * Available only when license has
      * "subscription_form" feature flag
      */
     is_subscription_form_enabled?: boolean;
