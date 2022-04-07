@@ -93,6 +93,7 @@ export interface Newsroom extends NewsroomRef {
         category: string | null;
     };
     ga_tracking_id: string | null;
+    segment_analytics_id: string | null;
 
     is_subscription_form_enabled: boolean;
 }
