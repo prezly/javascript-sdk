@@ -9,4 +9,7 @@ export interface NewsroomLanguageSettings {
     locale: CultureRef;
     stories_count: number;
     public_stories_count: number;
+    default_email_disclaimer: string;
+    default_cookie_statement: string;
+    default_subscribe_disclaimer: string;
 }
