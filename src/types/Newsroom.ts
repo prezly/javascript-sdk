@@ -96,4 +96,5 @@ export interface Newsroom extends NewsroomRef {
     segment_analytics_id: string | null;
 
     is_subscription_form_enabled: boolean;
+    is_white_labeled: boolean;
 }
