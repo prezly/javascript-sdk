@@ -105,15 +105,15 @@ export default async function createRequest<P = any>(
             payload: responsePayload,
             ...extractResponse(response),
         };
-    } catch (error: any) {
+    } catch (error) {
         // Fetch throws an error, if there is a connection problem (eg. network is down).
         // We do not have access to response, so we need to fake the error payload.
         // Since we also throw when response is not ok, re-throw the response data if available.
         const {
             status,
-            statusText = error.message || NETWORK_PROBLEM_ERROR_MESSAGE,
+            statusText = (error as any).message || NETWORK_PROBLEM_ERROR_MESSAGE,
             payload: errorPayload,
-        } = error;
+        } = error as any;
 
         throw new ApiError({
             payload:
@@ -124,7 +124,7 @@ export default async function createRequest<P = any>(
                 }),
             status,
             statusText,
-            headers: error.headers || {},
+            headers: (error as any).headers || {},
         });
     }
 }
