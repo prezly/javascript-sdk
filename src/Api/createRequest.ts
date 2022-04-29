@@ -111,9 +111,9 @@ export default async function createRequest<P = any>(
         // Since we also throw when response is not ok, re-throw the response data if available.
         const {
             status,
-            statusText = error.message || NETWORK_PROBLEM_ERROR_MESSAGE,
+            statusText = (error as any).message || NETWORK_PROBLEM_ERROR_MESSAGE,
             payload: errorPayload,
-        } = error;
+        } = error as any;
 
         throw new ApiError({
             payload:
@@ -124,7 +124,7 @@ export default async function createRequest<P = any>(
                 }),
             status,
             statusText,
-            headers: error.headers || {},
+            headers: (error as any).headers || {},
         });
     }
 }
