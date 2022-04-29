@@ -152,6 +152,12 @@ export interface ExtraStoryFields {
     social_image: string | null;
     social_text: string;
     tag_names: string[];
+
+    referenced_entities: {
+        stories: {
+            string: OEmbedInfo;
+        };
+    };
 }
 
 export interface ExtendedStory extends Story, ExtraStoryFields {}
