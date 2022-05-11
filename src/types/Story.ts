@@ -154,9 +154,7 @@ export interface ExtraStoryFields {
     tag_names: string[];
 
     referenced_entities: {
-        stories: {
-            string: OEmbedInfo;
-        };
+        stories: Record<string, OEmbedInfo>;
     };
 }
 
