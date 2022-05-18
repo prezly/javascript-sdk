@@ -40,6 +40,10 @@ export interface NewsroomCreateRequest {
      * Uploadcare Image JSON
      */
     square_logo?: string;
+    /**
+     * Theme ID or codename
+     */
+    active_theme?: string;
 }
 
 export interface NewsroomUpdateRequest {
