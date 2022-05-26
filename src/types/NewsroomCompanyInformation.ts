@@ -1,6 +1,7 @@
 export interface NewsroomCompanyInformation {
     name: string;
     about: string;
+    about_plaintext: string;
     // contact info
     email: string | null;
     website: string | null;
