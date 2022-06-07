@@ -13,7 +13,7 @@
     "author": "Prezly Team <hello@prezly.com> (https://www.prezly.com)",
     "license": "MIT",
     "engines": {
-        "node": ">= 8.16.0"
+        "node": ">= 16"
     },
     "dependencies": {
         "@prezly/progress-promise": "^1.0.0",
