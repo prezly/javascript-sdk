@@ -47,7 +47,6 @@ export interface NewsroomRef {
      */
     links: {
         media_gallery_api: string;
-        room_contacts_api: string;
         analytics_and_visibility_settings: string;
         categories_management: string;
         company_info_settings: string;
