@@ -21,6 +21,7 @@ interface JsonSchema {
 export interface NewsroomTheme {
     codename: string;
     description: string;
+    use_case: string | null;
     features: ThemeFeature[];
     id: string;
     is_custom: boolean;
