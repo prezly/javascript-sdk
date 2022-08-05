@@ -5,6 +5,12 @@ import { EmailBranding } from './EmailBranding';
 import { EmailBrandingMode } from './EmailBrandingMode';
 import { TrackingPolicy } from './TrackingPolicy';
 
+export enum NewsroomStatus {
+    ACTIVE = 'active', // i.e. "Live"
+    INACTIVE = 'inactive', // i.e. "Not live"
+    ARCHIVED = 'archived',
+}
+
 export interface NewsroomRef {
     uuid: string;
     /**
@@ -17,7 +23,16 @@ export interface NewsroomRef {
     name: string;
     subdomain: string;
 
+    status: NewsroomStatus;
+    /**
+     * @deprecated Please use `status` instead
+     * @see status
+     */
     is_active: boolean;
+    /**
+     * @deprecated Please use `status` instead
+     * @see status
+     */
     is_archived: boolean;
     is_multilingual: boolean;
     is_indexable: boolean;
