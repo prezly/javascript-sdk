@@ -1,4 +1,11 @@
-import { CultureRef, EmailBranding, EmailBrandingMode, Newsroom, Pagination } from '../../types';
+import {
+    CultureRef,
+    EmailBranding,
+    EmailBrandingMode,
+    Newsroom,
+    NewsroomStatus,
+    Pagination,
+} from '../../types';
 
 export interface NewsroomListRequest {
     limit?: number;
@@ -44,6 +51,7 @@ export interface NewsroomCreateRequest {
      * Theme ID or codename
      */
     active_theme?: string;
+    status?: NewsroomStatus.ACTIVE | NewsroomStatus.INACTIVE;
 }
 
 export interface NewsroomUpdateRequest {
@@ -107,4 +115,5 @@ export interface NewsroomUpdateRequest {
      * "subscription_form" feature flag
      */
     is_subscription_form_enabled?: boolean;
+    status?: NewsroomStatus.ACTIVE | NewsroomStatus.INACTIVE;
 }
