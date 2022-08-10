@@ -1,5 +1,6 @@
 import { CultureRef } from './CultureRef';
 import { NewsroomCompanyInformation } from './NewsroomCompanyInformation';
+import { Notification } from './common';
 
 export interface NewsroomLanguageSettings {
     categories_count: number;
@@ -12,4 +13,5 @@ export interface NewsroomLanguageSettings {
     default_email_disclaimer: string;
     default_cookie_statement: string;
     default_subscribe_disclaimer: string;
+    notifications: Notification[];
 }
