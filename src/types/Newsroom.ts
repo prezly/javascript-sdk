@@ -111,4 +111,5 @@ export interface Newsroom extends NewsroomRef {
 
     is_subscription_form_enabled: boolean;
     is_white_labeled: boolean;
+    is_plausible_enabled: boolean;
 }
