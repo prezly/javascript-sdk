@@ -116,5 +116,5 @@ export interface Newsroom extends NewsroomRef {
     /**
      * Present when user has view_newsroom_tracking_data permission
      */
-    plausible_shared_link: string | null;
+    plausible_shared_link?: string | null;
 }
