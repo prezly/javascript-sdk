@@ -114,7 +114,7 @@ export interface Newsroom extends NewsroomRef {
     is_plausible_enabled: boolean;
     plausible_site_id: string;
     /**
-     * Present when user has view_newsroom_tracking_data permission
+     * Present when user has permission
      */
     plausible_shared_link?: string | null;
 }
