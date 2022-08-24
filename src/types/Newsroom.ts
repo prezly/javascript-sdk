@@ -121,5 +121,5 @@ export interface Newsroom extends NewsroomRef {
     plausible_stats: {
         visits_last_7_days: number | null;
         visits_last_7_days_previous: number | null;
-    }
+    };
 }
