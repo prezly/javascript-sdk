@@ -111,10 +111,15 @@ export interface Newsroom extends NewsroomRef {
 
     is_subscription_form_enabled: boolean;
     is_white_labeled: boolean;
+
     is_plausible_enabled: boolean;
     plausible_site_id: string;
     /**
      * Present when user has permission
      */
     plausible_shared_link?: string | null;
+    plausible_stats: {
+        visits_last_7_days: number | null;
+        visits_last_7_days_previous: number | null;
+    }
 }
