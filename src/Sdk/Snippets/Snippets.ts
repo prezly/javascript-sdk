@@ -1,7 +1,7 @@
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
 
-import { SnippetCreateRequest } from './types';
+import { SnippetCreateRequest, SnippetUpdateRequest } from './types';
 import { Snippet } from '../../types/Snippet';
 
 type SnippetId = Snippet['uuid'] | Snippet['id'];
@@ -30,6 +30,17 @@ export default class Snippets {
         const { snippet } = await this.apiClient.post<{ snippet: Snippet }>(url, {
             payload,
         });
+        return snippet;
+    }
+
+    public async update(snippetId: SnippetId, payload: SnippetUpdateRequest): Promise<Snippet> {
+        const url = routing.snippetsUrl;
+        const { snippet } = await this.apiClient.patch<{ snippet: Snippet }>(
+            `${url}/${snippetId}`,
+            {
+                payload,
+            },
+        );
         return snippet;
     }
 }
