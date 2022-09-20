@@ -1,2 +1,2 @@
 export { default } from './Snippets';
-export { SnippetCreateRequest } from './types';
+export { SnippetCreateRequest, SnippetUpdateRequest } from './types';
