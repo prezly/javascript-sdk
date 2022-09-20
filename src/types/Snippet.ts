@@ -1,4 +1,4 @@
-import {UserRef} from "./UserRef";
+import { UserRef } from './UserRef';
 
 export interface Snippet {
     id: number;

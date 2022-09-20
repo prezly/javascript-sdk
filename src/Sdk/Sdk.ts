@@ -5,6 +5,7 @@ import CampaignRecipients from './CampaignRecipients';
 import Coverage from './Coverage';
 import DeferredJobsApiClient from './DeferredJobsApiClient';
 import Stories from './Stories';
+import Snippets from './Snippets';
 import Newsrooms from './Newsrooms';
 import NewsroomCategories from './NewsroomCategories';
 import NewsroomContacts from './NewsroomContacts';
@@ -38,6 +39,7 @@ export default class Sdk {
     public newsroomGalleries: NewsroomGalleries;
     public senderAddresses: SenderAddresses;
     public stories: Stories;
+    public snippets: Snippets;
     public subscriptions: Subscriptions;
 
     constructor({ accessToken, baseUrl = BASE_URL, headers = {} }: ClientOptions) {
@@ -65,6 +67,7 @@ export default class Sdk {
         this.newsroomGalleries = new NewsroomGalleries({ apiClient });
         this.senderAddresses = new SenderAddresses({ apiClient });
         this.stories = new Stories({ apiClient });
+        this.snippets = new Snippets({ apiClient });
         this.subscriptions = new Subscriptions({ apiClient });
     }
 }
