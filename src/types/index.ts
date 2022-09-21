@@ -32,6 +32,7 @@ export * from './EmailSubscription';
 export * from './SenderAddress';
 export * from './SenderDomain';
 export * from './Story';
+export * from './Snippet';
 export * from './UserRef';
 export * from './UnsubscribeReason';
 export * from './EmailBranding';
