@@ -9,4 +9,5 @@ export * from './Newsrooms';
 export * from './NewsroomCategories';
 export * from './NewsroomContacts';
 export * from './NewsroomLanguages';
+export * from './Snippets';
 export * from './types';

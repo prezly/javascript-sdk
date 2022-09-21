@@ -22,6 +22,7 @@ const routing = {
     storiesUrl: '/v2/stories',
     storiesSearchUrl: '/v2/stories/search',
     storyCoverageUrl: '/v1/stories/:story_id/reports/coverage',
+    snippetsUrl: '/v2/snippets',
 };
 
 export default routing;
