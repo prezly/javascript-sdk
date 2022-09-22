@@ -7,4 +7,5 @@ export interface Snippet {
     content: string;
     creator: UserRef | null;
     created_at: string;
+    modified_at: string;
 }

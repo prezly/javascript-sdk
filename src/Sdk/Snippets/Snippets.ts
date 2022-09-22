@@ -2,7 +2,7 @@ import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import routing from '../routing';
 
 import { SnippetCreateRequest, SnippetUpdateRequest } from './types';
-import { Snippet } from '../../types/Snippet';
+import { Snippet } from '../../types';
 
 type SnippetId = Snippet['uuid'] | Snippet['id'];
 
@@ -42,5 +42,10 @@ export default class Snippets {
             },
         );
         return snippet;
+    }
+
+    public async remove(snippetId: SnippetId): Promise<void> {
+        const url = routing.snippetsUrl;
+        return this.apiClient.delete(`${url}/${snippetId}`);
     }
 }
