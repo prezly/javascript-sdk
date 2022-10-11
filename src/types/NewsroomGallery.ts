@@ -1,7 +1,7 @@
 import { GalleryStatus } from './GalleryStatus';
 import { NewsroomGalleryImage } from './NewsroomGalleryImage';
-import {UserRef} from "./UserRef";
-import {UploadedImage} from "@prezly/uploads";
+import { UserRef } from './UserRef';
+import { UploadedImage } from '@prezly/uploads';
 
 export interface NewsroomGallery {
     id: number;
