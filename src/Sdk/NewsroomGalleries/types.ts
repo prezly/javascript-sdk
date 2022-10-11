@@ -1,4 +1,4 @@
-import { NewsroomGallery, Pagination, Query } from '../../types';
+import { GalleryStatus, NewsroomGallery, Pagination, Query } from '../../types';
 
 export interface NewsroomGalleriesListRequest {
     scope?: Query;
@@ -13,6 +13,26 @@ export interface NewsroomGalleriesOrderRequest {
         gallery: number | string;
         order: number;
     }[];
+}
+
+export interface NewsroomGalleryCreateRequest {
+    name: string;
+    description?: string | null;
+    status?: GalleryStatus;
+    /**
+     * Slate JSON content.
+     */
+    content: string;
+}
+
+export interface NewsroomGalleryUpdateRequest {
+    name?: string;
+    description?: string | null;
+    status?: GalleryStatus;
+    /**
+     * Slate JSON content.
+     */
+    content?: string;
 }
 
 export interface NewsroomGalleriesListResponse {
