@@ -1,7 +1,6 @@
 import { GalleryStatus } from './GalleryStatus';
 import { NewsroomGalleryImage } from './NewsroomGalleryImage';
 import { UserRef } from './UserRef';
-import { UploadedImage } from '@prezly/uploads';
 
 export interface NewsroomGallery {
     id: number;
@@ -10,7 +9,10 @@ export interface NewsroomGallery {
     /** @deprecated Use `name` instead */
     title: string;
     description: string | null;
-    thumbnail_image: UploadedImage | null;
+    /**
+     * Uploadcare image JSON.
+     */
+    thumbnail_image: string | null;
     url: string;
     status: GalleryStatus;
     creator: UserRef | null;
