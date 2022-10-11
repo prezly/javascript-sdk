@@ -8,6 +8,13 @@ export interface NewsroomGalleriesListRequest {
     sort?: string;
 }
 
+export interface NewsroomGalleriesOrderRequest {
+    order: {
+        gallery: number | string;
+        order: number;
+    }[];
+}
+
 export interface NewsroomGalleriesListResponse {
     galleries: NewsroomGallery[];
     pagination: Pagination;
