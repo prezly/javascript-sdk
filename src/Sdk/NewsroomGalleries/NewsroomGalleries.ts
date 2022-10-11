@@ -3,7 +3,11 @@ import { Newsroom } from '../../types';
 import routing from '../routing';
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import { NewsroomGallery } from '../../types';
-import { NewsroomGalleriesListRequest, NewsroomGalleriesListResponse } from './types';
+import {
+    NewsroomGalleriesListRequest,
+    NewsroomGalleriesListResponse,
+    NewsroomGalleriesOrderRequest,
+} from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -38,6 +42,16 @@ export default class NewsroomGalleries {
                 limit: limit,
                 offset: offset,
             },
+        });
+    }
+
+    public async order(
+        newsroomId: NewsroomId,
+        payload: NewsroomGalleriesOrderRequest,
+    ): Promise<void> {
+        const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
+        this.apiClient.post(`${url}/order`, {
+            payload,
         });
     }
 }
