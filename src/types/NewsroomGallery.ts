@@ -20,6 +20,9 @@ export interface NewsroomGallery {
     updated_at: string;
     modified_at: string | null;
     uploadcare_group_uuid: string | null;
+    /**
+     * Slate JSON content.
+     */
     content: string;
     images_number: number;
     images: NewsroomGalleryImage[];
