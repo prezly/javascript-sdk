@@ -1,5 +1,6 @@
 import { ClientOptions } from './types';
 import ApiClient from './ApiClient';
+import { Accounts } from './Accounts';
 import Campaigns from './Campaigns';
 import CampaignRecipients from './CampaignRecipients';
 import Coverage from './Coverage';
@@ -23,6 +24,7 @@ import Licenses from './Licenses';
 const BASE_URL = 'https://api.prezly.com';
 
 export default class Sdk {
+    public accounts: Accounts;
     public campaigns: Campaigns;
     public campaignRecipients: CampaignRecipients;
     public coverage: Coverage;
@@ -51,6 +53,7 @@ export default class Sdk {
             }),
         );
 
+        this.accounts = new Accounts({ apiClient });
         this.campaigns = new Campaigns({ apiClient });
         this.campaignRecipients = new CampaignRecipients({ apiClient });
         this.coverage = new Coverage({ apiClient });
