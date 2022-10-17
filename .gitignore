@@ -49,3 +49,4 @@ dist
 
 # IDE specific
 .idea
+.history
