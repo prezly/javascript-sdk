@@ -38,3 +38,4 @@ export * from './UnsubscribeReason';
 export * from './EmailBranding';
 export * from './EmailBrandingMode';
 export * from './PrivacyRequest';
+export * from './UserAccount';
