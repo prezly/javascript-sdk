@@ -3,6 +3,7 @@ import DeferredJobsApiClient from '../DeferredJobsApiClient';
 import { UserAccount } from '../../types/UserAccount';
 import {
     AccountsCreateRequest,
+    AccountsCreateResponse,
     AccountsListResponse,
     AccountsUpdateRequest,
     AccountsUpdateResponse,
@@ -20,12 +21,15 @@ export class Accounts {
         return this.apiClient.get<AccountsListResponse>(url);
     }
 
-    async create(payload: AccountsCreateRequest) {
+    async create(payload: AccountsCreateRequest): Promise<AccountsCreateResponse> {
         const url = routing.accounts;
-        return this.apiClient.post<AccountsCreateRequest>(url, { payload });
+        return this.apiClient.post<AccountsCreateResponse>(url, { payload });
     }
 
-    async update(id: UserAccount['id'], payload: AccountsUpdateRequest) {
+    async update(
+        id: UserAccount['id'],
+        payload: AccountsUpdateRequest,
+    ): Promise<AccountsUpdateResponse> {
         const url = `${routing.accounts}/${id}`;
         return this.apiClient.patch<AccountsUpdateResponse>(url, { payload });
     }
