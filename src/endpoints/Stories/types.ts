@@ -9,6 +9,7 @@ import type {
     Query,
     SortOrder,
     Story,
+    UserRef,
 } from '../../types';
 import { Campaign } from '../../types';
 
@@ -29,6 +30,32 @@ type Json = string;
  * String containing Prezly Content Format JSON structure.
  */
 type PrezlyContentFormat = string;
+
+export type StoriesQuery = Query<
+    | Query.Filter<'id', Query.OneToManyPredicate | Query.EqualityPredicate, Story['id']>
+    | Query.Filter<'uuid', Query.OneToManyPredicate | Query.EqualityPredicate, Story['uuid']>
+    | Query.Filter<'slug', Query.OneToManyPredicate | Query.EqualityPredicate, Story['slug']>
+    | Query.Filter<'format_version', Query.EqualityPredicate, Story['format_version']>
+    | Query.Filter<'lifecycle_status', Query.OneToManyPredicate, Story['lifecycle_status']>
+    | Query.Filter<'visibility', Query.OneToManyPredicate, Story['visibility']>
+    | Query.Filter<'language', Query.OneToManyPredicate, CultureRef['language_code']>
+    | Query.Filter<'locale', Query.OneToManyPredicate, CultureRef['code']>
+    | Query.Filter<'newsroom.id', Query.OneToManyPredicate, Newsroom['id']>
+    | Query.Filter<'newsroom.uuid', Query.OneToManyPredicate, Newsroom['uuid']>
+    | Query.Filter<'newsroom.status', Query.OneToManyPredicate, Newsroom['status']>
+    | Query.Filter<'author.id', Query.OneToManyPredicate, UserRef['id']>
+    | Query.Filter<'tag.id', Query.OneToManyPredicate, number>
+    | Query.Filter<'tag.name', Query.OneToManyPredicate, number>
+    | Query.Filter<'category.id', Query.OneToManyPredicate, Category['id']>
+    | Query.Filter<'published_at', Query.ComparablePredicate, Iso8601DateTime>
+    | Query.Filter<'scheduled_at', Query.ComparablePredicate, Iso8601DateTime>
+    | Query.Filter<'updated_at', Query.ComparablePredicate, Iso8601DateTime>
+    | Query.Filter<'header_image', Query.EqualityPredicate, UploadedImage | null>
+    | Query.Filter<'preview_image', Query.EqualityPredicate, UploadedImage | null>
+    | Query.Filter<'social_image', Query.EqualityPredicate, UploadedImage | null>
+    | Query.Filter<'images.count', Query.ComparablePredicate, number>
+    | Query.Filter<'videos.count', Query.ComparablePredicate, number>
+>;
 
 interface BaseWarning {
     text: string;
@@ -87,8 +114,8 @@ export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[
 
 export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
     extends ListOptions<Include> {
-    query?: Query;
-    scope?: Query;
+    query?: StoriesQuery;
+    scope?: StoriesQuery;
 }
 
 export interface ListResponse<S extends Story = Story> {
