@@ -1,7 +1,7 @@
 import { Newsroom, NewsroomWebhook } from '../../types';
 
-import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
-import routing from '../routing';
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 
 import { NewsroomWebhookCreateRequest, NewsroomWebhookUpdateRequest } from './types';
 

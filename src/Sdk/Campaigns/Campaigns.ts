@@ -2,9 +2,9 @@ import { ProgressPromise } from '@prezly/progress-promise';
 
 import { Campaign } from '../../types';
 
-import routing from '../routing';
-import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
-import { toIso8601 } from '../utils';
+import { routing } from '../../routing';
+import { DeferredJobsApiClient } from '../../api';
+import { toIso8601 } from '../../utils';
 
 import {
     CampaignCreateRequest,

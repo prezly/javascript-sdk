@@ -2,8 +2,8 @@ import { ProgressPromise } from '@prezly/progress-promise';
 
 import { Coverage, SelectionValue } from '../../types';
 
-import routing from '../routing';
-import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
+import { routing } from '../../routing';
+import { DeferredJobsApiClient } from '../../api';
 
 import {
     CoverageCreateRequest,

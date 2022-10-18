@@ -1,7 +1,7 @@
 import { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
 
-import routing from '../routing';
-import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
+import { routing } from '../../routing';
+import { DeferredJobsApiClient } from '../../api';
 
 import {
     NewsroomLanguageSettingsUpdateRequest,

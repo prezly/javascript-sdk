@@ -1,4 +1,4 @@
-const routing = {
+export const routing = {
     accounts: '/v2/accounts',
     campaignsUrl: '/v2/campaigns',
     campaignRecipientsUrl: '/v2/campaigns/:campaign_id/recipients',
@@ -25,5 +25,3 @@ const routing = {
     storyCoverageUrl: '/v1/stories/:story_id/reports/coverage',
     snippetsUrl: '/v2/snippets',
 };
-
-export default routing;

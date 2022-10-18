@@ -12,7 +12,7 @@ import {
 import { ApiClient } from './ApiClient';
 import { JobState, JobStatus } from '../types';
 
-import routing from './routing';
+import { routing } from '../routing';
 
 const JOB_STATUS_POLLING_INTERVAL = 2000; // ms
 

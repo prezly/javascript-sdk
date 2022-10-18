@@ -1,7 +1,7 @@
 import { SenderAddress } from '../../types';
 
-import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
-import routing from '../routing';
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 
 import { SenderAddressCreateRequest, SenderAddressUpdateRequest } from './types';
 

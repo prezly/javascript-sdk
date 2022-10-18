@@ -1,5 +1,5 @@
-import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
-import routing from '../routing';
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 
 import { SnippetCreateRequest, SnippetUpdateRequest } from './types';
 import { Snippet } from '../../types';
