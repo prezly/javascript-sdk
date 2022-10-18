@@ -1,4 +1,4 @@
-import { HeadersMap } from '../Api';
+import { HeadersMap } from '../http';
 
 export interface ClientOptions {
     accessToken: string;

@@ -5,13 +5,15 @@ import { DeferredJobResponse } from './types';
 
 const URL = typeof window === 'undefined' ? nodeUrl.URL : window.URL;
 
-const parseUrlParams = (query: string): ParsedQuery =>
-    queryString.parse(query, { arrayFormat: 'bracket' });
+function parseUrlParams(query: string): ParsedQuery {
+    return queryString.parse(query, { arrayFormat: 'bracket' });
+}
 
-const stringifyUrlParams = (params: ParsedQuery): string =>
-    queryString.stringify(params, { arrayFormat: 'bracket' });
+function stringifyUrlParams(params: ParsedQuery): string {
+    return queryString.stringify(params, { arrayFormat: 'bracket' });
+}
 
-export const createUrlWithQuery = (url = '', query?: object): URL => {
+export function createUrlWithQuery(url = '', query?: object): URL {
     const urlWithQuery = new URL(url);
 
     if (typeof query === 'object' && query !== null) {
@@ -22,7 +24,7 @@ export const createUrlWithQuery = (url = '', query?: object): URL => {
     }
 
     return urlWithQuery;
-};
+}
 
 function isObject(value: unknown): value is Record<string, unknown> {
     return value !== null && typeof value === 'object';

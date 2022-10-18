@@ -1,6 +1,6 @@
 import { createUrlWithQuery } from './lib';
 import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
-import ApiError from './ApiError';
+import { ApiError } from './ApiError';
 
 import {
     CONTENT_TYPE,
@@ -48,7 +48,7 @@ export function createFakeErrorPayload({
     };
 }
 
-export default async function createRequest<P = any>(
+export async function createRequest<P = any>(
     url: string,
     {
         headers,

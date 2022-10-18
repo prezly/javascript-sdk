@@ -1,4 +1,4 @@
-import { Api, ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../Api';
+import { Http, ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../http';
 
 import { DEFAULT_USER_AGENT } from './constants';
 import { stripSlashes } from './utils';
@@ -26,7 +26,7 @@ export default class ApiClient {
         endpointUri: string,
         { headers, query }: Params = {},
     ): Promise<ApiResponse<V>> {
-        return Api.get<V>(this.buildEndpointUrl(endpointUri), {
+        return Http.get<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -39,7 +39,7 @@ export default class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Api.post<V>(this.buildEndpointUrl(endpointUri), {
+        return Http.post<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -53,7 +53,7 @@ export default class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Api.put<V>(this.buildEndpointUrl(endpointUri), {
+        return Http.put<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -67,7 +67,7 @@ export default class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Api.patch<V>(this.buildEndpointUrl(endpointUri), {
+        return Http.patch<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -81,7 +81,7 @@ export default class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Api.delete<V>(this.buildEndpointUrl(endpointUri), {
+        return Http.delete<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,

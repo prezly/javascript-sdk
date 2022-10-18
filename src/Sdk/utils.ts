@@ -5,7 +5,9 @@
  *  - /v2/path -> v2/path
  *  - /v2/path/ -> v2/path
  */
-export const stripSlashes = (url: string): string => url.replace(/^\/|\/$/g, '');
+export function stripSlashes(url: string): string {
+    return url.replace(/^\/|\/$/g, '');
+}
 
 function pad(num: number): string {
     const abs = Math.floor(Math.abs(num));

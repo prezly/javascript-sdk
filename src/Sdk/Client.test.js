@@ -1,6 +1,6 @@
 const { version: packageVersion, repository } = require('../../package.json');
 
-import { Method } from '../Api';
+import { Method } from '../http';
 
 import { createClient } from './Client';
 

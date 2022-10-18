@@ -1,13 +1,13 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
 import {
-    Api,
+    Http,
     ApiResponse,
     HttpCodes,
     isDeferredJobResponse,
     Params,
     ParamsWithPayload,
-} from '../Api';
+} from '../http';
 
 import ApiClient from './ApiClient';
 import { JobState, JobStatus } from '../types';
@@ -26,9 +26,9 @@ async function handleDeferredJob<V = any, P = any>(
     const response = await request;
 
     if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
-        return new ProgressPromise<V, P>(async function(resolve, reject, progress) {
+        return new ProgressPromise<V, P>(async function (resolve, reject, progress) {
             do {
-                const response = await Api.get<{ job: JobState<V, P> }>(routing.jobsUrl);
+                const response = await Http.get<{ job: JobState<V, P> }>(routing.jobsUrl);
                 const { job } = response.payload;
 
                 if (job.status === JobStatus.RESOLVED) {
@@ -61,9 +61,7 @@ export default class DeferredJobsApiClient {
         endpointUri: string,
         { headers, query }: Params = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(
-            this.apiClient.get<V>(endpointUri, { headers, query }),
-        );
+        return handleDeferredJob<V, P>(this.apiClient.get<V>(endpointUri, { headers, query }));
     }
 
     public post<V = any, P = any>(
