@@ -1,25 +1,25 @@
 import { ApiClient, DeferredJobsApiClient } from './api';
 import { HeadersMap } from './http';
 
-import { Accounts } from './Sdk/Accounts';
-import Campaigns from './Sdk/Campaigns';
-import CampaignRecipients from './Sdk/CampaignRecipients';
-import Coverage from './Sdk/Coverage';
-import Stories from './Sdk/Stories';
-import Snippets from './Sdk/Snippets';
-import Newsrooms from './Sdk/Newsrooms';
-import NewsroomCategories from './Sdk/NewsroomCategories';
-import NewsroomContacts from './Sdk/NewsroomContacts';
-import NewsroomLanguages from './Sdk/NewsroomLanguages';
-import NewsroomThemes from './Sdk/NewsroomThemes';
-import NewsroomWebhooks from './Sdk/NewsroomWebhooks';
-import NewsroomPrivacyRequests from './Sdk/NewsroomPrivacyRequests';
-import NewsroomDomains from './Sdk/NewsroomDomains';
-import SenderAddresses from './Sdk/SenderAddresses';
-import Subscriptions from './Sdk/Subscriptions';
-import Jobs from './Sdk/Jobs';
-import NewsroomGalleries from './Sdk/NewsroomGalleries';
-import Licenses from './Sdk/Licenses';
+import { Accounts } from './endpoints/Accounts';
+import Campaigns from './endpoints/Campaigns';
+import CampaignRecipients from './endpoints/CampaignRecipients';
+import Coverage from './endpoints/Coverage';
+import Stories from './endpoints/Stories';
+import Snippets from './endpoints/Snippets';
+import Newsrooms from './endpoints/Newsrooms';
+import NewsroomCategories from './endpoints/NewsroomCategories';
+import NewsroomContacts from './endpoints/NewsroomContacts';
+import NewsroomLanguages from './endpoints/NewsroomLanguages';
+import NewsroomThemes from './endpoints/NewsroomThemes';
+import NewsroomWebhooks from './endpoints/NewsroomWebhooks';
+import NewsroomPrivacyRequests from './endpoints/NewsroomPrivacyRequests';
+import NewsroomDomains from './endpoints/NewsroomDomains';
+import SenderAddresses from './endpoints/SenderAddresses';
+import Subscriptions from './endpoints/Subscriptions';
+import Jobs from './endpoints/Jobs';
+import NewsroomGalleries from './endpoints/NewsroomGalleries';
+import Licenses from './endpoints/Licenses';
 
 const DEFAULT_BASE_URL = 'https://api.prezly.com';
 
