@@ -1,26 +1,33 @@
-import { ApiClient, DeferredJobsApiClient } from '../api';
-import { ClientOptions } from './types';
-import { Accounts } from './Accounts';
-import Campaigns from './Campaigns';
-import CampaignRecipients from './CampaignRecipients';
-import Coverage from './Coverage';
-import Stories from './Stories';
-import Snippets from './Snippets';
-import Newsrooms from './Newsrooms';
-import NewsroomCategories from './NewsroomCategories';
-import NewsroomContacts from './NewsroomContacts';
-import NewsroomLanguages from './NewsroomLanguages';
-import NewsroomThemes from './NewsroomThemes';
-import NewsroomWebhooks from './NewsroomWebhooks';
-import NewsroomPrivacyRequests from './NewsroomPrivacyRequests';
-import NewsroomDomains from './NewsroomDomains';
-import SenderAddresses from './SenderAddresses';
-import Subscriptions from './Subscriptions';
-import Jobs from './Jobs';
-import NewsroomGalleries from './NewsroomGalleries';
-import Licenses from './Licenses';
+import { ApiClient, DeferredJobsApiClient } from './api';
+import { HeadersMap } from './http';
+
+import { Accounts } from './Sdk/Accounts';
+import Campaigns from './Sdk/Campaigns';
+import CampaignRecipients from './Sdk/CampaignRecipients';
+import Coverage from './Sdk/Coverage';
+import Stories from './Sdk/Stories';
+import Snippets from './Sdk/Snippets';
+import Newsrooms from './Sdk/Newsrooms';
+import NewsroomCategories from './Sdk/NewsroomCategories';
+import NewsroomContacts from './Sdk/NewsroomContacts';
+import NewsroomLanguages from './Sdk/NewsroomLanguages';
+import NewsroomThemes from './Sdk/NewsroomThemes';
+import NewsroomWebhooks from './Sdk/NewsroomWebhooks';
+import NewsroomPrivacyRequests from './Sdk/NewsroomPrivacyRequests';
+import NewsroomDomains from './Sdk/NewsroomDomains';
+import SenderAddresses from './Sdk/SenderAddresses';
+import Subscriptions from './Sdk/Subscriptions';
+import Jobs from './Sdk/Jobs';
+import NewsroomGalleries from './Sdk/NewsroomGalleries';
+import Licenses from './Sdk/Licenses';
 
 const DEFAULT_BASE_URL = 'https://api.prezly.com';
+
+export interface ClientOptions {
+    accessToken: string;
+    baseUrl?: string;
+    headers?: HeadersMap;
+}
 
 export interface Client {
     accounts: Accounts;
