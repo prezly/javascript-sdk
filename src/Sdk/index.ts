@@ -1,4 +1,5 @@
-export { default } from './Sdk';
+export { Client as PrezlyClient, createClient as createPrezlyClient } from './Client';
+
 export * from './Accounts';
 export * from './Campaigns';
 export * from './CampaignRecipients';

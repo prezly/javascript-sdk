@@ -2,7 +2,7 @@ const { version: packageVersion, repository } = require('../../package.json');
 
 import { Method } from '../Api';
 
-import Sdk from './Sdk';
+import { createClient } from './Client';
 
 const BASE_URL = 'https://api.prezly.com';
 const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${packageVersion} (+${repository.url})`;
@@ -27,7 +27,7 @@ function successJsonResponse(body, status = 200) {
     });
 }
 
-describe('Sdk', () => {
+describe('Client', () => {
     const coverageSdkUrl = 'v2/coverage';
     const defaultCoverageApiUrl = `${BASE_URL}/${coverageSdkUrl}`;
 
@@ -51,7 +51,7 @@ describe('Sdk', () => {
             const expectedPayload = getListPayload([]);
             fetch.mockResolvedValueOnce(successJsonResponse(expectedPayload));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.list();
@@ -67,7 +67,7 @@ describe('Sdk', () => {
             const coverage = { id: 123 };
             fetch.mockResolvedValueOnce(successJsonResponse({ coverage }));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.get(coverage.id);
@@ -85,7 +85,7 @@ describe('Sdk', () => {
             const expectedPayload = getListPayload([coverage]);
             fetch.mockResolvedValueOnce(successJsonResponse(expectedPayload));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.getByExternalReferenceId(externalReferenceId);
@@ -102,7 +102,7 @@ describe('Sdk', () => {
             const expectedPayload = getListPayload([]);
             fetch.mockResolvedValueOnce(successJsonResponse(expectedPayload));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.getByExternalReferenceId('?');
@@ -116,7 +116,7 @@ describe('Sdk', () => {
             };
             fetch.mockResolvedValueOnce(successJsonResponse({ coverage }));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.create(coverage);
@@ -136,7 +136,7 @@ describe('Sdk', () => {
             };
             fetch.mockResolvedValueOnce(successJsonResponse({ coverage }));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.update(id, coverage);
@@ -153,7 +153,7 @@ describe('Sdk', () => {
             const id = 123;
             fetch.mockResolvedValueOnce(successJsonResponse(undefined, 204));
 
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
             const result = await prezlySdk.coverage.remove(id);
@@ -172,7 +172,7 @@ describe('Sdk', () => {
 
             // Intentionally using trailing `/` to test url sanitizing.
             const baseUrl = 'https://api.prezly.test/';
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
                 baseUrl,
             });
@@ -190,7 +190,7 @@ describe('Sdk', () => {
             const customHeaders = {
                 'User-Agent': 'Test',
             };
-            const prezlySdk = new Sdk({
+            const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
                 headers: customHeaders,
             });
