@@ -8,7 +8,7 @@ import { JobStatusResponse } from './types';
 export default class Jobs {
     private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
+    constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 

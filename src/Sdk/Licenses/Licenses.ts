@@ -6,7 +6,7 @@ import routing from '../routing';
 export default class Licenses {
     private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
+    constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 

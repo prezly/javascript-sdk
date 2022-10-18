@@ -18,7 +18,7 @@ type CoverageId = Coverage['uuid'] | Coverage['id'];
 export default class CoverageSdk {
     private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
+    constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 

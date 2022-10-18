@@ -16,13 +16,16 @@ type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 export default class Newsrooms {
     private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
+    constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 
-    async list({ limit, offset, search, sortOrder }: NewsroomListRequest = {}): Promise<
-        NewsroomListResponse
-    > {
+    async list({
+        limit,
+        offset,
+        search,
+        sortOrder,
+    }: NewsroomListRequest = {}): Promise<NewsroomListResponse> {
         return this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
             query: {
                 limit,

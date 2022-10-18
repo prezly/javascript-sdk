@@ -17,7 +17,7 @@ type GalleryId = NewsroomGallery['uuid'] | NewsroomGallery['id'];
 export default class NewsroomGalleries {
     private readonly apiClient: DeferredJobsApiClient;
 
-    constructor({ apiClient }: { apiClient: DeferredJobsApiClient }) {
+    constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 
