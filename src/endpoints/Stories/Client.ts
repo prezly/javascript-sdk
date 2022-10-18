@@ -68,9 +68,10 @@ export class Client {
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Exactly<SearchOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include, query } = options ?? {};
+        const { limit, offset, sortOrder, include, query, scope } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
             payload: {
+                scope,
                 query,
                 limit,
                 offset,

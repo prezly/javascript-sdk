@@ -114,6 +114,7 @@ export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[
 
 export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
     extends ListOptions<Include> {
+    scope?: StoriesQuery;
     query?: StoriesQuery;
     scope?: StoriesQuery;
 }
