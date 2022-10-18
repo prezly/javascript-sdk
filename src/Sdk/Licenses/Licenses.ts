@@ -1,6 +1,6 @@
 import { License } from '../../types';
 
-import DeferredJobsApiClient from '../DeferredJobsApiClient';
+import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
 import routing from '../routing';
 
 export default class Licenses {

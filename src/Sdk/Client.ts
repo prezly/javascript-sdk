@@ -1,10 +1,10 @@
 import { ClientOptions } from './types';
-import ApiClient from './ApiClient';
+import { ApiClient } from './ApiClient';
 import { Accounts } from './Accounts';
 import Campaigns from './Campaigns';
 import CampaignRecipients from './CampaignRecipients';
 import Coverage from './Coverage';
-import DeferredJobsApiClient from './DeferredJobsApiClient';
+import { DeferredJobsApiClient } from './DeferredJobsApiClient';
 import Stories from './Stories';
 import Snippets from './Snippets';
 import Newsrooms from './Newsrooms';

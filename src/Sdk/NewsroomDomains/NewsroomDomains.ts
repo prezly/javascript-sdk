@@ -1,7 +1,7 @@
 import { NewsroomDomain, Newsroom, NewsroomDomainShareInstructions } from '../../types';
 
 import routing from '../routing';
-import DeferredJobsApiClient from '../DeferredJobsApiClient';
+import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
 import { NewsroomDomainLinkRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];

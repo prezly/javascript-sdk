@@ -9,7 +9,7 @@ export interface Options {
     headers: HeadersMap;
 }
 
-export default class ApiClient {
+export class ApiClient {
     private readonly baseUrl: string;
     private readonly headers: HeadersMap;
 

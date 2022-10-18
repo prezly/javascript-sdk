@@ -1,4 +1,4 @@
-import DeferredJobsApiClient from '../DeferredJobsApiClient';
+import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
 import routing from '../routing';
 
 import { SnippetCreateRequest, SnippetUpdateRequest } from './types';

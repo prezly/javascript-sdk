@@ -1,7 +1,7 @@
 import { Newsroom } from '../../types';
 
 import routing from '../routing';
-import DeferredJobsApiClient from '../DeferredJobsApiClient';
+import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
 
 import {
     NewsroomCreateRequest,

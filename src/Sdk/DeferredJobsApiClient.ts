@@ -9,7 +9,7 @@ import {
     ParamsWithPayload,
 } from '../http';
 
-import ApiClient from './ApiClient';
+import { ApiClient } from './ApiClient';
 import { JobState, JobStatus } from '../types';
 
 import routing from './routing';
@@ -50,7 +50,7 @@ async function handleDeferredJob<V = any, P = any>(
     return ProgressPromise.resolve(response.payload);
 }
 
-export default class DeferredJobsApiClient {
+export class DeferredJobsApiClient {
     private readonly apiClient: ApiClient;
 
     constructor(apiClient: ApiClient) {

@@ -1,7 +1,7 @@
 import { Campaign, Contact, ContactsScope, EmailRecipient, Query } from '../../types';
 
 import routing from '../routing';
-import DeferredJobsApiClient from '../DeferredJobsApiClient';
+import { DeferredJobsApiClient } from '../DeferredJobsApiClient';
 
 import { CampaignsRecipientsListResponse, CampaignsRecipientsSearchOptions } from './types';
 import { CampaignRecipientsOperationResponse } from '../Campaigns';
