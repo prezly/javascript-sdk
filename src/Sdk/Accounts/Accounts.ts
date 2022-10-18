@@ -1,6 +1,6 @@
 import routing from '../routing';
 import DeferredJobsApiClient from '../DeferredJobsApiClient';
-import { UserAccount } from '../../types/UserAccount';
+import { UserAccount } from '../../types';
 import {
     AccountsCreateRequest,
     AccountsCreateResponse,

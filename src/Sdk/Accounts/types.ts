@@ -1,4 +1,4 @@
-import { UserAccount } from '../../types/UserAccount';
+import { UserAccount } from '../../types';
 
 export interface AccountsListResponse {
     accounts: UserAccount[];
