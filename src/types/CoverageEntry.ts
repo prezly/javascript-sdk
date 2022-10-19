@@ -29,7 +29,7 @@ export enum CoverageProvider {
     MANUAL = 'manual',
 }
 
-export interface Coverage extends Entity<number> {
+export interface CoverageEntry extends Entity<number> {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as identifier.

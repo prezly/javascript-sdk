@@ -7,7 +7,7 @@ export * from './Campaign';
 export * from './Category';
 export * from './Contact';
 export * from './CountryRef';
-export * from './Coverage';
+export * from './CoverageEntry';
 export * from './CultureRef';
 export * from './DnsConfigurationInstruction';
 export * from './JobState';

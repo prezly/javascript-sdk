@@ -4,7 +4,7 @@ import {
     CultureRef,
     CountryRef,
     Contact,
-    Coverage,
+    CoverageEntry,
     NewsroomRef,
     OEmbedInfo,
     Pagination,
@@ -68,7 +68,7 @@ export interface SearchOptions extends ListOptions {
 }
 
 export interface ListResponse {
-    coverage: Coverage[];
+    coverage: CoverageEntry[];
     pagination: Pagination;
     sort: string;
 }

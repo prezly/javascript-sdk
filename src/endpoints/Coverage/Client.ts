@@ -1,6 +1,6 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
-import { Coverage, SelectionValue } from '../../types';
+import { CoverageEntry, SelectionValue } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -14,7 +14,7 @@ import {
     UpdateRequest,
 } from './types';
 
-type CoverageId = Coverage['uuid'] | Coverage['id'];
+type CoverageId = CoverageEntry['uuid'] | CoverageEntry['id'];
 
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;
@@ -57,9 +57,9 @@ export class Client {
         });
     }
 
-    async get(id: CoverageId, includeDeleted = false): Promise<Coverage> {
+    async get(id: CoverageId, includeDeleted = false): Promise<CoverageEntry> {
         const url = `${routing.coverageUrl}/${id}`;
-        const { coverage } = await this.apiClient.get<{ coverage: Coverage }>(url, {
+        const { coverage } = await this.apiClient.get<{ coverage: CoverageEntry }>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
             },
@@ -67,7 +67,7 @@ export class Client {
         return coverage;
     }
 
-    async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
+    async getByExternalReferenceId(externalReferenceId: string): Promise<CoverageEntry | null> {
         const query = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
         const { coverage } = await this.search({
             includeDeleted: true,
@@ -76,8 +76,8 @@ export class Client {
         return coverage[0] || null;
     }
 
-    async create(payload: CreateRequest): Promise<Coverage> {
-        const { coverage } = await this.apiClient.post<{ coverage: Coverage }>(
+    async create(payload: CreateRequest): Promise<CoverageEntry> {
+        const { coverage } = await this.apiClient.post<{ coverage: CoverageEntry }>(
             routing.coverageUrl,
             {
                 payload,
@@ -86,8 +86,8 @@ export class Client {
         return coverage;
     }
 
-    async update(id: CoverageId, payload: UpdateRequest): Promise<Coverage> {
-        const { coverage } = await this.apiClient.patch<{ coverage: Coverage }>(
+    async update(id: CoverageId, payload: UpdateRequest): Promise<CoverageEntry> {
+        const { coverage } = await this.apiClient.patch<{ coverage: CoverageEntry }>(
             `${routing.coverageUrl}/${id}`,
             { payload },
         );
