@@ -68,7 +68,7 @@ export class Client {
     }
 
     async getByExternalReferenceId(externalReferenceId: string): Promise<CoverageEntry | null> {
-        const query = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
+        const query: Query = { external_reference_id: { $in: [externalReferenceId] } };
         const { coverage } = await this.search({
             includeDeleted: true,
             query,

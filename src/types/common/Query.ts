@@ -54,9 +54,9 @@ export namespace Query {
     export type ManyToManyPredicate = Predicate.EVERY | Predicate.SOME | Predicate.NONE;
 
     export type PredicateFieldFilter<F extends string, P extends Predicate, V> = {
-        [field in `${F}`]: {
-            [predicate in `${P}`]: P extends OneToManyPredicate | ManyToManyPredicate ? V[] : V;
-        };
+        [field in F]: Partial<{
+            [predicate in P]: P extends OneToManyPredicate | ManyToManyPredicate ? V[] : V;
+        }>;
     };
 
     export type ManyToManyFieldFilter<F extends string, V extends Value> = PredicateFieldFilter<
