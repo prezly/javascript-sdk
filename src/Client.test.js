@@ -1,8 +1,9 @@
-const { version: packageVersion, repository } = require('../package.json');
+import { readFileSync } from 'fs';
 
-import { Method } from './http';
+const { version: packageVersion, repository } = JSON.parse(readFileSync('package.json'));
 
 import { createClient } from './Client';
+import { Method } from './http';
 
 const BASE_URL = 'https://api.prezly.com';
 const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${packageVersion} (+${repository.url})`;
