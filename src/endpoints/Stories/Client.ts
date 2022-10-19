@@ -22,7 +22,7 @@ export class Client {
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<ExtraStoryFields, Options['include'][number]>
-            : Story,
+            : Story
     >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
@@ -40,7 +40,7 @@ export class Client {
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<ExtraStoryFields, Options['include'][number]>
-            : Story,
+            : Story
     >(options: SearchOptions<Include>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
