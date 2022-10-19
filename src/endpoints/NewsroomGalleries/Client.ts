@@ -3,18 +3,12 @@ import { Newsroom } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 import { NewsroomGallery } from '../../types';
-import {
-    NewsroomGalleriesListRequest,
-    NewsroomGalleriesListResponse,
-    NewsroomGalleriesOrderRequest,
-    NewsroomGalleryCreateRequest,
-    NewsroomGalleryUpdateRequest,
-} from './types';
+import { ListRequest, ListResponse, ReorderRequest, CreateRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type GalleryId = NewsroomGallery['uuid'] | NewsroomGallery['id'];
 
-export default class NewsroomGalleries {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -31,13 +25,10 @@ export default class NewsroomGalleries {
         return response.gallery;
     }
 
-    public async list(
-        newsroomId: NewsroomId,
-        payload: NewsroomGalleriesListRequest = {},
-    ): Promise<NewsroomGalleriesListResponse> {
+    public async list(newsroomId: NewsroomId, payload: ListRequest = {}): Promise<ListResponse> {
         const { scope, query, sort, limit, offset } = payload;
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
-        return this.apiClient.get<NewsroomGalleriesListResponse>(url, {
+        return this.apiClient.get<ListResponse>(url, {
             query: {
                 scope: scope ? JSON.stringify(scope) : undefined,
                 query: query ? JSON.stringify(query) : undefined,
@@ -48,20 +39,14 @@ export default class NewsroomGalleries {
         });
     }
 
-    public async order(
-        newsroomId: NewsroomId,
-        payload: NewsroomGalleriesOrderRequest,
-    ): Promise<void> {
+    public async order(newsroomId: NewsroomId, payload: ReorderRequest): Promise<void> {
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         this.apiClient.post(`${url}/order`, {
             payload,
         });
     }
 
-    public async create(
-        newsroomId: NewsroomId,
-        payload: NewsroomGalleryCreateRequest,
-    ): Promise<NewsroomGallery> {
+    public async create(newsroomId: NewsroomId, payload: CreateRequest): Promise<NewsroomGallery> {
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         const { gallery } = await this.apiClient.post<{ gallery: NewsroomGallery }>(url, {
             payload,
@@ -72,7 +57,7 @@ export default class NewsroomGalleries {
     public async update(
         newsroomId: NewsroomId,
         galleryId: GalleryId,
-        payload: NewsroomGalleryUpdateRequest,
+        payload: UpdateRequest,
     ): Promise<NewsroomGallery> {
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         const { gallery } = await this.apiClient.patch<{ gallery: NewsroomGallery }>(

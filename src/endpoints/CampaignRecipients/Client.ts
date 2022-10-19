@@ -3,27 +3,24 @@ import { Campaign, Contact, ContactsScope, EmailRecipient, Query } from '../../t
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { CampaignsRecipientsListResponse, CampaignsRecipientsSearchOptions } from './types';
-import { CampaignRecipientsOperationResponse } from '../Campaigns';
+import { ListResponse, SearchOptions } from './types';
+import { RecipientsOperationResponse } from '../Campaigns';
 
 type CampaignId = Campaign['id'];
 type ContactId = Contact['id'];
 type EmailRecipientId = EmailRecipient['id'];
 
-export default class CampaignRecipients {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 
-    async list(
-        campaignId: CampaignId,
-        options: CampaignsRecipientsSearchOptions,
-    ): Promise<CampaignsRecipientsListResponse> {
+    async list(campaignId: CampaignId, options: SearchOptions): Promise<ListResponse> {
         const { jsonQuery, page, pageSize, sortOrder } = options;
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
-        return this.apiClient.get<CampaignsRecipientsListResponse>(url, {
+        return this.apiClient.get<ListResponse>(url, {
             query: {
                 limit: pageSize,
                 page,
@@ -44,7 +41,7 @@ export default class CampaignRecipients {
     async addContact(
         campaignId: CampaignId,
         contact: { id: ContactId; emailAddress?: string },
-    ): Promise<CampaignRecipientsOperationResponse> {
+    ): Promise<RecipientsOperationResponse> {
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
         return this.apiClient.post(url, {
             payload: { contact },
@@ -54,7 +51,7 @@ export default class CampaignRecipients {
     async addContacts(
         campaignId: CampaignId,
         contacts: { query?: Query; scope?: ContactsScope },
-    ): Promise<CampaignRecipientsOperationResponse> {
+    ): Promise<RecipientsOperationResponse> {
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
         return this.apiClient.post(url, {
             payload: { contacts },
@@ -64,18 +61,18 @@ export default class CampaignRecipients {
     async removeRecipient(
         campaignId: CampaignId,
         recipientId: EmailRecipientId,
-    ): Promise<CampaignRecipientsOperationResponse> {
+    ): Promise<RecipientsOperationResponse> {
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
-        return this.apiClient.delete<CampaignRecipientsOperationResponse>(`${url}/${recipientId}`);
+        return this.apiClient.delete<RecipientsOperationResponse>(`${url}/${recipientId}`);
     }
 
     async removeRecipients(
         campaignId: CampaignId,
         params?: { query: Query },
-    ): Promise<CampaignRecipientsOperationResponse> {
+    ): Promise<RecipientsOperationResponse> {
         const { query } = params || {};
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
-        return this.apiClient.delete<CampaignRecipientsOperationResponse>(url, {
+        return this.apiClient.delete<RecipientsOperationResponse>(url, {
             payload: { query },
         });
     }

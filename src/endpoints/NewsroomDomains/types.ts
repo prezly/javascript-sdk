@@ -1,3 +1,3 @@
-export interface NewsroomDomainLinkRequest {
+export interface LinkRequest {
     domain: string;
 }

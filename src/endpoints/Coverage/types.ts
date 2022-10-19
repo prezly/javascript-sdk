@@ -11,9 +11,9 @@ import {
     Story,
 } from '../../types';
 
-export type CoverageScope = { story: Story['id'] } | null;
+export type Scope = { story: Story['id'] } | null;
 
-export interface CoverageUpdateRequest {
+export interface UpdateRequest {
     attachment_oembed?: OEmbedInfo | null;
     attachment_plaintext_content?: string | null;
     attachment?: string | null;
@@ -55,9 +55,9 @@ export interface CoverageUpdateRequest {
     page?: number | null;
 }
 
-export interface CoverageCreateRequest extends CoverageUpdateRequest {}
+export interface CreateRequest extends UpdateRequest {}
 
-export interface CoverageSearchOptions {
+export interface SearchOptions {
     includeDeleted?: boolean;
     jsonQuery?: string;
     page?: number;
@@ -65,7 +65,7 @@ export interface CoverageSearchOptions {
     sortOrder?: string;
 }
 
-export interface CoverageListResponse {
+export interface ListResponse {
     coverage: Coverage[];
     pagination: Pagination;
     sort: string;

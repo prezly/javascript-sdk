@@ -3,17 +3,12 @@ import { Newsroom, NewsroomContact } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import {
-    NewsroomContactsListRequestOptions,
-    NewsroomContactsSearchRequestOptions,
-    NewsroomContactCreateRequest,
-    NewsroomContactUpdateRequest,
-} from './types';
+import { ListRequestOptions, SearchOptions, CreateRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type NewsroomContactId = NewsroomContact['uuid'] | NewsroomContact['id'];
 
-export default class NewsroomContacts {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -22,7 +17,7 @@ export default class NewsroomContacts {
 
     public async list(
         newsroomId: NewsroomId,
-        { search }: NewsroomContactsListRequestOptions = {},
+        { search }: ListRequestOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const { contacts } = await this.apiClient.get<{ contacts: NewsroomContact[] }>(url, {
@@ -41,7 +36,7 @@ export default class NewsroomContacts {
 
     public async search(
         newsroomId: NewsroomId,
-        { search, query }: NewsroomContactsSearchRequestOptions = {},
+        { search, query }: SearchOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const { contacts } = await this.apiClient.get<{ contacts: NewsroomContact[] }>(url, {
@@ -50,10 +45,7 @@ export default class NewsroomContacts {
         return contacts;
     }
 
-    public async create(
-        newsroomId: NewsroomId,
-        payload: NewsroomContactCreateRequest,
-    ): Promise<NewsroomContact> {
+    public async create(newsroomId: NewsroomId, payload: CreateRequest): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const { contact } = await this.apiClient.post<{ contact: NewsroomContact }>(url, {
             payload,
@@ -64,7 +56,7 @@ export default class NewsroomContacts {
     public async update(
         newsroomId: NewsroomId,
         contactId: NewsroomContactId,
-        payload: NewsroomContactUpdateRequest,
+        payload: UpdateRequest,
     ): Promise<NewsroomContact> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const { contact } = await this.apiClient.patch<{ contact: NewsroomContact }>(

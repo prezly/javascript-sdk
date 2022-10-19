@@ -1,2 +1,2 @@
-export { default } from './NewsroomWebhooks';
-export { NewsroomWebhookCreateRequest, NewsroomWebhookUpdateRequest } from './types';
+export * from './Client';
+export * from './types';

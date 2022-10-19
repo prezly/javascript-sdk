@@ -1,1 +1,2 @@
-export { default } from './NewsroomGalleries';
+export * from './Client';
+export * from './types';

@@ -3,30 +3,19 @@ import { Newsroom } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import {
-    NewsroomCreateRequest,
-    NewsroomListRequest,
-    NewsroomListResponse,
-    NewsroomSearchRequest,
-    NewsroomUpdateRequest,
-} from './types';
+import { CreateRequest, ListRequest, ListResponse, SearchRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export default class Newsrooms {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 
-    async list({
-        limit,
-        offset,
-        search,
-        sortOrder,
-    }: NewsroomListRequest = {}): Promise<NewsroomListResponse> {
-        return this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
+    async list({ limit, offset, search, sortOrder }: ListRequest = {}): Promise<ListResponse> {
+        return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
             query: {
                 limit,
                 offset,
@@ -42,8 +31,8 @@ export default class Newsrooms {
         offset,
         search,
         sortOrder,
-    }: NewsroomSearchRequest = {}): Promise<NewsroomListResponse> {
-        return this.apiClient.get<NewsroomListResponse>(routing.newsroomsUrl, {
+    }: SearchRequest = {}): Promise<ListResponse> {
+        return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
             query: {
                 query: jsonQuery,
                 limit,
@@ -61,7 +50,7 @@ export default class Newsrooms {
         return newsroom;
     }
 
-    async create(payload: NewsroomCreateRequest): Promise<Newsroom> {
+    async create(payload: CreateRequest): Promise<Newsroom> {
         const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
             routing.newsroomsUrl,
             {
@@ -71,7 +60,7 @@ export default class Newsrooms {
         return newsroom;
     }
 
-    async update(id: NewsroomId, payload: NewsroomUpdateRequest): Promise<Newsroom> {
+    async update(id: NewsroomId, payload: UpdateRequest): Promise<Newsroom> {
         const { newsroom } = await this.apiClient.patch<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
             {

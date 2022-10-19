@@ -3,20 +3,14 @@ import { ExtendedStory, ExtraStoryFields, Story } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import {
-    StoriesListRequest,
-    StoriesListResponse,
-    StoriesSearchRequest,
-    StoryCreateRequest,
-    StoryUpdateRequest,
-} from './types';
+import { ListRequest, ListResponse, SearchRequest, CreateRequest, UpdateRequest } from './types';
 
 /**
  * `uuid` is the preferred way of targeting a Story. Numeric `id` is considered deprecated.
  */
 type StoryId = Story['uuid'] | Story['id'];
 
-export default class Stories {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -25,13 +19,13 @@ export default class Stories {
 
     async list<
         Include extends readonly (keyof ExtraStoryFields)[],
-        Options extends StoriesListRequest<Include>,
+        Options extends ListRequest<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<ExtraStoryFields, Options['include'][number]>
             : Story,
-    >(options?: Options): Promise<StoriesListResponse<StoryRecord>> {
+    >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options || {};
-        return this.apiClient.get<StoriesListResponse<StoryRecord>>(routing.storiesUrl, {
+        return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
             query: {
                 limit,
                 offset,
@@ -43,13 +37,13 @@ export default class Stories {
 
     async search<
         Include extends readonly (keyof ExtraStoryFields)[],
-        Options extends StoriesListRequest<Include>,
+        Options extends ListRequest<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<ExtraStoryFields, Options['include'][number]>
             : Story,
-    >(options?: StoriesSearchRequest<Include>): Promise<StoriesListResponse<StoryRecord>> {
+    >(options?: SearchRequest<Include>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, jsonQuery } = options || {};
-        return this.apiClient.post<StoriesListResponse<StoryRecord>>(routing.storiesSearchUrl, {
+        return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
             payload: {
                 query: jsonQuery,
                 limit,
@@ -67,14 +61,14 @@ export default class Stories {
         return story;
     }
 
-    async create(payload: StoryCreateRequest): Promise<ExtendedStory> {
+    async create(payload: CreateRequest): Promise<ExtendedStory> {
         const { story } = await this.apiClient.post<{ story: ExtendedStory }>(routing.storiesUrl, {
             payload,
         });
         return story;
     }
 
-    async update(id: StoryId, payload: StoryUpdateRequest): Promise<ExtendedStory> {
+    async update(id: StoryId, payload: UpdateRequest): Promise<ExtendedStory> {
         let url = `${routing.storiesUrl}/${id}`;
         const { story } = await this.apiClient.patch<{ story: ExtendedStory }>(url, {
             payload,

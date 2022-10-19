@@ -1,6 +1,6 @@
 import { NewsroomWebhookEvent } from '../../types';
 
-export interface NewsroomWebhookCreateRequest {
+export interface CreateRequest {
     name: string;
     url: string;
     events?: NewsroomWebhookEvent[];
@@ -8,7 +8,7 @@ export interface NewsroomWebhookCreateRequest {
     is_active?: boolean;
 }
 
-export interface NewsroomWebhookUpdateRequest {
+export interface UpdateRequest {
     name?: string;
     url?: string;
     events?: NewsroomWebhookEvent[];

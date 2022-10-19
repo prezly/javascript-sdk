@@ -9,7 +9,7 @@ import {
     OtherPrivacyRequestCreateRequest,
 } from './types';
 
-export default class NewsroomPrivacyRequests {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {

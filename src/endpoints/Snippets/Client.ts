@@ -1,12 +1,12 @@
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 
-import { SnippetCreateRequest, SnippetUpdateRequest } from './types';
+import { CreateRequest, UpdateRequest } from './types';
 import { Snippet } from '../../types';
 
 type SnippetId = Snippet['uuid'] | Snippet['id'];
 
-export default class Snippets {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -25,7 +25,7 @@ export default class Snippets {
         return snippet;
     }
 
-    public async create(payload: SnippetCreateRequest): Promise<Snippet> {
+    public async create(payload: CreateRequest): Promise<Snippet> {
         const url = routing.snippetsUrl;
         const { snippet } = await this.apiClient.post<{ snippet: Snippet }>(url, {
             payload,
@@ -33,7 +33,7 @@ export default class Snippets {
         return snippet;
     }
 
-    public async update(snippetId: SnippetId, payload: SnippetUpdateRequest): Promise<Snippet> {
+    public async update(snippetId: SnippetId, payload: UpdateRequest): Promise<Snippet> {
         const url = routing.snippetsUrl;
         const { snippet } = await this.apiClient.patch<{ snippet: Snippet }>(
             `${url}/${snippetId}`,

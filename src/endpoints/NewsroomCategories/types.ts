@@ -1,4 +1,4 @@
-export interface NewsroomCategoriesListOptions {
+export interface ListOptions {
     /**
      * Supported sort columns:
      * - `id`
@@ -9,7 +9,7 @@ export interface NewsroomCategoriesListOptions {
     sortOrder?: string;
 }
 
-export interface NewsroomCategoryCreateRequest {
+export interface CreateRequest {
     i18n: {
         [localCode: string]: {
             name: string;
@@ -18,7 +18,7 @@ export interface NewsroomCategoryCreateRequest {
     };
 }
 
-export interface NewsroomCategoryUpdateRequest {
+export interface UpdateRequest {
     i18n: {
         /**
          * Pass `null` to erase category translation.

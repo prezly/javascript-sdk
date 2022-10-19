@@ -1,1 +1,1 @@
-export { default } from './NewsroomThemes';
+export * from './Client';

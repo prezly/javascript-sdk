@@ -1,2 +1,2 @@
-export { default } from './Jobs';
-export { JobStatusResponse } from './types';
+export * from './Client';
+export * from './types';

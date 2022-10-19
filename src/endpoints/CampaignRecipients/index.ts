@@ -1,2 +1,2 @@
-export { default } from './CampaignRecipients';
+export * from './Client';
 export * from './types';

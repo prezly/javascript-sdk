@@ -1,8 +1,2 @@
-export { default } from './Coverage';
-export {
-    CoverageScope,
-    CoverageCreateRequest,
-    CoverageListResponse,
-    CoverageSearchOptions,
-    CoverageUpdateRequest,
-} from './types';
+export * from './Client';
+export * from './types';

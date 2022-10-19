@@ -1,21 +1,21 @@
 import { UserAccount } from '../../types';
 
-export interface AccountsListResponse {
+export interface ListResponse {
     accounts: UserAccount[];
 }
 
-export interface AccountsCreateRequest {
+export interface CreateRequest {
     company_name: string;
 }
 
-export interface AccountsCreateResponse {
+export interface CreateResponse {
     activation_url: string;
 }
 
-export interface AccountsUpdateRequest {
+export interface UpdateRequest {
     show_in_menu: boolean;
 }
 
-export interface AccountsUpdateResponse {
+export interface UpdateResponse {
     account: UserAccount;
 }

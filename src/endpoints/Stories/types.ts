@@ -23,25 +23,25 @@ type Html = string;
  */
 type PrezlyContentFormat = string;
 
-export type StoriesSearchRequest<Include extends readonly (keyof ExtraStoryFields)[]> = {
+export type SearchRequest<Include extends readonly (keyof ExtraStoryFields)[]> = {
     jsonQuery?: string;
     limit?: number;
     offset?: number;
     sortOrder?: string;
     include?: Include;
 };
-export type StoriesListRequest<Include extends readonly (keyof ExtraStoryFields)[]> = Omit<
-    StoriesSearchRequest<Include>,
+export type ListRequest<Include extends readonly (keyof ExtraStoryFields)[]> = Omit<
+    SearchRequest<Include>,
     'jsonQuery'
 >;
 
-export interface StoriesListResponse<S extends Story = Story> {
+export interface ListResponse<S extends Story = Story> {
     stories: S[];
     pagination: Pagination;
     sort: string;
 }
 
-interface GenericStoryCreateRequest {
+interface GenericCreateRequest {
     newsroom?: NewsroomRef['id'];
 
     title?: string;
@@ -59,7 +59,7 @@ interface GenericStoryCreateRequest {
     tags?: string[];
 }
 
-interface GenericStoryUpdateRequest {
+interface GenericUpdateRequest {
     title?: string;
     subtitle?: string;
     published_at?: Iso8601DateTime;
@@ -75,7 +75,7 @@ interface GenericStoryUpdateRequest {
     tags?: string[];
 }
 
-export interface HtmlStoryCreateRequest extends GenericStoryCreateRequest {
+export interface HtmlStoryCreateRequest extends GenericCreateRequest {
     /**
      * If format version is omitted, license default editor version will be implied.
      */
@@ -84,7 +84,7 @@ export interface HtmlStoryCreateRequest extends GenericStoryCreateRequest {
     content: Html;
 }
 
-export interface SlateStoryCreateRequest extends GenericStoryCreateRequest {
+export interface SlateStoryCreateRequest extends GenericCreateRequest {
     /**
      * If format version is omitted, license default editor version will be implied.
      */
@@ -96,12 +96,12 @@ export interface SlateStoryCreateRequest extends GenericStoryCreateRequest {
     content: PrezlyContentFormat;
 }
 
-export interface HtmlStoryUpdateRequest extends GenericStoryUpdateRequest {
+export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
     intro: Html;
     content: Html;
 }
 
-export interface SlateStoryUpdateRequest extends GenericStoryUpdateRequest {
+export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
     /**
      * Intro field is not supported for Prezly Content Format stories.
      */
@@ -109,5 +109,5 @@ export interface SlateStoryUpdateRequest extends GenericStoryUpdateRequest {
     content: PrezlyContentFormat;
 }
 
-export type StoryCreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
-export type StoryUpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;
+export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
+export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;

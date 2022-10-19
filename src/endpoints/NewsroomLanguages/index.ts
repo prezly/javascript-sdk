@@ -1,6 +1,2 @@
-export { default } from './NewsroomLanguages';
-export {
-    NewsroomLanguagesListRequest,
-    NewsroomLanguageSettingsUpdateRequest,
-    NewsroomLanguagesListResponse,
-} from './types';
+export * from './Client';
+export * from './types';

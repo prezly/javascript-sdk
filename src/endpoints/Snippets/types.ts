@@ -1,9 +1,9 @@
-export interface SnippetCreateRequest {
+export interface CreateRequest {
     title: string;
     content: string;
 }
 
-export interface SnippetUpdateRequest {
+export interface UpdateRequest {
     title?: string;
     content?: string;
 }

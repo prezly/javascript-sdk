@@ -7,7 +7,7 @@ import { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest }
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export default class Subscriptions {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {

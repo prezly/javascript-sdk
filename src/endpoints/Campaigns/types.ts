@@ -1,6 +1,6 @@
 import { Campaign, Pagination, Query, SenderAddress, Story, Warning } from '../../types';
 
-export interface CampaignCreateRequest {
+export interface CreateRequest {
     subject?: Campaign['subject'];
     sender?: SenderAddress['id'];
     content?: Campaign['content'];
@@ -12,7 +12,7 @@ export interface CampaignCreateRequest {
     };
 }
 
-export interface CampaignUpdateRequest {
+export interface UpdateRequest {
     subject?: Campaign['subject'];
     sender?: SenderAddress['id'];
     content?: Campaign['content'];
@@ -21,7 +21,7 @@ export interface CampaignUpdateRequest {
     story_appearance?: Campaign['story_appearance'];
 }
 
-export interface CampaignRecipientsOperationResponse {
+export interface RecipientsOperationResponse {
     campaign: Campaign;
     warnings: Warning[];
     message: string;
@@ -33,14 +33,14 @@ export interface CampaignResponse {
     warnings: Warning[];
 }
 
-export interface CampaignsSearchOptions {
+export interface SearchOptions {
     jsonQuery?: Query;
     page?: number;
     pageSize?: number;
     sortOrder?: string;
 }
 
-export interface CampaignsListResponse {
+export interface ListResponse {
     campaigns: Campaign[];
     pagination: Pagination;
     sort: string;

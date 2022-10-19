@@ -3,9 +3,9 @@ import { JobState } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { JobStatusResponse } from './types';
+import { StatusResponse } from './types';
 
-export default class Jobs {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -13,7 +13,7 @@ export default class Jobs {
     }
 
     async get(id: string): Promise<JobState> {
-        const { job } = await this.apiClient.get<JobStatusResponse>(`${routing.jobsUrl}/${id}`);
+        const { job } = await this.apiClient.get<StatusResponse>(`${routing.jobsUrl}/${id}`);
         return job.state;
     }
 }

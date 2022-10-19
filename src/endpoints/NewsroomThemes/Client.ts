@@ -6,7 +6,7 @@ import { DeferredJobsApiClient } from '../../api';
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type NewsroomThemeId = NewsroomTheme['id'];
 
-export default class NewsroomThemes {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {

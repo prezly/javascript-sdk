@@ -2,11 +2,11 @@ import { NewsroomDomain, Newsroom, NewsroomDomainShareInstructions } from '../..
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
-import { NewsroomDomainLinkRequest } from './types';
+import { LinkRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export default class NewsroomDomains {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -27,10 +27,7 @@ export default class NewsroomDomains {
         return domains;
     }
 
-    public async link(
-        newsroomId: NewsroomId,
-        payload: NewsroomDomainLinkRequest,
-    ): Promise<NewsroomDomain> {
+    public async link(newsroomId: NewsroomId, payload: LinkRequest): Promise<NewsroomDomain> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         const { domain } = await this.apiClient.post<{ domain: NewsroomDomain }>(url, {
             payload,

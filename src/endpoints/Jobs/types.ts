@@ -1,6 +1,6 @@
 import { JobState } from '../../types';
 
-export interface JobStatusResponse {
+export interface StatusResponse {
     job: {
         id: string;
         state: JobState;

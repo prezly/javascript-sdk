@@ -1,9 +1,2 @@
-export { default } from './Campaigns';
-export {
-    CampaignCreateRequest,
-    CampaignUpdateRequest,
-    CampaignResponse,
-    CampaignRecipientsOperationResponse,
-    CampaignsListResponse,
-    CampaignsSearchOptions,
-} from './types';
+export * from './Client';
+export * from './types';

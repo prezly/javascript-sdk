@@ -1,6 +1,2 @@
-export { default } from './NewsroomCategories';
-export {
-    NewsroomCategoriesListOptions,
-    NewsroomCategoryCreateRequest,
-    NewsroomCategoryUpdateRequest,
-} from './types';
+export * from './Client';
+export * from './types';

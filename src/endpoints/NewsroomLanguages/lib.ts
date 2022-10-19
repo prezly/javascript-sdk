@@ -1,8 +1,8 @@
-import { UnsafeNewsroomUpdateErrorResponse } from './types';
+import { UnsafeUpdateErrorResponse } from './types';
 
 export function isUnsafeNewsroomUpdateErrorResponse(
     value: any,
-): value is UnsafeNewsroomUpdateErrorResponse {
+): value is UnsafeUpdateErrorResponse {
     return (
         value &&
         value.status === 'error' &&

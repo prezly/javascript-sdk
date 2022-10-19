@@ -3,11 +3,11 @@ import { Newsroom, NewsroomWebhook } from '../../types';
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 
-import { NewsroomWebhookCreateRequest, NewsroomWebhookUpdateRequest } from './types';
+import { CreateRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export default class NewsroomWebhooks {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -20,10 +20,7 @@ export default class NewsroomWebhooks {
         return webhooks;
     }
 
-    public async create(
-        newsroomId: NewsroomId,
-        payload: NewsroomWebhookCreateRequest,
-    ): Promise<NewsroomWebhook> {
+    public async create(newsroomId: NewsroomId, payload: CreateRequest): Promise<NewsroomWebhook> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
         const { webhook } = await this.apiClient.post<{ webhook: NewsroomWebhook }>(url, {
             payload,
@@ -45,7 +42,7 @@ export default class NewsroomWebhooks {
     public async update(
         newsroomId: NewsroomId,
         webhookId: NewsroomWebhook['id'],
-        payload: NewsroomWebhookUpdateRequest,
+        payload: UpdateRequest,
     ): Promise<NewsroomWebhook> {
         const url = routing.newsroomWebhooksUrl.replace(':newsroom_id', String(newsroomId));
         const { webhook } = await this.apiClient.patch<{ webhook: NewsroomWebhook }>(

@@ -4,28 +4,25 @@ import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
 import {
-    NewsroomLanguageSettingsUpdateRequest,
-    NewsroomLanguagesListRequest,
-    NewsroomLanguagesListResponse,
-    UnsafeNewsroomUpdateErrorResponse,
+    SettingsUpdateRequest,
+    ListRequest,
+    ListResponse,
+    UnsafeUpdateErrorResponse,
 } from './types';
 import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export default class NewsroomLanguages {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 
-    async list(
-        newsroomId: NewsroomId,
-        { sortOrder }: NewsroomLanguagesListRequest = {},
-    ): Promise<NewsroomLanguagesListResponse> {
+    async list(newsroomId: NewsroomId, { sortOrder }: ListRequest = {}): Promise<ListResponse> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
-        return this.apiClient.get<NewsroomLanguagesListResponse>(url, {
+        return this.apiClient.get<ListResponse>(url, {
             query: {
                 sort: sortOrder,
             },
@@ -50,7 +47,7 @@ export default class NewsroomLanguages {
     async enable(
         newsroomId: NewsroomId,
         localeCode: CultureRef['code'],
-        payload: NewsroomLanguageSettingsUpdateRequest = {},
+        payload: SettingsUpdateRequest = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
         const { language } = await this.apiClient.put<{ language: NewsroomLanguageSettings }>(
@@ -78,7 +75,7 @@ export default class NewsroomLanguages {
     async update(
         newsroomId: NewsroomId,
         localeCode: CultureRef['code'],
-        payload: NewsroomLanguageSettingsUpdateRequest,
+        payload: SettingsUpdateRequest,
         options: { force?: boolean } = {},
     ): Promise<NewsroomLanguageSettings> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
@@ -113,8 +110,7 @@ export default class NewsroomLanguages {
         newLocaleCode: CultureRef['code'],
         forceUnsafeOperation: boolean = false,
     ): Promise<
-        | { status: 'success'; language: NewsroomLanguageSettings }
-        | UnsafeNewsroomUpdateErrorResponse
+        { status: 'success'; language: NewsroomLanguageSettings } | UnsafeUpdateErrorResponse
     > {
         try {
             const language = await this.update(

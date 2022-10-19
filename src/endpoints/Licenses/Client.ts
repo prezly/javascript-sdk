@@ -3,7 +3,7 @@ import { License } from '../../types';
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 
-export default class Licenses {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {

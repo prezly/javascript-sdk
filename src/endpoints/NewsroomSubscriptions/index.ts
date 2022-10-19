@@ -1,2 +1,2 @@
-export { default } from './NewsroomSubscriptions';
-export { NewsroomSubscriptionCreateRequest } from './types';
+export * from './Client';
+export * from './types';

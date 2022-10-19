@@ -2,14 +2,14 @@ import { UploadedImage } from '@prezly/uploads';
 
 import { CultureRef } from '../../types';
 
-export interface NewsroomContactsListRequestOptions {
+export interface ListRequestOptions {
     /**
      * Keyword search term
      */
     search?: string;
 }
 
-export interface NewsroomContactsSearchRequestOptions {
+export interface SearchOptions {
     /**
      * Keyword search term
      */
@@ -20,7 +20,7 @@ export interface NewsroomContactsSearchRequestOptions {
     query?: string;
 }
 
-export interface NewsroomContactCreateRequest {
+export interface CreateRequest {
     name: string;
     email?: string | null;
     phone?: string | null;
@@ -35,4 +35,4 @@ export interface NewsroomContactCreateRequest {
     display_locales?: CultureRef['code'][];
 }
 
-export type NewsroomContactUpdateRequest = Partial<NewsroomContactCreateRequest>;
+export type UpdateRequest = Partial<CreateRequest>;

@@ -2,7 +2,7 @@ import { UploadedImage } from '@prezly/uploads';
 
 import { Contact } from '../../types';
 
-export interface NewsroomSubscriptionCreateRequest {
+export interface CreateRequest {
     email_address: string;
     locale?: string;
     url?: string;

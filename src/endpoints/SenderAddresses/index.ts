@@ -1,2 +1,2 @@
-export { default } from './SenderAddresses';
-export { SenderAddressCreateRequest, SenderAddressUpdateRequest } from './types';
+export * from './Client';
+export * from './types';

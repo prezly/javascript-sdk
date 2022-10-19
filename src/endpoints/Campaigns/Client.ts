@@ -7,24 +7,24 @@ import { DeferredJobsApiClient } from '../../api';
 import { toIso8601 } from '../../utils';
 
 import {
-    CampaignCreateRequest,
-    CampaignRecipientsOperationResponse,
+    CreateRequest,
+    RecipientsOperationResponse,
     CampaignResponse,
-    CampaignUpdateRequest,
-    CampaignsListResponse,
-    CampaignsSearchOptions,
+    UpdateRequest,
+    ListResponse,
+    SearchOptions,
 } from './types';
 
-export default class Campaigns {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
         this.apiClient = apiClient;
     }
 
-    async list(options: CampaignsSearchOptions): Promise<CampaignsListResponse> {
+    async list(options: SearchOptions): Promise<ListResponse> {
         const { jsonQuery, page, pageSize, sortOrder } = options;
-        return this.apiClient.get<CampaignsListResponse>(routing.campaignsUrl, {
+        return this.apiClient.get<ListResponse>(routing.campaignsUrl, {
             query: {
                 limit: pageSize,
                 page,
@@ -34,9 +34,9 @@ export default class Campaigns {
         });
     }
 
-    async search(options: CampaignsSearchOptions): Promise<CampaignsListResponse> {
+    async search(options: SearchOptions): Promise<ListResponse> {
         const { jsonQuery, page, pageSize, sortOrder } = options;
-        return this.apiClient.post<CampaignsListResponse>(routing.campaignsUrl, {
+        return this.apiClient.post<ListResponse>(routing.campaignsUrl, {
             payload: {
                 limit: pageSize,
                 page,
@@ -88,14 +88,14 @@ export default class Campaigns {
     }
 
     async create(
-        payload: CampaignCreateRequest,
-    ): ProgressPromise<CampaignRecipientsOperationResponse, { recipients_number: number }> {
-        return this.apiClient.post<CampaignRecipientsOperationResponse>(routing.campaignsUrl, {
+        payload: CreateRequest,
+    ): ProgressPromise<RecipientsOperationResponse, { recipients_number: number }> {
+        return this.apiClient.post<RecipientsOperationResponse>(routing.campaignsUrl, {
             payload,
         });
     }
 
-    async update(id: Campaign['id'], payload: CampaignUpdateRequest): Promise<CampaignResponse> {
+    async update(id: Campaign['id'], payload: UpdateRequest): Promise<CampaignResponse> {
         return this.apiClient.patch<CampaignResponse>(`${routing.campaignsUrl}/${id}`, { payload });
     }
 }

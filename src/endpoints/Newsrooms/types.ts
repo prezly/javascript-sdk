@@ -7,7 +7,7 @@ import {
     Pagination,
 } from '../../types';
 
-export interface NewsroomListRequest {
+export interface ListRequest {
     limit?: number;
     offset?: number;
     /**
@@ -17,20 +17,20 @@ export interface NewsroomListRequest {
     sortOrder?: string;
 }
 
-export interface NewsroomSearchRequest extends NewsroomListRequest {
+export interface SearchRequest extends ListRequest {
     /**
      * Filter query using Prezly JSON Query Language
      */
     jsonQuery?: string;
 }
 
-export interface NewsroomListResponse {
+export interface ListResponse {
     newsrooms: Newsroom[];
     pagination: Pagination;
     sort: string;
 }
 
-export interface NewsroomCreateRequest {
+export interface CreateRequest {
     name: string;
     /**
      * Subdomain to be used for the newsroom.
@@ -54,7 +54,7 @@ export interface NewsroomCreateRequest {
     status?: NewsroomStatus.ACTIVE | NewsroomStatus.INACTIVE;
 }
 
-export interface NewsroomUpdateRequest {
+export interface UpdateRequest {
     name?: string;
     /**
      * Subdomain to be used for the newsroom.

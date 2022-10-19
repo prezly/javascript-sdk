@@ -1,6 +1,6 @@
 import { GalleryStatus, NewsroomGallery, Pagination, Query } from '../../types';
 
-export interface NewsroomGalleriesListRequest {
+export interface ListRequest {
     scope?: Query;
     query?: Query;
     limit?: number;
@@ -8,14 +8,14 @@ export interface NewsroomGalleriesListRequest {
     sort?: string;
 }
 
-export interface NewsroomGalleriesOrderRequest {
+export interface ReorderRequest {
     order: {
         gallery: number | string;
         order: number;
     }[];
 }
 
-export interface NewsroomGalleryCreateRequest {
+export interface CreateRequest {
     name: string;
     description?: string | null;
     status?: GalleryStatus;
@@ -25,7 +25,7 @@ export interface NewsroomGalleryCreateRequest {
     content: string;
 }
 
-export interface NewsroomGalleryUpdateRequest {
+export interface UpdateRequest {
     name?: string;
     description?: string | null;
     status?: GalleryStatus;
@@ -35,7 +35,7 @@ export interface NewsroomGalleryUpdateRequest {
     content?: string;
 }
 
-export interface NewsroomGalleriesListResponse {
+export interface ListResponse {
     galleries: NewsroomGallery[];
     pagination: Pagination;
     sort: string;

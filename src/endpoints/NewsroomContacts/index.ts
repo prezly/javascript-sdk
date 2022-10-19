@@ -1,7 +1,2 @@
-export { default } from './NewsroomContacts';
-export {
-    NewsroomContactsListRequestOptions,
-    NewsroomContactsSearchRequestOptions,
-    NewsroomContactCreateRequest,
-    NewsroomContactUpdateRequest,
-} from './types';
+export * from './Client';
+export * from './types';

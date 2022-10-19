@@ -3,9 +3,9 @@ import { SenderAddress } from '../../types';
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 
-import { SenderAddressCreateRequest, SenderAddressUpdateRequest } from './types';
+import { CreateRequest, UpdateRequest } from './types';
 
-export default class SenderAddresses {
+export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
     constructor(apiClient: DeferredJobsApiClient) {
@@ -19,7 +19,7 @@ export default class SenderAddresses {
         return senders;
     }
 
-    public async create(payload: SenderAddressCreateRequest): Promise<SenderAddress> {
+    public async create(payload: CreateRequest): Promise<SenderAddress> {
         const { sender } = await this.apiClient.post<{ sender: SenderAddress }>(
             routing.senderAddressesUrl,
             { payload },
@@ -36,7 +36,7 @@ export default class SenderAddresses {
 
     public async update(
         senderId: SenderAddress['id'],
-        payload: SenderAddressUpdateRequest,
+        payload: UpdateRequest,
     ): Promise<SenderAddress> {
         const { sender } = await this.apiClient.patch<{ sender: SenderAddress }>(
             `${routing.senderAddressesUrl}/${senderId}`,

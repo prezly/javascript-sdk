@@ -1,21 +1,21 @@
 import { CultureRef, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
 
-export interface NewsroomLanguagesListRequest {
+export interface ListRequest {
     sortOrder?: string;
 }
 
-export interface NewsroomLanguagesListResponse {
+export interface ListResponse {
     languages: NewsroomLanguageSettings[];
     sort: string;
 }
 
-export interface NewsroomLanguageSettingsUpdateRequest {
+export interface SettingsUpdateRequest {
     is_default?: true;
     code?: CultureRef['code'];
     company_information?: Partial<NewsroomCompanyInformation>;
 }
 
-export interface UnsafeNewsroomUpdateErrorResponse {
+export interface UnsafeUpdateErrorResponse {
     status: 'error';
     code: 'unsafe';
     message: string;

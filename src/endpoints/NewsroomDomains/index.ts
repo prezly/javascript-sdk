@@ -1,2 +1,2 @@
-export { default } from './NewsroomDomains';
-export { NewsroomDomainLinkRequest } from './types';
+export * from './Client';
+export * from './types';
