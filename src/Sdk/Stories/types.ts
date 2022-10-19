@@ -82,6 +82,10 @@ export interface HtmlStoryCreateRequest extends GenericStoryCreateRequest {
     format_version?: StoryFormatVersion.HTML;
     intro: Html;
     content: Html;
+    /**
+     * Attached gallery slate content.
+     */
+    attached_gallery_content?: string;
 }
 
 export interface SlateStoryCreateRequest extends GenericStoryCreateRequest {
@@ -99,6 +103,10 @@ export interface SlateStoryCreateRequest extends GenericStoryCreateRequest {
 export interface HtmlStoryUpdateRequest extends GenericStoryUpdateRequest {
     intro: Html;
     content: Html;
+    /**
+     * Attached gallery slate content.
+     */
+    attached_gallery_content?: string;
 }
 
 export interface SlateStoryUpdateRequest extends GenericStoryUpdateRequest {
