@@ -142,7 +142,6 @@ export interface Contact extends Entity {
         clicked_rate: number;
         opened: number;
         opened_rate: number;
-        replied: number;
         sent: number;
     };
 
@@ -152,7 +151,6 @@ export interface Contact extends Entity {
         edit: string;
         employees_api: string;
         enrichments_api: string;
-        exclude_mailbox_conversations: string;
         export_personal_data_api: string;
         organisations_api: string;
         view: string;
