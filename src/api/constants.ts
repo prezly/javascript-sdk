@@ -1,5 +1,4 @@
-// When using `import`, TS complains because `package.json` is outside the
-// `rootDir`, but it works with `require`.
-const { version: packageVersion, repository } = require('../../package.json'); // eslint-disable-line @typescript-eslint/no-var-requires
+const version = process.env.npm_package_version;
+const url = process.env.npm_package_repository_url;
 
-export const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${packageVersion} (+${repository.url})`;
+export const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${version} (+${url})`;
