@@ -75,7 +75,6 @@ export interface Contact extends Entity {
     id: number;
     contact_type: ContactType;
     is_deleted: boolean;
-    is_license_contact: boolean;
     is_person: boolean;
 
     company_name: string;
@@ -129,7 +128,6 @@ export interface Contact extends Entity {
 
     has_enrichments: boolean;
     is_bounced: boolean;
-    is_locked: boolean;
     is_duplicated: boolean;
     is_unsubscribed: boolean;
     is_unsubscribed_from_all_communications: boolean;
@@ -144,7 +142,6 @@ export interface Contact extends Entity {
         clicked_rate: number;
         opened: number;
         opened_rate: number;
-        replied: number;
         sent: number;
     };
 
@@ -154,7 +151,6 @@ export interface Contact extends Entity {
         edit: string;
         employees_api: string;
         enrichments_api: string;
-        exclude_mailbox_conversations: string;
         export_personal_data_api: string;
         organisations_api: string;
         view: string;
