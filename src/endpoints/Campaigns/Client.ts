@@ -2,7 +2,7 @@ import type { ProgressPromise } from '@prezly/progress-promise';
 
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Campaign} from '../../types';
+import type { Campaign } from '../../types';
 import { Query } from '../../types';
 import { toIso8601 } from '../../utils';
 

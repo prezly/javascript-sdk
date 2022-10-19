@@ -2,7 +2,6 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { JobState } from '../../types';
 
-
 import type { StatusResponse } from './types';
 
 export class Client {

@@ -1,16 +1,9 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
-import type {
-    ApiResponse,
-    Params,
-    ParamsWithPayload} from '../http';
-import {
-    Http,
-    HttpCodes,
-    isDeferredJobResponse
-} from '../http';
+import type { ApiResponse, Params, ParamsWithPayload } from '../http';
+import { Http, HttpCodes, isDeferredJobResponse } from '../http';
 import { routing } from '../routing';
-import type { JobState} from '../types';
+import type { JobState } from '../types';
 import { JobStatus } from '../types';
 
 import type { ApiClient } from './ApiClient';

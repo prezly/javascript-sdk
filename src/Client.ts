@@ -22,7 +22,6 @@ import {
 } from './endpoints';
 import type { HeadersMap } from './http';
 
-
 const DEFAULT_BASE_URL = 'https://api.prezly.com';
 
 export interface ClientOptions {

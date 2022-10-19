@@ -2,8 +2,13 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
 
-
-import type { ListOptions, ListResponse, SearchOptions, CreateRequest, UpdateRequest } from './types';
+import type {
+    ListOptions,
+    ListResponse,
+    SearchOptions,
+    CreateRequest,
+    UpdateRequest,
+} from './types';
 
 /**
  * `uuid` is the preferred way of targeting a Story. Numeric `id` is considered deprecated.

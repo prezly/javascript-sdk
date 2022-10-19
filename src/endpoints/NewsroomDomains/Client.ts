@@ -2,7 +2,6 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { NewsroomDomain, Newsroom } from '../../types';
 
-
 import type { LinkRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];

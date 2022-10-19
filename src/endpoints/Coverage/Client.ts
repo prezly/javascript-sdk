@@ -5,7 +5,6 @@ import { routing } from '../../routing';
 import type { CoverageEntry, SelectionValue } from '../../types';
 import { Query } from '../../types';
 
-
 import type {
     CreateRequest,
     ListOptions,

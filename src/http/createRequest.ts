@@ -8,7 +8,6 @@ import { createUrlWithQuery } from './lib';
 import type { Method, HeadersMap, ApiResponse } from './types';
 import { HttpCodes } from './types';
 
-
 function extractHeaders(headers: Headers): HeadersMap {
     const result: HeadersMap = {};
 

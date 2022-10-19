@@ -2,7 +2,6 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
 
-
 import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 import type {
     SettingsUpdateRequest,

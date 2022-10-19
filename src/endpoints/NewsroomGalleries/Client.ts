@@ -1,7 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import { Query } from '../../types';
-import type { Newsroom} from '../../types';
+import type { Newsroom } from '../../types';
 import type { NewsroomGallery } from '../../types';
 
 import type {

@@ -1,6 +1,6 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Campaign, Contact, EmailRecipient} from '../../types';
+import type { Campaign, Contact, EmailRecipient } from '../../types';
 import { Query } from '../../types';
 import type { RecipientsOperationResponse } from '../Campaigns';
 

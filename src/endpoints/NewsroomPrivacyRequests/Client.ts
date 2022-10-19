@@ -1,4 +1,3 @@
-
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { Newsroom, PrivacyRequest } from '../../types';
