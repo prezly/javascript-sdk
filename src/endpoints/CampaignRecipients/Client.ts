@@ -35,7 +35,7 @@ export class Client {
         // TODO: Introduce dedicated Search POST API
         return this.apiClient.get<ListResponse>(url, {
             query: {
-                query: query ? JSON.stringify(query) : undefined,
+                query: Query.stringify(query),
                 sort: sortOrder,
                 limit,
                 offset,

@@ -1,6 +1,6 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
-import { Campaign } from '../../types';
+import { Campaign, Query } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -28,7 +28,7 @@ export class Client {
             query: {
                 limit,
                 offset,
-                query: query ? JSON.stringify(query) : undefined,
+                query: Query.stringify(query),
                 sort: sortOrder,
             },
         });

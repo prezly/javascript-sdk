@@ -1,4 +1,4 @@
-import { Newsroom } from '../../types';
+import { Newsroom, Query } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -53,8 +53,8 @@ export class Client {
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
-                scope: scope ? JSON.stringify(scope) : undefined,
-                query: query ? JSON.stringify(query) : undefined,
+                scope: Query.stringify(scope),
+                query: Query.stringify(query),
                 sort: sortOrder,
                 limit: limit,
                 offset: offset,
