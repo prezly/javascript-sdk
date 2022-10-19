@@ -1,8 +1,9 @@
-import { Campaign, Contact, ContactsScope, EmailRecipient, Query } from '../../types';
+import { Campaign, Contact, EmailRecipient, Query } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
+import { ContactsScope } from './scopes';
 import { ListOptions, ListResponse, SearchOptions } from './types';
 import { RecipientsOperationResponse } from '../Campaigns';
 
