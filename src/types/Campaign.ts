@@ -1,38 +1,13 @@
 import { NewsroomRef } from './Newsroom';
 import { SenderAddress } from './SenderAddress';
-import { SenderDomainVerificationFlowVersion } from './SenderDomain';
+import { SenderDomain } from './SenderDomain';
 import { StoryRef } from './Story';
-import { UserRef } from './UserRef';
-
-export enum CampaignLifecycleStatus {
-    DRAFT = 'draft',
-    SCHEDULED = 'scheduled',
-    PENDING = 'pending',
-    SENT = 'sent',
-}
-
-export enum StoryAlignment {
-    CENTER = 'center',
-    LEFT = 'left',
-    RIGHT = 'right',
-}
-
-export enum StoryAppearance {
-    INTRO = 'intro',
-    FULL = 'full',
-}
-
-export enum SenderDomainVerificationStatus {
-    UNKNOWN = 'unknown',
-    VALID = 'valid',
-    INVALID = 'invalid',
-    NOT_APPLICABLE = 'not-applicable',
-}
+import { UserRef } from './User';
 
 export interface Campaign {
     id: number;
     author: UserRef;
-    lifecycle_status: CampaignLifecycleStatus;
+    lifecycle_status: Campaign.LifecycleStatus;
     subject: string;
     /**
      * JSON-serialized document in Prezly Content Format
@@ -44,13 +19,13 @@ export interface Campaign {
     // Attached story
     story: StoryRef | null;
     newsroom: NewsroomRef | null;
-    story_alignment: StoryAlignment;
-    story_appearance: StoryAppearance;
+    story_alignment: Campaign.StoryAlignment;
+    story_appearance: Campaign.StoryAppearance;
 
     // Sender address & domain
     sender: SenderAddress | null;
-    sender_domain_verification_flow: SenderDomainVerificationFlowVersion | null;
-    sender_domain_verification_status: SenderDomainVerificationStatus;
+    sender_domain_verification_flow: SenderDomain.VerificationFlowVersion | null;
+    sender_domain_verification_status: Campaign.SenderDomainVerificationStatus;
 
     created_at: string;
     updated_at: string;
@@ -70,4 +45,31 @@ export interface Campaign {
         unsubscribes: number;
         unsubscribes_rate: number;
     };
+}
+
+export namespace Campaign {
+    export enum LifecycleStatus {
+        DRAFT = 'draft',
+        SCHEDULED = 'scheduled',
+        PENDING = 'pending',
+        SENT = 'sent',
+    }
+
+    export enum StoryAlignment {
+        CENTER = 'center',
+        LEFT = 'left',
+        RIGHT = 'right',
+    }
+
+    export enum StoryAppearance {
+        INTRO = 'intro',
+        FULL = 'full',
+    }
+
+    export enum SenderDomainVerificationStatus {
+        UNKNOWN = 'unknown',
+        VALID = 'valid',
+        INVALID = 'invalid',
+        NOT_APPLICABLE = 'not-applicable',
+    }
 }

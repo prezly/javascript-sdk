@@ -1,5 +1,3 @@
-import { LicenseStatus } from './LicenseStatus';
-
 export interface LicenseRef {
     id: number;
     display_name: string;
@@ -7,9 +5,21 @@ export interface LicenseRef {
     is_locked: boolean;
     is_sso_required: boolean;
     avatar_url: string;
-    status: LicenseStatus;
+    status: License.Status;
 }
 
 export interface License extends LicenseRef {
     created_at: string;
+}
+
+export namespace License {
+    export enum Status {
+        TRIAL = 'trial',
+        ACTIVE = 'active',
+        PAST_DUE = 'past_due',
+        PAYMENT_COLLECTION_PAUSED = 'payment_collection_paused',
+        INACTIVE = 'inactive',
+        CANCELED = 'canceled',
+        UNPAID = 'unpaid',
+    }
 }

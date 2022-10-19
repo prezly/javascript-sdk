@@ -1,12 +1,4 @@
-import {
-    CultureRef,
-    EmailBranding,
-    EmailBrandingMode,
-    Newsroom,
-    NewsroomStatus,
-    Pagination,
-    Query,
-} from '../../types';
+import { CultureRef, Newsroom, Pagination, Query } from '../../types';
 
 export interface ListOptions {
     limit?: number;
@@ -52,7 +44,7 @@ export interface CreateRequest {
      * Theme ID or codename
      */
     active_theme?: string;
-    status?: NewsroomStatus.ACTIVE | NewsroomStatus.INACTIVE;
+    status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
 }
 
 export interface UpdateRequest {
@@ -97,8 +89,8 @@ export interface UpdateRequest {
      */
     timezone?: string;
 
-    email_branding_mode?: EmailBrandingMode;
-    email_branding?: EmailBranding;
+    email_branding_mode?: Newsroom.EmailBrandingMode;
+    email_branding?: Newsroom.EmailBranding;
 
     is_privacy_portal_enabled?: boolean;
     /**
@@ -116,5 +108,5 @@ export interface UpdateRequest {
      * "subscription_form" feature flag
      */
     is_subscription_form_enabled?: boolean;
-    status?: NewsroomStatus.ACTIVE | NewsroomStatus.INACTIVE;
+    status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
 }

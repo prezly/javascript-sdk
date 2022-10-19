@@ -1,4 +1,4 @@
-import { ContactType, EmailSubscription, Newsroom } from '../../types';
+import { Contact, EmailSubscription, Newsroom } from '../../types';
 
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
@@ -14,7 +14,7 @@ export class Client {
         this.apiClient = apiClient;
     }
 
-    public async subscribeToNewsroom<Type extends ContactType>(
+    public async subscribeToNewsroom<Type extends Contact.Type>(
         newsroomId: NewsroomId,
         payload: SubscribeRequest<Type>,
     ): Promise<EmailSubscription> {

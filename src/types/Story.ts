@@ -1,35 +1,9 @@
 import { Category } from './Category';
 import { Entity } from './Entity';
-import { CultureRef } from './CultureRef';
+import { CultureRef } from './Culture';
 import { NewsroomRef } from './Newsroom';
-import { UserRef } from './UserRef';
+import { UserRef } from './User';
 import { OEmbedInfo } from './common';
-
-export enum StoryFormatVersion {
-    HTML = 1,
-    SLATEJS = 3,
-}
-
-export enum StoryLifecycleStatus {
-    UNINITIALIZED = 'uninitialized',
-    DRAFT = 'draft',
-    SCHEDULED = 'scheduled',
-    EMBARGO = 'embargo',
-    PUBLISHED = 'published',
-}
-
-export enum StoryPublicationStatus {
-    NEW = 'new',
-    DRAFT = 'draft',
-    PUBLISHED = 'published',
-}
-
-export enum StoryVisibility {
-    PUBLIC = 'public',
-    EMBARGO = 'embargo',
-    PRIVATE = 'private',
-    CONFIDENTIAL = 'confidential',
-}
 
 export interface StoryRef {
     uuid: string;
@@ -40,9 +14,9 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
-    publication_status: StoryPublicationStatus;
-    lifecycle_status: StoryLifecycleStatus;
-    visibility: StoryVisibility;
+    publication_status: Story.PublicationStatus;
+    lifecycle_status: Story.LifecycleStatus;
+    visibility: Story.Visibility;
 
     thumbnail_url: string;
 
@@ -75,7 +49,7 @@ export interface Story extends Entity<number> {
     intro: string;
     summary: string;
     slug: string;
-    format_version: StoryFormatVersion;
+    format_version: Story.FormatVersion;
     culture: CultureRef;
     author: UserRef | null;
 
@@ -112,7 +86,7 @@ export interface Story extends Entity<number> {
     published_at: string | null;
     scheduled_at: string | null;
 
-    lifecycle_status: StoryLifecycleStatus;
+    lifecycle_status: Story.LifecycleStatus;
     is_archived: boolean;
     is_finalized: boolean;
     is_published: boolean;
@@ -123,39 +97,67 @@ export interface Story extends Entity<number> {
     is_sharable: boolean;
     is_analytics_available: boolean;
 
-    publication_status: StoryPublicationStatus;
-    visibility: StoryVisibility;
+    publication_status: Story.PublicationStatus;
+    visibility: Story.Visibility;
 }
 
-export interface ExtraStoryFields {
-    /**
-     * Depending on `format_version` this field can contain:
-     * - HTML content for v1 stories (deprecated)
-     * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
-     */
-    content: string;
-    /**
-     * Uploadcare image JSON.
-     */
-    thumbnail_image: string | null;
-    /**
-     * Uploadcare image JSON.
-     */
-    header_image: string | null;
-    /**
-     * Uploadcare image JSON.
-     */
-    preview_image: string | null;
-    /**
-     * Uploadcare image JSON.
-     */
-    social_image: string | null;
-    social_text: string;
-    tag_names: string[];
+export namespace Story {
+    export enum FormatVersion {
+        HTML = 1,
+        SLATEJS = 3,
+    }
 
-    referenced_entities: {
-        stories: Record<string, OEmbedInfo>;
-    };
+    export enum LifecycleStatus {
+        UNINITIALIZED = 'uninitialized',
+        DRAFT = 'draft',
+        SCHEDULED = 'scheduled',
+        EMBARGO = 'embargo',
+        PUBLISHED = 'published',
+    }
+
+    export enum PublicationStatus {
+        NEW = 'new',
+        DRAFT = 'draft',
+        PUBLISHED = 'published',
+    }
+
+    export enum Visibility {
+        PUBLIC = 'public',
+        EMBARGO = 'embargo',
+        PRIVATE = 'private',
+        CONFIDENTIAL = 'confidential',
+    }
+
+    export interface ExtraFields {
+        /**
+         * Depending on `format_version` this field can contain:
+         * - HTML content for v1 stories (deprecated)
+         * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
+         */
+        content: string;
+        /**
+         * Uploadcare image JSON.
+         */
+        thumbnail_image: string | null;
+        /**
+         * Uploadcare image JSON.
+         */
+        header_image: string | null;
+        /**
+         * Uploadcare image JSON.
+         */
+        preview_image: string | null;
+        /**
+         * Uploadcare image JSON.
+         */
+        social_image: string | null;
+        social_text: string;
+        tag_names: string[];
+
+        referenced_entities: {
+            stories: Record<string, OEmbedInfo>;
+        };
+    }
 }
 
-export interface ExtendedStory extends Story, ExtraStoryFields {}
+export interface ExtendedStory extends Story, Story.ExtraFields {}

@@ -1,17 +1,5 @@
 import { Contact } from './Contact';
 
-export enum EmailAddressStatus {
-    OK = 'ok',
-    BOUNCED = 'bounced',
-    UNSUBSCRIBED = 'unsubscribed',
-    UNSUBSCRIBED_FROM_ALL_COMMUNICATIONS = 'unsubscribed_from_all_communications',
-}
-
-export interface EmailAddressRecord {
-    email_address: string;
-    status: EmailAddressStatus;
-}
-
 export interface EmailRecipient {
     /**
      * Unique alphanumerical identifier for the recipient.
@@ -27,7 +15,7 @@ export interface EmailRecipient {
     /**
      * List of all contact email addresses with their statuses in context of the current campaign.
      */
-    email_addresses: EmailAddressRecord[];
+    email_addresses: EmailRecipient.EmailAddressRecord[];
     /**
      * The current recipient email address is unsubscribed from the current campaign newsroom.
      */
@@ -36,4 +24,18 @@ export interface EmailRecipient {
      * The current recipient email address is unsubscribed from all your Prezly communications.
      */
     is_unsubscribed_from_all_communications: boolean;
+}
+
+export namespace EmailRecipient {
+    export enum EmailAddressStatus {
+        OK = 'ok',
+        BOUNCED = 'bounced',
+        UNSUBSCRIBED = 'unsubscribed',
+        UNSUBSCRIBED_FROM_ALL_COMMUNICATIONS = 'unsubscribed_from_all_communications',
+    }
+
+    export interface EmailAddressRecord {
+        email_address: string;
+        status: EmailAddressStatus;
+    }
 }

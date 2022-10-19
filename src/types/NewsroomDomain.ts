@@ -6,3 +6,10 @@ export interface NewsroomDomain {
     status: 'active' | 'inactive' | 'redirect';
     instructions: DnsConfigurationInstruction[];
 }
+
+export namespace NewsroomDomain {
+    export interface ShareInstructions {
+        url: string;
+        expires_at: string;
+    }
+}

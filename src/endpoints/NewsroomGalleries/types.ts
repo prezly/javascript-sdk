@@ -1,4 +1,4 @@
-import { GalleryStatus, NewsroomGallery, Pagination, Query } from '../../types';
+import { NewsroomGallery, Pagination, Query } from '../../types';
 
 export interface ListOptions {
     limit?: number;
@@ -21,7 +21,7 @@ export interface ReorderRequest {
 export interface CreateRequest {
     name: string;
     description?: string | null;
-    status?: GalleryStatus;
+    status?: NewsroomGallery.Status;
     /**
      * Slate JSON content.
      */
@@ -31,7 +31,7 @@ export interface CreateRequest {
 export interface UpdateRequest {
     name?: string;
     description?: string | null;
-    status?: GalleryStatus;
+    status?: NewsroomGallery.Status;
     /**
      * Slate JSON content.
      */

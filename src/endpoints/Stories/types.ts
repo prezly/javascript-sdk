@@ -1,14 +1,4 @@
-import {
-    Category,
-    CultureRef,
-    ExtraStoryFields,
-    NewsroomRef,
-    Pagination,
-    Query,
-    Story,
-    StoryFormatVersion,
-    StoryVisibility,
-} from '../../types';
+import { Category, CultureRef, NewsroomRef, Pagination, Query, Story } from '../../types';
 
 /**
  * Uploadcare image JSON string.
@@ -24,14 +14,14 @@ type Html = string;
  */
 type PrezlyContentFormat = string;
 
-export interface ListOptions<Include extends readonly (keyof ExtraStoryFields)[]> {
+export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
     limit?: number;
     offset?: number;
     sortOrder?: string;
     include?: Include;
 }
 
-export interface SearchOptions<Include extends readonly (keyof ExtraStoryFields)[]>
+export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
     extends ListOptions<Include> {
     query?: Query;
 }
@@ -48,7 +38,7 @@ interface GenericCreateRequest {
     title?: string;
     subtitle?: string;
     published_at?: Iso8601DateTime;
-    visibility?: StoryVisibility;
+    visibility?: Story.Visibility;
     culture?: CultureRef['code'];
 
     header_image?: UploadedImage;
@@ -64,7 +54,7 @@ interface GenericUpdateRequest {
     title?: string;
     subtitle?: string;
     published_at?: Iso8601DateTime;
-    visibility?: StoryVisibility;
+    visibility?: Story.Visibility;
     culture?: CultureRef['code'];
 
     header_image?: UploadedImage;
@@ -80,7 +70,7 @@ export interface HtmlStoryCreateRequest extends GenericCreateRequest {
     /**
      * If format version is omitted, license default editor version will be implied.
      */
-    format_version?: StoryFormatVersion.HTML;
+    format_version?: Story.FormatVersion.HTML;
     intro: Html;
     content: Html;
 }
@@ -89,7 +79,7 @@ export interface SlateStoryCreateRequest extends GenericCreateRequest {
     /**
      * If format version is omitted, license default editor version will be implied.
      */
-    format_version?: StoryFormatVersion.SLATEJS;
+    format_version?: Story.FormatVersion.SLATEJS;
     /**
      * Intro field is not supported for Prezly Content Format stories.
      */

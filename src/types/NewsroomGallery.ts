@@ -1,6 +1,5 @@
-import { GalleryStatus } from './GalleryStatus';
-import { NewsroomGalleryImage } from './NewsroomGalleryImage';
-import { UserRef } from './UserRef';
+import { UserRef } from './User';
+import { UploadedImage } from '@prezly/uploads';
 
 export interface NewsroomGallery {
     id: number;
@@ -14,7 +13,7 @@ export interface NewsroomGallery {
      */
     thumbnail_image: string | null;
     url: string;
-    status: GalleryStatus;
+    status: NewsroomGallery.Status;
     creator: UserRef | null;
     created_at: string;
     updated_at: string;
@@ -25,5 +24,20 @@ export interface NewsroomGallery {
      */
     content: string;
     images_number: number;
-    images: NewsroomGalleryImage[];
+    images: NewsroomGallery.Image[];
+}
+
+export namespace NewsroomGallery {
+    export enum Status {
+        PRIVATE = 'private',
+        PUBLIC = 'public',
+    }
+
+    export interface Image {
+        id: number;
+        caption: string;
+        created_at: string;
+        updated_at: string;
+        uploadcare_image: UploadedImage;
+    }
 }

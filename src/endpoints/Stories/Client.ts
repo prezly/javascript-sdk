@@ -1,4 +1,4 @@
-import { ExtendedStory, ExtraStoryFields, Story } from '../../types';
+import { ExtendedStory, Story } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -18,10 +18,10 @@ export class Client {
     }
 
     async list<
-        Include extends readonly (keyof ExtraStoryFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
-            ? Story & Pick<ExtraStoryFields, Options['include'][number]>
+            ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options ?? {};
@@ -36,10 +36,10 @@ export class Client {
     }
 
     async search<
-        Include extends readonly (keyof ExtraStoryFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
-            ? Story & Pick<ExtraStoryFields, Options['include'][number]>
+            ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options: SearchOptions<Include>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query } = options ?? {};

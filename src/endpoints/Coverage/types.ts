@@ -1,6 +1,4 @@
 import {
-    CoverageType,
-    CoverageProvider,
     CultureRef,
     CountryRef,
     Contact,
@@ -33,11 +31,11 @@ export interface UpdateRequest {
      * Automatic calculation will be dropped in future when it starts being
      * required in coverage create requests.
      */
-    type?: CoverageType;
+    type?: CoverageEntry.Type;
     culture?: CultureRef['code'] | null;
     country?: CountryRef['code'] | null;
     management_url?: string | null;
-    provider?: CoverageProvider | null;
+    provider?: CoverageEntry.Provider | null;
     /**
      * For tv/radio types. Fragment duration in seconds.
      */

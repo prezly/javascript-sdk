@@ -1,15 +1,6 @@
 import { UploadedImage } from '@prezly/uploads';
 
-import { CultureRef } from './CultureRef';
-import { EmailBranding } from './EmailBranding';
-import { EmailBrandingMode } from './EmailBrandingMode';
-import { TrackingPolicy } from './TrackingPolicy';
-
-export enum NewsroomStatus {
-    ACTIVE = 'active', // i.e. "Live"
-    INACTIVE = 'inactive', // i.e. "Not live"
-    ARCHIVED = 'archived',
-}
+import { CultureRef } from './Culture';
 
 export interface NewsroomRef {
     uuid: string;
@@ -23,7 +14,7 @@ export interface NewsroomRef {
     name: string;
     subdomain: string;
 
-    status: NewsroomStatus;
+    status: Newsroom.Status;
     /**
      * @deprecated Please use `status` instead
      * @see status
@@ -94,14 +85,14 @@ export interface Newsroom extends NewsroomRef {
     newsroom_logo: UploadedImage | null;
     icon: UploadedImage | null;
 
-    email_branding_mode: EmailBrandingMode;
-    email_branding: EmailBranding;
+    email_branding_mode: Newsroom.EmailBrandingMode;
+    email_branding: Newsroom.EmailBranding;
 
     is_privacy_portal_enabled: boolean;
     custom_privacy_policy_link: string | null;
     custom_data_request_link: string | null;
 
-    tracking_policy: TrackingPolicy;
+    tracking_policy: Newsroom.TrackingPolicy;
     cookiepro: {
         is_enabled: boolean;
         category: string | null;
@@ -122,4 +113,32 @@ export interface Newsroom extends NewsroomRef {
         visits_last_7_days: number | null;
         visits_last_7_days_previous: number | null;
     };
+}
+
+export namespace Newsroom {
+    export enum Status {
+        ACTIVE = 'active', // i.e. "Live"
+        INACTIVE = 'inactive', // i.e. "Not live"
+        ARCHIVED = 'archived',
+    }
+
+    export interface EmailBranding {
+        background_color: string;
+        title_color: string;
+        text_color: string;
+        link_color: string;
+        /** @deprecated This is not used in email styling */
+        link_hover_color?: string;
+    }
+
+    export enum EmailBrandingMode {
+        DEFAULT = 'default',
+        CUSTOM = 'custom',
+    }
+
+    export enum TrackingPolicy {
+        DEFAULT = 'default',
+        DISABLED = 'disabled',
+        CONSENT_TO_IDENTIFY = 'consent-to-identify',
+    }
 }

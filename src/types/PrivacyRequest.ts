@@ -1,17 +1,19 @@
-export enum PrivacyRequestStatus {
-    UNCONFIRMED = 'unconfirmed',
-    CONFIRMED = 'confirmed',
-}
-
-export enum PrivacyRequestType {
-    DELETE = 'delete',
-    EXPORT = 'export',
-    CORRECT = 'correct',
-    OTHER = 'other',
-}
-
 export interface PrivacyRequest {
     id: string;
-    status: PrivacyRequestStatus;
+    status: PrivacyRequest.Status;
     email: string;
+}
+
+export namespace PrivacyRequest {
+    export enum Type {
+        DELETE = 'delete',
+        EXPORT = 'export',
+        CORRECT = 'correct',
+        OTHER = 'other',
+    }
+
+    export enum Status {
+        UNCONFIRMED = 'unconfirmed',
+        CONFIRMED = 'confirmed',
+    }
 }

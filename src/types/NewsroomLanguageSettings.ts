@@ -1,4 +1,4 @@
-import { CultureRef } from './CultureRef';
+import { CultureRef } from './Culture';
 import { NewsroomCompanyInformation } from './NewsroomCompanyInformation';
 import { Notification } from './common';
 

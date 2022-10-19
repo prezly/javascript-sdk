@@ -1,9 +1,3 @@
-export enum SenderDomainVerificationFlowVersion {
-    V1 = 'v1',
-    V2 = 'v2',
-    V3 = 'v3',
-}
-
 export interface SenderDomain {
     domain_name: string;
     /**
@@ -28,5 +22,13 @@ export interface SenderDomain {
      * There were different verification setups we've been using over the years.
      * The latest one, which is also the best so far, is `v3`.
      */
-    verification_flow_version: SenderDomainVerificationFlowVersion;
+    verification_flow_version: SenderDomain.VerificationFlowVersion;
+}
+
+export namespace SenderDomain {
+    export enum VerificationFlowVersion {
+        V1 = 'v1',
+        V2 = 'v2',
+        V3 = 'v3',
+    }
 }
