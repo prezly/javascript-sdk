@@ -125,6 +125,12 @@ export interface Story extends Entity<number> {
 
     publication_status: StoryPublicationStatus;
     visibility: StoryVisibility;
+
+    /**
+     * Contains attached gallery slate content.
+     * Always `null` for v3 stories.
+     */
+    attached_gallery_content: string | null;
 }
 
 export interface ExtraStoryFields {
