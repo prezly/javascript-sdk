@@ -11,7 +11,7 @@ export namespace Query {
         return typeof query === 'string' ? query : JSON.stringify(query);
     }
 
-    type Value = string | number | boolean;
+    type Value = string | number | boolean | null;
 
     export enum Predicate {
         EQUALS = '$eq',
