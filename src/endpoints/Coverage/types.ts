@@ -57,12 +57,14 @@ export interface UpdateRequest {
 
 export interface CreateRequest extends UpdateRequest {}
 
-export interface SearchOptions {
+export interface ListOptions {
     includeDeleted?: boolean;
-    jsonQuery?: string;
     page?: number;
     pageSize?: number;
     sortOrder?: string;
+}
+export interface SearchOptions extends ListOptions {
+    query?: string;
 }
 
 export interface ListResponse {

@@ -5,7 +5,14 @@ import { Coverage, SelectionValue } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { CreateRequest, ListResponse, Scope, SearchOptions, UpdateRequest } from './types';
+import {
+    CreateRequest,
+    ListOptions,
+    ListResponse,
+    Scope,
+    SearchOptions,
+    UpdateRequest,
+} from './types';
 
 type CoverageId = Coverage['uuid'] | Coverage['id'];
 
@@ -16,8 +23,9 @@ export class Client {
         this.apiClient = apiClient;
     }
 
-    async list(options: SearchOptions = {}, scope?: Scope): Promise<ListResponse> {
-        const { includeDeleted, jsonQuery, page, pageSize, sortOrder } = options;
+    async list(options: ListOptions = {}, scope?: Scope): Promise<ListResponse> {
+        const { includeDeleted, page, pageSize, sortOrder } = options;
+        // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
             : routing.coverageUrl;
@@ -26,7 +34,24 @@ export class Client {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 page,
                 limit: pageSize,
-                query: jsonQuery,
+                sort: sortOrder,
+            },
+        });
+    }
+
+    async search(options: SearchOptions = {}, scope?: Scope): Promise<ListResponse> {
+        const { includeDeleted, query, page, pageSize, sortOrder } = options;
+        // TODO: Switch to `scope` API parameter
+        const url = scope?.story
+            ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
+            : routing.coverageUrl;
+        // TODO: Introduce dedicated Search POST API
+        return this.apiClient.get<ListResponse>(url, {
+            query: {
+                include_deleted: includeDeleted ? 'on' : undefined,
+                query,
+                page,
+                limit: pageSize,
                 sort: sortOrder,
             },
         });
@@ -43,10 +68,10 @@ export class Client {
     }
 
     async getByExternalReferenceId(externalReferenceId: string): Promise<Coverage | null> {
-        const jsonQuery = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
-        const { coverage } = await this.list({
+        const query = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
+        const { coverage } = await this.search({
             includeDeleted: true,
-            jsonQuery,
+            query,
         });
         return coverage[0] || null;
     }
@@ -76,15 +101,12 @@ export class Client {
     async bulkRemove(
         options: Partial<{
             selection: SelectionValue;
-            jsonQuery: string;
+            query: string;
         }>,
     ): ProgressPromise<{ records_deleted_number: number }> {
-        const { selection, jsonQuery } = options;
+        const { selection, query } = options;
         return this.apiClient.delete(routing.coverageUrl, {
-            payload: {
-                selection,
-                query: jsonQuery,
-            },
+            payload: { selection, query },
         });
     }
 }

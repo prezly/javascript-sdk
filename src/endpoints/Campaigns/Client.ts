@@ -23,24 +23,24 @@ export class Client {
     }
 
     async list(options: SearchOptions): Promise<ListResponse> {
-        const { jsonQuery, page, pageSize, sortOrder } = options;
+        const { query, page, pageSize, sortOrder } = options;
         return this.apiClient.get<ListResponse>(routing.campaignsUrl, {
             query: {
                 limit: pageSize,
                 page,
-                query: jsonQuery ? JSON.stringify(jsonQuery) : undefined,
+                query: query ? JSON.stringify(query) : undefined,
                 sort: sortOrder,
             },
         });
     }
 
     async search(options: SearchOptions): Promise<ListResponse> {
-        const { jsonQuery, page, pageSize, sortOrder } = options;
+        const { query, page, pageSize, sortOrder } = options;
         return this.apiClient.post<ListResponse>(routing.campaignsUrl, {
             payload: {
                 limit: pageSize,
                 page,
-                query: jsonQuery,
+                query,
                 sort: sortOrder,
             },
         });

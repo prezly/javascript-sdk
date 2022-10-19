@@ -1,6 +1,6 @@
 import { CultureRef, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
 
-export interface ListRequest {
+export interface ListOptions {
     sortOrder?: string;
 }
 

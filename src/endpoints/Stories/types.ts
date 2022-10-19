@@ -23,17 +23,17 @@ type Html = string;
  */
 type PrezlyContentFormat = string;
 
-export type SearchRequest<Include extends readonly (keyof ExtraStoryFields)[]> = {
-    jsonQuery?: string;
+export interface ListOptions<Include extends readonly (keyof ExtraStoryFields)[]> {
     limit?: number;
     offset?: number;
     sortOrder?: string;
     include?: Include;
-};
-export type ListRequest<Include extends readonly (keyof ExtraStoryFields)[]> = Omit<
-    SearchRequest<Include>,
-    'jsonQuery'
->;
+}
+
+export interface SearchOptions<Include extends readonly (keyof ExtraStoryFields)[]>
+    extends ListOptions<Include> {
+    query?: string;
+}
 
 export interface ListResponse<S extends Story = Story> {
     stories: S[];

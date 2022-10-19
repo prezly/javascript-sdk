@@ -1,11 +1,14 @@
 import { GalleryStatus, NewsroomGallery, Pagination, Query } from '../../types';
 
-export interface ListRequest {
-    scope?: Query;
-    query?: Query;
+export interface ListOptions {
     limit?: number;
     offset?: number;
     sort?: string;
+}
+
+export interface SearchOptions extends ListOptions {
+    scope?: Query;
+    query?: Query;
 }
 
 export interface ReorderRequest {

@@ -3,7 +3,7 @@ import { ExtendedStory, ExtraStoryFields, Story } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { ListRequest, ListResponse, SearchRequest, CreateRequest, UpdateRequest } from './types';
+import { ListOptions, ListResponse, SearchOptions, CreateRequest, UpdateRequest } from './types';
 
 /**
  * `uuid` is the preferred way of targeting a Story. Numeric `id` is considered deprecated.
@@ -19,12 +19,12 @@ export class Client {
 
     async list<
         Include extends readonly (keyof ExtraStoryFields)[],
-        Options extends ListRequest<Include>,
+        Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<ExtraStoryFields, Options['include'][number]>
             : Story,
     >(options?: Options): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include } = options || {};
+        const { limit, offset, sortOrder, include } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
             query: {
                 limit,
@@ -37,15 +37,15 @@ export class Client {
 
     async search<
         Include extends readonly (keyof ExtraStoryFields)[],
-        Options extends ListRequest<Include>,
+        Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<ExtraStoryFields, Options['include'][number]>
             : Story,
-    >(options?: SearchRequest<Include>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include, jsonQuery } = options || {};
+    >(options: SearchOptions<Include>): Promise<ListResponse<StoryRecord>> {
+        const { limit, offset, sortOrder, include, query } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
             payload: {
-                query: jsonQuery,
+                query,
                 limit,
                 offset,
                 sort: sortOrder,

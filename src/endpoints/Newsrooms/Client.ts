@@ -3,7 +3,7 @@ import { Newsroom } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { CreateRequest, ListRequest, ListResponse, SearchRequest, UpdateRequest } from './types';
+import { CreateRequest, ListOptions, ListResponse, SearchOptions, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -14,7 +14,7 @@ export class Client {
         this.apiClient = apiClient;
     }
 
-    async list({ limit, offset, search, sortOrder }: ListRequest = {}): Promise<ListResponse> {
+    async list({ limit, offset, search, sortOrder }: ListOptions = {}): Promise<ListResponse> {
         return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
             query: {
                 limit,
@@ -25,16 +25,12 @@ export class Client {
         });
     }
 
-    async search({
-        jsonQuery,
-        limit,
-        offset,
-        search,
-        sortOrder,
-    }: SearchRequest = {}): Promise<ListResponse> {
+    async search(options: SearchOptions = {}): Promise<ListResponse> {
+        const { query, limit, offset, search, sortOrder } = options;
+        // TODO: Introduce dedicated Search POST API
         return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
             query: {
-                query: jsonQuery,
+                query,
                 limit,
                 offset,
                 search,

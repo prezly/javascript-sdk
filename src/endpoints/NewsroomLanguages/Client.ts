@@ -5,7 +5,7 @@ import { DeferredJobsApiClient } from '../../api';
 
 import {
     SettingsUpdateRequest,
-    ListRequest,
+    ListOptions,
     ListResponse,
     UnsafeUpdateErrorResponse,
 } from './types';
@@ -20,7 +20,7 @@ export class Client {
         this.apiClient = apiClient;
     }
 
-    async list(newsroomId: NewsroomId, { sortOrder }: ListRequest = {}): Promise<ListResponse> {
+    async list(newsroomId: NewsroomId, { sortOrder }: ListOptions = {}): Promise<ListResponse> {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {

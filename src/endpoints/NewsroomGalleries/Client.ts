@@ -3,7 +3,14 @@ import { Newsroom } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 import { NewsroomGallery } from '../../types';
-import { ListRequest, ListResponse, ReorderRequest, CreateRequest, UpdateRequest } from './types';
+import {
+    ListOptions,
+    ListResponse,
+    ReorderRequest,
+    CreateRequest,
+    UpdateRequest,
+    SearchOptions,
+} from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type GalleryId = NewsroomGallery['uuid'] | NewsroomGallery['id'];
@@ -25,8 +32,24 @@ export class Client {
         return response.gallery;
     }
 
-    public async list(newsroomId: NewsroomId, payload: ListRequest = {}): Promise<ListResponse> {
-        const { scope, query, sort, limit, offset } = payload;
+    public async list(newsroomId: NewsroomId, options: ListOptions = {}): Promise<ListResponse> {
+        const { sort, limit, offset } = options;
+        const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
+        return this.apiClient.get<ListResponse>(url, {
+            query: {
+                sort: sort,
+                limit: limit,
+                offset: offset,
+            },
+        });
+    }
+
+    public async search(
+        newsroomId: NewsroomId,
+        options: SearchOptions = {},
+    ): Promise<ListResponse> {
+        const { scope, query, sort, limit, offset } = options;
+        // TODO: Introduce dedicated Search POST API
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {

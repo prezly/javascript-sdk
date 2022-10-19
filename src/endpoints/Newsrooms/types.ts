@@ -7,7 +7,7 @@ import {
     Pagination,
 } from '../../types';
 
-export interface ListRequest {
+export interface ListOptions {
     limit?: number;
     offset?: number;
     /**
@@ -17,11 +17,11 @@ export interface ListRequest {
     sortOrder?: string;
 }
 
-export interface SearchRequest extends ListRequest {
+export interface SearchOptions extends ListOptions {
     /**
      * Filter query using Prezly JSON Query Language
      */
-    jsonQuery?: string;
+    query?: string;
 }
 
 export interface ListResponse {

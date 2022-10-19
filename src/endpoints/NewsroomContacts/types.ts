@@ -2,18 +2,14 @@ import { UploadedImage } from '@prezly/uploads';
 
 import { CultureRef } from '../../types';
 
-export interface ListRequestOptions {
+export interface ListOptions {
     /**
      * Keyword search term
      */
     search?: string;
 }
 
-export interface SearchOptions {
-    /**
-     * Keyword search term
-     */
-    search?: string;
+export interface SearchOptions extends ListOptions {
     /**
      * Prezly Query Language expression to filter contacts by.
      */

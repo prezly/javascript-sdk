@@ -3,7 +3,7 @@ import { Newsroom, NewsroomContact } from '../../types';
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { ListRequestOptions, SearchOptions, CreateRequest, UpdateRequest } from './types';
+import { ListOptions, SearchOptions, CreateRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type NewsroomContactId = NewsroomContact['uuid'] | NewsroomContact['id'];
@@ -17,7 +17,7 @@ export class Client {
 
     public async list(
         newsroomId: NewsroomId,
-        { search }: ListRequestOptions = {},
+        { search }: ListOptions = {},
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const { contacts } = await this.apiClient.get<{ contacts: NewsroomContact[] }>(url, {

@@ -3,7 +3,7 @@ import { Campaign, Contact, ContactsScope, EmailRecipient, Query } from '../../t
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
 
-import { ListResponse, SearchOptions } from './types';
+import { ListOptions, ListResponse, SearchOptions } from './types';
 import { RecipientsOperationResponse } from '../Campaigns';
 
 type CampaignId = Campaign['id'];
@@ -17,15 +17,28 @@ export class Client {
         this.apiClient = apiClient;
     }
 
-    async list(campaignId: CampaignId, options: SearchOptions): Promise<ListResponse> {
-        const { jsonQuery, page, pageSize, sortOrder } = options;
+    async list(campaignId: CampaignId, options: ListOptions): Promise<ListResponse> {
+        const { page, pageSize, sortOrder } = options;
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 limit: pageSize,
                 page,
-                query: jsonQuery ? JSON.stringify(jsonQuery) : undefined,
                 sort: sortOrder,
+            },
+        });
+    }
+
+    async search(campaignId: CampaignId, options: SearchOptions): Promise<ListResponse> {
+        const { page, pageSize, sortOrder, query } = options;
+        const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
+        // TODO: Introduce dedicated Search POST API
+        return this.apiClient.get<ListResponse>(url, {
+            query: {
+                query: query ? JSON.stringify(query) : undefined,
+                sort: sortOrder,
+                limit: pageSize,
+                page,
             },
         });
     }
