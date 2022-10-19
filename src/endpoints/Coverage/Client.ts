@@ -1,6 +1,6 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
-import { CoverageEntry, SelectionValue } from '../../types';
+import { CoverageEntry, Query, SelectionValue } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -49,7 +49,7 @@ export class Client {
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
-                query,
+                query: Query.stringify(query),
                 limit,
                 offset,
                 sort: sortOrder,

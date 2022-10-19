@@ -1,4 +1,4 @@
-import { Newsroom } from '../../types';
+import { Newsroom, Query } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -30,7 +30,7 @@ export class Client {
         // TODO: Introduce dedicated Search POST API
         return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
             query: {
-                query,
+                query: Query.stringify(query),
                 limit,
                 offset,
                 search,

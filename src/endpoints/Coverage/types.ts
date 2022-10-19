@@ -9,6 +9,7 @@ import {
     OEmbedInfo,
     Pagination,
     Story,
+    Query,
 } from '../../types';
 
 export type Scope = { story: Story['id'] } | null;
@@ -64,7 +65,7 @@ export interface ListOptions {
     sortOrder?: string;
 }
 export interface SearchOptions extends ListOptions {
-    query?: string;
+    query?: Query;
 }
 
 export interface ListResponse {

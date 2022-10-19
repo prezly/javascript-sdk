@@ -4,6 +4,7 @@ import {
     ExtraStoryFields,
     NewsroomRef,
     Pagination,
+    Query,
     Story,
     StoryFormatVersion,
     StoryVisibility,
@@ -32,7 +33,7 @@ export interface ListOptions<Include extends readonly (keyof ExtraStoryFields)[]
 
 export interface SearchOptions<Include extends readonly (keyof ExtraStoryFields)[]>
     extends ListOptions<Include> {
-    query?: string;
+    query?: Query;
 }
 
 export interface ListResponse<S extends Story = Story> {

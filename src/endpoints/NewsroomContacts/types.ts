@@ -1,6 +1,6 @@
 import { UploadedImage } from '@prezly/uploads';
 
-import { CultureRef } from '../../types';
+import { CultureRef, Query } from '../../types';
 
 export interface ListOptions {
     /**
@@ -13,7 +13,7 @@ export interface SearchOptions extends ListOptions {
     /**
      * Prezly Query Language expression to filter contacts by.
      */
-    query?: string;
+    query?: Query;
 }
 
 export interface CreateRequest {

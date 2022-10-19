@@ -5,6 +5,7 @@ import {
     Newsroom,
     NewsroomStatus,
     Pagination,
+    Query,
 } from '../../types';
 
 export interface ListOptions {
@@ -21,7 +22,7 @@ export interface SearchOptions extends ListOptions {
     /**
      * Filter query using Prezly JSON Query Language
      */
-    query?: string;
+    query?: Query;
 }
 
 export interface ListResponse {

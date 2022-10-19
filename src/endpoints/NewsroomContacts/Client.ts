@@ -1,4 +1,4 @@
-import { Newsroom, NewsroomContact } from '../../types';
+import { Newsroom, NewsroomContact, Query } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -40,7 +40,10 @@ export class Client {
     ): Promise<NewsroomContact[]> {
         const url = routing.newsroomContactsUrl.replace(':newsroom_id', String(newsroomId));
         const { contacts } = await this.apiClient.get<{ contacts: NewsroomContact[] }>(url, {
-            query: { search, query },
+            query: {
+                search,
+                query: Query.stringify(query),
+            },
         });
         return contacts;
     }
