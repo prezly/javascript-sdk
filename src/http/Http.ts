@@ -1,5 +1,5 @@
-import { ApiResponse, Method, Params, ParamsWithPayload } from './types';
 import { createRequest } from './createRequest';
+import { ApiResponse, Method, Params, ParamsWithPayload } from './types';
 
 export const Http = {
     get<V = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<V>> {

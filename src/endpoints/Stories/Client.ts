@@ -1,7 +1,7 @@
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 import { ExtendedStory, Story } from '../../types';
 
-import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
 
 import { ListOptions, ListResponse, SearchOptions, CreateRequest, UpdateRequest } from './types';
 
@@ -69,7 +69,7 @@ export class Client {
     }
 
     async update(id: StoryId, payload: UpdateRequest): Promise<ExtendedStory> {
-        let url = `${routing.storiesUrl}/${id}`;
+        const url = `${routing.storiesUrl}/${id}`;
         const { story } = await this.apiClient.patch<{ story: ExtendedStory }>(url, {
             payload,
         });

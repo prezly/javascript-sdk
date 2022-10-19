@@ -1,5 +1,5 @@
-import * as nodeUrl from 'url';
 import queryString, { ParsedQuery } from 'query-string';
+import * as nodeUrl from 'url';
 
 import { DeferredJobResponse } from './types';
 

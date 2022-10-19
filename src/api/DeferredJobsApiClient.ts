@@ -8,11 +8,10 @@ import {
     Params,
     ParamsWithPayload,
 } from '../http';
-
-import { ApiClient } from './ApiClient';
+import { routing } from '../routing';
 import { JobState, JobStatus } from '../types';
 
-import { routing } from '../routing';
+import { ApiClient } from './ApiClient';
 
 const JOB_STATUS_POLLING_INTERVAL = 2000; // ms
 
@@ -43,7 +42,7 @@ async function handleDeferredJob<V = any, P = any>(
                 progress(job.progress, job.value);
 
                 await sleep(JOB_STATUS_POLLING_INTERVAL);
-            } while (true);
+            } while (true); // eslint-disable-line no-constant-condition
         });
     }
 

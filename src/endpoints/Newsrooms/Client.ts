@@ -1,7 +1,7 @@
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 import { Newsroom, Query } from '../../types';
 
-import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
 
 import { CreateRequest, ListOptions, ListResponse, SearchOptions, UpdateRequest } from './types';
 

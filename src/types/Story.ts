@@ -1,9 +1,9 @@
 import { Category } from './Category';
-import { Entity } from './Entity';
+import { OEmbedInfo } from './common';
 import { CultureRef } from './Culture';
+import { Entity } from './Entity';
 import { NewsroomRef } from './Newsroom';
 import { UserRef } from './User';
-import { OEmbedInfo } from './common';
 
 export interface StoryRef {
     uuid: string;

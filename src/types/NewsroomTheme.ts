@@ -1,4 +1,5 @@
 import { UploadedImage } from '@prezly/uploads';
+
 import { Newsroom } from './Newsroom';
 
 export interface NewsroomTheme {

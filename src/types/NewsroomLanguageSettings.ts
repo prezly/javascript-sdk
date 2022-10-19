@@ -1,6 +1,6 @@
+import { Notification } from './common';
 import { CultureRef } from './Culture';
 import { NewsroomCompanyInformation } from './NewsroomCompanyInformation';
-import { Notification } from './common';
 
 export interface NewsroomLanguageSettings {
     categories_count: number;

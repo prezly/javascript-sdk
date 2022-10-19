@@ -1,7 +1,7 @@
-import { Contact, EmailSubscription, Newsroom } from '../../types';
 
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import { Contact, EmailSubscription, Newsroom } from '../../types';
 
 import { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest } from './types';
 

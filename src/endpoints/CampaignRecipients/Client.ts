@@ -1,11 +1,10 @@
-import { Campaign, Contact, EmailRecipient, Query } from '../../types';
-
-import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
+import { Campaign, Contact, EmailRecipient, Query } from '../../types';
+import { RecipientsOperationResponse } from '../Campaigns';
 
 import { ContactsScope } from './scopes';
 import { ListOptions, ListResponse, SearchOptions } from './types';
-import { RecipientsOperationResponse } from '../Campaigns';
 
 type CampaignId = Campaign['id'];
 type ContactId = Contact['id'];

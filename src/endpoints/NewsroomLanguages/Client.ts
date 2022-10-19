@@ -1,15 +1,15 @@
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 import { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
 
-import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
 
+import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 import {
     SettingsUpdateRequest,
     ListOptions,
     ListResponse,
     UnsafeUpdateErrorResponse,
 } from './types';
-import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
@@ -108,7 +108,7 @@ export class Client {
         newsroomId: NewsroomId,
         localeCode: CultureRef['code'],
         newLocaleCode: CultureRef['code'],
-        forceUnsafeOperation: boolean = false,
+        forceUnsafeOperation = false,
     ): Promise<
         { status: 'success'; language: NewsroomLanguageSettings } | UnsafeUpdateErrorResponse
     > {

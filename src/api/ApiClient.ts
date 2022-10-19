@@ -1,7 +1,7 @@
 import { Http, ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../http';
+import { stripSlashes } from '../utils';
 
 import { DEFAULT_USER_AGENT } from './constants';
-import { stripSlashes } from '../utils';
 
 export interface Options {
     accessToken: string;

@@ -2,12 +2,12 @@ import { UploadedFile } from '@prezly/uploads';
 
 import { OEmbedInfo } from './common';
 import { Contact } from './Contact';
+import { CountryRef } from './Country';
+import { CultureRef } from './Culture';
 import { Entity } from './Entity';
 import { NewsroomRef } from './Newsroom';
 import { Story } from './Story';
 import { UserRef } from './User';
-import { CountryRef } from './Country';
-import { CultureRef } from './Culture';
 
 export interface CoverageEntry extends Entity<number> {
     uuid: string;

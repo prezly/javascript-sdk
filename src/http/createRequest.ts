@@ -1,12 +1,12 @@
-import { createUrlWithQuery } from './lib';
-import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
 import { ApiError } from './ApiError';
-
 import {
     CONTENT_TYPE,
     INVALID_URL_ERROR_MESSAGE,
     NETWORK_PROBLEM_ERROR_MESSAGE,
 } from './constants';
+import { createUrlWithQuery } from './lib';
+import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
+
 
 function extractHeaders(headers: Headers): HeadersMap {
     const result: HeadersMap = {};

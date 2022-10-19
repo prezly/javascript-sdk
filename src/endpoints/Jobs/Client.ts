@@ -1,7 +1,7 @@
+import { DeferredJobsApiClient } from '../../api';
+import { routing } from '../../routing';
 import { JobState } from '../../types';
 
-import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
 
 import { StatusResponse } from './types';
 

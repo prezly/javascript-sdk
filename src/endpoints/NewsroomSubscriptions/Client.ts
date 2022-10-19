@@ -1,7 +1,7 @@
-import { Newsroom } from '../../types';
 
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import { Newsroom } from '../../types';
 
 import { CreateRequest } from './types';
 

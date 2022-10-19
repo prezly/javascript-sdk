@@ -1,7 +1,8 @@
-import { Newsroom, PrivacyRequest } from '../../types';
 
 import { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import { Newsroom, PrivacyRequest } from '../../types';
+
 import {
     DeletePrivacyRequestCreateRequest,
     ExportPrivacyRequestCreateRequest,
