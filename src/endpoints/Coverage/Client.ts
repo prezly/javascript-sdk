@@ -24,7 +24,7 @@ export class Client {
     }
 
     async list(options: ListOptions = {}, scope?: Scope): Promise<ListResponse> {
-        const { includeDeleted, page, pageSize, sortOrder } = options;
+        const { includeDeleted, limit, offset, sortOrder } = options;
         // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
@@ -32,15 +32,15 @@ export class Client {
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
-                page,
-                limit: pageSize,
+                limit,
+                offset,
                 sort: sortOrder,
             },
         });
     }
 
     async search(options: SearchOptions = {}, scope?: Scope): Promise<ListResponse> {
-        const { includeDeleted, query, page, pageSize, sortOrder } = options;
+        const { includeDeleted, query, limit, offset, sortOrder } = options;
         // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
@@ -50,8 +50,8 @@ export class Client {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 query,
-                page,
-                limit: pageSize,
+                limit,
+                offset,
                 sort: sortOrder,
             },
         });

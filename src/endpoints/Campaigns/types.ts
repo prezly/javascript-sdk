@@ -34,8 +34,8 @@ export interface CampaignResponse {
 }
 
 export interface ListOptions {
-    page?: number;
-    pageSize?: number;
+    limit?: number;
+    offset?: number;
     sortOrder?: string;
 }
 

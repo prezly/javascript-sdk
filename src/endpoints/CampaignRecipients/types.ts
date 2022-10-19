@@ -1,8 +1,8 @@
 import { EmailRecipient, Pagination, Query } from '../../types';
 
 export interface ListOptions {
-    page?: number;
-    pageSize?: number;
+    limit?: number;
+    offset?: number;
     sortOrder?: string;
 }
 export interface SearchOptions extends ListOptions {

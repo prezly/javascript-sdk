@@ -59,8 +59,8 @@ export interface CreateRequest extends UpdateRequest {}
 
 export interface ListOptions {
     includeDeleted?: boolean;
-    page?: number;
-    pageSize?: number;
+    limit?: number;
+    offset?: number;
     sortOrder?: string;
 }
 export interface SearchOptions extends ListOptions {

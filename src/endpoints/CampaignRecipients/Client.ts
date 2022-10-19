@@ -18,27 +18,27 @@ export class Client {
     }
 
     async list(campaignId: CampaignId, options: ListOptions): Promise<ListResponse> {
-        const { page, pageSize, sortOrder } = options;
+        const { limit, offset, sortOrder } = options;
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
-                limit: pageSize,
-                page,
+                limit,
+                offset,
                 sort: sortOrder,
             },
         });
     }
 
     async search(campaignId: CampaignId, options: SearchOptions): Promise<ListResponse> {
-        const { page, pageSize, sortOrder, query } = options;
+        const { limit, offset, sortOrder, query } = options;
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
         // TODO: Introduce dedicated Search POST API
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 query: query ? JSON.stringify(query) : undefined,
                 sort: sortOrder,
-                limit: pageSize,
-                page,
+                limit,
+                offset,
             },
         });
     }
