@@ -1,6 +1,6 @@
 import { UploadedImage } from '@prezly/uploads';
 
-import { Contact, ContactType, UnsubscribeReason, Utm } from '../../types';
+import { Contact, ContactType, Utm } from '../../types';
 
 interface Person {
     contact_type: ContactType.PERSON;
@@ -36,6 +36,14 @@ export interface SubscribeRequest<Type extends ContactType> {
         salutation?: Contact['salutation'];
         address?: Partial<Contact['address']>;
     };
+}
+
+export enum UnsubscribeReason {
+    UNKNOWN = 'unknown',
+    UNWANTED = 'unwanted',
+    SPAM = 'spam',
+    NEVER_SIGNED_UP = 'never_signed_up',
+    OTHER = 'other',
 }
 
 export interface UnsubscribeRequest {
