@@ -33,11 +33,11 @@ export class Client {
     }
 
     public async list(newsroomId: NewsroomId, options: ListOptions = {}): Promise<ListResponse> {
-        const { sort, limit, offset } = options;
+        const { sortOrder, limit, offset } = options;
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
-                sort: sort,
+                sort: sortOrder,
                 limit: limit,
                 offset: offset,
             },
@@ -48,14 +48,14 @@ export class Client {
         newsroomId: NewsroomId,
         options: SearchOptions = {},
     ): Promise<ListResponse> {
-        const { scope, query, sort, limit, offset } = options;
+        const { scope, query, sortOrder, limit, offset } = options;
         // TODO: Introduce dedicated Search POST API
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 scope: scope ? JSON.stringify(scope) : undefined,
                 query: query ? JSON.stringify(query) : undefined,
-                sort: sort,
+                sort: sortOrder,
                 limit: limit,
                 offset: offset,
             },
