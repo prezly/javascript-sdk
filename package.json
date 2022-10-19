@@ -49,7 +49,7 @@
         "prebuild": "npm run clean && npm ci",
         "build": "npm run build:types && npm run build:es",
         "build:types": "tsc --project .",
-        "build:es": "cross-env npm_package_repository_url=https://github.com/prezly/javascript-sdk babel ./src --ignore='**/*.test.ts' --config-file=./babel.config.json --extensions=.ts,.cts --source-root=./src --out-dir=./dist",
+        "build:es": "babel ./src --ignore='**/*.test.ts' --config-file=./babel.config.json --extensions=.ts,.cts --source-root=./src --out-dir=./dist",
         "watch": "tsc --watch --preserveWatchOutput --project .",
         "start": "npm run build --incremental --watch",
         "lint": "eslint ./src --ext=.ts",
