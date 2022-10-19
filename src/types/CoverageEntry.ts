@@ -1,13 +1,13 @@
-import { UploadedFile } from '@prezly/uploads';
+import type { UploadedFile } from '@prezly/uploads';
 
-import { OEmbedInfo } from './common';
-import { Contact } from './Contact';
-import { CountryRef } from './Country';
-import { CultureRef } from './Culture';
-import { Entity } from './Entity';
-import { NewsroomRef } from './Newsroom';
-import { Story } from './Story';
-import { UserRef } from './User';
+import type { OEmbedInfo } from './common';
+import type { Contact } from './Contact';
+import type { CountryRef } from './Country';
+import type { CultureRef } from './Culture';
+import type { Entity } from './Entity';
+import type { NewsroomRef } from './Newsroom';
+import type { Story } from './Story';
+import type { UserRef } from './User';
 
 export interface CoverageEntry extends Entity<number> {
     uuid: string;

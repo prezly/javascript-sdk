@@ -1,3 +1,10 @@
 export { Http } from './Http';
 export { isDeferredJobResponse } from './lib';
-export { ApiResponse, HeadersMap, HttpCodes, Method, Params, ParamsWithPayload } from './types';
+export {
+    type ApiResponse,
+    type HeadersMap,
+    type Params,
+    type ParamsWithPayload,
+    HttpCodes,
+    Method,
+} from './types';

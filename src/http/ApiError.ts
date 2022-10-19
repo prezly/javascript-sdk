@@ -1,4 +1,4 @@
-import { ApiErrorPayload, HeadersMap, ApiResponse } from './types';
+import type { ApiErrorPayload, HeadersMap, ApiResponse } from './types';
 
 export class ApiError<P = ApiErrorPayload> extends Error implements ApiResponse<P> {
     payload: P;

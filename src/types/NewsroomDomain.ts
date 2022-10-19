@@ -1,4 +1,4 @@
-import { DnsConfigurationInstruction } from './DnsConfigurationInstruction';
+import type { DnsConfigurationInstruction } from './DnsConfigurationInstruction';
 
 export interface NewsroomDomain {
     domain_name: string;

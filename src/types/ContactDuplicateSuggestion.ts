@@ -1,4 +1,4 @@
-import { ContactRef } from './Contact';
+import type { ContactRef } from './Contact';
 
 export interface ContactDuplicateSuggestion {
     contact: ContactRef;

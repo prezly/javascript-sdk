@@ -1,6 +1,6 @@
-import { UploadedImage } from '@prezly/uploads';
+import type { UploadedImage } from '@prezly/uploads';
 
-import { Contact } from '../../types';
+import type { Contact } from '../../types';
 
 export interface CreateRequest {
     email_address: string;

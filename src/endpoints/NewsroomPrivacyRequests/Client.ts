@@ -1,9 +1,9 @@
 
-import { DeferredJobsApiClient } from '../../api';
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { Newsroom, PrivacyRequest } from '../../types';
+import type { Newsroom, PrivacyRequest } from '../../types';
 
-import {
+import type {
     DeletePrivacyRequestCreateRequest,
     ExportPrivacyRequestCreateRequest,
     CorrectPrivacyRequestCreateRequest,

@@ -1,7 +1,7 @@
 
-import { DeferredJobsApiClient } from '../../api';
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { License } from '../../types';
+import type { License } from '../../types';
 
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;

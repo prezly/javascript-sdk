@@ -1,4 +1,4 @@
-import { Campaign, Pagination, Query, SenderAddress, Story, Warning } from '../../types';
+import type { Campaign, Pagination, Query, SenderAddress, Story, Warning } from '../../types';
 
 export interface CreateRequest {
     subject?: Campaign['subject'];

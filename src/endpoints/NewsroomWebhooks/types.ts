@@ -1,4 +1,4 @@
-import { NewsroomWebhook } from '../../types';
+import type { NewsroomWebhook } from '../../types';
 
 export interface CreateRequest {
     name: string;

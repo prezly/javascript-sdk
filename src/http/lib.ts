@@ -1,7 +1,8 @@
-import queryString, { ParsedQuery } from 'query-string';
+import type { ParsedQuery } from 'query-string';
+import queryString from 'query-string';
 import * as nodeUrl from 'url';
 
-import { DeferredJobResponse } from './types';
+import type { DeferredJobResponse } from './types';
 
 const URL = typeof window === 'undefined' ? nodeUrl.URL : window.URL;
 

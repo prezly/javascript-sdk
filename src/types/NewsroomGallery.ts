@@ -1,6 +1,6 @@
-import { UploadedImage } from '@prezly/uploads';
+import type { UploadedImage } from '@prezly/uploads';
 
-import { UserRef } from './User';
+import type { UserRef } from './User';
 
 export interface NewsroomGallery {
     id: number;

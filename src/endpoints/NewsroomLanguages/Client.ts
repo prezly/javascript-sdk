@@ -1,10 +1,10 @@
-import { DeferredJobsApiClient } from '../../api';
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
+import type { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
 
 
 import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
-import {
+import type {
     SettingsUpdateRequest,
     ListOptions,
     ListResponse,

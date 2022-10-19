@@ -5,7 +5,8 @@ import {
     NETWORK_PROBLEM_ERROR_MESSAGE,
 } from './constants';
 import { createUrlWithQuery } from './lib';
-import { HttpCodes, Method, HeadersMap, ApiResponse } from './types';
+import type { Method, HeadersMap, ApiResponse } from './types';
+import { HttpCodes } from './types';
 
 
 function extractHeaders(headers: Headers): HeadersMap {

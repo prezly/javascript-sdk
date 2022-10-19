@@ -1,8 +1,8 @@
-import { NewsroomRef } from './Newsroom';
-import { SenderAddress } from './SenderAddress';
-import { SenderDomain } from './SenderDomain';
-import { StoryRef } from './Story';
-import { UserRef } from './User';
+import type { NewsroomRef } from './Newsroom';
+import type { SenderAddress } from './SenderAddress';
+import type { SenderDomain } from './SenderDomain';
+import type { StoryRef } from './Story';
+import type { UserRef } from './User';
 
 export interface Campaign {
     id: number;

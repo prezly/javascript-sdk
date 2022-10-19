@@ -1,4 +1,4 @@
-import { CultureRef, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
+import type { CultureRef, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
 
 export interface ListOptions {
     sortOrder?: string;

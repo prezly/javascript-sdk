@@ -1,4 +1,5 @@
-import { Http, ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../http';
+import type { ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../http';
+import { Http } from '../http';
 import { stripSlashes } from '../utils';
 
 import { DEFAULT_USER_AGENT } from './constants';

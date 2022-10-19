@@ -1,4 +1,4 @@
-import { SenderDomain } from './SenderDomain';
+import type { SenderDomain } from './SenderDomain';
 
 export interface SenderAddress {
     id: number;

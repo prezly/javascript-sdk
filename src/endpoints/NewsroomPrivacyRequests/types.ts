@@ -1,4 +1,4 @@
-import { PrivacyRequest } from '../../types';
+import type { PrivacyRequest } from '../../types';
 
 export interface DeletePrivacyRequestCreateRequest {
     email: string;

@@ -1,17 +1,19 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
+import type {
+    ApiResponse,
+    Params,
+    ParamsWithPayload} from '../http';
 import {
     Http,
-    ApiResponse,
     HttpCodes,
-    isDeferredJobResponse,
-    Params,
-    ParamsWithPayload,
+    isDeferredJobResponse
 } from '../http';
 import { routing } from '../routing';
-import { JobState, JobStatus } from '../types';
+import type { JobState} from '../types';
+import { JobStatus } from '../types';
 
-import { ApiClient } from './ApiClient';
+import type { ApiClient } from './ApiClient';
 
 const JOB_STATUS_POLLING_INTERVAL = 2000; // ms
 

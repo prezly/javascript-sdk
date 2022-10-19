@@ -1,4 +1,4 @@
-import { EmailRecipient, Pagination, Query } from '../../types';
+import type { EmailRecipient, Pagination, Query } from '../../types';
 
 export interface ListOptions {
     limit?: number;

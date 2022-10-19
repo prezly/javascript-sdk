@@ -1,4 +1,4 @@
-import { CultureRef, Newsroom, Pagination, Query } from '../../types';
+import type { CultureRef, Newsroom, Pagination, Query } from '../../types';
 
 export interface ListOptions {
     limit?: number;

@@ -1,6 +1,6 @@
-import { UploadedImage } from '@prezly/uploads';
+import type { UploadedImage } from '@prezly/uploads';
 
-import { Contact, Utm } from '../../types';
+import type { Contact, Utm } from '../../types';
 
 interface Person {
     contact_type: Contact.Type.PERSON;

@@ -1,6 +1,6 @@
-import { UploadedImage } from '@prezly/uploads';
+import type { UploadedImage } from '@prezly/uploads';
 
-import { CultureRef, Query } from '../../types';
+import type { CultureRef, Query } from '../../types';
 
 export interface ListOptions {
     /**
