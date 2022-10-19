@@ -8,7 +8,6 @@ export interface CampaignReportScope {
     report:
         | 'recipients'
         | 'sent'
-        | 'replied'
         | 'clicked'
         | 'opened'
         | 'unopened'
