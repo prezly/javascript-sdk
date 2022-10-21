@@ -156,6 +156,7 @@ export namespace Contact {
         PINTEREST = 'pinterest',
         SKYPE = 'skype',
         SNAPCHAT = 'snapchat',
+        TIKTOK = 'tiktok',
         TWITCH = 'twitch',
         TWITTER = 'twitter',
         YOUTUBE = 'youtube',
