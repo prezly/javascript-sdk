@@ -13,9 +13,9 @@ yarn add @prezly/sdk
 Using ES Modules:
 
 ```js
-import PrezlySdk from '@prezly/sdk';
+import { createPrezlyClient } from '@prezly/sdk';
 
-const prezlySdk = new PrezlySdk({
+const prezlyClient = createPrezlyClient({
     accessToken: 'your-access-token',
 });
 ```
@@ -23,9 +23,9 @@ const prezlySdk = new PrezlySdk({
 Or Using CommonJS:
 
 ```js
-const PrezlySdk = require('@prezly/sdk').default;
+const { createPrezlyClient } = require('@prezly/sdk').default;
 
-const prezlySdk = new PrezlySdk({
+const prezlyClient = createPrezlyClient({
     accessToken: 'your-access-token',
 });
 ```
@@ -53,7 +53,7 @@ yarn add whatwg-fetch
 ```js
 import 'whatwg-fetch';
 // ...
-import PrezlySdk from '@prezly/sdk';
+import { createPrezlyClient } from '@prezly/sdk';
 ```
 
 We recommend referring to the [official `whatwg-fetch` module documentation](https://www.npmjs.com/package/whatwg-fetch) for more information.
@@ -69,7 +69,7 @@ yarn add node-fetch
 ```js
 global.fetch = require('node-fetch');
 // ...
-const PrezlySdk = require('@prezly/sdk').default;
+const { createPrezlyClient } = require('@prezly/sdk');
 ```
 
 We recommend referring to the [official `node-fetch` module documentation](https://www.npmjs.com/package/node-fetch) for more information.
@@ -87,7 +87,7 @@ Using ES Modules:
 ```js
 import 'cross-fetch/polyfill';
 // ...
-import PrezlySdk from '@prezly/sdk';
+import { createPrezlyClient } from '@prezly/sdk';
 ```
 
 Or Using CommonJS:
@@ -95,7 +95,7 @@ Or Using CommonJS:
 ```js
 require('cross-fetch/polyfill');
 // ...
-const PrezlySdk = require('@prezly/sdk').default;
+const { createPrezlyClient } = require('@prezly/sdk');
 ```
 
 We recommend referring to the [official `cross-fetch` module documentation](https://www.npmjs.com/package/cross-fetch) for more information.
