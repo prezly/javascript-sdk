@@ -1,4 +1,4 @@
-import { CultureRef } from './Culture';
+import type { CultureRef } from './Culture';
 
 export interface Category {
     display_description: string | null;

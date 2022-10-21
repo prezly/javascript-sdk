@@ -1,7 +1,6 @@
-import { Newsroom, NewsroomTheme, NewsroomThemePreset } from '../../types';
-
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
+import type { Newsroom, NewsroomTheme, NewsroomThemePreset } from '../../types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type NewsroomThemeId = NewsroomTheme['id'];

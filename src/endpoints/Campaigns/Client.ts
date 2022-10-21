@@ -1,12 +1,12 @@
-import { ProgressPromise } from '@prezly/progress-promise';
+import type { ProgressPromise } from '@prezly/progress-promise';
 
-import { Campaign, Query } from '../../types';
-
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
+import type { Campaign } from '../../types';
+import { Query } from '../../types';
 import { toIso8601 } from '../../utils';
 
-import {
+import type {
     CreateRequest,
     RecipientsOperationResponse,
     CampaignResponse,

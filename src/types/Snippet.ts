@@ -1,4 +1,4 @@
-import { UserRef } from './User';
+import type { UserRef } from './User';
 
 export interface Snippet {
     id: number;

@@ -1,8 +1,8 @@
-import { DeferredJobsApiClient } from '../../api';
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import type { Snippet } from '../../types';
 
-import { CreateRequest, UpdateRequest } from './types';
-import { Snippet } from '../../types';
+import type { CreateRequest, UpdateRequest } from './types';
 
 type SnippetId = Snippet['uuid'] | Snippet['id'];
 

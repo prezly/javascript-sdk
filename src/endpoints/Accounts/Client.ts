@@ -1,7 +1,8 @@
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
-import { UserAccount } from '../../types';
-import {
+import type { UserAccount } from '../../types';
+
+import type {
     CreateRequest,
     CreateResponse,
     ListResponse,

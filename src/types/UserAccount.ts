@@ -1,6 +1,6 @@
-import { LicenseRef } from './License';
-import { NewsroomRef } from './Newsroom';
-import { Permission } from './Permissions';
+import type { LicenseRef } from './License';
+import type { NewsroomRef } from './Newsroom';
+import type { Permission } from './Permissions';
 
 export interface UserAccount {
     id: number;

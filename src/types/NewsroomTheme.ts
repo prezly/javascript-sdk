@@ -1,5 +1,6 @@
-import { UploadedImage } from '@prezly/uploads';
-import { Newsroom } from './Newsroom';
+import type { UploadedImage } from '@prezly/uploads';
+
+import type { Newsroom } from './Newsroom';
 
 export interface NewsroomTheme {
     codename: string;

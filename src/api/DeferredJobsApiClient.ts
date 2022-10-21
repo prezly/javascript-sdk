@@ -1,18 +1,12 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
-import {
-    Http,
-    ApiResponse,
-    HttpCodes,
-    isDeferredJobResponse,
-    Params,
-    ParamsWithPayload,
-} from '../http';
-
-import { ApiClient } from './ApiClient';
-import { JobState, JobStatus } from '../types';
-
+import type { ApiResponse, Params, ParamsWithPayload } from '../http';
+import { Http, HttpCodes, isDeferredJobResponse } from '../http';
 import { routing } from '../routing';
+import type { JobState } from '../types';
+import { JobStatus } from '../types';
+
+import type { ApiClient } from './ApiClient';
 
 const JOB_STATUS_POLLING_INTERVAL = 2000; // ms
 
@@ -43,7 +37,7 @@ async function handleDeferredJob<V = any, P = any>(
                 progress(job.progress, job.value);
 
                 await sleep(JOB_STATUS_POLLING_INTERVAL);
-            } while (true);
+            } while (true); // eslint-disable-line no-constant-condition
         });
     }
 

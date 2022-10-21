@@ -1,12 +1,15 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "commonjs",
+        "module": "es6",
         "lib": ["esnext", "dom"],
-        "outDir": "./dist",
+        "emitDeclarationOnly": true,
+        "declarationDir": "./dist",
         "removeComments": false,
+        "importsNotUsedAsValues": "error",
         "inlineSourceMap": true,
         "inlineSources": true,
+        "isolatedModules": true,
         "downlevelIteration": true,
         "strict": true,
         "noUnusedLocals": true,

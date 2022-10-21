@@ -1,11 +1,11 @@
-import { ProgressPromise } from '@prezly/progress-promise';
+import type { ProgressPromise } from '@prezly/progress-promise';
 
-import { CoverageEntry, Query, SelectionValue } from '../../types';
-
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
+import type { CoverageEntry, SelectionValue } from '../../types';
+import { Query } from '../../types';
 
-import {
+import type {
     CreateRequest,
     ListOptions,
     ListResponse,

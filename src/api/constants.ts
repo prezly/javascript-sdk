@@ -1,5 +1,4 @@
-// When using `import`, TS complains because `package.json` is outside the
-// `rootDir`, but it works with `require`.
-const { version: packageVersion, repository } = require('../../package.json');
+const VERSION = process.env.npm_package_version;
+const URL = 'https://github.com/prezly/javascript-sdk';
 
-export const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${packageVersion} (+${repository.url})`;
+export const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${VERSION} (+${URL})`;

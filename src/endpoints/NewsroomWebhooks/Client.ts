@@ -1,9 +1,8 @@
-import { Newsroom, NewsroomWebhook } from '../../types';
-
-import { DeferredJobsApiClient } from '../../api';
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import type { Newsroom, NewsroomWebhook } from '../../types';
 
-import { CreateRequest, UpdateRequest } from './types';
+import type { CreateRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 

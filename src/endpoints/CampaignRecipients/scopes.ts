@@ -1,4 +1,4 @@
-import { Campaign, Contact, EmailRecipient, SelectionValue } from '../../types';
+import type { Campaign, Contact, EmailRecipient, SelectionValue } from '../../types';
 
 export interface AllContactsScope {
     type: 'scope:contacts';

@@ -1,4 +1,4 @@
-import { Category, CultureRef, NewsroomRef, Pagination, Query, Story } from '../../types';
+import type { Category, CultureRef, NewsroomRef, Pagination, Query, Story } from '../../types';
 
 /**
  * Uploadcare image JSON string.

@@ -1,7 +1,7 @@
-import { UploadedImage } from '@prezly/uploads';
+import type { UploadedImage } from '@prezly/uploads';
 
-import { Entity } from './Entity';
-import { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
+import type { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
+import type { Entity } from './Entity';
 
 export interface ContactRef extends Entity {
     contact_type: 'person' | 'organisation';

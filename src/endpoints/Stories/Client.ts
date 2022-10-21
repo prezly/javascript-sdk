@@ -1,9 +1,14 @@
-import { ExtendedStory, Story } from '../../types';
-
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
+import type { ExtendedStory, Story } from '../../types';
 
-import { ListOptions, ListResponse, SearchOptions, CreateRequest, UpdateRequest } from './types';
+import type {
+    ListOptions,
+    ListResponse,
+    SearchOptions,
+    CreateRequest,
+    UpdateRequest,
+} from './types';
 
 /**
  * `uuid` is the preferred way of targeting a Story. Numeric `id` is considered deprecated.
@@ -69,7 +74,7 @@ export class Client {
     }
 
     async update(id: StoryId, payload: UpdateRequest): Promise<ExtendedStory> {
-        let url = `${routing.storiesUrl}/${id}`;
+        const url = `${routing.storiesUrl}/${id}`;
         const { story } = await this.apiClient.patch<{ story: ExtendedStory }>(url, {
             payload,
         });

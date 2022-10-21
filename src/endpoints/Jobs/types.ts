@@ -1,4 +1,4 @@
-import { JobState } from '../../types';
+import type { JobState } from '../../types';
 
 export interface StatusResponse {
     job: {

@@ -1,6 +1,4 @@
 import { ApiClient, DeferredJobsApiClient } from './api';
-import { HeadersMap } from './http';
-
 import {
     Accounts,
     Campaigns,
@@ -22,6 +20,7 @@ import {
     Snippets,
     Subscriptions,
 } from './endpoints';
+import type { HeadersMap } from './http';
 
 const DEFAULT_BASE_URL = 'https://api.prezly.com';
 

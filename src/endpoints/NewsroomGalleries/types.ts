@@ -1,4 +1,4 @@
-import { NewsroomGallery, Pagination, Query } from '../../types';
+import type { NewsroomGallery, Pagination, Query } from '../../types';
 
 export interface ListOptions {
     limit?: number;

@@ -1,9 +1,9 @@
-import { Newsroom, Query } from '../../types';
-
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { DeferredJobsApiClient } from '../../api';
-import { NewsroomGallery } from '../../types';
-import {
+import { Query } from '../../types';
+import type { Newsroom, NewsroomGallery } from '../../types';
+
+import type {
     ListOptions,
     ListResponse,
     ReorderRequest,

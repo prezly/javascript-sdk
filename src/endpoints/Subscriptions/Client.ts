@@ -1,9 +1,12 @@
-import { Contact, EmailSubscription, Newsroom } from '../../types';
-
-import { DeferredJobsApiClient } from '../../api';
+import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import type { Contact, EmailSubscription, Newsroom } from '../../types';
 
-import { SubscribeRequest, UnsubscribeRequest, UpdateUnsubscribeDetailsRequest } from './types';
+import type {
+    SubscribeRequest,
+    UnsubscribeRequest,
+    UpdateUnsubscribeDetailsRequest,
+} from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
