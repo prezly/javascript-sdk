@@ -99,6 +99,12 @@ export interface Story extends Entity<number> {
 
     publication_status: Story.PublicationStatus;
     visibility: Story.Visibility;
+
+    /**
+     * Contains attached gallery slate content.
+     * Always `null` for v3 stories.
+     */
+    attached_gallery_content: string | null;
 }
 
 export namespace Story {
