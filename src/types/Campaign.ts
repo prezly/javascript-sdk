@@ -1,6 +1,6 @@
 import type { NewsroomRef } from './Newsroom';
 import type { SenderAddress } from './SenderAddress';
-import type { SenderDomain } from './SenderDomain';
+import { SenderDomain } from './SenderDomain';
 import type { StoryRef } from './Story';
 import type { UserRef } from './User';
 
@@ -48,6 +48,9 @@ export interface Campaign {
 }
 
 export namespace Campaign {
+    export type SenderDomainVerificationFlow = SenderDomain.VerificationFlowVersion;
+    export const SenderDomainVerificationFlow = SenderDomain.VerificationFlowVersion;
+
     export enum LifecycleStatus {
         DRAFT = 'draft',
         SCHEDULED = 'scheduled',
