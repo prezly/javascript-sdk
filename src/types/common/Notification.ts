@@ -1,20 +1,22 @@
-export enum NotificationStyle {
-    SUCCESS = 'success',
-    INFO = 'info',
-    WARNING = 'warning',
-    DANGER = 'danger',
-}
-
-export interface NotificationAction {
-    target: string;
-    name: string;
-}
-
 export interface Notification {
     id: string;
     type: string;
-    style: NotificationStyle;
+    style: Notification.Style;
     title: string;
     description: string;
-    actions: NotificationAction[];
+    actions: Notification.Action[];
+}
+
+export namespace Notification {
+    export enum Style {
+        SUCCESS = 'success',
+        INFO = 'info',
+        WARNING = 'warning',
+        DANGER = 'danger',
+    }
+
+    export interface Action {
+        target: string;
+        name: string;
+    }
 }

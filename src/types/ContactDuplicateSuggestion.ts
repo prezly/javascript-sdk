@@ -1,10 +1,4 @@
-import { ContactRef } from './ContactRef';
-
-export enum Status {
-    UNSEEN = 'unseen',
-    ACCEPTED = 'accepted',
-    DECLINED = 'declined',
-}
+import { ContactRef } from './Contact';
 
 export interface ContactDuplicateSuggestion {
     contact: ContactRef;
@@ -12,8 +6,16 @@ export interface ContactDuplicateSuggestion {
      * Value in range 0.0 ... 1.0.
      */
     score: number;
-    status: Status;
+    status: ContactDuplicateSuggestion.Status;
     links: {
         merge_api: string;
     };
+}
+
+export namespace ContactDuplicateSuggestion {
+    export enum Status {
+        UNSEEN = 'unseen',
+        ACCEPTED = 'accepted',
+        DECLINED = 'declined',
+    }
 }

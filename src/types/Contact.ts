@@ -1,79 +1,23 @@
 import { UploadedImage } from '@prezly/uploads';
 
 import { Entity } from './Entity';
-import { ContactRef } from './ContactRef';
 import { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
 
-export enum ContactType {
-    PERSON = 'person',
-    ORGANISATION = 'organisation',
-}
-
-export enum Gender {
-    MALE = 'male',
-    FEMALE = 'female',
-    UNSPECIFIED = 'unspecified',
-}
-
-export enum Periodicity {
-    DAILY = 'daily',
-    WEEKDAYS = 'weekdays',
-    WEEKLY = 'weekly',
-    BI_WEEKLY = 'bi-weekly',
-    MONTHLY = 'monthly',
-    BI_MONTHLY = 'bi-monthly',
-    QUARTERLY = 'quarterly',
-    ANNUALLY = 'annually',
-    BI_ANUALLY = 'bi-anually',
-    SEMI_ANNUALLY = 'semi-annually',
-}
-
-export enum MediumType {
-    WIRE = 'wire',
-    PRINT = 'print',
-    RADIO = 'radio',
-    PHOTO = 'photo',
-    NEWSPAPER = 'newspaper',
-    MAGAZINE = 'magazine',
-    TV = 'tv',
-    BLOG = 'blog',
-    VLOG = 'vlog',
-    SOCIAL = 'social',
-    WEB = 'web',
-    ANALYST = 'analyst',
-    EXPERT = 'expert',
-    INFLUENCER = 'influencer',
-    PODCAST = 'podcast',
-    NEWSLETTER = 'newsletter',
-    NEWS_SITE = 'news website',
-}
-
-export enum SocialNetwork {
-    DISCORD = 'discord',
-    FACEBOOK = 'facebook',
-    INSTAGRAM = 'instagram',
-    LINKEDIN = 'linkedin',
-    PINTEREST = 'pinterest',
-    SKYPE = 'skype',
-    SNAPCHAT = 'snapchat',
-    TWITCH = 'twitch',
-    TWITTER = 'twitter',
-    YOUTUBE = 'youtube',
-}
-
-export enum PhoneNumberType {
-    TELEPHONE = 'tel',
-    CELLPHONE = 'cell',
-}
-
-export interface PhoneNumber {
-    number: string;
-    type: PhoneNumberType;
+export interface ContactRef extends Entity {
+    contact_type: 'person' | 'organisation';
+    display_name: string;
+    function_name: string | null;
+    avatar_url: string;
+    is_deleted: boolean;
+    links: {
+        api: string;
+        view: string | null;
+    };
 }
 
 export interface Contact extends Entity {
     id: number;
-    contact_type: ContactType;
+    contact_type: Contact.Type;
     is_deleted: boolean;
     is_person: boolean;
 
@@ -85,9 +29,9 @@ export interface Contact extends Entity {
     avatar_url: string;
     avatar_image: UploadedImage | null;
     salutation: string;
-    gender: Gender;
-    periodicity: Periodicity | null;
-    medium_types: MediumType[];
+    gender: Contact.Gender;
+    periodicity: Contact.Periodicity | null;
+    medium_types: Contact.MediumType[];
     bio: string;
     languages: {
         code: string;
@@ -98,7 +42,7 @@ export interface Contact extends Entity {
 
     primary_email: string | null;
     emails: string[];
-    phone_numbers: PhoneNumber[];
+    phone_numbers: Contact.PhoneNumber[];
     function_name: string;
     address: {
         street: string;
@@ -156,5 +100,76 @@ export interface Contact extends Entity {
         view: string;
     };
 
-    social: { type: SocialNetwork; username: string }[];
+    social: { type: Contact.SocialNetwork; username: string }[];
+}
+
+export namespace Contact {
+    export enum Type {
+        PERSON = 'person',
+        ORGANISATION = 'organisation',
+    }
+
+    export enum Gender {
+        MALE = 'male',
+        FEMALE = 'female',
+        UNSPECIFIED = 'unspecified',
+    }
+
+    export enum Periodicity {
+        DAILY = 'daily',
+        WEEKDAYS = 'weekdays',
+        WEEKLY = 'weekly',
+        BI_WEEKLY = 'bi-weekly',
+        MONTHLY = 'monthly',
+        BI_MONTHLY = 'bi-monthly',
+        QUARTERLY = 'quarterly',
+        ANNUALLY = 'annually',
+        BI_ANUALLY = 'bi-anually',
+        SEMI_ANNUALLY = 'semi-annually',
+    }
+
+    export enum MediumType {
+        WIRE = 'wire',
+        PRINT = 'print',
+        RADIO = 'radio',
+        PHOTO = 'photo',
+        NEWSPAPER = 'newspaper',
+        MAGAZINE = 'magazine',
+        TV = 'tv',
+        BLOG = 'blog',
+        VLOG = 'vlog',
+        SOCIAL = 'social',
+        WEB = 'web',
+        ANALYST = 'analyst',
+        EXPERT = 'expert',
+        INFLUENCER = 'influencer',
+        PODCAST = 'podcast',
+        NEWSLETTER = 'newsletter',
+        NEWS_SITE = 'news website',
+    }
+
+    export enum SocialNetwork {
+        DISCORD = 'discord',
+        FACEBOOK = 'facebook',
+        INSTAGRAM = 'instagram',
+        LINKEDIN = 'linkedin',
+        PINTEREST = 'pinterest',
+        SKYPE = 'skype',
+        SNAPCHAT = 'snapchat',
+        TWITCH = 'twitch',
+        TWITTER = 'twitter',
+        YOUTUBE = 'youtube',
+    }
+
+    export interface PhoneNumber {
+        number: string;
+        type: PhoneNumber.Type;
+    }
+
+    export namespace PhoneNumber {
+        export enum Type {
+            TELEPHONE = 'tel',
+            CELLPHONE = 'cell',
+        }
+    }
 }

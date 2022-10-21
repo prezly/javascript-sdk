@@ -5,29 +5,9 @@ import { Contact } from './Contact';
 import { Entity } from './Entity';
 import { NewsroomRef } from './Newsroom';
 import { Story } from './Story';
-import { UserRef } from './UserRef';
-import { CountryRef } from './CountryRef';
-import { CultureRef } from './CultureRef';
-
-export enum CoverageType {
-    ONLINE = 'online',
-    SOCIAL = 'social',
-    PRINT = 'print',
-    RADIO = 'radio',
-    TELEVISION = 'television',
-}
-
-export enum CoverageProvider {
-    AMMCO = 'ammco',
-    AUXIPRESS = 'auxipress',
-    BELGA = 'belga',
-    FEED = 'feed',
-    KANTAR = 'kantar',
-    KNEWIN = 'knewin',
-    MEDIAWEB = 'mediaweb',
-    MELTWATER = 'meltwater',
-    MANUAL = 'manual',
-}
+import { UserRef } from './User';
+import { CountryRef } from './Country';
+import { CultureRef } from './Culture';
 
 export interface CoverageEntry extends Entity<number> {
     uuid: string;
@@ -63,13 +43,35 @@ export interface CoverageEntry extends Entity<number> {
      * @deprecated Please don't rely on this prop. It will be removed in future.
      */
     view_url: string;
-    type: CoverageType;
+    type: CoverageEntry.Type;
     country: CountryRef | null;
     culture: CultureRef | null;
     management_url: string | null;
-    provider: CoverageProvider | null;
+    provider: CoverageEntry.Provider | null;
     fragment_duration: number | null;
     fragment_start_time: string | null;
     fragment_end_time: string | null;
     page: number | null;
+}
+
+export namespace CoverageEntry {
+    export enum Type {
+        ONLINE = 'online',
+        SOCIAL = 'social',
+        PRINT = 'print',
+        RADIO = 'radio',
+        TELEVISION = 'television',
+    }
+
+    export enum Provider {
+        AMMCO = 'ammco',
+        AUXIPRESS = 'auxipress',
+        BELGA = 'belga',
+        FEED = 'feed',
+        KANTAR = 'kantar',
+        KNEWIN = 'knewin',
+        MEDIAWEB = 'mediaweb',
+        MELTWATER = 'meltwater',
+        MANUAL = 'manual',
+    }
 }

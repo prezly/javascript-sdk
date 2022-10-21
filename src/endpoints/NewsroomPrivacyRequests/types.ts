@@ -1,29 +1,29 @@
-import { PrivacyRequestType } from '../../types';
+import { PrivacyRequest } from '../../types';
 
 export interface DeletePrivacyRequestCreateRequest {
     email: string;
-    type: PrivacyRequestType.DELETE;
+    type: PrivacyRequest.Type.DELETE;
     message: string;
     extra_message?: string;
 }
 
 export interface ExportPrivacyRequestCreateRequest {
     email: string;
-    type: PrivacyRequestType.EXPORT;
+    type: PrivacyRequest.Type.EXPORT;
     message?: string;
     extra_message?: string;
 }
 
 export interface CorrectPrivacyRequestCreateRequest {
     email: string;
-    type: PrivacyRequestType.CORRECT;
+    type: PrivacyRequest.Type.CORRECT;
     message: string;
     extra_message: string;
 }
 
 export interface OtherPrivacyRequestCreateRequest {
     email: string;
-    type: PrivacyRequestType.OTHER;
+    type: PrivacyRequest.Type.OTHER;
     message: string;
     extra_message?: string;
 }

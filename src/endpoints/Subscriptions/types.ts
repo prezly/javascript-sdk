@@ -1,9 +1,9 @@
 import { UploadedImage } from '@prezly/uploads';
 
-import { Contact, ContactType, Utm } from '../../types';
+import { Contact, Utm } from '../../types';
 
 interface Person {
-    contact_type: ContactType.PERSON;
+    contact_type: Contact.Type.PERSON;
     first_name?: Contact['first_name'];
     last_name?: Contact['last_name'];
     gender?: Contact['gender'];
@@ -12,18 +12,18 @@ interface Person {
 }
 
 interface Organisation {
-    contact_type: ContactType.ORGANISATION;
+    contact_type: Contact.Type.ORGANISATION;
     company_name: Contact['company_name'];
 }
 
-export interface SubscribeRequest<Type extends ContactType> {
+export interface SubscribeRequest<Type extends Contact.Type> {
     email_address: string;
     locale?: string;
     url?: string;
     visitor_uid?: string;
     session_uid?: string;
     comment?: string;
-    contact?: (Type extends ContactType.PERSON ? Person : Organisation) & {
+    contact?: (Type extends Contact.Type.PERSON ? Person : Organisation) & {
         avatar_image?: UploadedImage | null;
         languages?: string[];
         emails?: Contact['emails'];

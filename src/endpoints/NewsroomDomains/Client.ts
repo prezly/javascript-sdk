@@ -1,4 +1,4 @@
-import { NewsroomDomain, Newsroom, NewsroomDomainShareInstructions } from '../../types';
+import { NewsroomDomain, Newsroom } from '../../types';
 
 import { routing } from '../../routing';
 import { DeferredJobsApiClient } from '../../api';
@@ -53,10 +53,10 @@ export class Client {
     public async shareDnsInstructions(
         newsroomId: NewsroomId,
         domain: string,
-    ): Promise<NewsroomDomainShareInstructions> {
+    ): Promise<NewsroomDomain.ShareInstructions> {
         const url = routing.newsroomDomainsUrl.replace(':newsroom_id', String(newsroomId));
         const response = await this.apiClient.post<{
-            sharable_dns_instructions: NewsroomDomainShareInstructions;
+            sharable_dns_instructions: NewsroomDomain.ShareInstructions;
         }>(`${url}/${domain}/share`);
 
         return response.sharable_dns_instructions;
