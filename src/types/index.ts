@@ -1,13 +1,12 @@
 // Common
 export * from './common';
-export * from './scopes';
 export * from './Entity';
 // Entities
 export * from './Campaign';
 export * from './Category';
 export * from './Contact';
 export * from './CountryRef';
-export * from './Coverage';
+export * from './CoverageEntry';
 export * from './CultureRef';
 export * from './DnsConfigurationInstruction';
 export * from './JobState';
@@ -34,7 +33,6 @@ export * from './SenderDomain';
 export * from './Story';
 export * from './Snippet';
 export * from './UserRef';
-export * from './UnsubscribeReason';
 export * from './EmailBranding';
 export * from './EmailBrandingMode';
 export * from './PrivacyRequest';
