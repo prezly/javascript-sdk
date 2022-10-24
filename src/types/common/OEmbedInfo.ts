@@ -1,7 +1,7 @@
 export interface OEmbedInfo {
     version: '1.0';
     url: string;
-    type: 'video' | 'photo' | 'rich' | 'link';
+    type: `${OEmbedInfo.Type}`;
 
     // generic properties
     title?: string;
@@ -20,4 +20,13 @@ export interface OEmbedInfo {
     html?: string;
     width?: number;
     height?: number;
+}
+
+export namespace OEmbedInfo {
+    export enum Type {
+        LINK = 'link',
+        PHOTO = 'photo',
+        RICH = 'rich',
+        VIDEO = 'video',
+    }
 }
