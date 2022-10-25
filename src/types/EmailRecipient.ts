@@ -1,21 +1,17 @@
-import type { Contact } from './Contact';
+import type { Contact, ContactRef } from './Contact';
 
-export interface EmailRecipient {
+export interface EmailRecipientRef {
     /**
      * Unique alphanumerical identifier for the recipient.
      */
     id: string;
     display_name: string;
     avatar_url: string;
-    contact: Contact;
+    contact: ContactRef;
     /**
      * Email address the email will be sent to. One of the contact email addresses.
      */
     email_address: string;
-    /**
-     * List of all contact email addresses with their statuses in context of the current campaign.
-     */
-    email_addresses: EmailRecipient.EmailAddressRecord[];
     /**
      * The current recipient email address is unsubscribed from the current campaign newsroom.
      */
@@ -24,6 +20,14 @@ export interface EmailRecipient {
      * The current recipient email address is unsubscribed from all your Prezly communications.
      */
     is_unsubscribed_from_all_communications: boolean;
+}
+
+export interface EmailRecipient extends EmailRecipientRef {
+    contact: Contact;
+    /**
+     * List of all contact email addresses with their statuses in context of the current campaign.
+     */
+    email_addresses: EmailRecipient.EmailAddressRecord[];
 }
 
 export namespace EmailRecipient {
