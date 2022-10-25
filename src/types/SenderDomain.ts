@@ -1,3 +1,5 @@
+import type { DnsConfigurationInstruction } from './DnsConfigurationInstruction';
+
 export interface SenderDomain {
     domain_name: string;
     /**
@@ -31,5 +33,10 @@ export namespace SenderDomain {
         V2 = 'v2',
         V3 = 'v3',
         PREZLYMAIL = 'prezlymail',
+    }
+
+    export interface Configuration {
+        domain: SenderDomain;
+        dns: Record<VerificationFlowVersion, DnsConfigurationInstruction[]>;
     }
 }
