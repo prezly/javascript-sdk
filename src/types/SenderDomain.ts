@@ -25,6 +25,10 @@ export interface SenderDomain {
      * The latest one, which is also the best so far, is `v3`.
      */
     verification_flow_version: SenderDomain.VerificationFlowVersion | null;
+    /**
+     * Expirable URL linking to the domain-specific instructions page users can share with their IT departments.
+     */
+    shareable_dns_instructions_url: string | null;
 }
 
 export namespace SenderDomain {
