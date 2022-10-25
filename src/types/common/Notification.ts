@@ -1,6 +1,6 @@
-export interface Notification {
+export interface Notification<T extends string = string> {
     id: string;
-    type: string;
+    type: T;
     style: Notification.Style;
     title: string;
     description: string;
