@@ -22,7 +22,7 @@ export interface SenderDomain {
      * There were different verification setups we've been using over the years.
      * The latest one, which is also the best so far, is `v3`.
      */
-    verification_flow_version: SenderDomain.VerificationFlowVersion;
+    verification_flow_version: SenderDomain.VerificationFlowVersion | null;
 }
 
 export namespace SenderDomain {
@@ -30,5 +30,6 @@ export namespace SenderDomain {
         V1 = 'v1',
         V2 = 'v2',
         V3 = 'v3',
+        PREZLYMAIL = 'prezlymail',
     }
 }
