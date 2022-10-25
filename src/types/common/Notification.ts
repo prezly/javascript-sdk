@@ -10,9 +10,9 @@ export interface NotificationAction {
     name: string;
 }
 
-export interface Notification {
+export interface Notification<T extends string = string> {
     id: string;
-    type: string;
+    type: T;
     style: NotificationStyle;
     title: string;
     description: string;
