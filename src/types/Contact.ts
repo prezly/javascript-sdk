@@ -124,7 +124,7 @@ export namespace Contact {
         BI_MONTHLY = 'bi-monthly',
         QUARTERLY = 'quarterly',
         ANNUALLY = 'annually',
-        BI_ANUALLY = 'bi-anually',
+        BI_ANUALLY = 'bi-annually',
         SEMI_ANNUALLY = 'semi-annually',
     }
 
