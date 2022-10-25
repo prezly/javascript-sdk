@@ -19,6 +19,7 @@ export namespace License {
         PAST_DUE = 'past_due',
         PAYMENT_COLLECTION_PAUSED = 'payment_collection_paused',
         INACTIVE = 'inactive',
+        INCOMPLETE = 'incomplete',
         CANCELED = 'canceled',
         UNPAID = 'unpaid',
     }
