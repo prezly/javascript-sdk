@@ -21,6 +21,7 @@ export * from './NewsroomGallery';
 export * from './NewsroomLanguageSettings';
 export * from './NewsroomTheme';
 export * from './NewsroomWebhook';
+export * from './Plan';
 export * from './PrivacyRequest';
 export * from './SenderAddress';
 export * from './SenderDomain';
