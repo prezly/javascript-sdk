@@ -7,6 +7,7 @@ export interface SenderAddress {
     type: SenderAddress.Type;
     is_default: boolean;
     is_public_webmail: boolean;
+    is_verified: boolean;
     domain: SenderDomain;
 }
 
