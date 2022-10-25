@@ -4,7 +4,8 @@ import type { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
 import type { Entity } from './Entity';
 
 export interface ContactRef extends Entity {
-    contact_type: 'person' | 'organisation';
+    id: number;
+    contact_type: Contact.Type;
     display_name: string;
     function_name: string | null;
     avatar_url: string;
