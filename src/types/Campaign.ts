@@ -93,7 +93,7 @@ export namespace Campaign {
         arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>,
     ): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isScheduled(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.SCHEDULED;
     }
@@ -102,7 +102,7 @@ export namespace Campaign {
     export function isPending(campaign: Pick<Campaign, 'lifecycle_status'>): boolean;
     export function isPending(arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isPending(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.PENDING;
     }
@@ -111,7 +111,7 @@ export namespace Campaign {
     export function isSent(campaign: Pick<Campaign, 'lifecycle_status'>): boolean;
     export function isSent(arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isSent(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.SENT;
     }

@@ -171,7 +171,7 @@ export namespace Story {
         arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
     ): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isUninitialized(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.UNINITIALIZED;
     }
@@ -189,7 +189,7 @@ export namespace Story {
     export function isScheduled(story: Pick<Story, 'lifecycle_status'>): boolean;
     export function isScheduled(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isScheduled(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.SCHEDULED;
     }
@@ -200,7 +200,7 @@ export namespace Story {
         arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
     ): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isScheduledEmbargo(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.EMBARGO;
     }
@@ -209,7 +209,7 @@ export namespace Story {
     export function isPublished(story: Pick<Story, 'lifecycle_status'>): boolean;
     export function isPublished(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isPublished(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.PUBLISHED;
     }
