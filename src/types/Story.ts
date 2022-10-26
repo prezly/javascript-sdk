@@ -164,6 +164,55 @@ export namespace Story {
             stories: Record<string, OEmbedInfo>;
         };
     }
+
+    export function isUninitialized(status: LifecycleStatus): boolean;
+    export function isUninitialized(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isUninitialized(
+        arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
+    ): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.UNINITIALIZED;
+    }
+
+    export function isDraft(status: LifecycleStatus): boolean;
+    export function isDraft(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isDraft(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.DRAFT;
+    }
+
+    export function isScheduled(status: LifecycleStatus): boolean;
+    export function isScheduled(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isScheduled(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.SCHEDULED;
+    }
+
+    export function isScheduledEmbargo(status: LifecycleStatus): boolean;
+    export function isScheduledEmbargo(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isScheduledEmbargo(
+        arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
+    ): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.EMBARGO;
+    }
+
+    export function isPublished(status: LifecycleStatus): boolean;
+    export function isPublished(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isPublished(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.PUBLISHED;
+    }
 }
 
 export interface ExtendedStory extends Story, Story.ExtraFields {}
