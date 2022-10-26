@@ -7,6 +7,8 @@ export interface CultureRef {
     language_code: string;
 }
 
+export type Culture = CultureRef;
+
 export namespace Culture {
     export enum TextDirection {
         LTR = 'ltr',
