@@ -1,6 +1,9 @@
 import type { LicenseRef } from './License';
 import type { NewsroomRef } from './Newsroom';
 import type { Permission } from './Permissions';
+import type { UserRef } from './User';
+
+export type UserAccountRef = UserRef;
 
 export interface UserAccount {
     id: number;
