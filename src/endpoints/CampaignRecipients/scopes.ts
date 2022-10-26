@@ -34,7 +34,7 @@ export interface CampaignReportScope {
         | 'unopened'
         | 'undelivered'
         | 'unsubscribed';
-    selection?: SelectionValue<Contact['id']>;
+    selection?: SelectionValue<EmailRecipient['id']>;
 }
 
 export type ContactsScope =
