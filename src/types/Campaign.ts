@@ -39,8 +39,10 @@ export interface Campaign {
         clicks: number;
         clicks_rate: number;
         delivered: number;
+        delivering: number;
         opens: number;
         opens_rate: number;
+        skipped: number;
         undelivered_rate: number;
         unsubscribes: number;
         unsubscribes_rate: number;
