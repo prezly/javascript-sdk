@@ -1,4 +1,6 @@
-export interface NewsroomWebhook {
+import type { Entity } from './Entity';
+
+export interface NewsroomWebhook extends Entity<string> {
     id: string;
     name: string;
     url: string;

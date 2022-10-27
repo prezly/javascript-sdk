@@ -1,4 +1,6 @@
-export interface UserRef {
+import type { Entity } from './Entity';
+
+export interface UserRef extends Entity<number> {
     id: number;
     display_name: string;
     avatar_url: string;

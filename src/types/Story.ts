@@ -5,7 +5,7 @@ import type { Entity } from './Entity';
 import type { NewsroomRef } from './Newsroom';
 import type { UserRef } from './User';
 
-export interface StoryRef {
+export interface StoryRef extends Entity<number> {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as an identifier instead.
