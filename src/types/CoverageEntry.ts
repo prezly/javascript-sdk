@@ -4,12 +4,11 @@ import type { OEmbedInfo } from './common';
 import type { Contact } from './Contact';
 import type { CountryRef } from './Country';
 import type { CultureRef } from './Culture';
-import type { Entity } from './Entity';
 import type { NewsroomRef } from './Newsroom';
 import type { Story } from './Story';
 import type { UserRef } from './User';
 
-export interface CoverageEntry extends Entity<number> {
+export interface CoverageEntry {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as identifier.

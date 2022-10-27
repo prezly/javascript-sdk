@@ -39,8 +39,10 @@ export interface Campaign {
         clicks: number;
         clicks_rate: number;
         delivered: number;
+        delivering: number;
         opens: number;
         opens_rate: number;
+        skipped: number;
         undelivered_rate: number;
         unsubscribes: number;
         unsubscribes_rate: number;
@@ -74,5 +76,43 @@ export namespace Campaign {
         VALID = 'valid',
         INVALID = 'invalid',
         NOT_APPLICABLE = 'not-applicable',
+    }
+
+    export function isDraft(status: LifecycleStatus): boolean;
+    export function isDraft(campaign: Pick<Campaign, 'lifecycle_status'>): boolean;
+    export function isDraft(arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.DRAFT;
+    }
+
+    export function isScheduled(status: LifecycleStatus): boolean;
+    export function isScheduled(campaign: Pick<Campaign, 'lifecycle_status'>): boolean;
+    export function isScheduled(
+        arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>,
+    ): boolean {
+        if (typeof arg === 'object') {
+            return isScheduled(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.SCHEDULED;
+    }
+
+    export function isPending(status: LifecycleStatus): boolean;
+    export function isPending(campaign: Pick<Campaign, 'lifecycle_status'>): boolean;
+    export function isPending(arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isPending(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.PENDING;
+    }
+
+    export function isSent(status: LifecycleStatus): boolean;
+    export function isSent(campaign: Pick<Campaign, 'lifecycle_status'>): boolean;
+    export function isSent(arg: LifecycleStatus | Pick<Campaign, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isSent(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.SENT;
     }
 }

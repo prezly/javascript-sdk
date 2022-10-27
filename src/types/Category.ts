@@ -1,8 +1,9 @@
 import type { CultureRef } from './Culture';
 
 export interface Category {
-    display_description: string | null;
+    id: number;
     display_name: string;
+    display_description: string | null;
     i18n: {
         [localeCode: string]: {
             description: string | null;
@@ -11,6 +12,5 @@ export interface Category {
             slug: string | null;
         };
     };
-    id: number;
     stories_number: number;
 }

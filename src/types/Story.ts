@@ -1,7 +1,6 @@
 import type { Category } from './Category';
 import type { OEmbedInfo } from './common';
 import type { CultureRef } from './Culture';
-import type { Entity } from './Entity';
 import type { NewsroomRef } from './Newsroom';
 import type { UserRef } from './User';
 
@@ -37,7 +36,7 @@ export interface StoryRef {
     };
 }
 
-export interface Story extends Entity<number> {
+export interface Story {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as an identifier instead.
@@ -163,6 +162,55 @@ export namespace Story {
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
         };
+    }
+
+    export function isUninitialized(status: LifecycleStatus): boolean;
+    export function isUninitialized(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isUninitialized(
+        arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
+    ): boolean {
+        if (typeof arg === 'object') {
+            return isUninitialized(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.UNINITIALIZED;
+    }
+
+    export function isDraft(status: LifecycleStatus): boolean;
+    export function isDraft(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isDraft(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isDraft(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.DRAFT;
+    }
+
+    export function isScheduled(status: LifecycleStatus): boolean;
+    export function isScheduled(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isScheduled(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isScheduled(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.SCHEDULED;
+    }
+
+    export function isScheduledEmbargo(status: LifecycleStatus): boolean;
+    export function isScheduledEmbargo(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isScheduledEmbargo(
+        arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
+    ): boolean {
+        if (typeof arg === 'object') {
+            return isScheduledEmbargo(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.EMBARGO;
+    }
+
+    export function isPublished(status: LifecycleStatus): boolean;
+    export function isPublished(story: Pick<Story, 'lifecycle_status'>): boolean;
+    export function isPublished(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+        if (typeof arg === 'object') {
+            return isPublished(arg.lifecycle_status);
+        }
+        return arg === LifecycleStatus.PUBLISHED;
     }
 }
 

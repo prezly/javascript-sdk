@@ -1,10 +1,10 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
-import type { Entity } from './Entity';
 
-export interface ContactRef extends Entity {
-    contact_type: 'person' | 'organisation';
+export interface ContactRef {
+    id: number;
+    contact_type: Contact.Type;
     display_name: string;
     function_name: string | null;
     avatar_url: string;
@@ -15,7 +15,7 @@ export interface ContactRef extends Entity {
     };
 }
 
-export interface Contact extends Entity {
+export interface Contact {
     id: number;
     contact_type: Contact.Type;
     is_deleted: boolean;

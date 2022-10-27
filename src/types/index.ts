@@ -1,6 +1,5 @@
 // Common
 export * from './common';
-export * from './Entity';
 // Entities
 export * from './Campaign';
 export * from './Category';
@@ -8,6 +7,7 @@ export * from './Contact';
 export * from './Country';
 export * from './CoverageEntry';
 export * from './Culture';
+export * from './Currency';
 export * from './DnsConfigurationInstruction';
 export * from './EmailRecipient';
 export * from './EmailSubscription';
@@ -21,6 +21,7 @@ export * from './NewsroomGallery';
 export * from './NewsroomLanguageSettings';
 export * from './NewsroomTheme';
 export * from './NewsroomWebhook';
+export * from './Plan';
 export * from './PrivacyRequest';
 export * from './SenderAddress';
 export * from './SenderDomain';

@@ -3,11 +3,11 @@ import type { UploadedImage } from '@prezly/uploads';
 import type { Newsroom } from './Newsroom';
 
 export interface NewsroomTheme {
+    id: string;
     codename: string;
     description: string;
     use_case: string | null;
     features: NewsroomTheme.Feature[];
-    id: string;
     is_custom: boolean;
     is_legacy: boolean;
     name: string;

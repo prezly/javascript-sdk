@@ -12,9 +12,31 @@ export interface UserRef {
     last_name: string;
 
     is_terms_of_service_accepted: boolean;
-    sign_in_flow: 'google' | 'password' | 'sso';
-    use_case_answer: string;
+    sign_in_flow: User.SignInFlow;
+    use_case_answer: User.UseCaseAnswer | null;
 
     created_at: string;
+    /**
+     * Last time the user was active.
+     */
     last_seen_at: string | null;
+    locked_until: string | null;
+}
+
+export namespace User {
+    export enum SignInFlow {
+        GOOGLE = 'google',
+        PASSWORD = 'password',
+        SSO = 'sso',
+    }
+
+    export enum UseCaseAnswer {
+        UNKNOWN = 'unknown',
+        CAMPAIGNS = 'campaigns',
+        CONTACTS = 'contacts',
+        STORIES = 'stories',
+        NEWSROOM = 'newsroom',
+        COVERAGE = 'coverage',
+        SKIP = 'skip',
+    }
 }
