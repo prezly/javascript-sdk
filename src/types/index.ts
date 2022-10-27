@@ -8,6 +8,7 @@ export * from './Contact';
 export * from './Country';
 export * from './CoverageEntry';
 export * from './Culture';
+export * from './Currency';
 export * from './DnsConfigurationInstruction';
 export * from './EmailRecipient';
 export * from './EmailSubscription';

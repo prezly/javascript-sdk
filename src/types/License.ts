@@ -1,3 +1,4 @@
+import type { Currency } from './Currency';
 import type { PlanLevel } from './Plan';
 
 export interface LicenseRef {
@@ -36,7 +37,7 @@ export interface License extends LicenseRef {
     /**
      * When there are no subscriptions yet, the currency is null (we do not set a default value).
      */
-    currency: 'eur' | 'usd' | 'gbp' | null;
+    currency: Currency | null;
     /**
      * Date when current subscription period/cycle will end.
      * At the end of this period, a new invoice will be created.
