@@ -1,7 +1,6 @@
-import type { Entity } from './Entity';
 import type { UserRef } from './User';
 
-export interface Snippet extends Entity<number> {
+export interface Snippet {
     id: number;
     uuid: string;
     title: string;

@@ -1,6 +1,4 @@
-import type { Entity } from './Entity';
-
-export interface NewsroomWebhook extends Entity<string> {
+export interface NewsroomWebhook {
     id: string;
     name: string;
     url: string;

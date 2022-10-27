@@ -1,9 +1,8 @@
 import type { UploadedImage } from '@prezly/uploads';
 
-import type { Entity } from './Entity';
 import type { UserRef } from './User';
 
-export interface NewsroomGallery extends Entity<number> {
+export interface NewsroomGallery {
     id: number;
     uuid: string;
     name: string;

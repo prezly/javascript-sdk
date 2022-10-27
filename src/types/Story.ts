@@ -1,11 +1,10 @@
 import type { Category } from './Category';
 import type { OEmbedInfo } from './common';
 import type { CultureRef } from './Culture';
-import type { Entity } from './Entity';
 import type { NewsroomRef } from './Newsroom';
 import type { UserRef } from './User';
 
-export interface StoryRef extends Entity<number> {
+export interface StoryRef {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as an identifier instead.
@@ -37,7 +36,7 @@ export interface StoryRef extends Entity<number> {
     };
 }
 
-export interface Story extends Entity<number> {
+export interface Story {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as an identifier instead.

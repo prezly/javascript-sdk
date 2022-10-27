@@ -1,6 +1,4 @@
-import type { Entity } from './Entity';
-
-export interface PrivacyRequest extends Entity<string> {
+export interface PrivacyRequest {
     id: string;
     status: PrivacyRequest.Status;
     email: string;

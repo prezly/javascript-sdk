@@ -1,9 +1,8 @@
 import type { UploadedImage } from '@prezly/uploads';
 
-import type { Entity } from './Entity';
 import type { Newsroom } from './Newsroom';
 
-export interface NewsroomTheme extends Entity<string> {
+export interface NewsroomTheme {
     id: string;
     codename: string;
     description: string;

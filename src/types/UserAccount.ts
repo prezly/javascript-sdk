@@ -1,4 +1,3 @@
-import type { Entity } from './Entity';
 import type { LicenseRef } from './License';
 import type { NewsroomRef } from './Newsroom';
 import type { Permission } from './Permissions';
@@ -6,7 +5,7 @@ import type { UserRef } from './User';
 
 export type UserAccountRef = UserRef;
 
-export interface UserAccount extends Entity<number> {
+export interface UserAccount {
     id: number;
     avatar_url: string;
     country: string;

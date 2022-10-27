@@ -1,7 +1,6 @@
 import type { Contact, ContactRef } from './Contact';
-import type { Entity } from './Entity';
 
-export interface EmailRecipientRef extends Entity<string> {
+export interface EmailRecipientRef {
     /**
      * Unique alphanumerical identifier for the recipient.
      */

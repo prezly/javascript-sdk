@@ -1,6 +1,5 @@
 // Common
 export * from './common';
-export * from './Entity';
 // Entities
 export * from './Campaign';
 export * from './Category';

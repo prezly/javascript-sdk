@@ -1,6 +1,4 @@
-import type { Entity } from './Entity';
-
-export interface EmailSubscription extends Entity<string> {
+export interface EmailSubscription {
     id: string;
     email_address: string;
 }

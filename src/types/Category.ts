@@ -1,7 +1,6 @@
 import type { CultureRef } from './Culture';
-import type { Entity } from './Entity';
 
-export interface Category extends Entity<number> {
+export interface Category {
     id: number;
     display_name: string;
     display_description: string | null;

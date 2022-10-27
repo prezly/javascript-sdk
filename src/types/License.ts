@@ -1,8 +1,7 @@
 import type { Currency } from './Currency';
-import type { Entity } from './Entity';
 import type { PlanLevel } from './Plan';
 
-export interface LicenseRef extends Entity<number> {
+export interface LicenseRef {
     id: number;
     display_name: string;
     is_operable: boolean;

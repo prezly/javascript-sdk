@@ -1,9 +1,8 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { CultureRef } from './Culture';
-import type { Entity } from './Entity';
 
-export interface NewsroomRef extends Entity<number> {
+export interface NewsroomRef {
     uuid: string;
     /**
      * @deprecated Please use `uuid` instead.

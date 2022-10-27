@@ -1,9 +1,8 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
-import type { Entity } from './Entity';
 
-export interface ContactRef extends Entity<number> {
+export interface ContactRef {
     id: number;
     contact_type: Contact.Type;
     display_name: string;
@@ -16,7 +15,7 @@ export interface ContactRef extends Entity<number> {
     };
 }
 
-export interface Contact extends Entity<number> {
+export interface Contact {
     id: number;
     contact_type: Contact.Type;
     is_deleted: boolean;

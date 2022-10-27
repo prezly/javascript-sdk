@@ -1,11 +1,10 @@
-import type { Entity } from './Entity';
 import type { NewsroomRef } from './Newsroom';
 import type { SenderAddress } from './SenderAddress';
 import { SenderDomain } from './SenderDomain';
 import type { StoryRef } from './Story';
 import type { UserRef } from './User';
 
-export interface Campaign extends Entity<number> {
+export interface Campaign {
     id: number;
     author: UserRef;
     lifecycle_status: Campaign.LifecycleStatus;

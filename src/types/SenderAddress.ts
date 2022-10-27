@@ -1,7 +1,6 @@
-import type { Entity } from './Entity';
 import type { SenderDomain } from './SenderDomain';
 
-export interface SenderAddress extends Entity<number> {
+export interface SenderAddress {
     id: number;
     sender_email: string;
     sender_name: string;
