@@ -64,6 +64,28 @@ export class Client {
     }
 
     /**
+     * Get story by UUID.
+     */
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: Story['uuid'], options?: Options): Promise<StoryRecord>;
+
+    /**
+     * Get multiple stories by UUIDs.
+     */
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(ids: Story['uuid'][], options?: Options): Promise<StoryRecord[]>;
+
+    /**
      * Get story by deprecated numeric ID, or UUID.
      * @deprecated Please use UUID instead.
      */
@@ -86,28 +108,6 @@ export class Client {
             ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
             : ExtendedStory,
     >(ids: Story['id'][], options?: Options): Promise<StoryRecord[]>;
-
-    /**
-     * Get story by UUID.
-     */
-    async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
-        Options extends IncludeOptions<Include>,
-        StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
-            : ExtendedStory,
-    >(id: Story['uuid'], options?: Options): Promise<StoryRecord>;
-
-    /**
-     * Get multiple stories by UUIDs.
-     */
-    async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
-        Options extends IncludeOptions<Include>,
-        StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
-            : ExtendedStory,
-    >(ids: Story['uuid'][], options?: Options): Promise<StoryRecord[]>;
 
     /**
      * Implementation
