@@ -28,6 +28,7 @@ export interface ListOptions<Include extends readonly (keyof Story.OnDemandField
 export interface SearchOptions<Include extends readonly (keyof Story.OnDemandFields)[]>
     extends ListOptions<Include> {
     query?: Query;
+    scope?: Query;
 }
 
 export interface ListResponse<S extends Story = Story> {
