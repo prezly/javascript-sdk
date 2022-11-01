@@ -241,4 +241,9 @@ export class Client {
     }
 
     unschedule = this.unpublish;
+
+    async delete(id: StoryId): Promise<void> {
+        const url = `${routing.storiesUrl}/${id}`;
+        await this.apiClient.delete(url);
+    }
 }
