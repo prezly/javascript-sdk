@@ -119,3 +119,19 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
 
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
 export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;
+
+export interface PublishRequest {
+    published_at?: Iso8601DateTime;
+    visibility?: Story.Visibility.PUBLIC | Story.Visibility.PRIVATE | Story.Visibility.CONFIDENTIAL;
+}
+
+export interface UnpublishRequest {
+    visibility?: Story.Visibility.PUBLIC | Story.Visibility.PRIVATE | Story.Visibility.CONFIDENTIAL;
+}
+
+export interface ScheduleRequest {
+    published_at?: Iso8601DateTime;
+    visibility?: Story.Visibility.PUBLIC | Story.Visibility.EMBARGO;
+}
+
+export type UnscheduleRequest = UnpublishRequest;

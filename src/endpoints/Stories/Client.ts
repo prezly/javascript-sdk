@@ -7,7 +7,10 @@ import type {
     IncludeOptions,
     ListOptions,
     ListResponse,
+    PublishRequest,
+    ScheduleRequest,
     SearchOptions,
+    UnpublishRequest,
     UpdateRequest,
 } from './types';
 
@@ -185,4 +188,57 @@ export class Client {
         });
         return story;
     }
+
+    async publish<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, payload: PublishRequest, options?: Options): Promise<StoryRecord> {
+        const url = `${routing.storiesUrl}/${id}/publish`;
+        const include = options?.include;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            payload,
+            query: { include: include as string[] | undefined },
+        });
+        return story;
+    }
+
+    async unpublish<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, payload?: UnpublishRequest, options?: Options): Promise<StoryRecord> {
+        const url = `${routing.storiesUrl}/${id}/publish`;
+        const include = options?.include;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            payload,
+            query: { include: include as string[] | undefined },
+        });
+        return story;
+    }
+
+    async schedule<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, payload?: ScheduleRequest, options?: Options): Promise<StoryRecord> {
+        const url = `${routing.storiesUrl}/${id}/publish`;
+        const include = options?.include;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            payload,
+            query: { include: include as string[] | undefined },
+        });
+        return story;
+    }
+
+    unschedule = this.unpublish;
 }
