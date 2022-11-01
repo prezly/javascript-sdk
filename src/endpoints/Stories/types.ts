@@ -52,6 +52,8 @@ interface GenericCreateRequest {
 
     categories?: Category['id'][];
     tags?: string[];
+
+    is_shared_to_prpro?: boolean;
 }
 
 interface GenericUpdateRequest {
@@ -68,6 +70,8 @@ interface GenericUpdateRequest {
 
     categories?: Category['id'][];
     tags?: string[];
+
+    is_shared_to_prpro?: boolean;
 }
 
 export interface HtmlStoryCreateRequest extends GenericCreateRequest {

@@ -135,6 +135,7 @@ export interface Story {
     is_scheduled: boolean;
     is_sharable: boolean;
     is_analytics_available: boolean;
+    is_shared_to_prpro: boolean;
 
     /**
      * @deprecated Please use `lifecycle_status` instead.
