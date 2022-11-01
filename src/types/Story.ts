@@ -140,6 +140,23 @@ export namespace Story {
          * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
          */
         content: string;
+
+        /**
+         * Only supported on v3 stories with JSON-encoded structured content.
+         */
+        autosaved_content: string | null;
+
+        /**
+         * Auto-incrementing version number updated on every update.
+         * Used for detecting multiple users editing the same story simultaneously.
+         */
+        content_version: number;
+
+        /**
+         * User who performed the latest update on the story.
+         */
+        last_modifying_user: UserRef | null;
+
         /**
          * Uploadcare image JSON.
          */
@@ -162,6 +179,16 @@ export namespace Story {
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
         };
+
+        /**
+         * Number of campaigns linked to this story.
+         */
+        'campaigns.count': number;
+
+        /**
+         * Number of pitches linked to this story.
+         */
+        'pitches.count': number;
     }
 
     export function isUninitialized(status: LifecycleStatus): boolean;
