@@ -4,6 +4,7 @@ import type { ExtendedStory, Story } from '../../types';
 
 import type {
     CreateRequest,
+    IncludeOptions,
     ListOptions,
     ListResponse,
     SearchOptions,
@@ -42,11 +43,11 @@ export class Client {
 
     async search<
         Include extends readonly (keyof Story.OnDemandFields)[],
-        Options extends ListOptions<Include>,
+        Options extends SearchOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<Story.OnDemandFields, Options['include'][number]>
             : Story,
-    >(options: SearchOptions<Include>): Promise<ListResponse<StoryRecord>> {
+    >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
             payload: {
@@ -60,18 +61,65 @@ export class Client {
     }
 
     /**
+     * Get story by numeric ID.
      * @deprecated Please use UUID instead.
      */
-    async get(id: Story['id']): Promise<ExtendedStory>;
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: Story['id'], options?: Options): Promise<StoryRecord>;
+
     /**
+     * Get multiple stories by numeric IDs.
      * @deprecated Please use UUID instead.
      */
-    async get(ids: Story['id'][]): Promise<ExtendedStory[]>;
-    async get(id: Story['uuid']): Promise<ExtendedStory>;
-    async get(ids: Story['uuid'][]): Promise<ExtendedStory[]>;
-    async get(
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(ids: Story['id'][], options?: Options): Promise<StoryRecord[]>;
+
+    /**
+     * Get story by UUID.
+     */
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: Story['uuid'], options?: Options): Promise<StoryRecord>;
+
+    /**
+     * Get multiple stories by UUIDs.
+     */
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(ids: Story['uuid'][], options?: Options): Promise<StoryRecord[]>;
+
+    /**
+     * Implementation
+     */
+    async get<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(
         arg: Story['id'] | Story['uuid'] | Story['id'][] | Story['uuid'][],
-    ): Promise<ExtendedStory | ExtendedStory[]> {
+        options?: Options,
+    ): Promise<StoryRecord | StoryRecord[]> {
+        const include = options?.include;
         const isArray = Array.isArray(arg);
 
         if (isArray && arg.length === 0) {
@@ -80,24 +128,27 @@ export class Client {
         }
 
         if (isArray && typeof arg[0] === 'number') {
-            const { stories } = await this.search({
+            const { stories } = await this.search<Include, SearchOptions<Include>, StoryRecord>({
                 limit: arg.length,
                 query: { id: { $in: arg } },
+                include,
             });
             return stories;
         }
 
         if (isArray && typeof arg[0] === 'string') {
-            const { stories } = await this.search({
+            const { stories } = await this.search<Include, SearchOptions<Include>, StoryRecord>({
                 limit: arg.length,
                 query: { uuid: { $in: arg } },
+                include,
             });
 
             return stories;
         }
 
-        const { story } = await this.apiClient.get<{ story: ExtendedStory }>(
+        const { story } = await this.apiClient.get<{ story: StoryRecord }>(
             `${routing.storiesUrl}/${arg}`,
+            { query: { include: include as undefined | string[] } },
         );
         return story;
     }
