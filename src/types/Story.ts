@@ -290,4 +290,17 @@ export namespace Story {
     }
 }
 
-export interface ExtendedStory extends Story, Story.OnDemandFields {}
+export interface ExtendedStory
+    extends Story,
+        Pick<
+            Story.OnDemandFields,
+            | 'thumbnail_image'
+            | 'header_image'
+            | 'preview_image'
+            | 'social_image'
+            | 'social_text'
+            | 'tag_names'
+            | 'content'
+            | 'attached_gallery_content'
+            | 'referenced_entities'
+        > {}
