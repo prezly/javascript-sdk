@@ -14,14 +14,14 @@ type Html = string;
  */
 type PrezlyContentFormat = string;
 
-export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
+export interface ListOptions<Include extends readonly (keyof Story.OnDemandFields)[]> {
     limit?: number;
     offset?: number;
     sortOrder?: string;
     include?: Include;
 }
 
-export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
+export interface SearchOptions<Include extends readonly (keyof Story.OnDemandFields)[]>
     extends ListOptions<Include> {
     query?: Query;
 }

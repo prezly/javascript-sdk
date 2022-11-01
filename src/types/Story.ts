@@ -133,7 +133,7 @@ export namespace Story {
         CONFIDENTIAL = 'confidential',
     }
 
-    export interface ExtraFields {
+    export interface OnDemandFields {
         /**
          * Depending on `format_version` this field can contain:
          * - HTML content for v1 stories (deprecated)
@@ -214,4 +214,4 @@ export namespace Story {
     }
 }
 
-export interface ExtendedStory extends Story, Story.ExtraFields {}
+export interface ExtendedStory extends Story, Story.OnDemandFields {}

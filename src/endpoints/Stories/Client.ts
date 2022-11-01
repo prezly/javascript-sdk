@@ -23,10 +23,10 @@ export class Client {
     }
 
     async list<
-        Include extends readonly (keyof Story.ExtraFields)[],
+        Include extends readonly (keyof Story.OnDemandFields)[],
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
-            ? Story & Pick<Story.ExtraFields, Options['include'][number]>
+            ? Story & Pick<Story.OnDemandFields, Options['include'][number]>
             : Story,
     >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options ?? {};
@@ -41,10 +41,10 @@ export class Client {
     }
 
     async search<
-        Include extends readonly (keyof Story.ExtraFields)[],
+        Include extends readonly (keyof Story.OnDemandFields)[],
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
-            ? Story & Pick<Story.ExtraFields, Options['include'][number]>
+            ? Story & Pick<Story.OnDemandFields, Options['include'][number]>
             : Story,
     >(options: SearchOptions<Include>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query } = options ?? {};
