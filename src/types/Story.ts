@@ -143,12 +143,6 @@ export interface Story {
      */
     publication_status: Story.PublicationStatus;
     visibility: Story.Visibility;
-
-    /**
-     * Contains attached gallery slate content.
-     * Always `null` for v3 stories.
-     */
-    attached_gallery_content: string | null;
 }
 
 export namespace Story {
@@ -184,6 +178,25 @@ export namespace Story {
 
     export interface OnDemandFields {
         /**
+         * Uploadcare image JSON.
+         */
+        thumbnail_image: string | null;
+        /**
+         * Uploadcare image JSON.
+         */
+        header_image: string | null;
+        /**
+         * Uploadcare image JSON.
+         */
+        preview_image: string | null;
+        /**
+         * Uploadcare image JSON.
+         */
+        social_image: string | null;
+        social_text: string;
+        tag_names: string[];
+
+        /**
          * Depending on `format_version` this field can contain:
          * - HTML content for v1 stories (deprecated)
          * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
@@ -207,23 +220,10 @@ export namespace Story {
         last_modifying_user: UserRef | null;
 
         /**
-         * Uploadcare image JSON.
+         * Contains attached gallery slate content.
+         * Always `null` for v3 stories.
          */
-        thumbnail_image: string | null;
-        /**
-         * Uploadcare image JSON.
-         */
-        header_image: string | null;
-        /**
-         * Uploadcare image JSON.
-         */
-        preview_image: string | null;
-        /**
-         * Uploadcare image JSON.
-         */
-        social_image: string | null;
-        social_text: string;
-        tag_names: string[];
+        attached_gallery_content: string | null;
 
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
