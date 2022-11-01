@@ -3,10 +3,10 @@ import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
 
 import type {
+    CreateRequest,
     ListOptions,
     ListResponse,
     SearchOptions,
-    CreateRequest,
     UpdateRequest,
 } from './types';
 
@@ -59,9 +59,45 @@ export class Client {
         });
     }
 
-    async get(id: StoryId): Promise<ExtendedStory> {
+    /**
+     * @deprecated Please use UUID instead.
+     */
+    async get(id: Story['id']): Promise<ExtendedStory>;
+    /**
+     * @deprecated Please use UUID instead.
+     */
+    async get(ids: Story['id'][]): Promise<ExtendedStory[]>;
+    async get(id: Story['uuid']): Promise<ExtendedStory>;
+    async get(ids: Story['uuid'][]): Promise<ExtendedStory[]>;
+    async get(
+        arg: Story['id'] | Story['uuid'] | Story['id'][] | Story['uuid'][],
+    ): Promise<ExtendedStory | ExtendedStory[]> {
+        const isArray = Array.isArray(arg);
+
+        if (isArray && arg.length === 0) {
+            // No need to call the API.
+            return [];
+        }
+
+        if (isArray && typeof arg[0] === 'number') {
+            const { stories } = await this.search({
+                limit: arg.length,
+                query: { id: { $in: arg } },
+            });
+            return stories;
+        }
+
+        if (isArray && typeof arg[0] === 'string') {
+            const { stories } = await this.search({
+                limit: arg.length,
+                query: { uuid: { $in: arg } },
+            });
+
+            return stories;
+        }
+
         const { story } = await this.apiClient.get<{ story: ExtendedStory }>(
-            `${routing.storiesUrl}/${id}`,
+            `${routing.storiesUrl}/${arg}`,
         );
         return story;
     }
