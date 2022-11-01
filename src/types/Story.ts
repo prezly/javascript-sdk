@@ -13,6 +13,11 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     publication_status: Story.PublicationStatus;
     lifecycle_status: Story.LifecycleStatus;
     visibility: Story.Visibility;
@@ -86,16 +91,56 @@ export interface Story {
     scheduled_at: string | null;
 
     lifecycle_status: Story.LifecycleStatus;
+    /**
+     * @deprecated Please use `newsroom.status` instead.
+     * @see newsroom
+     * @see Newsroom.Status
+     */
     is_archived: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_finalized: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_published: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_draft: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_embargo: boolean;
+    /**
+     * @deprecated Please use `visibility` instead.
+     * @see visibility
+     * @see Story.Visibility
+     */
     is_private: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_scheduled: boolean;
     is_sharable: boolean;
     is_analytics_available: boolean;
 
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     publication_status: Story.PublicationStatus;
     visibility: Story.Visibility;
 
@@ -120,6 +165,10 @@ export namespace Story {
         PUBLISHED = 'published',
     }
 
+    /**
+     * Please use `LifecycleStatus` instead.
+     * @see LifecycleStatus
+     */
     export enum PublicationStatus {
         NEW = 'new',
         DRAFT = 'draft',
