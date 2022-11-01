@@ -64,7 +64,7 @@ export class Client {
     }
 
     /**
-     * Get story by numeric ID.
+     * Get story by deprecated numeric ID, or UUID.
      * @deprecated Please use UUID instead.
      */
     async get<
@@ -73,7 +73,7 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: Story['id'], options?: Options): Promise<StoryRecord>;
+    >(id: Story['id'] | Story['uuid'], options?: Options): Promise<StoryRecord>;
 
     /**
      * Get multiple stories by numeric IDs.
