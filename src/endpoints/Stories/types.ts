@@ -80,8 +80,8 @@ export interface HtmlStoryCreateRequest extends GenericCreateRequest {
      * If format version is omitted, license default editor version will be implied.
      */
     format_version?: Story.FormatVersion.HTML;
-    intro: Html;
-    content: Html;
+    intro?: Html;
+    content?: Html;
     /**
      * Attached gallery slate content.
      */
@@ -96,13 +96,13 @@ export interface SlateStoryCreateRequest extends GenericCreateRequest {
     /**
      * Intro field is not supported for Prezly Content Format stories.
      */
-    intro: never;
-    content: PrezlyContentFormat;
+    intro?: never;
+    content?: PrezlyContentFormat;
 }
 
 export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
-    intro: Html;
-    content: Html;
+    intro?: Html;
+    content?: Html;
     /**
      * Attached gallery slate content.
      */
@@ -113,8 +113,8 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
     /**
      * Intro field is not supported for Prezly Content Format stories.
      */
-    intro: never;
-    content: PrezlyContentFormat;
+    intro?: never;
+    content?: PrezlyContentFormat;
 }
 
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
