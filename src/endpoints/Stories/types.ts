@@ -15,7 +15,7 @@ type Html = string;
 type PrezlyContentFormat = string;
 
 export interface IncludeOptions<Include extends readonly (keyof Story.OnDemandFields)[]> {
-    include: Include;
+    include?: Include;
 }
 
 export interface ListOptions<Include extends readonly (keyof Story.OnDemandFields)[]> {

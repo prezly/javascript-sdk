@@ -153,17 +153,35 @@ export class Client {
         return story;
     }
 
-    async create(payload: CreateRequest): Promise<ExtendedStory> {
-        const { story } = await this.apiClient.post<{ story: ExtendedStory }>(routing.storiesUrl, {
+    async create<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(payload: CreateRequest, options?: Options): Promise<StoryRecord> {
+        const include = options?.include;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(routing.storiesUrl, {
             payload,
+            query: { include: include as string[] | undefined },
         });
         return story;
     }
 
-    async update(id: StoryId, payload: UpdateRequest): Promise<ExtendedStory> {
+    async update<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, payload: UpdateRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}`;
-        const { story } = await this.apiClient.patch<{ story: ExtendedStory }>(url, {
+        const include = options?.include;
+
+        const { story } = await this.apiClient.patch<{ story: StoryRecord }>(url, {
             payload,
+            query: { include: include as string[] | undefined },
         });
         return story;
     }
