@@ -130,7 +130,7 @@ export interface UnpublishRequest {
 }
 
 export interface ScheduleRequest {
-    published_at?: Iso8601DateTime;
+    publish_at?: Iso8601DateTime;
     visibility?: Story.Visibility.PUBLIC | Story.Visibility.EMBARGO;
 }
 
