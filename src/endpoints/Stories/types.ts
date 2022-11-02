@@ -115,10 +115,21 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
      */
     intro?: never;
     content?: PrezlyContentFormat;
+    autosaved_content?: PrezlyContentFormat;
+    content_version?: number;
 }
 
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
 export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;
+
+export interface AutosaveRequest {
+    autosaved_content: PrezlyContentFormat;
+    content_version?: number;
+}
+
+export interface RevertRequest {
+    content_version?: number;
+}
 
 export interface PublishRequest {
     published_at?: Iso8601DateTime;

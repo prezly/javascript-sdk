@@ -3,11 +3,13 @@ import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
 
 import type {
+    AutosaveRequest,
     CreateRequest,
     IncludeOptions,
     ListOptions,
     ListResponse,
     PublishRequest,
+    RevertRequest,
     ScheduleRequest,
     SearchOptions,
     UnpublishRequest,
@@ -190,13 +192,16 @@ export class Client {
         return story;
     }
 
+    /**
+     * This operation is only allowed for V3 stories
+     */
     async autosave<
         Include extends readonly (keyof Story.OnDemandFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload: UpdateRequest, options?: Options): Promise<StoryRecord> {
+    >(id: StoryId, payload: AutosaveRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/autosave`;
         const include = options?.include;
 
@@ -207,13 +212,16 @@ export class Client {
         return story;
     }
 
+    /**
+     * This operation is only allowed for V3 stories
+     */
     async revert<
         Include extends readonly (keyof Story.OnDemandFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload: UpdateRequest, options?: Options): Promise<StoryRecord> {
+    >(id: StoryId, payload?: RevertRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/revert`;
         const include = options?.include;
 
