@@ -19,6 +19,7 @@ export const routing = {
     newsroomPrivacyRequestsUrl: '/v2/newsrooms/:newsroom_id/privacy-requests',
     newsroomDomainsUrl: '/v2/newsrooms/:newsroom_id/domains',
     newsroomGalleriesUrl: '/v2/newsrooms/:newsroom_id/galleries',
+    notificationSubscriptionsUrl: '/v2/notification-subscriptions',
     senderAddressesUrl: '/v2/sender-addresses',
     storiesUrl: '/v2/stories',
     storiesSearchUrl: '/v2/stories/search',
