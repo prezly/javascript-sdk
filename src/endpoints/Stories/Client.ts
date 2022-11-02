@@ -230,7 +230,7 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload: PublishRequest, options?: Options): Promise<StoryRecord> {
+    >(id: StoryId, payload?: PublishRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/publish`;
         const include = options?.include;
 
