@@ -11,6 +11,7 @@ import type {
     ScheduleRequest,
     SearchOptions,
     UnpublishRequest,
+    UnscheduleRequest,
     UpdateRequest,
 } from './types';
 
@@ -274,7 +275,22 @@ export class Client {
         return story;
     }
 
-    unschedule = this.unpublish;
+    async unschedule<
+        Include extends readonly (keyof Story.OnDemandFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, payload?: UnscheduleRequest, options?: Options): Promise<StoryRecord> {
+        const url = `${routing.storiesUrl}/${id}/unpublish`;
+        const include = options?.include;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            payload,
+            query: { include: include as string[] | undefined },
+        });
+        return story;
+    }
 
     async delete(id: StoryId): Promise<void> {
         const url = `${routing.storiesUrl}/${id}`;
