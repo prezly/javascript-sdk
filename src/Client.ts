@@ -19,6 +19,7 @@ import {
     Stories,
     Snippets,
     Subscriptions,
+    NotificationSubscriptions,
 } from './endpoints';
 import type { HeadersMap } from './http';
 
@@ -50,6 +51,7 @@ export interface Client {
     stories: Stories.Client;
     snippets: Snippets.Client;
     subscriptions: Subscriptions.Client;
+    notificationSubscriptions: NotificationSubscriptions.Client;
 }
 
 export function createClient({
@@ -85,5 +87,6 @@ export function createClient({
         stories: new Stories.Client(apiClient),
         snippets: new Snippets.Client(apiClient),
         subscriptions: new Subscriptions.Client(apiClient),
+        notificationSubscriptions: new NotificationSubscriptions.Client(apiClient),
     };
 }

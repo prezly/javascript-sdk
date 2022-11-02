@@ -29,3 +29,5 @@ export * from './Snippet';
 export * from './Story';
 export * from './User';
 export * from './UserAccount';
+export * from './NotificationSubscription';
+export * from './NotificationType';
