@@ -46,9 +46,9 @@ interface GenericCreateRequest {
     visibility?: Story.Visibility;
     culture?: CultureRef['code'];
 
-    header_image?: UploadedImage;
-    preview_image?: UploadedImage;
-    social_image?: UploadedImage;
+    header_image?: UploadedImage | null;
+    preview_image?: UploadedImage | null;
+    social_image?: UploadedImage | null;
     social_text?: string;
 
     categories?: Category['id'][];
@@ -64,9 +64,9 @@ interface GenericUpdateRequest {
     visibility?: Story.Visibility;
     culture?: CultureRef['code'];
 
-    header_image?: UploadedImage;
-    preview_image?: UploadedImage;
-    social_image?: UploadedImage;
+    header_image?: UploadedImage | null;
+    preview_image?: UploadedImage | null;
+    social_image?: UploadedImage | null;
     social_text?: string;
 
     categories?: Category['id'][];
