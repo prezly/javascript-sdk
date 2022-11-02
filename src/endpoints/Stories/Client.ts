@@ -247,7 +247,7 @@ export class Client {
             ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload?: UnpublishRequest, options?: Options): Promise<StoryRecord> {
-        const url = `${routing.storiesUrl}/${id}/publish`;
+        const url = `${routing.storiesUrl}/${id}/unpublish`;
         const include = options?.include;
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
