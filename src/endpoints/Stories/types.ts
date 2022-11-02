@@ -155,7 +155,7 @@ export interface ScheduleRequest {
 
 export type UnscheduleRequest = UnpublishRequest;
 
-const EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE: Record<
+const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE: Record<
     keyof Omit<ExtendedStory, keyof Story>,
     boolean
 > = {
@@ -170,7 +170,7 @@ const EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE: Record<
     referenced_entities: true,
 }; // satisfies Record<keyof Omit<ExtendedStory, keyof Story>, boolean>; // TODO: Use Typescript `satisfies` operator, when it's out of beta
 
-const ONDEMAND_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
+const ALL_EXTRA_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
     thumbnail_image: true,
     header_image: true,
     preview_image: true,
@@ -187,10 +187,10 @@ const ONDEMAND_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
     'pitches.count': true,
 }; // satisfies Record<keyof Story.OnDemandFields, boolean>; // TODO: Use Typescript `satisfies` operator, when it's out of beta
 
-export const ALL_ONDEMAND_FIELDS = Object.keys(
-    ONDEMAND_FIELDS_SHAPE,
-) as (keyof typeof ONDEMAND_FIELDS_SHAPE)[];
+export const ALL_EXTRA_FIELDS = Object.keys(
+    ALL_EXTRA_FIELDS_SHAPE,
+) as (keyof typeof ALL_EXTRA_FIELDS_SHAPE)[];
 
-export const EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS = Object.keys(
-    EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE,
-) as (keyof typeof EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE)[];
+export const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS = Object.keys(
+    EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE,
+) as (keyof typeof EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE)[];
