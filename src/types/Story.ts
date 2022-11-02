@@ -13,6 +13,11 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     publication_status: Story.PublicationStatus;
     lifecycle_status: Story.LifecycleStatus;
     visibility: Story.Visibility;
@@ -86,24 +91,59 @@ export interface Story {
     scheduled_at: string | null;
 
     lifecycle_status: Story.LifecycleStatus;
+    /**
+     * @deprecated Please use `newsroom.status` instead.
+     * @see newsroom
+     * @see Newsroom.Status
+     */
     is_archived: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_finalized: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_published: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_draft: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_embargo: boolean;
+    /**
+     * @deprecated Please use `visibility` instead.
+     * @see visibility
+     * @see Story.Visibility
+     */
     is_private: boolean;
+    /**
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
+     */
     is_scheduled: boolean;
     is_sharable: boolean;
     is_analytics_available: boolean;
-
-    publication_status: Story.PublicationStatus;
-    visibility: Story.Visibility;
+    is_shared_to_prpro: boolean;
 
     /**
-     * Contains attached gallery slate content.
-     * Always `null` for v3 stories.
+     * @deprecated Please use `lifecycle_status` instead.
+     * @see lifecycle_status
+     * @see Story.LifecycleStatus
      */
-    attached_gallery_content: string | null;
+    publication_status: Story.PublicationStatus;
+    visibility: Story.Visibility;
 }
 
 export namespace Story {
@@ -120,6 +160,10 @@ export namespace Story {
         PUBLISHED = 'published',
     }
 
+    /**
+     * Please use `LifecycleStatus` instead.
+     * @see LifecycleStatus
+     */
     export enum PublicationStatus {
         NEW = 'new',
         DRAFT = 'draft',
@@ -134,12 +178,6 @@ export namespace Story {
     }
 
     export interface ExtraFields {
-        /**
-         * Depending on `format_version` this field can contain:
-         * - HTML content for v1 stories (deprecated)
-         * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
-         */
-        content: string;
         /**
          * Uploadcare image JSON.
          */
@@ -159,9 +197,48 @@ export namespace Story {
         social_text: string;
         tag_names: string[];
 
+        /**
+         * Depending on `format_version` this field can contain:
+         * - HTML content for v1 stories (deprecated)
+         * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
+         */
+        content: string;
+
+        /**
+         * Only supported on v3 stories with JSON-encoded structured content.
+         */
+        autosaved_content: string | null;
+
+        /**
+         * Auto-incrementing version number updated on every update.
+         * Used for detecting multiple users editing the same story simultaneously.
+         */
+        content_version: number;
+
+        /**
+         * User who performed the latest update on the story.
+         */
+        last_modifying_user: UserRef | null;
+
+        /**
+         * Contains attached gallery slate content.
+         * Always `null` for v3 stories.
+         */
+        attached_gallery_content: string | null;
+
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
         };
+
+        /**
+         * Number of campaigns linked to this story.
+         */
+        'campaigns.count': number;
+
+        /**
+         * Number of pitches linked to this story.
+         */
+        'pitches.count': number;
     }
 
     export function isUninitialized(status: LifecycleStatus): boolean;
@@ -214,4 +291,17 @@ export namespace Story {
     }
 }
 
-export interface ExtendedStory extends Story, Story.ExtraFields {}
+export interface ExtendedStory
+    extends Story,
+        Pick<
+            Story.ExtraFields,
+            | 'thumbnail_image'
+            | 'header_image'
+            | 'preview_image'
+            | 'social_image'
+            | 'social_text'
+            | 'tag_names'
+            | 'content'
+            | 'attached_gallery_content'
+            | 'referenced_entities'
+        > {}
