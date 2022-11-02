@@ -1,8 +1,8 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import type { NotificationSubscription } from '../../types';
 
 import type { NotificationSubscriptionsUpdateRequest } from './types';
-import type { NotificationSubscription } from '../../types';
 
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;
