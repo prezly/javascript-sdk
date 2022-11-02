@@ -30,10 +30,10 @@ export class Client {
     }
 
     async list<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends ListOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
-            ? Story & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options ?? {};
@@ -48,10 +48,10 @@ export class Client {
     }
 
     async search<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends SearchOptions<Include>,
         StoryRecord extends Story = Options['include'] extends Include
-            ? Story & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Options): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query } = options ?? {};
@@ -70,10 +70,10 @@ export class Client {
      * Get story by UUID.
      */
     async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: Story['uuid'], options?: Options): Promise<StoryRecord>;
 
@@ -81,10 +81,10 @@ export class Client {
      * Get multiple stories by UUIDs.
      */
     async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(ids: Story['uuid'][], options?: Options): Promise<StoryRecord[]>;
 
@@ -93,10 +93,10 @@ export class Client {
      * @deprecated Please use UUID instead.
      */
     async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: Story['id'] | Story['uuid'], options?: Options): Promise<StoryRecord>;
 
@@ -105,10 +105,10 @@ export class Client {
      * @deprecated Please use UUID instead.
      */
     async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(ids: Story['id'][], options?: Options): Promise<StoryRecord[]>;
 
@@ -116,10 +116,10 @@ export class Client {
      * Implementation
      */
     async get<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(
         arg: Story['id'] | Story['uuid'] | Story['id'][] | Story['uuid'][],
@@ -160,10 +160,10 @@ export class Client {
     }
 
     async create<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(payload: CreateRequest, options?: Options): Promise<StoryRecord> {
         const include = options?.include;
@@ -176,10 +176,10 @@ export class Client {
     }
 
     async update<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload: UpdateRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}`;
@@ -196,10 +196,10 @@ export class Client {
      * This operation is only allowed for V3 stories
      */
     async autosave<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload: AutosaveRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/autosave`;
@@ -216,10 +216,10 @@ export class Client {
      * This operation is only allowed for V3 stories
      */
     async revert<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload?: RevertRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/revert`;
@@ -233,10 +233,10 @@ export class Client {
     }
 
     async publish<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload?: PublishRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/publish`;
@@ -250,10 +250,10 @@ export class Client {
     }
 
     async unpublish<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload?: UnpublishRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
@@ -267,10 +267,10 @@ export class Client {
     }
 
     async schedule<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload?: ScheduleRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/schedule`;
@@ -284,10 +284,10 @@ export class Client {
     }
 
     async unschedule<
-        Include extends readonly (keyof Story.OnDemandFields)[],
+        Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
-            ? ExtendedStory & Pick<Story.OnDemandFields, Options['include'][number]>
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(id: StoryId, payload?: UnscheduleRequest, options?: Options): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpublish`;

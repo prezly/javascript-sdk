@@ -1,4 +1,12 @@
-import type { Category, CultureRef, Newsroom, Pagination, Query, Story } from '../../types';
+import type {
+    Category,
+    CultureRef,
+    ExtendedStory,
+    Newsroom,
+    Pagination,
+    Query,
+    Story,
+} from '../../types';
 
 /**
  * Uploadcare image JSON string.
@@ -14,18 +22,18 @@ type Html = string;
  */
 type PrezlyContentFormat = string;
 
-export interface IncludeOptions<Include extends readonly (keyof Story.OnDemandFields)[]> {
+export interface IncludeOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
     include?: Include;
 }
 
-export interface ListOptions<Include extends readonly (keyof Story.OnDemandFields)[]> {
+export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
     limit?: number;
     offset?: number;
     sortOrder?: string;
     include?: Include;
 }
 
-export interface SearchOptions<Include extends readonly (keyof Story.OnDemandFields)[]>
+export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
     extends ListOptions<Include> {
     query?: Query;
     scope?: Query;
@@ -147,10 +155,10 @@ export interface ScheduleRequest {
 
 export type UnscheduleRequest = UnpublishRequest;
 
-const EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE /*: Record<
+const EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE: Record<
     keyof Omit<ExtendedStory, keyof Story>,
     boolean
->*/ = {
+> = {
     thumbnail_image: true,
     header_image: true,
     preview_image: true,
@@ -162,7 +170,7 @@ const EXTENDED_STORY_INCLUDED_ONDEMAND_FIELDS_SHAPE /*: Record<
     referenced_entities: true,
 }; // satisfies Record<keyof Omit<ExtendedStory, keyof Story>, boolean>; // TODO: Use Typescript `satisfies` operator, when it's out of beta
 
-const ONDEMAND_FIELDS_SHAPE /*: Record<keyof Story.OnDemandFields, boolean>*/ = {
+const ONDEMAND_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
     thumbnail_image: true,
     header_image: true,
     preview_image: true,

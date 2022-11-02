@@ -177,7 +177,7 @@ export namespace Story {
         CONFIDENTIAL = 'confidential',
     }
 
-    export interface OnDemandFields {
+    export interface ExtraFields {
         /**
          * Uploadcare image JSON.
          */
@@ -294,7 +294,7 @@ export namespace Story {
 export interface ExtendedStory
     extends Story,
         Pick<
-            Story.OnDemandFields,
+            Story.ExtraFields,
             | 'thumbnail_image'
             | 'header_image'
             | 'preview_image'
