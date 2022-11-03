@@ -30,5 +30,3 @@ export * from './Story';
 export * from './User';
 export * from './UserAccount';
 export * from './NotificationSubscription';
-export * from './NotificationType';
-export * from './NotificationTypeArea';
