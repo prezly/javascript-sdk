@@ -175,6 +175,23 @@ export class Client {
         return story;
     }
 
+    async duplicate<
+        Include extends readonly (keyof Story.ExtraFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, options?: Options): Promise<StoryRecord> {
+        const include = options?.include;
+        const url = `${routing.storiesUrl}/${id}/duplicate`;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            query: { include: include as string[] | undefined },
+        });
+
+        return story;
+    }
+
     async update<
         Include extends readonly (keyof Story.ExtraFields)[],
         Options extends IncludeOptions<Include>,
