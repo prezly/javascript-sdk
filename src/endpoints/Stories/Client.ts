@@ -1,13 +1,18 @@
 import type { DeferredJobsApiClient } from '../../api';
+import { HttpCodes } from '../../http';
+import { ApiError } from '../../http/ApiError';
 import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
 
 import type {
     AutosaveRequest,
+    ChangeNewsroomSuccessResponse,
+    ChangeNewsroomUnsafeResponse,
     CreateRequest,
     IncludeOptions,
     ListOptions,
     ListResponse,
+    MoveRequest,
     PublishRequest,
     RevertRequest,
     ScheduleRequest,
@@ -190,6 +195,36 @@ export class Client {
         });
 
         return story;
+    }
+
+    async move<
+        Include extends readonly (keyof Story.ExtraFields)[],
+        Options extends IncludeOptions<Include> & { force?: true },
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
+            : ExtendedStory,
+    >(
+        id: StoryId,
+        payload: MoveRequest,
+        options?: Options,
+    ): Promise<ChangeNewsroomSuccessResponse<StoryRecord> | ChangeNewsroomUnsafeResponse> {
+        const include = options?.include;
+        const force = options?.force;
+        const url = `${routing.storiesUrl}/${id}/move`;
+
+        try {
+            const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+                query: { include: include as string[] | undefined, force },
+                payload,
+            });
+
+            return { status: 'success', story };
+        } catch (error) {
+            if (error instanceof ApiError && error.status === HttpCodes.CONFLICT) {
+                return error.payload as ChangeNewsroomUnsafeResponse;
+            }
+            throw error;
+        }
     }
 
     async update<

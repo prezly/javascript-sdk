@@ -1,6 +1,6 @@
 import type { CultureRef } from './Culture';
 
-export interface Category {
+export interface CategoryRef {
     id: number;
     display_name: string;
     display_description: string | null;
@@ -12,5 +12,9 @@ export interface Category {
             slug: string | null;
         };
     };
+    stories_number: number;
+}
+
+export interface Category extends CategoryRef {
     stories_number: number;
 }
