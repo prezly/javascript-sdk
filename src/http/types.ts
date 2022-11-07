@@ -2,6 +2,7 @@ export enum HttpCodes {
     ACCEPTED = 202,
     NO_CONTENT = 204,
     NOT_FOUND = 404,
+    CONFLICT = 409,
     GONE = 410,
     PRECONDITION_FAILED = 412,
 }

@@ -1,11 +1,14 @@
 import type {
     Category,
+    CategoryRef,
     CultureRef,
     ExtendedStory,
     Newsroom,
+    NewsroomContactRef,
     Pagination,
     Query,
     Story,
+    Warning as BaseWarning,
 } from '../../types';
 
 /**
@@ -21,6 +24,43 @@ type Html = string;
  * String containing Prezly Content Format JSON structure.
  */
 type PrezlyContentFormat = string;
+
+interface ChangingNewsroomUnsafeOperationWarning extends BaseWarning {
+    scope: 'room_id';
+    field: 'room_id';
+    value: Newsroom['id'];
+}
+
+interface DestinationNewsroomMissingCategoriesWarning extends BaseWarning {
+    scope: 'room_id';
+    field: 'categories';
+    value: CategoryRef[];
+}
+
+interface DestinationNewsroomMissingCulturesWarning extends BaseWarning {
+    scope: 'room_id';
+    field: 'cultures';
+    value: CultureRef[];
+}
+
+interface StoryTranslationsWillMoveWarning extends BaseWarning {
+    scope: 'room_id';
+    field: 'translations';
+    value: CultureRef[];
+}
+
+interface StoryEmbeddedContactsWillBeRemovedWarning extends BaseWarning {
+    scope: 'room_id';
+    field: 'room_contacts';
+    value: NewsroomContactRef[];
+}
+
+export type ChangeNewsroomWarning =
+    | ChangingNewsroomUnsafeOperationWarning
+    | DestinationNewsroomMissingCategoriesWarning
+    | DestinationNewsroomMissingCulturesWarning
+    | StoryEmbeddedContactsWillBeRemovedWarning
+    | StoryTranslationsWillMoveWarning;
 
 export interface IncludeOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
     include?: Include;
@@ -154,6 +194,22 @@ export interface ScheduleRequest {
 }
 
 export type UnscheduleRequest = UnpublishRequest;
+
+export interface MoveRequest {
+    newsroom: Newsroom['uuid'] | Newsroom['id'];
+}
+
+export interface ChangeNewsroomSuccessResponse<T extends ExtendedStory> {
+    status: 'success';
+    story: T;
+}
+
+export interface ChangeNewsroomUnsafeResponse {
+    status: 'error';
+    code: 'unsafe';
+    message: string;
+    warnings: ChangeNewsroomWarning[];
+}
 
 const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE: Record<
     keyof Omit<ExtendedStory, keyof Story>,

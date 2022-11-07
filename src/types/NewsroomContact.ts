@@ -2,7 +2,7 @@ import type { UploadedImage } from '@prezly/uploads';
 
 import type { CultureRef } from './Culture';
 
-export interface NewsroomContact {
+export interface NewsroomContactRef {
     uuid: string;
     /**
      * @deprecated Please use `uuid` as identifier.
@@ -18,6 +18,11 @@ export interface NewsroomContact {
     website: string | null;
     twitter: string | null;
     facebook: string | null;
+    avatar_url: string | null;
+}
+
+// TODO: Add `avatar_url` to the full NewsroomContact API object presentation
+export interface NewsroomContact extends Omit<NewsroomContactRef, 'avatar_url'> {
     avatar_image: UploadedImage | null;
     /**
      * Featured contacts are listed on the newsroom homepage.
