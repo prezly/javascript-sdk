@@ -17,6 +17,7 @@ import type {
     RevertRequest,
     ScheduleRequest,
     SearchOptions,
+    TranslateRequest,
     UnpublishRequest,
     UnscheduleRequest,
     UpdateRequest,
@@ -192,6 +193,24 @@ export class Client {
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
             query: { include: include as string[] | undefined },
+        });
+
+        return story;
+    }
+
+    async translate<
+        Include extends readonly (keyof Story.ExtraFields)[],
+        Options extends IncludeOptions<Include>,
+        StoryRecord extends ExtendedStory = Options['include'] extends Include
+            ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
+            : ExtendedStory,
+    >(id: StoryId, payload: TranslateRequest, options?: Options): Promise<StoryRecord> {
+        const include = options?.include;
+        const url = `${routing.storiesUrl}/${id}/translate`;
+
+        const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            query: { include: include as string[] | undefined },
+            payload,
         });
 
         return story;

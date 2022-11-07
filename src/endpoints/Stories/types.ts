@@ -195,6 +195,10 @@ export interface ScheduleRequest {
 
 export type UnscheduleRequest = UnpublishRequest;
 
+export interface TranslateRequest {
+    culture: CultureRef['code'];
+}
+
 export interface MoveRequest {
     newsroom: Newsroom['uuid'] | Newsroom['id'];
 }
