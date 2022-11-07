@@ -1,9 +1,22 @@
-import type { NotificationType } from './NotificationType';
-
 export interface NotificationSubscription {
-    notification_type: NotificationType;
+    notification_type: NotificationSubscription.Type;
     is_email_subscribed: boolean;
     is_receiving: boolean;
     missing_permissions: string[];
     missing_features: string[];
+}
+
+export namespace NotificationSubscription {
+    export interface Type {
+        id: string;
+        title: string;
+        description: string | null;
+        area: Area;
+    }
+
+    export enum Area {
+        CAMPAIGNS = 'Campaigns',
+        CONTACTS = 'Contacts',
+        BILLING_AND_LEGAL = 'Billing & Legal',
+    }
 }
