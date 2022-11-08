@@ -1,6 +1,6 @@
 {
     "name": "@prezly/sdk",
-    "version": "11.2.0",
+    "version": "11.2.1",
     "description": "Prezly API SDK",
     "type": "module",
     "main": "dist/index.js",
