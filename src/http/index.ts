@@ -1,3 +1,4 @@
+export { ApiError } from './ApiError';
 export { Http } from './Http';
 export { isDeferredJobResponse } from './lib';
 export {
