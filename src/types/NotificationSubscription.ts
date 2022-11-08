@@ -1,7 +1,12 @@
 export interface NotificationSubscription {
     notification_type: NotificationSubscription.Type;
+
     is_email_subscribed: boolean;
+    is_email_required: boolean;
+    is_receiving_email: boolean;
+
     is_receiving: boolean;
+
     missing_permissions: string[];
     missing_features: string[];
 }
