@@ -8,7 +8,6 @@ import type {
     Pagination,
     Query,
     Story,
-    Warning as BaseWarning,
 } from '../../types';
 
 /**
@@ -24,6 +23,13 @@ type Html = string;
  * String containing Prezly Content Format JSON structure.
  */
 type PrezlyContentFormat = string;
+
+interface BaseWarning {
+    text: string;
+    scope: string;
+    field: string;
+    value: unknown;
+}
 
 interface ChangingNewsroomUnsafeOperationWarning extends BaseWarning {
     scope: 'room_id';
