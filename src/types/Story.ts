@@ -241,6 +241,10 @@ export namespace Story {
         'pitches.count': number;
     }
 
+    /*
+     * Lifecycle status checks
+     */
+
     export function isUninitialized(status: LifecycleStatus): boolean;
     export function isUninitialized(story: Pick<Story, 'lifecycle_status'>): boolean;
     export function isUninitialized(
@@ -288,6 +292,34 @@ export namespace Story {
             return isPublished(arg.lifecycle_status);
         }
         return arg === LifecycleStatus.PUBLISHED;
+    }
+
+    /*
+     * Format version checks
+     */
+
+    export function isLegacyHtmlFormat(format: FormatVersion): format is FormatVersion.HTML;
+    export function isLegacyHtmlFormat<T extends Pick<Story, 'format_version'>>(
+        story: T,
+    ): story is T & { format_version: FormatVersion.HTML };
+    export function isLegacyHtmlFormat(
+        arg: FormatVersion | Pick<Story, 'format_version'>,
+    ): boolean {
+        if (typeof arg === 'object') {
+            return isLegacyHtmlFormat(arg.format_version);
+        }
+        return arg === FormatVersion.HTML;
+    }
+
+    export function isSlateFormat(format: FormatVersion): format is FormatVersion.SLATEJS;
+    export function isSlateFormat<T extends Pick<Story, 'format_version'>>(
+        story: Pick<Story, 'format_version'>,
+    ): story is T & { format_version: FormatVersion.SLATEJS };
+    export function isSlateFormat(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
+        if (typeof arg === 'object') {
+            return isSlateFormat(arg.format_version);
+        }
+        return arg === FormatVersion.SLATEJS;
     }
 }
 
