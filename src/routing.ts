@@ -1,5 +1,6 @@
 export const routing = {
     accounts: '/v2/accounts',
+    billing: '/v2/accounts',
     campaignsUrl: '/v2/campaigns',
     campaignRecipientsUrl: '/v2/campaigns/:campaign_id/recipients',
     coverageUrl: '/v2/coverage',

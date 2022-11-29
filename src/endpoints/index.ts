@@ -1,4 +1,5 @@
 export * as Accounts from './Accounts';
+export * as Billing from './Billing';
 export * as CampaignRecipients from './CampaignRecipients';
 export * as Campaigns from './Campaigns';
 export * as Coverage from './Coverage';

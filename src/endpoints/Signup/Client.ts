@@ -1,9 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 
-import type {
-    CheckEmailAvailabilityResponse,
-} from './types';
+import type { CheckEmailAvailabilityResponse } from './types';
 
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;
@@ -14,6 +12,6 @@ export class Client {
 
     async checkEmailAvailability(email: string): Promise<CheckEmailAvailabilityResponse> {
         const url = `${routing.signup}/check-availability`;
-        return this.apiClient.post<CheckEmailAvailabilityResponse>(url, { payload: { email } })
+        return this.apiClient.post<CheckEmailAvailabilityResponse>(url, { payload: { email } });
     }
 }

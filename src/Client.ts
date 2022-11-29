@@ -1,6 +1,7 @@
 import { ApiClient, DeferredJobsApiClient } from './api';
 import {
     Accounts,
+    Billing,
     Campaigns,
     CampaignRecipients,
     Coverage,
@@ -34,6 +35,7 @@ export interface ClientOptions {
 
 export interface Client {
     accounts: Accounts.Client;
+    billing: Billing.Client;
     campaigns: Campaigns.Client;
     campaignRecipients: CampaignRecipients.Client;
     coverage: Coverage.Client;
@@ -71,6 +73,7 @@ export function createClient({
 
     return {
         accounts: new Accounts.Client(apiClient),
+        billing: new Billing.Client(apiClient),
         campaigns: new Campaigns.Client(apiClient),
         campaignRecipients: new CampaignRecipients.Client(apiClient),
         coverage: new Coverage.Client(apiClient),
