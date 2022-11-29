@@ -21,6 +21,7 @@ export const routing = {
     newsroomGalleriesUrl: '/v2/newsrooms/:newsroom_id/galleries',
     notificationSubscriptionsUrl: '/v2/notification-subscriptions',
     senderAddressesUrl: '/v2/sender-addresses',
+    signup: '/v2/signup',
     storiesUrl: '/v2/stories',
     storiesSearchUrl: '/v2/stories/search',
     storyCoverageUrl: '/v1/stories/:story_id/reports/coverage',

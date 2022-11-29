@@ -15,6 +15,7 @@ export * as NewsroomSubscriptions from './NewsroomSubscriptions';
 export * as NewsroomThemes from './NewsroomThemes';
 export * as NewsroomWebhooks from './NewsroomWebhooks';
 export * as SenderAddresses from './SenderAddresses';
+export * as Signup from './Signup';
 export * as Snippets from './Snippets';
 export * as Stories from './Stories';
 export * as Subscriptions from './Subscriptions';
