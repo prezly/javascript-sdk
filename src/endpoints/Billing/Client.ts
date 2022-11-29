@@ -11,7 +11,7 @@ export class Client {
     }
 
     async signup(payload: SignupRequest): Promise<SignupResponse> {
-        const url = routing.billing;
+        const url = `${routing.billing}/signup`;
         return this.apiClient.post<SignupResponse>(url, { payload });
     }
 }
