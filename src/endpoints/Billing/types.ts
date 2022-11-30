@@ -10,8 +10,8 @@ export enum SignupCurrencies {
 }
 
 export enum SignupBillingCycles {
-    BILLING_CYCLE_YEAR = 'year',
-    BILLING_CYCLE_MONTH = 'month',
+    YEAR = 'year',
+    MONTH = 'month',
 }
 
 export interface SignupRequest {
