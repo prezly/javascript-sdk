@@ -3,10 +3,10 @@ export interface SignupRequest {
     company_name: string;
     first_name: string;
     last_name: string;
-    plan: 'core';
-    currency: 'eur';
     quantity: number;
-    billing_cycle: 'month';
+    plan?: 'core';
+    currency?: 'eur';
+    billing_cycle?: 'month';
     phone?: string;
 }
 
