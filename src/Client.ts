@@ -1,6 +1,7 @@
 import { ApiClient, DeferredJobsApiClient } from './api';
 import {
     Accounts,
+    Billing,
     Campaigns,
     CampaignRecipients,
     Coverage,
@@ -16,6 +17,7 @@ import {
     NewsroomDomains,
     NewsroomGalleries,
     SenderAddresses,
+    Signup,
     Stories,
     Snippets,
     Subscriptions,
@@ -33,6 +35,7 @@ export interface ClientOptions {
 
 export interface Client {
     accounts: Accounts.Client;
+    billing: Billing.Client;
     campaigns: Campaigns.Client;
     campaignRecipients: CampaignRecipients.Client;
     coverage: Coverage.Client;
@@ -48,6 +51,7 @@ export interface Client {
     newsroomDomains: NewsroomDomains.Client;
     newsroomGalleries: NewsroomGalleries.Client;
     senderAddresses: SenderAddresses.Client;
+    signup: Signup.Client;
     stories: Stories.Client;
     snippets: Snippets.Client;
     subscriptions: Subscriptions.Client;
@@ -69,6 +73,7 @@ export function createClient({
 
     return {
         accounts: new Accounts.Client(apiClient),
+        billing: new Billing.Client(apiClient),
         campaigns: new Campaigns.Client(apiClient),
         campaignRecipients: new CampaignRecipients.Client(apiClient),
         coverage: new Coverage.Client(apiClient),
@@ -84,6 +89,7 @@ export function createClient({
         newsroomDomains: new NewsroomDomains.Client(apiClient),
         newsroomGalleries: new NewsroomGalleries.Client(apiClient),
         senderAddresses: new SenderAddresses.Client(apiClient),
+        signup: new Signup.Client(apiClient),
         stories: new Stories.Client(apiClient),
         snippets: new Snippets.Client(apiClient),
         subscriptions: new Subscriptions.Client(apiClient),
