@@ -1,12 +1,28 @@
+export enum SignupPlan {
+    STARTER = 'starter',
+    CORE = 'core',
+    PREMIUM = 'premium',
+}
+
+export enum SignupCurrencies {
+    EUR = 'eur',
+    USD = 'usd',
+}
+
+export enum SignupBillingCycles {
+    BILLING_CYCLE_YEAR = 'year',
+    BILLING_CYCLE_MONTH = 'month',
+}
+
 export interface SignupRequest {
     email: string;
     company_name: string;
     first_name: string;
     last_name: string;
     quantity: number;
-    plan?: 'core';
-    currency?: 'eur';
-    billing_cycle?: 'month';
+    plan?: SignupPlan;
+    currency?: SignupCurrencies;
+    billing_cycle?: SignupBillingCycles;
     phone?: string;
 }
 
