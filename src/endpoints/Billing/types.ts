@@ -4,12 +4,12 @@ export enum SignupPlan {
     PREMIUM = 'premium',
 }
 
-export enum SignupCurrencies {
+export enum SignupCurrency {
     EUR = 'eur',
     USD = 'usd',
 }
 
-export enum SignupBillingCycles {
+export enum SignupBillingCycle {
     YEAR = 'year',
     MONTH = 'month',
 }
@@ -21,8 +21,8 @@ export interface SignupRequest {
     last_name: string;
     quantity: number;
     plan?: SignupPlan;
-    currency?: SignupCurrencies;
-    billing_cycle?: SignupBillingCycles;
+    currency?: SignupCurrency;
+    billing_cycle?: SignupBillingCycle;
     phone?: string;
 }
 
