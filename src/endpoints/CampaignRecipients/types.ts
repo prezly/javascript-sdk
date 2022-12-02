@@ -1,5 +1,7 @@
 import type { EmailRecipient, Pagination, Query } from '../../types';
 
+export { ContactsScope } from '../../types'; // convenience shortcut & BC
+
 export interface ListOptions {
     limit?: number;
     offset?: number;

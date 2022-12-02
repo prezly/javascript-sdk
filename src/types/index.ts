@@ -4,6 +4,7 @@ export * from './common';
 export * from './Campaign';
 export * from './Category';
 export * from './Contact';
+export * from './ContactsScope';
 export * from './Country';
 export * from './CoverageEntry';
 export * from './Culture';
