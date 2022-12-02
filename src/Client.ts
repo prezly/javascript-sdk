@@ -4,6 +4,7 @@ import {
     Billing,
     Campaigns,
     CampaignRecipients,
+    ContactsExports,
     Coverage,
     Jobs,
     Licenses,
@@ -38,6 +39,7 @@ export interface Client {
     billing: Billing.Client;
     campaigns: Campaigns.Client;
     campaignRecipients: CampaignRecipients.Client;
+    contactsExports: ContactsExports.Client;
     coverage: Coverage.Client;
     jobs: Jobs.Client;
     licenses: Licenses.Client;
@@ -76,6 +78,7 @@ export function createClient({
         billing: new Billing.Client(apiClient),
         campaigns: new Campaigns.Client(apiClient),
         campaignRecipients: new CampaignRecipients.Client(apiClient),
+        contactsExports: new ContactsExports.Client(apiClient),
         coverage: new Coverage.Client(apiClient),
         jobs: new Jobs.Client(apiClient),
         licenses: new Licenses.Client(apiClient),

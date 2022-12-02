@@ -1,10 +1,9 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Campaign, Contact, EmailRecipient } from '../../types';
+import type { Campaign, Contact, ContactsScope, EmailRecipient } from '../../types';
 import { Query } from '../../types';
 import type { RecipientsOperationResponse } from '../Campaigns';
 
-import type { ContactsScope } from './scopes';
 import type { ListOptions, ListResponse, SearchOptions } from './types';
 
 type CampaignId = Campaign['id'];
