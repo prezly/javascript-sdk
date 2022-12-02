@@ -1,3 +1,4 @@
 export * from './Client';
-export * from './scopes';
 export * from './types';
+
+export { ContactsScope } from '../../types'; // convenience shortcut & BC
