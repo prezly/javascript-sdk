@@ -35,6 +35,10 @@ export namespace NewsroomTheme {
         SUBSCRIBE_FORM = 'subscribe_form',
         STORY_PINNING = 'story_pinning',
     }
+
+    export function isFeatureSupported(theme: NewsroomTheme, feature: NewsroomTheme.Feature) {
+        return theme.features.includes(feature);
+    }
 }
 
 export interface NewsroomThemePreset {
