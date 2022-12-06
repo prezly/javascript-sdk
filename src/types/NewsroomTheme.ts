@@ -33,6 +33,7 @@ export namespace NewsroomTheme {
         CUSTOM_CSS_JAVASCRIPT = 'custom_css_javascript',
         HOMEPAGE_CONTACTS = 'homepage_contacts',
         SUBSCRIBE_FORM = 'subscribe_form',
+        STORY_PINNING = 'story_pinning',
     }
 }
 
