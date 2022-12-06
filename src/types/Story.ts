@@ -144,6 +144,9 @@ export interface Story {
      */
     publication_status: Story.PublicationStatus;
     visibility: Story.Visibility;
+
+    is_pinned: boolean;
+    pinned_by: UserRef | null;
 }
 
 export namespace Story {
