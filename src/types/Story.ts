@@ -2,8 +2,8 @@ import type { Category } from './Category';
 import type { OEmbedInfo } from './common';
 import type { CultureRef } from './Culture';
 import type { NewsroomRef } from './Newsroom';
-import type { UserRef } from './User';
 import type { SEOSettings } from './SEOSettings';
+import type { UserRef } from './User';
 
 export interface StoryRef {
     uuid: string;
