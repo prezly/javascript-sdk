@@ -377,12 +377,15 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, options?: Options): Promise<StoryRecord> {
+    >(id: StoryId, options?: Options & { force?: boolean }): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/pin`;
         const include = options?.include;
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
-            query: { include: include as string[] | undefined },
+            query: {
+                include: include as string[] | undefined,
+                force: options?.force || undefined,
+            },
         });
         return story;
     }
