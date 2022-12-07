@@ -3,6 +3,7 @@ import type { OEmbedInfo } from './common';
 import type { CultureRef } from './Culture';
 import type { NewsroomRef } from './Newsroom';
 import type { UserRef } from './User';
+import type {SEOSettings} from "./SEOSettings";
 
 export interface StoryRef {
     uuid: string;
@@ -147,6 +148,8 @@ export interface Story {
 
     is_pinned: boolean;
     pinned_by: UserRef | null;
+
+    seo_settings: SEOSettings;
 }
 
 export namespace Story {

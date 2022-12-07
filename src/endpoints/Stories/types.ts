@@ -127,6 +127,12 @@ interface GenericUpdateRequest {
     tags?: string[];
 
     is_shared_to_prpro?: boolean;
+
+    seo_settings?: {
+        meta_title?: string | null;
+        meta_description?: string | null;
+        canonical_url?: string | null;
+    }
 }
 
 export interface HtmlStoryCreateRequest extends GenericCreateRequest {
