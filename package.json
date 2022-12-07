@@ -61,7 +61,7 @@
         "prettier:check": "prettier --check './src/**/*.{ts,js}'",
         "prettier:fix": "prettier --write './src/**/*.{ts,js}'",
         "prerelease": "npm run clean && npm run build",
-        "release": "np --any-branch"
+        "release": "np --any-branch --no-tests"
     },
     "np": {
         "yarn": false
