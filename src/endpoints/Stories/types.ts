@@ -132,7 +132,7 @@ interface GenericUpdateRequest {
         meta_title?: string | null;
         meta_description?: string | null;
         canonical_url?: string | null;
-    }
+    };
 }
 
 export interface HtmlStoryCreateRequest extends GenericCreateRequest {
