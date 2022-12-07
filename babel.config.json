@@ -4,6 +4,7 @@
         ["@babel/preset-env", { "modules": "commonjs", "targets": { "node": "current" } }]
     ],
     "plugins": [
+        "@babel/plugin-proposal-export-namespace-from",
         "babel-plugin-transform-inline-environment-variables",
         ["babel-plugin-add-import-extension", { "extension": "js" }]
     ]
