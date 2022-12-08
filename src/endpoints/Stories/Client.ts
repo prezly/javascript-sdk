@@ -1,6 +1,5 @@
 import type { DeferredJobsApiClient } from '../../api';
-import { HttpCodes } from '../../http';
-import { ApiError } from '../../http/ApiError';
+import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
 
