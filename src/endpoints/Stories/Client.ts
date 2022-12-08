@@ -27,6 +27,12 @@ import type {
  */
 type StoryId = Story['uuid'] | Story['id'];
 
+/**
+ * Utility type to forbid arbitrary ad-hoc extensions of generic parameters.
+ * @see https://stackoverflow.com/a/69666350
+ */
+type Exactly<T, X> = T & Record<Exclude<keyof X, keyof T>, never>;
+
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
@@ -40,7 +46,7 @@ export class Client {
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
-    >(options?: Options): Promise<ListResponse<StoryRecord>> {
+    >(options?: Exactly<ListOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
             query: {
@@ -58,7 +64,7 @@ export class Client {
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
-    >(options?: Options): Promise<ListResponse<StoryRecord>> {
+    >(options?: Exactly<SearchOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
             payload: {
@@ -80,7 +86,7 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: Story['uuid'], options?: Options): Promise<StoryRecord>;
+    >(id: Story['uuid'], options?: Exactly<IncludeOptions<Include>, Options>): Promise<StoryRecord>;
 
     /**
      * Get multiple stories by UUIDs.
@@ -91,7 +97,10 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(ids: Story['uuid'][], options?: Options): Promise<StoryRecord[]>;
+    >(
+        ids: Story['uuid'][],
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord[]>;
 
     /**
      * Get story by deprecated numeric ID, or UUID.
@@ -103,7 +112,10 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: Story['id'] | Story['uuid'], options?: Options): Promise<StoryRecord>;
+    >(
+        id: Story['id'] | Story['uuid'],
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord>;
 
     /**
      * Get multiple stories by numeric IDs.
@@ -115,7 +127,10 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(ids: Story['id'][], options?: Options): Promise<StoryRecord[]>;
+    >(
+        ids: Story['id'][],
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord[]>;
 
     /**
      * Implementation
@@ -128,7 +143,7 @@ export class Client {
             : ExtendedStory,
     >(
         arg: Story['id'] | Story['uuid'] | Story['id'][] | Story['uuid'][],
-        options?: Options,
+        options?: Exactly<IncludeOptions<Include>, Options>,
     ): Promise<StoryRecord | StoryRecord[]> {
         const include = options?.include;
         const isArray = Array.isArray(arg);
@@ -170,7 +185,10 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(payload: CreateRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        payload: CreateRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const include = options?.include;
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(routing.storiesUrl, {
@@ -186,7 +204,7 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, options?: Options): Promise<StoryRecord> {
+    >(id: StoryId, options?: Exactly<IncludeOptions<Include>, Options>): Promise<StoryRecord> {
         const include = options?.include;
         const url = `${routing.storiesUrl}/${id}/duplicate`;
 
@@ -203,7 +221,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload: TranslateRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload: TranslateRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const include = options?.include;
         const url = `${routing.storiesUrl}/${id}/translate`;
 
@@ -217,14 +239,14 @@ export class Client {
 
     async move<
         Include extends readonly (keyof Story.ExtraFields)[],
-        Options extends IncludeOptions<Include> & { force?: true },
+        Options extends IncludeOptions<Include>,
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
     >(
         id: StoryId,
         payload: MoveRequest,
-        options?: Options,
+        options?: Exactly<IncludeOptions<Include>, Options> & { force?: true },
     ): Promise<ChangeNewsroomSuccessResponse<StoryRecord> | ChangeNewsroomUnsafeResponse> {
         const include = options?.include;
         const force = options?.force;
@@ -251,7 +273,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload: UpdateRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload: UpdateRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}`;
         const include = options?.include;
 
@@ -271,7 +297,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload: AutosaveRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload: AutosaveRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/autosave`;
         const include = options?.include;
 
@@ -291,7 +321,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload?: RevertRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload?: RevertRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/revert`;
         const include = options?.include;
 
@@ -308,7 +342,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload?: PublishRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload?: PublishRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/publish`;
         const include = options?.include;
 
@@ -325,7 +363,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload?: UnpublishRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload?: UnpublishRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
         const include = options?.include;
 
@@ -342,7 +384,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload?: ScheduleRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload?: ScheduleRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/schedule`;
         const include = options?.include;
 
@@ -359,7 +405,11 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, payload?: UnscheduleRequest, options?: Options): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        payload?: UnscheduleRequest,
+        options?: Exactly<IncludeOptions<Include>, Options>,
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
         const include = options?.include;
 
@@ -376,7 +426,10 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, options?: Options & { force?: boolean }): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        options?: Exactly<IncludeOptions<Include>, Options> & { force?: boolean },
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/pin`;
         const include = options?.include;
 
@@ -395,7 +448,7 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, options?: Options): Promise<StoryRecord> {
+    >(id: StoryId, options?: Exactly<IncludeOptions<Include>, Options>): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpin`;
         const include = options?.include;
 
