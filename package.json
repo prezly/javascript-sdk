@@ -1,9 +1,18 @@
 {
     "name": "@prezly/sdk",
-    "version": "11.8.0",
+    "version": "11.8.1-0",
     "description": "Prezly API SDK",
     "type": "module",
-    "main": "dist/index.js",
+    "main": "dist/index.cjs",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.cjs"
+        }
+    },
     "files": [
         "dist/**"
     ],
@@ -24,6 +33,7 @@
     "devDependencies": {
         "@babel/cli": "^7.19.3",
         "@babel/core": "^7.7.2",
+        "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
         "@babel/preset-env": "^7.7.1",
         "@babel/preset-typescript": "^7.18.6",
         "@types/node": "^12.12.9",
@@ -46,9 +56,10 @@
     "scripts": {
         "clean": "rimraf dist node_modules",
         "prebuild": "npm run clean && npm ci",
-        "build": "npm run build:types && npm run build:es",
+        "build": "npm run build:types && npm run build:es && npm run build:cjs",
         "build:types": "tsc --project .",
         "build:es": "babel ./src --ignore='**/*.test.ts' --config-file=./babel.config.json --extensions=.ts,.cts --source-root=./src --out-dir=./dist",
+        "build:cjs": "babel ./src --ignore='**/*.test.ts' --config-file=./babel.config.cjs.json --extensions=.ts,.cts --source-root=./src --out-dir=./dist --out-file-extension .cjs",
         "watch": "tsc --watch --preserveWatchOutput --project .",
         "start": "npm run build --incremental --watch",
         "lint": "eslint ./src --ext=.ts",
