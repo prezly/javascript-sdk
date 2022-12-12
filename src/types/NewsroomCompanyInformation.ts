@@ -17,8 +17,10 @@ export interface NewsroomCompanyInformation {
     youtube: string | null;
     instagram: string | null;
     tiktok: string | null;
+    // GDPR
     email_disclaimer: string;
     cookie_statement: string;
     subscribe_disclaimer: string;
+    // SEO
     seo_settings: SEOSettings;
 }
