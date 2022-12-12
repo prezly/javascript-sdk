@@ -35,9 +35,9 @@ export interface SettingsUpdateRequest {
         subscribe_disclaimer?: string;
         // SEO
         seo_settings?: {
-            meta_title?: string | null,
-            meta_description?: string | null,
-        },
+            meta_title?: string | null;
+            meta_description?: string | null;
+        };
     };
 }
 
