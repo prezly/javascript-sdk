@@ -17,19 +17,8 @@ export interface NewsroomCompanyInformation {
     youtube: string | null;
     instagram: string | null;
     tiktok: string | null;
-    // advanced GDPR-related settings
-    /**
-     * Only admins are allowed to update this field.
-     */
     email_disclaimer: string;
-    /**
-     * Only admins are allowed to update this field.
-     */
     cookie_statement: string;
-    /**
-     * Only admins are allowed to update this field.
-     */
     subscribe_disclaimer: string;
-
     seo_settings: SEOSettings;
 }
