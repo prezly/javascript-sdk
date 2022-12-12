@@ -110,12 +110,4 @@ export interface UpdateRequest {
      */
     is_subscription_form_enabled?: boolean;
     status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
-
-    cultures_seo_settings?: {
-        culture: CultureRef['code'],
-        seo_settings: {
-            meta_title?: string | null;
-            meta_description?: string | null;
-        },
-    }[];
 }

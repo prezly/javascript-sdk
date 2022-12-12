@@ -1,7 +1,6 @@
 import type { Notification } from './common';
 import type { CultureRef } from './Culture';
 import type { NewsroomCompanyInformation } from './NewsroomCompanyInformation';
-import type {SEOSettings} from "./SEOSettings";
 
 export interface NewsroomLanguageSettings {
     categories_count: number;
@@ -15,5 +14,4 @@ export interface NewsroomLanguageSettings {
     default_cookie_statement: string;
     default_subscribe_disclaimer: string;
     notifications: Notification[];
-    seo_settings: SEOSettings;
 }

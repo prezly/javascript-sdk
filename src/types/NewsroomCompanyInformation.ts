@@ -1,3 +1,5 @@
+import type {SEOSettings} from "./SEOSettings";
+
 export interface NewsroomCompanyInformation {
     name: string;
     about: string;
@@ -28,4 +30,6 @@ export interface NewsroomCompanyInformation {
      * Only admins are allowed to update this field.
      */
     subscribe_disclaimer: string;
+
+    seo_settings: SEOSettings;
 }
