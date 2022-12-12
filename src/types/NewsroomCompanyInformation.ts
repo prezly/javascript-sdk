@@ -1,4 +1,4 @@
-import type {SEOSettings} from "./SEOSettings";
+import type { SEOSettings } from './SEOSettings';
 
 export interface NewsroomCompanyInformation {
     name: string;
