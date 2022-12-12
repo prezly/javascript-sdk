@@ -72,6 +72,7 @@ export interface UpdateRequest {
      */
     icon?: string;
 
+    google_search_console_key?: string | null;
     google_analytics_id?: string | null;
     segment_analytics_id?: string | null;
 
@@ -109,4 +110,12 @@ export interface UpdateRequest {
      */
     is_subscription_form_enabled?: boolean;
     status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
+
+    cultures_seo_settings?: {
+        culture: CultureRef['code'],
+        seo_settings: {
+            meta_title?: string | null;
+            meta_description?: string | null;
+        },
+    }[];
 }
