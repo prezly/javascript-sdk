@@ -1,3 +1,5 @@
+import type { SEOSettings } from './SEOSettings';
+
 export interface NewsroomCompanyInformation {
     name: string;
     about: string;
@@ -15,17 +17,10 @@ export interface NewsroomCompanyInformation {
     youtube: string | null;
     instagram: string | null;
     tiktok: string | null;
-    // advanced GDPR-related settings
-    /**
-     * Only admins are allowed to update this field.
-     */
+    // GDPR
     email_disclaimer: string;
-    /**
-     * Only admins are allowed to update this field.
-     */
     cookie_statement: string;
-    /**
-     * Only admins are allowed to update this field.
-     */
     subscribe_disclaimer: string;
+    // SEO
+    seo_settings: SEOSettings;
 }

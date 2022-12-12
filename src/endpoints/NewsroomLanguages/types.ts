@@ -1,4 +1,4 @@
-import type { CultureRef, NewsroomCompanyInformation, NewsroomLanguageSettings } from '../../types';
+import type { CultureRef, NewsroomLanguageSettings } from '../../types';
 
 export interface ListOptions {
     sortOrder?: string;
@@ -12,7 +12,33 @@ export interface ListResponse {
 export interface SettingsUpdateRequest {
     is_default?: true;
     code?: CultureRef['code'];
-    company_information?: Partial<NewsroomCompanyInformation>;
+    company_information?: {
+        name?: string;
+        about?: string;
+        about_plaintext?: string;
+        // contact info
+        email?: string | null;
+        website?: string | null;
+        phone?: string | null;
+        address?: string | null;
+        // social medias
+        twitter?: string | null;
+        facebook?: string | null;
+        linkedin?: string | null;
+        pinterest?: string | null;
+        youtube?: string | null;
+        instagram?: string | null;
+        tiktok?: string | null;
+        // GDPR
+        email_disclaimer?: string;
+        cookie_statement?: string;
+        subscribe_disclaimer?: string;
+        // SEO
+        seo_settings?: {
+            meta_title?: string | null;
+            meta_description?: string | null;
+        };
+    };
 }
 
 export interface UnsafeUpdateErrorResponse {

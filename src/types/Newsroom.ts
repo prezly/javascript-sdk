@@ -101,6 +101,7 @@ export interface Newsroom extends NewsroomRef {
     };
     ga_tracking_id: string | null;
     segment_analytics_id: string | null;
+    google_search_console_key: string | null;
 
     is_subscription_form_enabled: boolean;
     is_white_labeled: boolean;

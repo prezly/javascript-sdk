@@ -72,6 +72,7 @@ export interface UpdateRequest {
      */
     icon?: string;
 
+    google_search_console_key?: string | null;
     google_analytics_id?: string | null;
     segment_analytics_id?: string | null;
 
