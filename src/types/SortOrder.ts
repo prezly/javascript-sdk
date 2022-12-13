@@ -68,7 +68,11 @@ export namespace SortOrder {
         another: SortOrder | string,
     ): SortOrder | string {
         if (typeof sortOrder === 'string' && typeof another === 'string') {
-            return [sortOrder, another].join(',');
+            const combined = stringify(combine(toObject(sortOrder), toObject(another)));
+            if (typeof combined === 'undefined') {
+                throw new Error('stringify() cannot return undefined. This should never happen.');
+            }
+            return combined;
         }
 
         if (typeof sortOrder === 'object' && typeof another === 'object') {
