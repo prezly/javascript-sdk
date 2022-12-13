@@ -7,6 +7,7 @@ import type {
     NewsroomContactRef,
     Pagination,
     Query,
+    SortOrder,
     Story,
 } from '../../types';
 
@@ -75,7 +76,7 @@ export interface IncludeOptions<Include extends readonly (keyof Story.ExtraField
 export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
     limit?: number;
     offset?: number;
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
     include?: Include;
 }
 

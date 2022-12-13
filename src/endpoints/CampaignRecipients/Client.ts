@@ -1,7 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { Campaign, Contact, ContactsScope, EmailRecipient } from '../../types';
-import { Query } from '../../types';
+import { Query, SortOrder } from '../../types';
 import type { RecipientsOperationResponse } from '../Campaigns';
 
 import type { ListOptions, ListResponse, SearchOptions } from './types';
@@ -24,7 +24,7 @@ export class Client {
             query: {
                 limit,
                 offset,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
     }
@@ -36,7 +36,7 @@ export class Client {
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 query: Query.stringify(query),
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
                 limit,
                 offset,
             },

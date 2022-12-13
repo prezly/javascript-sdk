@@ -2,6 +2,7 @@ import type { DeferredJobsApiClient } from '../../api';
 import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
+import { SortOrder } from '../../types';
 
 import type {
     AutosaveRequest,
@@ -52,7 +53,7 @@ export class Client {
             query: {
                 limit,
                 offset,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
                 include: include ? include.join(',') : undefined,
             },
         });
@@ -71,7 +72,7 @@ export class Client {
                 query,
                 limit,
                 offset,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
                 include: include ? include.join(',') : undefined,
             },
         });

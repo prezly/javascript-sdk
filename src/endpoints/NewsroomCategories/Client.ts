@@ -1,6 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { Category, Newsroom } from '../../types';
+import { SortOrder } from '../../types';
 
 import type { ListOptions, CreateRequest, UpdateRequest } from './types';
 
@@ -20,7 +21,7 @@ export class Client {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
         const { categories } = await this.apiClient.get<{ categories: Category[] }>(url, {
             query: {
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
         return categories;

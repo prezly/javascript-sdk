@@ -1,4 +1,4 @@
-import type { CultureRef, Newsroom, Pagination, Query } from '../../types';
+import type { CultureRef, Newsroom, Pagination, Query, SortOrder } from '../../types';
 
 export interface ListOptions {
     limit?: number;
@@ -7,7 +7,7 @@ export interface ListOptions {
      * Text search keyword.
      */
     search?: string;
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
 }
 
 export interface SearchOptions extends ListOptions {

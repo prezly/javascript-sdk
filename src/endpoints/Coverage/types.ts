@@ -8,6 +8,7 @@ import type {
     Pagination,
     Story,
     Query,
+    SortOrder,
 } from '../../types';
 
 export type Scope = { story: Story['id'] } | null;
@@ -60,7 +61,7 @@ export interface ListOptions {
     includeDeleted?: boolean;
     limit?: number;
     offset?: number;
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
 }
 export interface SearchOptions extends ListOptions {
     query?: Query;

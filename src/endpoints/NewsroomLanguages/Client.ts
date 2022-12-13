@@ -1,6 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { CultureRef, Newsroom, NewsroomLanguageSettings } from '../../types';
+import { SortOrder } from '../../types';
 
 import { isUnsafeNewsroomUpdateErrorResponse } from './lib';
 import type {
@@ -23,7 +24,7 @@ export class Client {
         const url = routing.newsroomLanguagesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
     }

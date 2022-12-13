@@ -1,4 +1,12 @@
-import type { Campaign, Pagination, Query, SenderAddress, Story, Warning } from '../../types';
+import type {
+    Campaign,
+    Pagination,
+    Query,
+    SenderAddress,
+    SortOrder,
+    Story,
+    Warning,
+} from '../../types';
 
 export interface CreateRequest {
     subject?: Campaign['subject'];
@@ -36,7 +44,7 @@ export interface CampaignResponse {
 export interface ListOptions {
     limit?: number;
     offset?: number;
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
 }
 
 export interface SearchOptions extends ListOptions {
