@@ -1,9 +1,9 @@
-import type { EmailRecipient, Pagination, Query } from '../../types';
+import type { EmailRecipient, Pagination, Query, SortOrder } from '../../types';
 
 export interface ListOptions {
     limit?: number;
     offset?: number;
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
 }
 export interface SearchOptions extends ListOptions {
     query?: Query;

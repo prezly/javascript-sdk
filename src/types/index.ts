@@ -28,6 +28,7 @@ export * from './PrivacyRequest';
 export * from './SenderAddress';
 export * from './SenderDomain';
 export * from './Snippet';
+export * from './SortOrder';
 export * from './Story';
 export * from './User';
 export * from './UserAccount';

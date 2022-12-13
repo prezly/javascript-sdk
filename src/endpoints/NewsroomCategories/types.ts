@@ -1,3 +1,5 @@
+import type { SortOrder } from '../../types';
+
 export interface ListOptions {
     /**
      * Supported sort columns:
@@ -6,7 +8,7 @@ export interface ListOptions {
      * - `display_description`
      * - `stories_number`
      */
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
 }
 
 export interface CreateRequest {

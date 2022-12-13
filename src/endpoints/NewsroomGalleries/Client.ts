@@ -1,6 +1,6 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { Query } from '../../types';
+import { Query, SortOrder } from '../../types';
 import type { Newsroom, NewsroomGallery } from '../../types';
 
 import type {
@@ -37,7 +37,7 @@ export class Client {
         const url = routing.newsroomGalleriesUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.get<ListResponse>(url, {
             query: {
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
                 limit: limit,
                 offset: offset,
             },
@@ -55,7 +55,7 @@ export class Client {
             query: {
                 scope: Query.stringify(scope),
                 query: Query.stringify(query),
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
                 limit: limit,
                 offset: offset,
             },

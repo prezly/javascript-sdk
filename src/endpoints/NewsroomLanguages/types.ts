@@ -1,7 +1,7 @@
-import type { CultureRef, NewsroomLanguageSettings } from '../../types';
+import type { CultureRef, NewsroomLanguageSettings, SortOrder } from '../../types';
 
 export interface ListOptions {
-    sortOrder?: string;
+    sortOrder?: SortOrder | string;
 }
 
 export interface ListResponse {

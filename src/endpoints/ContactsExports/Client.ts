@@ -1,6 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { ContactsExport } from '../../types';
+import { SortOrder } from '../../types';
 
 import type { ContactsBulkSelector, ListOptions, ListResponse, SearchOptions } from './types';
 
@@ -20,7 +21,7 @@ export class Client {
             query: {
                 limit,
                 offset,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
     }
@@ -36,7 +37,7 @@ export class Client {
                 limit,
                 offset,
                 query,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
     }

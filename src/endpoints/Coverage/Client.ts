@@ -3,7 +3,7 @@ import type { ProgressPromise } from '@prezly/progress-promise';
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { CoverageEntry, SelectionValue } from '../../types';
-import { Query } from '../../types';
+import { Query, SortOrder } from '../../types';
 
 import type {
     CreateRequest,
@@ -34,7 +34,7 @@ export class Client {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 limit,
                 offset,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
     }
@@ -52,7 +52,7 @@ export class Client {
                 query: Query.stringify(query),
                 limit,
                 offset,
-                sort: sortOrder,
+                sort: SortOrder.stringify(sortOrder),
             },
         });
     }
