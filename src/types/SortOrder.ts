@@ -13,6 +13,18 @@ export namespace SortOrder {
         direction: Direction;
     }
 
+    export function asc(column: string): SortOrder {
+        return {
+            columns: [{ name: column, direction: Direction.ASC }],
+        };
+    }
+
+    export function desc(column: string): SortOrder {
+        return {
+            columns: [{ name: column, direction: Direction.DESC }],
+        };
+    }
+
     export function parse(sortOrder: string): SortOrder;
     export function parse(sortOrder: string | undefined): SortOrder | undefined;
     export function parse(sortOrder: string | undefined): SortOrder | undefined {
