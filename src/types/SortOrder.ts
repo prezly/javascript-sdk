@@ -13,13 +13,26 @@ export namespace SortOrder {
         direction: Direction;
     }
 
+    export function empty(): SortOrder {
+        return { columns: [] };
+    }
+
+    export function isEmpty(sortOrder: SortOrder | string | undefined): boolean {
+        if (typeof sortOrder === 'undefined') {
+            return true;
+        }
+        return toObject(sortOrder).columns.length === 0;
+    }
+
     export function asc(column: string): SortOrder {
+        validateColumnName(column);
         return {
             columns: [{ name: column, direction: Direction.ASC }],
         };
     }
 
     export function desc(column: string): SortOrder {
+        validateColumnName(column);
         return {
             columns: [{ name: column, direction: Direction.DESC }],
         };
@@ -35,8 +48,6 @@ export namespace SortOrder {
         return { columns };
     }
 
-    export function stringify(sortOrder: SortOrder | string): string;
-    export function stringify(sortOrder: SortOrder | string | undefined): string | undefined;
     export function stringify(sortOrder: SortOrder | string | undefined): string | undefined {
         if (typeof sortOrder === 'undefined') {
             return undefined;
@@ -44,22 +55,29 @@ export namespace SortOrder {
         if (typeof sortOrder === 'string') {
             return sortOrder;
         }
+        if (isEmpty(sortOrder)) {
+            return undefined;
+        }
         return toString(sortOrder);
     }
 
     export function combine(sortOrder: string, append: string): string;
     export function combine(sortOrder: SortOrder, append: SortOrder): SortOrder;
     export function combine(
-        sortOrder: string | SortOrder,
-        another: string | SortOrder,
-    ): string | SortOrder {
-        if (typeof sortOrder === 'string') {
-            return stringify(combine(toObject(sortOrder), toObject(another)));
+        sortOrder: SortOrder | string,
+        another: SortOrder | string,
+    ): SortOrder | string {
+        if (typeof sortOrder === 'string' && typeof another === 'string') {
+            return [sortOrder, another].join(',');
         }
 
-        return {
-            columns: [...sortOrder.columns, ...toObject(another).columns],
-        };
+        if (typeof sortOrder === 'object' && typeof another === 'object') {
+            return {
+                columns: [...sortOrder.columns, ...toObject(another).columns],
+            };
+        }
+
+        throw new Error('Both arguments of combine() should be of the same type.');
     }
 }
 
@@ -99,7 +117,7 @@ function toString(arg: SortOrder | SortOrder.Column | SortOrder.Direction): stri
 }
 
 function validateColumnName(name: string): void | never {
-    if (!name.match(/^([\w_]+\.)*[\w_]+$/)) {
+    if (name.length === 0) {
         throw new Error(`Invalid sort column name: '${name}'.`);
     }
 }
