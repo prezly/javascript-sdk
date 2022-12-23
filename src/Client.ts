@@ -17,6 +17,7 @@ import {
     NewsroomPrivacyRequests,
     NewsroomDomains,
     NewsroomGalleries,
+    NewsroomHub,
     SenderAddresses,
     Signup,
     Stories,
@@ -52,6 +53,7 @@ export interface Client {
     newsroomPrivacyRequests: NewsroomPrivacyRequests.Client;
     newsroomDomains: NewsroomDomains.Client;
     newsroomGalleries: NewsroomGalleries.Client;
+    newsroomHub: NewsroomHub.Client;
     senderAddresses: SenderAddresses.Client;
     signup: Signup.Client;
     stories: Stories.Client;
@@ -91,6 +93,7 @@ export function createClient({
         newsroomPrivacyRequests: new NewsroomPrivacyRequests.Client(apiClient),
         newsroomDomains: new NewsroomDomains.Client(apiClient),
         newsroomGalleries: new NewsroomGalleries.Client(apiClient),
+        newsroomHub: new NewsroomHub.Client(apiClient),
         senderAddresses: new SenderAddresses.Client(apiClient),
         signup: new Signup.Client(apiClient),
         stories: new Stories.Client(apiClient),
