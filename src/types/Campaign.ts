@@ -43,6 +43,7 @@ export interface Campaign {
         opens: number;
         opens_rate: number;
         skipped: number;
+        undelivered: number;
         undelivered_rate: number;
         unsubscribes: number;
         unsubscribes_rate: number;
