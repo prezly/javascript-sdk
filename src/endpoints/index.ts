@@ -10,6 +10,7 @@ export * as NewsroomCategories from './NewsroomCategories';
 export * as NewsroomContacts from './NewsroomContacts';
 export * as NewsroomDomains from './NewsroomDomains';
 export * as NewsroomGalleries from './NewsroomGalleries';
+export * as NewsroomHub from './NewsroomHub';
 export * as NewsroomLanguages from './NewsroomLanguages';
 export * as NewsroomPrivacyRequests from './NewsroomPrivacyRequests';
 export * as Newsrooms from './Newsrooms';
