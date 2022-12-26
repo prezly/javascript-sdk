@@ -6,10 +6,10 @@ export interface ListResponse {
     members: NewsroomRef[];
 }
 
-export interface UpdateRequest {
+export interface LinkRequest {
     members: NewsroomId[];
 }
 
-export interface UpdateResponse {
+export interface LinkResponse {
     members: NewsroomRef[];
 }
