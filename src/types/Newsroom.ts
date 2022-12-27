@@ -69,6 +69,7 @@ export interface NewsroomRef {
         manual_subscription_management: string;
         privacy_settings: string;
         widget_settings: string;
+        widget_javascript: string;
     };
 }
 
@@ -123,7 +124,6 @@ export interface Newsroom extends NewsroomRef {
     };
 
     is_widget_enabled: boolean;
-    widget_url: string;
 }
 
 export namespace Newsroom {
