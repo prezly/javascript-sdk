@@ -69,7 +69,7 @@ export interface NewsroomRef {
         manual_subscription_management: string;
         privacy_settings: string;
         widget_settings: string;
-        widget_javascript: string;
+        widget_feed: string;
     };
 }
 
