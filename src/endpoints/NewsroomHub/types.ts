@@ -1,9 +1,9 @@
-import type { NewsroomRef } from '../../types';
+import type { Newsroom } from '../../types';
 
-type NewsroomId = NewsroomRef['uuid'] | NewsroomRef['id'];
+type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
 export interface HubMember {
-    newsroom: NewsroomRef;
+    newsroom: Newsroom;
     is_displaying_stories_in_hub: boolean;
 }
 
