@@ -99,9 +99,14 @@ export interface Newsroom extends NewsroomRef {
         is_enabled: boolean;
         category: string | null;
     };
+    google_analytics_id: string | null;
+    /**
+     * @deprecated Please use `google_analytics_id` instead.
+     * @see google_analytics_id
+     */
     ga_tracking_id: string | null;
-    segment_analytics_id: string | null;
     google_search_console_key: string | null;
+    segment_analytics_id: string | null;
 
     is_subscription_form_enabled: boolean;
     is_white_labeled: boolean;
