@@ -110,4 +110,6 @@ export interface UpdateRequest {
      */
     is_subscription_form_enabled?: boolean;
     status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
+
+    is_widget_enabled?: boolean;
 }

@@ -121,6 +121,9 @@ export interface Newsroom extends NewsroomRef {
         visits_last_7_days: number | null;
         visits_last_7_days_previous: number | null;
     };
+
+    is_widget_enabled: boolean;
+    widget_url: string;
 }
 
 export namespace Newsroom {
