@@ -232,6 +232,12 @@ export namespace Story {
          */
         attached_gallery_content: string | null;
 
+        /**
+         * Contains attached videos slate content.
+         * Always `null` for v3 stories.
+         */
+        attached_videos_content: string | null;
+
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
         };
