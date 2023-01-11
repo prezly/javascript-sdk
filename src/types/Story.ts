@@ -238,6 +238,18 @@ export namespace Story {
          */
         attached_videos_content: string | null;
 
+        /**
+         * Contains attached bookmarks slate content.
+         * Always `null` for v3 stories.
+         */
+        attached_bookmarks_content: string | null;
+
+        /**
+         * Contains attached files slate content.
+         * Always `null` for v3 stories.
+         */
+        attached_attachments_content: string | null;
+
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
         };
