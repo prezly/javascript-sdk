@@ -256,6 +256,8 @@ const ALL_EXTRA_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
     last_modifying_user: true,
     attached_gallery_content: true,
     attached_videos_content: true,
+    attached_bookmarks_content: true,
+    attached_attachments_content: true,
     referenced_entities: true,
     'campaigns.count': true,
     'pitches.count': true,
