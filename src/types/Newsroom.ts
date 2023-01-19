@@ -117,6 +117,7 @@ export interface Newsroom extends NewsroomRef {
      * Present when user has permission
      */
     plausible_shared_link?: string | null;
+    default_plausible_dashboard_page?: string | null;
     plausible_stats: {
         visits_last_7_days: number | null;
         visits_last_7_days_previous: number | null;
