@@ -36,6 +36,7 @@ export interface ClientOptions {
 }
 
 export interface Client {
+    api: DeferredJobsApiClient;
     accounts: Accounts.Client;
     billing: Billing.Client;
     campaigns: Campaigns.Client;
@@ -76,6 +77,7 @@ export function createClient({
     );
 
     return {
+        api: apiClient,
         accounts: new Accounts.Client(apiClient),
         billing: new Billing.Client(apiClient),
         campaigns: new Campaigns.Client(apiClient),
