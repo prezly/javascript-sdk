@@ -250,6 +250,12 @@ export namespace Story {
          */
         attached_attachments_content: string | null;
 
+        /**
+         * Contains attached contacts slate content.
+         * Always `null` for v3 stories.
+         */
+        attached_contacts_content: string | null;
+
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
         };
