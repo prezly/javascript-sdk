@@ -45,7 +45,9 @@ export interface CreateRequest {
      */
     active_theme?: string;
     status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
-    // Populate newsroom with example content
+    /**
+     * Populate newsroom with example content
+     */
     with_demo_content?: boolean;
 }
 
