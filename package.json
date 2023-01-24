@@ -70,7 +70,7 @@
         "snapshot": "jest --updateSnapshot",
         "prettier:check": "prettier --check './src/**/*.{ts,js}'",
         "prettier:fix": "prettier --write './src/**/*.{ts,js}'",
-        "prerelease": "npm run clean && npm run build",
+        "prerelease": "npm run build",
         "release": "np"
     },
     "np": {
