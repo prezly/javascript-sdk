@@ -30,7 +30,7 @@ export interface CreateRequest {
      * {subdomain}.prezly.com
      */
     subdomain: string;
-    cultures: CultureRef['code'][];
+    cultures?: CultureRef['code'][];
     default_culture?: CultureRef['code'];
     /**
      * Uploadcare Image JSON
