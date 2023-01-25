@@ -14,13 +14,21 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
+
+    status: Story.Status;
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
+     */
+    lifecycle_status: Story.LifecycleStatus;
+    /**
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     publication_status: Story.PublicationStatus;
-    lifecycle_status: Story.LifecycleStatus;
+
     visibility: Story.Visibility;
 
     thumbnail_url: string;
@@ -91,7 +99,11 @@ export interface Story {
     published_at: string | null;
     scheduled_at: string | null;
 
-    lifecycle_status: Story.LifecycleStatus;
+    status: Story.Status;
+    /**
+     * @deprecated Please use `status` instead.
+     */
+    lifecycle_status: Story.Status;
     /**
      * @deprecated Please use `newsroom.status` instead.
      * @see newsroom
@@ -99,27 +111,27 @@ export interface Story {
      */
     is_archived: boolean;
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     is_finalized: boolean;
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     is_published: boolean;
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     is_draft: boolean;
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     is_embargo: boolean;
     /**
@@ -129,9 +141,9 @@ export interface Story {
      */
     is_private: boolean;
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     is_scheduled: boolean;
     is_sharable: boolean;
@@ -139,9 +151,9 @@ export interface Story {
     is_shared_to_prpro: boolean;
 
     /**
-     * @deprecated Please use `lifecycle_status` instead.
-     * @see lifecycle_status
-     * @see Story.LifecycleStatus
+     * @deprecated Please use `status` instead.
+     * @see status
+     * @see Story.Status
      */
     publication_status: Story.PublicationStatus;
     visibility: Story.Visibility;
@@ -158,7 +170,7 @@ export namespace Story {
         SLATEJS = 3,
     }
 
-    export enum LifecycleStatus {
+    export enum Status {
         UNINITIALIZED = 'uninitialized',
         DRAFT = 'draft',
         SCHEDULED = 'scheduled',
@@ -167,8 +179,14 @@ export namespace Story {
     }
 
     /**
-     * Please use `LifecycleStatus` instead.
-     * @see LifecycleStatus
+     * @deprecated Please use `Status` instead.
+     * @see Status
+     */
+    export import LifecycleStatus = Status;
+
+    /**
+     * @deprecated Please use `Status` instead.
+     * @see Status
      */
     export enum PublicationStatus {
         NEW = 'new',
@@ -291,53 +309,49 @@ export namespace Story {
      * Lifecycle status checks
      */
 
-    export function isUninitialized(status: LifecycleStatus): boolean;
-    export function isUninitialized(story: Pick<Story, 'lifecycle_status'>): boolean;
-    export function isUninitialized(
-        arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
-    ): boolean {
+    export function isUninitialized(status: Status): boolean;
+    export function isUninitialized(story: Pick<Story, 'status'>): boolean;
+    export function isUninitialized(arg: Status | Pick<Story, 'status'>): boolean {
         if (typeof arg === 'object') {
-            return isUninitialized(arg.lifecycle_status);
+            return isUninitialized(arg.status);
         }
-        return arg === LifecycleStatus.UNINITIALIZED;
+        return arg === Status.UNINITIALIZED;
     }
 
-    export function isDraft(status: LifecycleStatus): boolean;
-    export function isDraft(story: Pick<Story, 'lifecycle_status'>): boolean;
-    export function isDraft(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+    export function isDraft(status: Status): boolean;
+    export function isDraft(story: Pick<Story, 'status'>): boolean;
+    export function isDraft(arg: Status | Pick<Story, 'status'>): boolean {
         if (typeof arg === 'object') {
-            return isDraft(arg.lifecycle_status);
+            return isDraft(arg.status);
         }
-        return arg === LifecycleStatus.DRAFT;
+        return arg === Status.DRAFT;
     }
 
-    export function isScheduled(status: LifecycleStatus): boolean;
-    export function isScheduled(story: Pick<Story, 'lifecycle_status'>): boolean;
-    export function isScheduled(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+    export function isScheduled(status: Status): boolean;
+    export function isScheduled(story: Pick<Story, 'status'>): boolean;
+    export function isScheduled(arg: Status | Pick<Story, 'status'>): boolean {
         if (typeof arg === 'object') {
-            return isScheduled(arg.lifecycle_status);
+            return isScheduled(arg.status);
         }
-        return arg === LifecycleStatus.SCHEDULED;
+        return arg === Status.SCHEDULED;
     }
 
-    export function isScheduledEmbargo(status: LifecycleStatus): boolean;
-    export function isScheduledEmbargo(story: Pick<Story, 'lifecycle_status'>): boolean;
-    export function isScheduledEmbargo(
-        arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>,
-    ): boolean {
+    export function isScheduledEmbargo(status: Status): boolean;
+    export function isScheduledEmbargo(story: Pick<Story, 'status'>): boolean;
+    export function isScheduledEmbargo(arg: Status | Pick<Story, 'status'>): boolean {
         if (typeof arg === 'object') {
-            return isScheduledEmbargo(arg.lifecycle_status);
+            return isScheduledEmbargo(arg.status);
         }
-        return arg === LifecycleStatus.EMBARGO;
+        return arg === Status.EMBARGO;
     }
 
-    export function isPublished(status: LifecycleStatus): boolean;
-    export function isPublished(story: Pick<Story, 'lifecycle_status'>): boolean;
-    export function isPublished(arg: LifecycleStatus | Pick<Story, 'lifecycle_status'>): boolean {
+    export function isPublished(status: Status): boolean;
+    export function isPublished(story: Pick<Story, 'status'>): boolean;
+    export function isPublished(arg: Status | Pick<Story, 'status'>): boolean {
         if (typeof arg === 'object') {
-            return isPublished(arg.lifecycle_status);
+            return isPublished(arg.status);
         }
-        return arg === LifecycleStatus.PUBLISHED;
+        return arg === Status.PUBLISHED;
     }
 
     /*
