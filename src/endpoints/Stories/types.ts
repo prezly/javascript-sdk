@@ -180,6 +180,31 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
     content_version?: number;
 }
 
+export interface Preview {
+    preview: {
+        content: {
+            'text/html': string;
+            'text/plain': string;
+        }
+    }
+}
+
+export interface PreviewOptions {
+    alignment?: Alignment;
+    appearance?: Appearance;
+}
+
+export enum Alignment {
+    LEFT = 'left',
+    CENTER = 'center',
+    RIGHT = 'right',
+}
+
+export enum Appearance {
+    INTRO = 'intro',
+    FULL = 'full',
+}
+
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
 export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;
 
