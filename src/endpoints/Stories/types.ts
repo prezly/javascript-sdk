@@ -181,7 +181,7 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
     content_version?: number;
 }
 
-export interface Preview {
+export interface PreviewResponse {
     preview: {
         content: {
             'text/html': string;
