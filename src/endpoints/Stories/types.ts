@@ -9,8 +9,9 @@ import type {
     Query,
     SortOrder,
     Story,
-    Campaign,
 } from '../../types';
+
+import { Campaign } from '../../types';
 
 /**
  * Uploadcare image JSON string.
@@ -191,9 +192,12 @@ export interface PreviewResponse {
 }
 
 export interface PreviewOptions {
-    alignment?: Campaign.StoryAlignment;
-    appearance?: Campaign.StoryAppearance;
+    alignment?: Alignment;
+    appearance?: Appearance;
 }
+
+export import Alignment = Campaign.StoryAlignment;
+export import Appearance = Campaign.StoryAppearance;
 
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
 export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;
