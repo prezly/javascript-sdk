@@ -185,8 +185,8 @@ export interface Preview {
         content: {
             'text/html': string;
             'text/plain': string;
-        }
-    }
+        };
+    };
 }
 
 export interface PreviewOptions {

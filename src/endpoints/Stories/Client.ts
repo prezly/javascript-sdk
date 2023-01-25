@@ -466,14 +466,14 @@ export class Client {
         await this.apiClient.delete(url);
     }
 
-    async preview(id: StoryId, options?: PreviewOptions,): Promise<Preview> {
+    async preview(id: StoryId, options?: PreviewOptions): Promise<Preview> {
         const url = `${routing.storiesUrl}/${id}/preview`;
 
         const { preview } = await this.apiClient.get<{ preview: Preview }>(url, {
             query: {
                 alignment: options?.alignment,
                 appearance: options?.appearance,
-            }
+            },
         });
         return preview;
     }
