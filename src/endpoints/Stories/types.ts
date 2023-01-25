@@ -225,7 +225,7 @@ export interface ScheduleRequest {
 export type UnscheduleRequest = UnpublishRequest;
 
 export interface TranslateRequest {
-    culture: CultureRef['code'];
+    culture?: CultureRef['code'];
 }
 
 export interface MoveRequest {

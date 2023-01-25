@@ -226,15 +226,18 @@ export class Client {
             : ExtendedStory,
     >(
         id: StoryId,
-        payload: TranslateRequest,
+        payload: TranslateRequest = {},
         options?: Exactly<IncludeOptions<Include>, Options>,
     ): Promise<StoryRecord> {
+        const { culture } = payload ?? {};
         const include = options?.include;
         const url = `${routing.storiesUrl}/${id}/translate`;
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
             query: { include: include as string[] | undefined },
-            payload,
+            payload: {
+                culture,
+            },
         });
 
         return story;
