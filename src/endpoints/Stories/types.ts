@@ -9,6 +9,7 @@ import type {
     Query,
     SortOrder,
     Story,
+    Campaign,
 } from '../../types';
 
 /**
@@ -190,19 +191,8 @@ export interface Preview {
 }
 
 export interface PreviewOptions {
-    alignment?: Alignment;
-    appearance?: Appearance;
-}
-
-export enum Alignment {
-    LEFT = 'left',
-    CENTER = 'center',
-    RIGHT = 'right',
-}
-
-export enum Appearance {
-    INTRO = 'intro',
-    FULL = 'full',
+    alignment?: Campaign.StoryAlignment;
+    appearance?: Campaign.StoryAppearance;
 }
 
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
