@@ -10,6 +10,7 @@ import type {
     SortOrder,
     Story,
 } from '../../types';
+import { Campaign } from '../../types';
 
 /**
  * Uploadcare image JSON string.
@@ -179,6 +180,21 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
     autosaved_content?: PrezlyContentFormat;
     content_version?: number;
 }
+
+export interface PreviewResponse {
+    content: {
+        'text/html': string;
+        'text/plain': string;
+    };
+}
+
+export interface PreviewOptions {
+    alignment?: Alignment;
+    appearance?: Appearance;
+}
+
+export import Alignment = Campaign.StoryAlignment;
+export import Appearance = Campaign.StoryAppearance;
 
 export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
 export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;

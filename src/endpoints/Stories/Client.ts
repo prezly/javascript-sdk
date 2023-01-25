@@ -13,6 +13,8 @@ import type {
     ListOptions,
     ListResponse,
     MoveRequest,
+    PreviewResponse,
+    PreviewOptions,
     PublishRequest,
     RevertRequest,
     ScheduleRequest,
@@ -462,5 +464,17 @@ export class Client {
     async delete(id: StoryId): Promise<void> {
         const url = `${routing.storiesUrl}/${id}`;
         await this.apiClient.delete(url);
+    }
+
+    async preview(id: StoryId, options?: PreviewOptions): Promise<PreviewResponse> {
+        const url = `${routing.storiesUrl}/${id}/preview`;
+
+        const { preview } = await this.apiClient.get<{ preview: PreviewResponse }>(url, {
+            query: {
+                alignment: options?.alignment,
+                appearance: options?.appearance,
+            },
+        });
+        return preview;
     }
 }
