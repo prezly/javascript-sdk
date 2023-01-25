@@ -182,11 +182,9 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
 }
 
 export interface PreviewResponse {
-    preview: {
-        content: {
-            'text/html': string;
-            'text/plain': string;
-        };
+    content: {
+        'text/html': string;
+        'text/plain': string;
     };
 }
 
