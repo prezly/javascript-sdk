@@ -150,4 +150,35 @@ export namespace Newsroom {
         DISABLED = 'disabled',
         CONSENT_TO_IDENTIFY = 'consent-to-identify',
     }
+
+    /*
+     * Status checks
+     */
+
+    export function isActive(newsroom: Newsroom['status']): boolean;
+    export function isActive(newsroom: Pick<Newsroom, 'status'>): boolean;
+    export function isActive(arg: Newsroom['status'] | Pick<Newsroom, 'status'>): boolean {
+        if (typeof arg === 'string') {
+            return arg === Status.ACTIVE;
+        }
+        return isActive(arg.status);
+    }
+
+    export function isInactive(newsroom: Newsroom['status']): boolean;
+    export function isInactive(newsroom: Pick<Newsroom, 'status'>): boolean;
+    export function isInactive(arg: Newsroom['status'] | Pick<Newsroom, 'status'>): boolean {
+        if (typeof arg === 'string') {
+            return arg === Status.INACTIVE;
+        }
+        return isInactive(arg.status);
+    }
+
+    export function isArchived(newsroom: Newsroom['status']): boolean;
+    export function isArchived(newsroom: Pick<Newsroom, 'status'>): boolean;
+    export function isArchived(arg: Newsroom['status'] | Pick<Newsroom, 'status'>): boolean {
+        if (typeof arg === 'string') {
+            return arg === Status.ARCHIVED;
+        }
+        return isArchived(arg.status);
+    }
 }
