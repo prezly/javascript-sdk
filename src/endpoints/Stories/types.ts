@@ -10,7 +10,6 @@ import type {
     SortOrder,
     Story,
 } from '../../types';
-
 import { Campaign } from '../../types';
 
 /**
