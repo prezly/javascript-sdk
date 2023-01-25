@@ -1,7 +1,7 @@
 import type { Category } from './Category';
 import type { OEmbedInfo } from './common';
 import type { CultureRef } from './Culture';
-import type { NewsroomRef } from './Newsroom';
+import { Newsroom, type NewsroomRef } from './Newsroom';
 import type { SEOSettings } from './SEOSettings';
 import type { UserRef } from './User';
 
@@ -269,6 +269,22 @@ export namespace Story {
          * Number of pitches linked to this story.
          */
         'pitches.count': number;
+    }
+
+    /*
+     * Newsroom status checks
+     */
+
+    export function isActiveNewsroom(story: Pick<Story, 'newsroom'>): boolean {
+        return Newsroom.isActive(story.newsroom);
+    }
+
+    export function isInactiveNewsroom(story: Pick<Story, 'newsroom'>): boolean {
+        return Newsroom.isInactive(story.newsroom);
+    }
+
+    export function isArchivedNewsroom(story: Pick<Story, 'newsroom'>): boolean {
+        return Newsroom.isArchived(story.newsroom);
     }
 
     /*
