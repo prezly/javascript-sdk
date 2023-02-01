@@ -67,21 +67,9 @@ export interface Story {
     author: UserRef | null;
 
     links: {
-        // backend app urls
-        analytics: string;
-        api: string;
-        create_campaign: string;
-        duplicate: string | null;
-        edit: string | null;
-        newsroom_preview: string;
-        newsroom_view: string | null;
-        preview: string;
-        publication_api: string;
-        reports_api: string;
-        // newsroom urls
-        sharing: string;
         short: string | null;
-        translate: string | null;
+        newsroom_view: string | null;
+        newsroom_preview: string;
     };
 
     newsroom: NewsroomRef;
