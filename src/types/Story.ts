@@ -44,9 +44,7 @@ export interface StoryRef {
     oembed: OEmbedInfo;
 
     links: {
-        edit: string;
         newsroom_view: string;
-        report: string;
     };
 }
 
