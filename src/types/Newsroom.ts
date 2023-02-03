@@ -158,27 +158,27 @@ export namespace Newsroom {
     export function isActive(newsroom: Newsroom['status']): boolean;
     export function isActive(newsroom: Pick<Newsroom, 'status'>): boolean;
     export function isActive(arg: Newsroom['status'] | Pick<Newsroom, 'status'>): boolean {
-        if (typeof arg === 'string') {
-            return arg === Status.ACTIVE;
+        if (typeof arg === 'object' && arg !== null) {
+            return isActive(arg.status);
         }
-        return isActive(arg.status);
+        return arg === Status.ACTIVE;
     }
 
     export function isInactive(newsroom: Newsroom['status']): boolean;
     export function isInactive(newsroom: Pick<Newsroom, 'status'>): boolean;
     export function isInactive(arg: Newsroom['status'] | Pick<Newsroom, 'status'>): boolean {
-        if (typeof arg === 'string') {
-            return arg === Status.INACTIVE;
+        if (typeof arg === 'object' && arg !== null) {
+            return isInactive(arg.status);
         }
-        return isInactive(arg.status);
+        return arg === Status.INACTIVE;
     }
 
     export function isArchived(newsroom: Newsroom['status']): boolean;
     export function isArchived(newsroom: Pick<Newsroom, 'status'>): boolean;
     export function isArchived(arg: Newsroom['status'] | Pick<Newsroom, 'status'>): boolean {
-        if (typeof arg === 'string') {
-            return arg === Status.ARCHIVED;
+        if (typeof arg === 'object' && arg !== null) {
+            return isArchived(arg.status);
         }
-        return isArchived(arg.status);
+        return arg === Status.ARCHIVED;
     }
 }
