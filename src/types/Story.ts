@@ -298,7 +298,7 @@ export namespace Story {
     export function isUninitialized(status: Status): boolean;
     export function isUninitialized(story: Pick<Story, 'status'>): boolean;
     export function isUninitialized(arg: Status | Pick<Story, 'status'>): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isUninitialized(arg.status);
         }
         return arg === Status.UNINITIALIZED;
@@ -307,7 +307,7 @@ export namespace Story {
     export function isDraft(status: Status): boolean;
     export function isDraft(story: Pick<Story, 'status'>): boolean;
     export function isDraft(arg: Status | Pick<Story, 'status'>): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isDraft(arg.status);
         }
         return arg === Status.DRAFT;
@@ -316,7 +316,7 @@ export namespace Story {
     export function isScheduled(status: Status): boolean;
     export function isScheduled(story: Pick<Story, 'status'>): boolean;
     export function isScheduled(arg: Status | Pick<Story, 'status'>): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isScheduled(arg.status);
         }
         return arg === Status.SCHEDULED;
@@ -325,7 +325,7 @@ export namespace Story {
     export function isScheduledEmbargo(status: Status): boolean;
     export function isScheduledEmbargo(story: Pick<Story, 'status'>): boolean;
     export function isScheduledEmbargo(arg: Status | Pick<Story, 'status'>): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isScheduledEmbargo(arg.status);
         }
         return arg === Status.EMBARGO;
@@ -334,7 +334,7 @@ export namespace Story {
     export function isPublished(status: Status): boolean;
     export function isPublished(story: Pick<Story, 'status'>): boolean;
     export function isPublished(arg: Status | Pick<Story, 'status'>): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isPublished(arg.status);
         }
         return arg === Status.PUBLISHED;
@@ -351,7 +351,7 @@ export namespace Story {
     export function isLegacyHtmlFormat(
         arg: FormatVersion | Pick<Story, 'format_version'>,
     ): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isLegacyHtmlFormat(arg.format_version);
         }
         return arg === FormatVersion.HTML;
@@ -362,7 +362,7 @@ export namespace Story {
         story: Pick<Story, 'format_version'>,
     ): story is T & { format_version: FormatVersion.SLATEJS };
     export function isSlateFormat(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
-        if (typeof arg === 'object') {
+        if (typeof arg === 'object' && arg !== null) {
             return isSlateFormat(arg.format_version);
         }
         return arg === FormatVersion.SLATEJS;
