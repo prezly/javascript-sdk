@@ -57,8 +57,12 @@ export interface License extends LicenseRef {
     /**
      * Plan level will be null in case
      * we do not have data about plan level.
+     *
+     * @deprecated Will be dropped in the future,
+     * use "plan" instead.
      */
     plan_level: PlanLevel | null;
+    plan: License.Plan;
     status: License.Status;
     subscription_lockout: boolean;
     /**
@@ -107,5 +111,10 @@ export namespace License {
         INCOMPLETE = 'incomplete',
         CANCELED = 'canceled',
         UNPAID = 'unpaid',
+    }
+
+    export interface Plan {
+        display_name: string | null;
+        is_legacy: boolean;
     }
 }
