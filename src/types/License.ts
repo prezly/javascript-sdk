@@ -62,7 +62,7 @@ export interface License extends LicenseRef {
      * use "plan" instead.
      */
     plan_level: PlanLevel | null;
-    plan: License.Plan;
+    plan: License.Plan | null;
     status: License.Status;
     subscription_lockout: boolean;
     /**
@@ -116,5 +116,6 @@ export namespace License {
     export interface Plan {
         display_name: string | null;
         is_legacy: boolean;
+        is_superior: boolean;
     }
 }
