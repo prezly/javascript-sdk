@@ -22,6 +22,10 @@ type Iso8601DateTime = string;
  */
 type Html = string;
 /**
+ * String-serialized JSON object.
+ */
+type Json = string;
+/**
  * String containing Prezly Content Format JSON structure.
  */
 type PrezlyContentFormat = string;
@@ -144,10 +148,11 @@ export interface HtmlStoryCreateRequest extends GenericCreateRequest {
     format_version?: Story.FormatVersion.HTML;
     intro?: Html;
     content?: Html;
-    /**
-     * Attached gallery slate content.
-     */
-    attached_gallery_content?: string;
+    attached_attachments_content?: Json;
+    attached_bookmarks_content?: Json;
+    attached_contacts_content?: Json;
+    attached_gallery_content?: Json;
+    attached_videos_content?: Json;
 }
 
 export interface SlateStoryCreateRequest extends GenericCreateRequest {
@@ -165,10 +170,11 @@ export interface SlateStoryCreateRequest extends GenericCreateRequest {
 export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
     intro?: Html;
     content?: Html;
-    /**
-     * Attached gallery slate content.
-     */
-    attached_gallery_content?: string;
+    attached_attachments_content?: Json;
+    attached_bookmarks_content?: Json;
+    attached_contacts_content?: Json;
+    attached_gallery_content?: Json;
+    attached_videos_content?: Json;
 }
 
 export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
@@ -183,7 +189,7 @@ export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
 
 export interface PreviewResponse {
     content: {
-        'text/html': string;
+        'text/html': Html;
         'text/plain': string;
     };
 }
