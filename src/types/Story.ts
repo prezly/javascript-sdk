@@ -5,6 +5,9 @@ import { Newsroom, type NewsroomRef } from './Newsroom';
 import type { SEOSettings } from './SEOSettings';
 import type { UserRef } from './User';
 
+type Html = string;
+type Json = string;
+
 export interface StoryRef {
     uuid: string;
     /**
@@ -212,12 +215,12 @@ export namespace Story {
          * - HTML content for v1 stories (deprecated)
          * - JSON-encoded structured content for v3 stories (see Prezly Content Format).
          */
-        content: string;
+        content: Html | Json;
 
         /**
          * Only supported on v3 stories with JSON-encoded structured content.
          */
-        autosaved_content: string | null;
+        autosaved_content: Json | null;
 
         /**
          * Auto-incrementing version number updated on every update.
@@ -234,31 +237,31 @@ export namespace Story {
          * Contains attached gallery slate content.
          * Always `null` for v3 stories.
          */
-        attached_gallery_content: string | null;
+        attached_gallery_content: Json | null;
 
         /**
          * Contains attached videos slate content.
          * Always `null` for v3 stories.
          */
-        attached_videos_content: string | null;
+        attached_videos_content: Json | null;
 
         /**
          * Contains attached bookmarks slate content.
          * Always `null` for v3 stories.
          */
-        attached_bookmarks_content: string | null;
+        attached_bookmarks_content: Json | null;
 
         /**
          * Contains attached files slate content.
          * Always `null` for v3 stories.
          */
-        attached_attachments_content: string | null;
+        attached_attachments_content: Json | null;
 
         /**
          * Contains attached contacts slate content.
          * Always `null` for v3 stories.
          */
-        attached_contacts_content: string | null;
+        attached_contacts_content: Json | null;
 
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
