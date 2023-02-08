@@ -1,5 +1,6 @@
 import type { Currency } from './Currency';
 import type { PlanLevel } from './Plan';
+import type { SignupBillingCycle } from "../endpoints/Billing";
 
 export interface LicenseRef {
     id: number;
@@ -114,11 +115,12 @@ export namespace License {
     }
 
     export interface Plan {
-        id: string;
         display_name: string | null;
         description: string | null;
         is_legacy: boolean;
         is_superior: boolean;
-        newsrooms_limit: number;
+        billing_cycle: SignupBillingCycle;
+        currency: Currency;
+        related_product_id: string;
     }
 }
