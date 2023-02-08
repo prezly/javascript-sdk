@@ -116,6 +116,7 @@ export namespace License {
     export interface Plan {
         id: string;
         display_name: string | null;
+        description: string | null;
         is_legacy: boolean;
         is_superior: boolean;
         newsrooms_limit: number;
