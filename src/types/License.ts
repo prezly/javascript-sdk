@@ -1,6 +1,5 @@
 import type { Currency } from './Currency';
 import type { PlanLevel } from './Plan';
-import type { SignupBillingCycle } from "../endpoints/Billing";
 
 export interface LicenseRef {
     id: number;
@@ -119,8 +118,6 @@ export namespace License {
         description: string | null;
         is_legacy: boolean;
         is_superior: boolean;
-        billing_cycle: SignupBillingCycle;
-        currency: Currency;
-        related_product_id: string;
+        pricing_table_option_id: string | null;
     }
 }
