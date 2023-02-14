@@ -115,7 +115,9 @@ export namespace License {
 
     export interface Plan {
         display_name: string | null;
+        description: string | null;
         is_legacy: boolean;
         is_superior: boolean;
+        pricing_table_option_id: string | null;
     }
 }
