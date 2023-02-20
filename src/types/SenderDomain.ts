@@ -21,6 +21,11 @@ export interface SenderDomain {
      */
     is_upgrade_recommended: boolean;
     /**
+     * Indicate whether the domain is on a deprecated email verification setup.
+     * Upgrading is required.
+     */
+    is_upgrade_required: boolean;
+    /**
      * There were different verification setups we've been using over the years.
      * The latest one, which is also the best so far, is `v3`.
      */
