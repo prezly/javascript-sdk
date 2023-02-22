@@ -10,7 +10,6 @@ export interface Plan {
     pricing_table_option_id: string | null;
     billing_cycle: string;
     currency: string;
-    ends_at: string | null;
     usage: Usage[];
 }
 
