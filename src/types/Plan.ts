@@ -1,4 +1,4 @@
-import type { Limit } from "../endpoints/PricingTables";
+import type { Limit } from '../endpoints/PricingTables';
 
 export interface Plan {
     display_name: string;
