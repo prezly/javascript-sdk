@@ -1,6 +1,6 @@
 import type { Limit } from '../endpoints/PricingTables';
 
-export interface Plan {
+export interface PlanReference {
     display_name: string;
     description: string | null;
     is_legacy: boolean;
@@ -8,6 +8,9 @@ export interface Plan {
     is_superior: boolean;
     is_trial: boolean;
     pricing_table_option_id: string | null;
+}
+
+export interface Plan extends PlanReference{
     billing_cycle: string;
     currency: string;
     usage: Usage[];
