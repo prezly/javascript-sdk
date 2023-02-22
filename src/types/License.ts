@@ -1,5 +1,5 @@
 import type { Currency } from './Currency';
-import type { PlanLevel } from './Plan';
+import type { PlanLevel, PlanReference } from './Plan';
 
 export interface LicenseRef {
     id: number;
@@ -62,7 +62,7 @@ export interface License extends LicenseRef {
      * use "plan" instead.
      */
     plan_level: PlanLevel | null;
-    plan: License.Plan | null;
+    plan: PlanReference | null;
     status: License.Status;
     subscription_lockout: boolean;
     /**
@@ -111,13 +111,5 @@ export namespace License {
         INCOMPLETE = 'incomplete',
         CANCELED = 'canceled',
         UNPAID = 'unpaid',
-    }
-
-    export interface Plan {
-        display_name: string | null;
-        description: string | null;
-        is_legacy: boolean;
-        is_superior: boolean;
-        pricing_table_option_id: string | null;
     }
 }
