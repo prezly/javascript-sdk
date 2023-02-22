@@ -11,13 +11,7 @@ export interface Plan {
     billing_cycle: string;
     currency: string;
     ends_at: string | null;
-    discount: Discount | null;
     usage: Usage[];
-}
-
-export interface Discount {
-    amount_off: number;
-    percent_off: number;
 }
 
 export interface Usage {
