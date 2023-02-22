@@ -10,7 +10,7 @@ export interface PlanReference {
     pricing_table_option_id: string | null;
 }
 
-export interface Plan extends PlanReference{
+export interface Plan extends PlanReference {
     billing_cycle: string;
     currency: string;
     usage: Usage[];

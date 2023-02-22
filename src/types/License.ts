@@ -1,5 +1,5 @@
 import type { Currency } from './Currency';
-import type {PlanLevel, PlanReference} from './Plan';
+import type { PlanLevel, PlanReference } from './Plan';
 
 export interface LicenseRef {
     id: number;
