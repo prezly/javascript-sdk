@@ -13,7 +13,6 @@ export interface Plan {
     ends_at: string | null;
     discount: Discount | null;
     usage: Usage[];
-    items: Item[];
 }
 
 export interface Discount {
@@ -24,14 +23,6 @@ export interface Discount {
 export interface Usage {
     limit: Limit;
     used: number;
-}
-
-export interface Item {
-    amount: number;
-    quantity: number;
-    unit: string | null;
-    billing_cycle: string;
-    currency: string;
 }
 
 /** @deprecated Will be dropped in future */
