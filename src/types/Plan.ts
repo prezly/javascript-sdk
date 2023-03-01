@@ -7,6 +7,7 @@ export interface PlanReference {
     is_deprecated: boolean;
     is_superior: boolean;
     is_trial: boolean;
+    can_upgrade: boolean;
     pricing_table_option_id: string | null;
 }
 
