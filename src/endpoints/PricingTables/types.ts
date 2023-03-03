@@ -1,5 +1,6 @@
 export interface PricingTable {
     options: Option[];
+    rows: Row[];
 }
 
 export interface Option {
@@ -35,4 +36,23 @@ export interface AddOn {
     id: string;
     display_name: string;
     prices: Price[];
+}
+
+export interface Row {
+    display_name: string;
+    description: string | null;
+    link: string | null;
+    area: string | null;
+    status: 'beta' | null;
+    is_key_item: boolean;
+    cells: {
+        starter?: Cell;
+        core?: Cell;
+        premium?: Cell;
+    }
+}
+
+export interface Cell {
+    value: string | null;
+    description: string | null;
 }
