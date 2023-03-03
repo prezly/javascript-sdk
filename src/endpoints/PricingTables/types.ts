@@ -49,7 +49,7 @@ export interface Row {
         starter?: Cell;
         core?: Cell;
         premium?: Cell;
-    }
+    };
 }
 
 export interface Cell {
