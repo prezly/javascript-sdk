@@ -45,11 +45,7 @@ export interface Row {
     area: string | null;
     status: 'beta' | null;
     is_key_item: boolean;
-    cells: {
-        starter?: Cell;
-        core?: Cell;
-        premium?: Cell;
-    };
+    cells: Record<string, Cell>;
 }
 
 export interface Cell {
