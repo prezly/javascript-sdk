@@ -14,6 +14,8 @@ export interface PlanReference {
 export interface Plan extends PlanReference {
     billing_cycle: string;
     currency: string;
+    total_before_discount: number;
+    total_after_discount: number;
     usage: Usage[];
 }
 
