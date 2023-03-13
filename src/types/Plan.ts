@@ -1,5 +1,6 @@
 import type { Limit } from '../endpoints/PricingTables';
 
+import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
 
 export interface PlanReference {
@@ -14,7 +15,7 @@ export interface PlanReference {
 }
 
 export interface Plan extends PlanReference {
-    billing_cycle: PlanBillingCycle;
+    billing_cycle: BillingCycle;
     billing_cycle_count: number;
     currency: Currency;
     total_before_discount: number;
@@ -41,9 +42,4 @@ export enum PlanLevel {
     AGENCY_MEDIUM = 'agency_medium',
     AGENCY_LARGE = 'agency_large',
     AGENCY_HUGE = 'agency_huge',
-}
-
-export enum PlanBillingCycle {
-    YEAR = 'year',
-    MONTH = 'month',
 }

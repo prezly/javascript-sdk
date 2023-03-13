@@ -1,3 +1,5 @@
+import type { BillingCycle } from '../../types/BillingCycle';
+
 export enum SignupPlan {
     STARTER = 'starter',
     CORE = 'core',
@@ -9,11 +11,6 @@ export enum SignupCurrency {
     USD = 'usd',
 }
 
-export enum SignupBillingCycle {
-    YEAR = 'year',
-    MONTH = 'month',
-}
-
 export interface SignupRequest {
     email: string;
     company_name: string;
@@ -22,7 +19,7 @@ export interface SignupRequest {
     quantity: number;
     plan?: SignupPlan;
     currency?: SignupCurrency;
-    billing_cycle?: SignupBillingCycle;
+    billing_cycle?: BillingCycle;
     phone?: string;
 }
 
