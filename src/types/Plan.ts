@@ -1,5 +1,8 @@
 import type { Limit } from '../endpoints/PricingTables';
 
+import type { BillingCycle } from './BillingCycle';
+import type { Currency } from './Currency';
+
 export interface PlanReference {
     display_name: string;
     description: string | null;
@@ -12,9 +15,9 @@ export interface PlanReference {
 }
 
 export interface Plan extends PlanReference {
-    billing_cycle: string;
+    billing_cycle: BillingCycle;
     billing_cycle_count: number;
-    currency: string;
+    currency: Currency;
     total_before_discount: number;
     total_after_discount: number;
     usage: Usage[];

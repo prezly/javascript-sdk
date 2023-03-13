@@ -1,6 +1,7 @@
 // Common
 export * from './common';
 // Entities
+export * from './BillingCycle';
 export * from './Campaign';
 export * from './Category';
 export * from './Contact';
