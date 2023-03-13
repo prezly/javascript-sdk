@@ -21,11 +21,26 @@ export interface Plan extends PlanReference {
     total_before_discount: number;
     total_after_discount: number;
     usage: Usage[];
+    possible_changes: PlanChange[]
+    ends_at: string | null;
+    ended_at: string | null;
 }
 
 export interface Usage {
     limit: Limit;
     used: number;
+}
+
+export interface PlanChange {
+    pricing_table_option_id: string;
+    can_self_change: boolean;
+    type: PlanChangeType;
+}
+
+export enum PlanChangeType {
+    ACTIVATION = 'activation',
+    UPGRADE = 'upgrade',
+    DOWNGRADE = 'downgrade',
 }
 
 /** @deprecated Will be dropped in future */
