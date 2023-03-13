@@ -21,7 +21,7 @@ export interface Plan extends PlanReference {
     total_before_discount: number;
     total_after_discount: number;
     usage: Usage[];
-    possible_changes: PlanChange[]
+    possible_changes: PlanChange[];
     ends_at: string | null;
     ended_at: string | null;
 }
