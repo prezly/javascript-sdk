@@ -2,6 +2,7 @@ import type { Limit } from '../endpoints/PricingTables';
 
 import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
+import type { OptionId } from "../endpoints/PricingTables";
 
 export interface PlanReference {
     display_name: string;
@@ -11,7 +12,7 @@ export interface PlanReference {
     is_superior: boolean;
     is_trial: boolean;
     can_upgrade: boolean;
-    pricing_table_option_id: string | null;
+    pricing_table_option_id: OptionId | null;
 }
 
 export interface Plan extends PlanReference {
@@ -32,7 +33,7 @@ export interface Usage {
 }
 
 export interface Change {
-    pricing_table_option_id: string;
+    pricing_table_option_id: OptionId;
     can_self_change: boolean;
     type: ChangeType;
 }

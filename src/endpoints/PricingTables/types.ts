@@ -4,13 +4,24 @@ export interface PricingTable {
 }
 
 export interface Option {
-    id: string;
+    id: OptionId;
     display_name: string;
     description: string | null;
     overview_features_list: PlanFeatureRef[];
     limits: Limit[];
     prices: Price[];
     add_ons: AddOn[];
+}
+
+export enum OptionId {
+    STARTER = 'starter',
+    CORE = 'core',
+    PREMIUM = 'premium',
+    AGENCY_STARTER = 'agency_starter',
+    AGENCY_SMALL = 'agency_small',
+    AGENCY_MEDIUM = 'agency_medium',
+    AGENCY_LARGE = 'agency_large',
+    AGENCY_HUGE = 'agency_huge',
 }
 
 export interface PlanFeatureRef {
