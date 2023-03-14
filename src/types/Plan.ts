@@ -1,8 +1,8 @@
 import type { Limit } from '../endpoints/PricingTables';
+import type { OptionId } from '../endpoints/PricingTables';
 
 import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
-import type { OptionId } from '../endpoints/PricingTables';
 
 export interface PlanReference {
     display_name: string;
