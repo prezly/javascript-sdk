@@ -1,6 +1,12 @@
 export interface PricingTable {
+    id: TableId;
     options: Option[];
     rows: Row[];
+}
+
+export enum TableId {
+    STANDARD = 'standard',
+    AGENCY = 'agency',
 }
 
 export interface Option {
