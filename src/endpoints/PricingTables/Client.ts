@@ -10,9 +10,15 @@ export class Client {
         this.apiClient = apiClient;
     }
 
+    public async list(): Promise<PricingTable[]> {
+        const url = routing.pricingTablesUrl;
+        const { tables } = await this.apiClient.get<{ tables: PricingTable[] }>(url);
+        return tables;
+    }
+
     public async get(tableId: 'standard'): Promise<PricingTable> {
-        const url = routing.pricingTablesUrl.replace(':table_id', String(tableId));
-        const { table } = await this.apiClient.get<{ table: PricingTable }>(url);
+        const url = routing.pricingTablesUrl;
+        const { table } = await this.apiClient.get<{ table: PricingTable }>(`${url}/${tableId}`);
         return table;
     }
 }

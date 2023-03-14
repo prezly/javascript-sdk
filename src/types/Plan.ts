@@ -1,4 +1,5 @@
 import type { Limit } from '../endpoints/PricingTables';
+import type { OptionId } from '../endpoints/PricingTables';
 
 import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
@@ -11,7 +12,7 @@ export interface PlanReference {
     is_superior: boolean;
     is_trial: boolean;
     can_upgrade: boolean;
-    pricing_table_option_id: string | null;
+    pricing_table_option_id: OptionId | null;
 }
 
 export interface Plan extends PlanReference {
@@ -21,11 +22,26 @@ export interface Plan extends PlanReference {
     total_before_discount: number;
     total_after_discount: number;
     usage: Usage[];
+    possible_changes: Change[];
+    ends_at: string | null;
+    ended_at: string | null;
 }
 
 export interface Usage {
     limit: Limit;
     used: number;
+}
+
+export interface Change {
+    pricing_table_option_id: OptionId;
+    can_self_change: boolean;
+    type: ChangeType;
+}
+
+export enum ChangeType {
+    ACTIVATION = 'activation',
+    UPGRADE = 'upgrade',
+    DOWNGRADE = 'downgrade',
 }
 
 /** @deprecated Will be dropped in future */
