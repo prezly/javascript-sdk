@@ -36,10 +36,19 @@ export interface PlanFeatureRef {
 }
 
 export interface Limit {
-    id: string;
+    id: LimitId;
     display_name: string;
     value: null | number;
     per: null | string;
+}
+
+export enum LimitId {
+    STORIES = 'stories',
+    USERS = 'users',
+    SITES = 'sites',
+    CONTACTS = 'contacts',
+    EMAIL_SENDS = 'email_sends',
+    CUSTOM_SENDER_ADDRESSES = 'custom_sender_addresses',
 }
 
 export interface Price {
@@ -50,9 +59,13 @@ export interface Price {
 }
 
 export interface AddOn {
-    id: string;
+    id: AddOnId;
     display_name: string;
     prices: Price[];
+}
+
+export enum AddOnId {
+    SITE = 'site',
 }
 
 export interface Row {
