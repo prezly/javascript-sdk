@@ -2,6 +2,7 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 
 import type { PricingTable } from './types';
+import type { TableId } from './types';
 
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;
@@ -16,7 +17,7 @@ export class Client {
         return tables;
     }
 
-    public async get(tableId: 'standard'): Promise<PricingTable> {
+    public async get(tableId: TableId.STANDARD): Promise<PricingTable> {
         const url = routing.pricingTablesUrl;
         const { table } = await this.apiClient.get<{ table: PricingTable }>(`${url}/${tableId}`);
         return table;
