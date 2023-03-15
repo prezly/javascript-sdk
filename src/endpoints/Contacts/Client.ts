@@ -11,6 +11,7 @@ import type {
     ListOptions,
     ListResponse,
     SearchOptions,
+    SearchResponse,
     UpdateRequest,
 } from './types';
 
@@ -27,7 +28,7 @@ export class Client {
     /**
      * List Contacts Exports with sorting, and pagination.
      */
-    async list(options: ListOptions) {
+    async list(options: ListOptions): Promise<ListResponse> {
         const { limit, offset, sortOrder } = options;
         const { contacts, pagination, sort } = await this.apiClient.get<{
             contacts: Contact[];
@@ -47,7 +48,7 @@ export class Client {
     /**
      * List Contacts Exports with sorting, pagination, and filtering.
      */
-    async search(options: SearchOptions): Promise<ListResponse> {
+    async search(options: SearchOptions): Promise<SearchResponse> {
         const { limit, offset, query, sortOrder } = options;
         const url = `${routing.contactsUrl}/search`;
         const { contacts, pagination, sort } = await this.apiClient.post<{
