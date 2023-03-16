@@ -1,5 +1,6 @@
 import type { Limit } from '../endpoints/PricingTables';
 import type { OptionId } from '../endpoints/PricingTables';
+import type { TableId } from '../endpoints/PricingTables';
 
 import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
@@ -12,6 +13,7 @@ export interface PlanReference {
     is_superior: boolean;
     is_trial: boolean;
     can_upgrade: boolean;
+    pricing_table_id: TableId | null;
     pricing_table_option_id: OptionId | null;
 }
 
@@ -33,6 +35,7 @@ export interface Usage {
 }
 
 export interface Change {
+    pricing_table_id: TableId;
     pricing_table_option_id: OptionId;
     can_self_change: boolean;
     type: ChangeType;
