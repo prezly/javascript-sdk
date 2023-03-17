@@ -173,4 +173,26 @@ export namespace Contact {
             CELLPHONE = 'cell',
         }
     }
+
+    export function isPerson(contact: Pick<Contact, 'contact_type'>): boolean;
+    export function isPerson(type: Contact['contact_type']): boolean;
+    export function isPerson(
+        arg: Contact['contact_type'] | Pick<Contact, 'contact_type'>,
+    ): boolean {
+        if (arg !== null && typeof arg === 'object') {
+            return arg.contact_type === Type.PERSON;
+        }
+        return arg === Type.PERSON;
+    }
+
+    export function isOrganisation(contact: Pick<Contact, 'contact_type'>): boolean;
+    export function isOrganisation(type: Contact['contact_type']): boolean;
+    export function isOrganisation(
+        arg: Contact['contact_type'] | Pick<Contact, 'contact_type'>,
+    ): boolean {
+        if (arg !== null && typeof arg === 'object') {
+            return arg.contact_type === Type.ORGANISATION;
+        }
+        return arg === Type.ORGANISATION;
+    }
 }
