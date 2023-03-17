@@ -5,6 +5,7 @@ export * from './BillingCycle';
 export * from './Campaign';
 export * from './Category';
 export * from './Contact';
+export * from './ContactDuplicateSuggestion';
 export * from './ContactsExport';
 export * from './ContactsScope';
 export * from './Country';
