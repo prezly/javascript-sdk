@@ -1,10 +1,11 @@
 import { ApiClient, DeferredJobsApiClient } from './api';
-import { Contacts } from './endpoints';
 import {
     Accounts,
     Billing,
     Campaigns,
     CampaignRecipients,
+    Contacts,
+    ContactsDuplicates,
     ContactsExports,
     Coverage,
     Jobs,
@@ -44,6 +45,7 @@ export interface Client {
     campaigns: Campaigns.Client;
     campaignRecipients: CampaignRecipients.Client;
     contacts: Contacts.Client;
+    contactsDuplicates: ContactsDuplicates.Client;
     contactsExports: ContactsExports.Client;
     coverage: Coverage.Client;
     jobs: Jobs.Client;
@@ -87,6 +89,7 @@ export function createClient({
         campaigns: new Campaigns.Client(apiClient),
         campaignRecipients: new CampaignRecipients.Client(apiClient),
         contacts: new Contacts.Client(apiClient),
+        contactsDuplicates: new ContactsDuplicates.Client(apiClient),
         contactsExports: new ContactsExports.Client(apiClient),
         coverage: new Coverage.Client(apiClient),
         jobs: new Jobs.Client(apiClient),

@@ -3,6 +3,7 @@ export * as Billing from './Billing';
 export * as CampaignRecipients from './CampaignRecipients';
 export * as Campaigns from './Campaigns';
 export * as Contacts from './Contacts';
+export * as ContactsDuplicates from './ContactsDuplicates';
 export * as ContactsExports from './ContactsExports';
 export * as Coverage from './Coverage';
 export * as Jobs from './Jobs';
