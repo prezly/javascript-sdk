@@ -1,11 +1,22 @@
-import type { ContactRef } from './Contact';
+import type { Contact, ContactRef } from './Contact';
+
+/**
+ * Value in range 0.0 ... 1.0.
+ */
+type Score = number;
 
 export interface ContactDuplicateSuggestion {
-    contact: ContactRef;
-    /**
-     * Value in range 0.0 ... 1.0.
-     */
-    score: number;
+    contact: Contact; // Note: Contact
+    score: Score;
+    status: ContactDuplicateSuggestion.Status;
+    links: {
+        merge_api: string;
+    };
+}
+
+export interface ContactDuplicateSuggestionRef {
+    contact: ContactRef; // Note: ContactRef
+    score: Score;
     status: ContactDuplicateSuggestion.Status;
     links: {
         merge_api: string;
