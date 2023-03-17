@@ -1,6 +1,6 @@
 import type { UploadedImage } from '@prezly/uploads';
 
-import type { ContactDuplicateSuggestion } from './ContactDuplicateSuggestion';
+import type { ContactDuplicateSuggestionRef } from './ContactDuplicateSuggestion';
 
 export interface ContactRef {
     id: number;
@@ -76,7 +76,7 @@ export interface Contact {
     is_unsubscribed: boolean;
     is_unsubscribed_from_all_communications: boolean;
     unsubscribed_newsrooms: string[];
-    duplicate_contacts: ContactDuplicateSuggestion[];
+    duplicate_contacts: ContactDuplicateSuggestionRef[];
 
     created_at: string | null; // there are contacts in DB that do have `created_at = null`
     modified_at: string | null;
@@ -172,5 +172,27 @@ export namespace Contact {
             TELEPHONE = 'tel',
             CELLPHONE = 'cell',
         }
+    }
+
+    export function isPerson(contact: Pick<Contact, 'contact_type'>): boolean;
+    export function isPerson(type: Contact['contact_type']): boolean;
+    export function isPerson(
+        arg: Contact['contact_type'] | Pick<Contact, 'contact_type'>,
+    ): boolean {
+        if (arg !== null && typeof arg === 'object') {
+            return arg.contact_type === Type.PERSON;
+        }
+        return arg === Type.PERSON;
+    }
+
+    export function isOrganisation(contact: Pick<Contact, 'contact_type'>): boolean;
+    export function isOrganisation(type: Contact['contact_type']): boolean;
+    export function isOrganisation(
+        arg: Contact['contact_type'] | Pick<Contact, 'contact_type'>,
+    ): boolean {
+        if (arg !== null && typeof arg === 'object') {
+            return arg.contact_type === Type.ORGANISATION;
+        }
+        return arg === Type.ORGANISATION;
     }
 }
