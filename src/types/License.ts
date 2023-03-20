@@ -1,5 +1,6 @@
 import type { Currency } from './Currency';
 import type { PlanLevel, PlanReference } from './Plan';
+import CompanyType = License.CompanyType;
 
 export interface LicenseRef {
     id: number;
@@ -12,6 +13,8 @@ export interface LicenseRef {
 }
 
 export interface License extends LicenseRef {
+    company_type: CompanyType | null;
+
     billing_company_name: string;
     billing_contact: string;
     billing_contact_email: string;
@@ -111,5 +114,11 @@ export namespace License {
         INCOMPLETE = 'incomplete',
         CANCELED = 'canceled',
         UNPAID = 'unpaid',
+    }
+
+    export enum CompanyType {
+        BRAND = 'brand',
+        AGENCY = 'agency',
+        INTERNAL = 'internal',
     }
 }
