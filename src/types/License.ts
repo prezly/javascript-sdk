@@ -1,5 +1,6 @@
 import type { Currency } from './Currency';
 import type { PlanLevel, PlanReference } from './Plan';
+
 import CompanyType = License.CompanyType;
 
 export interface LicenseRef {
