@@ -12,6 +12,8 @@ export interface LicenseRef {
 }
 
 export interface License extends LicenseRef {
+    company_type: License.CompanyType | null;
+
     billing_company_name: string;
     billing_contact: string;
     billing_contact_email: string;
@@ -111,5 +113,11 @@ export namespace License {
         INCOMPLETE = 'incomplete',
         CANCELED = 'canceled',
         UNPAID = 'unpaid',
+    }
+
+    export enum CompanyType {
+        BRAND = 'brand',
+        AGENCY = 'agency',
+        INTERNAL = 'internal',
     }
 }
