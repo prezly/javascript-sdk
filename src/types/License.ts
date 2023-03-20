@@ -1,8 +1,6 @@
 import type { Currency } from './Currency';
 import type { PlanLevel, PlanReference } from './Plan';
 
-import CompanyType = License.CompanyType;
-
 export interface LicenseRef {
     id: number;
     display_name: string;
@@ -14,7 +12,7 @@ export interface LicenseRef {
 }
 
 export interface License extends LicenseRef {
-    company_type: CompanyType | null;
+    company_type: License.CompanyType | null;
 
     billing_company_name: string;
     billing_contact: string;
