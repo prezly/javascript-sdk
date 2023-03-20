@@ -29,6 +29,7 @@ export interface Plan extends PlanReference {
     possible_changes: Change[];
     ends_at: string | null;
     ended_at: string | null;
+    current_period_end: string | null;
 }
 
 export interface Usage {
