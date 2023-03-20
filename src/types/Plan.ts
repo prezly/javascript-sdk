@@ -21,6 +21,8 @@ export interface Plan extends PlanReference {
     billing_cycle: BillingCycle;
     billing_cycle_count: number;
     currency: Currency;
+    subtotal_before_discount: number;
+    subtotal_after_discount: number;
     total_before_discount: number;
     total_after_discount: number;
     usage: Usage[];
