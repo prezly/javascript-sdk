@@ -23,6 +23,7 @@ export interface License extends LicenseRef {
      * it will be null (no data about billing cycle).
      */
     billing_cycle: number | null;
+    has_credit_card: boolean;
     /**
      * Date when subscription will be automatically canceled.
      */
