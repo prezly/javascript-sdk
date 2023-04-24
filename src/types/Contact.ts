@@ -75,6 +75,7 @@ export interface Contact {
     is_duplicated: boolean;
     is_unsubscribed: boolean;
     is_unsubscribed_from_all_communications: boolean;
+    is_spam_reported: boolean;
     unsubscribed_newsrooms: string[];
     duplicate_contacts: ContactDuplicateSuggestionRef[];
 
