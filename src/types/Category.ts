@@ -17,4 +17,5 @@ export interface CategoryRef {
 
 export interface Category extends CategoryRef {
     stories_number: number;
+    public_stories_number: number;
 }
