@@ -4,7 +4,22 @@ import * as nodeUrl from 'url';
 
 import type { DeferredJobResponse } from './types';
 
-const URL = typeof window === 'undefined' ? nodeUrl.URL : window.URL;
+/**
+ * Choose which `URL` class to use based on the environment (Browser / Node.js / Edge)
+ */
+function getURLClass() {
+    if (typeof window !== 'undefined') {
+        return window.URL;
+    }
+
+    if (typeof (globalThis as { EdgeRuntime?: string }).EdgeRuntime === 'string') {
+        return globalThis.URL;
+    }
+
+    return nodeUrl.URL;
+}
+
+const URL = getURLClass();
 
 function parseUrlParams(query: string): ParsedQuery {
     return queryString.parse(query, { arrayFormat: 'bracket' });
