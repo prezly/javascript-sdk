@@ -8,6 +8,7 @@ export interface SenderAddress {
     is_default: boolean;
     is_public_webmail: boolean;
     is_verified: boolean;
+    is_approved: boolean;
     domain: SenderDomain;
 }
 
