@@ -1,7 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { SenderAddress } from '../../types';
-import { Query } from "../../types";
+import { Query } from '../../types';
 
 import type { CreateRequest, UpdateRequest } from './types';
 
@@ -15,7 +15,7 @@ export class Client {
     public async list(scope?: Query): Promise<SenderAddress[]> {
         const { senders } = await this.apiClient.get<{ senders: SenderAddress[] }>(
             routing.senderAddressesUrl,
-            { query: { scope: Query.stringify(scope) } }
+            { query: { scope: Query.stringify(scope) } },
         );
         return senders;
     }
