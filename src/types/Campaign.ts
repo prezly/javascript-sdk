@@ -3,6 +3,7 @@ import type { SenderAddress } from './SenderAddress';
 import { SenderDomain } from './SenderDomain';
 import type { StoryRef } from './Story';
 import type { UserRef } from './User';
+
 import ClickTrackingVersion = Campaign.ClickTrackingVersion;
 
 export interface Campaign {
