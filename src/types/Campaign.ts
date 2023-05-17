@@ -33,6 +33,10 @@ export interface Campaign {
     sent_at: string | null;
     delivered_at: string | null;
 
+    is_open_tracking_enabled: boolean;
+    is_click_tracking_enabled: boolean;
+    click_tracking_version: Campaign.ClickTrackingVersion;
+
     recipients_number: number;
     stats: {
         bounces: number;
@@ -77,6 +81,11 @@ export namespace Campaign {
         VALID = 'valid',
         INVALID = 'invalid',
         NOT_APPLICABLE = 'not-applicable',
+    }
+
+    export enum ClickTrackingVersion {
+        DEPRECATED = 1,
+        ENHANCED = 2,
     }
 
     export function isDraft(status: LifecycleStatus): boolean;
