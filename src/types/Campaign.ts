@@ -3,6 +3,7 @@ import type { SenderAddress } from './SenderAddress';
 import { SenderDomain } from './SenderDomain';
 import type { StoryRef } from './Story';
 import type { UserRef } from './User';
+import ClickTrackingVersion = Campaign.ClickTrackingVersion;
 
 export interface Campaign {
     id: number;
@@ -32,6 +33,10 @@ export interface Campaign {
     scheduled_at: string | null;
     sent_at: string | null;
     delivered_at: string | null;
+
+    is_open_tracking_enabled: boolean;
+    is_click_tracking_enabled: boolean;
+    click_tracking_version: ClickTrackingVersion;
 
     recipients_number: number;
     stats: {
@@ -77,6 +82,11 @@ export namespace Campaign {
         VALID = 'valid',
         INVALID = 'invalid',
         NOT_APPLICABLE = 'not-applicable',
+    }
+
+    export enum ClickTrackingVersion {
+        DEPRECATED = 1,
+        ENHANCED = 2,
     }
 
     export function isDraft(status: LifecycleStatus): boolean;
