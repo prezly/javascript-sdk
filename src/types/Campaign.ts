@@ -4,8 +4,6 @@ import { SenderDomain } from './SenderDomain';
 import type { StoryRef } from './Story';
 import type { UserRef } from './User';
 
-import ClickTrackingVersion = Campaign.ClickTrackingVersion;
-
 export interface Campaign {
     id: number;
     author: UserRef;
@@ -37,7 +35,7 @@ export interface Campaign {
 
     is_open_tracking_enabled: boolean;
     is_click_tracking_enabled: boolean;
-    click_tracking_version: ClickTrackingVersion;
+    click_tracking_version: Campaign.ClickTrackingVersion;
 
     recipients_number: number;
     stats: {
