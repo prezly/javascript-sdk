@@ -51,12 +51,18 @@ export interface Campaign {
         undelivered_rate: number;
         unsubscribes: number;
         unsubscribes_rate: number;
+        links: Campaign.Link[];
     };
 }
 
 export namespace Campaign {
     export type SenderDomainVerificationFlow = SenderDomain.VerificationFlowVersion;
     export const SenderDomainVerificationFlow = SenderDomain.VerificationFlowVersion;
+
+    export interface Link {
+        url: string;
+        clicks: number;
+    }
 
     export enum LifecycleStatus {
         DRAFT = 'draft',
