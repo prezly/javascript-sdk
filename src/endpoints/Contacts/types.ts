@@ -1,6 +1,9 @@
 import type { Contact, Pagination, Query } from '../../types';
 import type { SortOrder } from '../../types';
 
+// Convenience shortcuts
+export type { ContactsBulkSelector as BulkSelector, ContactsScope as Scope } from '../../types';
+
 export interface ListOptions {
     limit?: number;
     offset?: number;
@@ -60,4 +63,8 @@ export interface PersonUpdateRequest extends BaseContactPayload {
 
 export interface PersonCreateRequest extends PersonUpdateRequest {
     contact_type: `${Contact.Type.PERSON}`;
+}
+
+export interface BulkDeleteResponse {
+    deleted_contacts_count: number;
 }

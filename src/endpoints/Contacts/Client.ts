@@ -4,9 +4,10 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { Contact, Pagination } from '../../types';
 import { SortOrder } from '../../types';
-import type { ContactsBulkSelector } from '../ContactsExports';
 
 import type {
+    BulkDeleteResponse,
+    BulkSelector,
     CreateRequest,
     ListOptions,
     ListResponse,
@@ -118,29 +119,29 @@ export class Client {
         return contact;
     }
 
-    async bulkTag(
-        selector: ContactsBulkSelector,
-        tags: (TagId | TagName)[],
-    ): ProgressPromise<undefined> {
+    async bulkTag(selector: BulkSelector, tags: (TagId | TagName)[]): ProgressPromise<undefined> {
+        const { scope, query } = selector;
         return this.apiClient.patch(routing.contactsUrl, {
-            payload: {
-                scope: selector.scope,
-                query: selector.query,
-                '+tags': tags,
-            },
+            payload: { query, scope, '+tags': tags },
         });
     }
 
-    async bulkUntag(
-        selector: ContactsBulkSelector,
-        tags: (TagId | TagName)[],
-    ): ProgressPromise<undefined> {
+    async bulkUntag(selector: BulkSelector, tags: (TagId | TagName)[]): ProgressPromise<undefined> {
+        const { query, scope } = selector;
         return this.apiClient.patch(routing.contactsUrl, {
-            payload: {
-                scope: selector.scope,
-                query: selector.query,
-                '-tags': tags,
-            },
+            payload: { query, scope, '-tags': tags },
+        });
+    }
+
+    async delete(id: Contact['id']) {
+        const url = `${routing.contactsUrl}/${id}`;
+        await this.apiClient.delete(url);
+    }
+
+    async bulkDelete(selector: BulkSelector) {
+        const { query, scope } = selector;
+        return this.apiClient.delete<BulkDeleteResponse>(routing.contactsUrl, {
+            payload: { query, scope },
         });
     }
 }
