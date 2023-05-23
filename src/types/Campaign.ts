@@ -16,6 +16,15 @@ export interface Campaign {
     content: string;
     thumbnail_url: string;
 
+    /**
+     * This partially duplicates the `sender` property, but will always stay defined,
+     * even if the linked sender gets deleted later.
+     */
+    from: {
+        name: string;
+        email_address: string;
+    };
+
     // Attached story
     story: StoryRef | null;
     newsroom: NewsroomRef | null;
