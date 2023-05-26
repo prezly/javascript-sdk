@@ -3,6 +3,7 @@ import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
 import type { ExtendedStory, Story } from '../../types';
 import { SortOrder } from '../../types';
+import { isArrayOf, isNumber, isString } from '../../utils';
 
 import type {
     AutosaveRequest,
@@ -157,7 +158,7 @@ export class Client {
             return [];
         }
 
-        if (isArray && typeof arg[0] === 'number') {
+        if (isArray && isArrayOf(isNumber, arg)) {
             const { stories } = await this.search<Include, SearchOptions<Include>, StoryRecord>({
                 limit: arg.length,
                 query: { id: { $in: arg } },
@@ -166,7 +167,7 @@ export class Client {
             return stories;
         }
 
-        if (isArray && typeof arg[0] === 'string') {
+        if (isArray && isArrayOf(isString, arg)) {
             const { stories } = await this.search<Include, SearchOptions<Include>, StoryRecord>({
                 limit: arg.length,
                 query: { uuid: { $in: arg } },

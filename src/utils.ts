@@ -39,3 +39,19 @@ export function toIso8601(date: Date): string {
         pad(offset % 60)
     );
 }
+
+export function isNumber(x: unknown): x is number {
+    return typeof x === 'number';
+}
+
+export function isString(x: unknown): x is string {
+    return typeof x === 'string';
+}
+
+export function isBoolean(x: unknown): x is boolean {
+    return typeof x === 'boolean';
+}
+
+export function isArrayOf<T>(guard: (x: unknown) => x is T, x: unknown): x is T {
+    return Array.isArray(x) && x.every(guard);
+}
