@@ -18,6 +18,10 @@ export namespace Query {
         return typeof query === 'string' ? query : JSON.stringify(query);
     }
 
+    export enum LogicalOperator {
+        AND = '$and',
+    }
+
     type Value = string | number | boolean | null;
 
     export enum Predicate {
@@ -34,10 +38,6 @@ export namespace Query {
         EVERY = '$all',
         SOME = '$any',
         NONE = '$none',
-    }
-
-    export enum LogicalOperator {
-        AND = '$and',
     }
 
     export type EqualityPredicate = Predicate.EQUALS | Predicate.NOT_EQUALS;
@@ -60,39 +60,11 @@ export namespace Query {
 
     export type ManyToManyPredicate = Predicate.EVERY | Predicate.SOME | Predicate.NONE;
 
-    export type GenericFilter<F extends string, P extends Predicate, V> = {
+    export type Filter<F extends string = string, P extends Predicate = Predicate, V = Value> = {
         [field in F]: ExactlyOne<{
             [predicate in P]: P extends OneToManyPredicate | ManyToManyPredicate ? V[] : V;
         }>;
     };
-
-    export type ManyToManyFilter<F extends string, V extends Value> = GenericFilter<
-        F,
-        ManyToManyPredicate,
-        V
-    >;
-    export type OneToManyFilter<F extends string, V extends Value> = GenericFilter<
-        F,
-        OneToManyPredicate,
-        V
-    >;
-    export type TextFilter<F extends string> = GenericFilter<F, TextPredicate, string>;
-    export type EqualityFilter<F extends string, V extends Value> = GenericFilter<
-        F,
-        EqualityPredicate,
-        V
-    >;
-    export type ComparableFilter<F extends string, V extends Value> = GenericFilter<
-        F,
-        ComparablePredicate,
-        V
-    >;
-
-    export type Filter<
-        F extends string = string,
-        P extends Predicate = Predicate,
-        V = Value,
-    > = GenericFilter<F, P, V>;
 
     export type CombinedQuery<F extends Filter = Filter> = {
         [operator in `${LogicalOperator}`]: F[];
