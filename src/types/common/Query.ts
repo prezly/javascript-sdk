@@ -40,7 +40,15 @@ export namespace Query {
         NONE = '$none',
     }
 
+    export function isPredicate(predicate: string): predicate is Predicate {
+        return (Object.values(Predicate) as string[]).includes(predicate);
+    }
+
     export type EqualityPredicate = Predicate.EQUALS | Predicate.NOT_EQUALS;
+
+    export function isEqualityPredicate(predicate: Predicate): predicate is EqualityPredicate {
+        return predicate === Predicate.EQUALS || predicate === Predicate.NOT_EQUALS;
+    }
 
     export type ComparablePredicate =
         | Predicate.EQUALS
@@ -50,15 +58,47 @@ export namespace Query {
         | Predicate.GREATER_THAN
         | Predicate.GREATER_EQUAL;
 
+    export function isComparablePredicate(predicate: Predicate): predicate is ComparablePredicate {
+        return (
+            predicate === Predicate.EQUALS ||
+            predicate === Predicate.NOT_EQUALS ||
+            predicate === Predicate.LESS_THAN ||
+            predicate === Predicate.LESS_EQUAL ||
+            predicate === Predicate.GREATER_THAN ||
+            predicate === Predicate.GREATER_EQUAL
+        );
+    }
+
     export type TextPredicate =
         | Predicate.EQUALS
         | Predicate.NOT_EQUALS
         | Predicate.LIKE
         | Predicate.NOT_LIKE;
 
+    export function isTextPredicate(predicate: Predicate): predicate is TextPredicate {
+        return (
+            predicate === Predicate.EQUALS ||
+            predicate === Predicate.NOT_EQUALS ||
+            predicate === Predicate.LIKE ||
+            predicate === Predicate.NOT_LIKE
+        );
+    }
+
     export type OneToManyPredicate = Predicate.IN | Predicate.NOT_IN;
 
+    export function isOneToManyPredicate(predicate: Predicate): predicate is OneToManyPredicate {
+        return predicate === Predicate.IN || predicate === Predicate.NOT_IN;
+    }
+
     export type ManyToManyPredicate = Predicate.EVERY | Predicate.SOME | Predicate.NONE;
+
+    export function isManyToManyPredicate(predicate: Predicate): predicate is ManyToManyPredicate {
+        return (
+            predicate === Predicate.EVERY ||
+            predicate === Predicate.SOME ||
+            predicate === Predicate.NONE
+        );
+    }
 
     export type Filter<F extends string = string, P extends Predicate = Predicate, V = Value> = {
         [field in F]: ExactlyOne<{
