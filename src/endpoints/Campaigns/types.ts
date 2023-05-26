@@ -2,6 +2,7 @@ import type {
     Campaign,
     Pagination,
     Query,
+    QueryString,
     SenderAddress,
     SortOrder,
     Story,
@@ -16,7 +17,7 @@ export interface CreateRequest {
     story_alignment?: Campaign['story_alignment'];
     story_appearance?: Campaign['story_appearance'];
     recipients?: {
-        query: Query;
+        query: Query | QueryString;
     };
     is_open_tracking_enabled?: boolean;
     is_click_tracking_enabled?: boolean;
@@ -52,7 +53,7 @@ export interface ListOptions {
 }
 
 export interface SearchOptions extends ListOptions {
-    query?: Query;
+    query?: Query | QueryString;
 }
 
 export interface ListResponse {

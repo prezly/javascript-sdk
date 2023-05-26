@@ -1,4 +1,4 @@
-import type { CultureRef, Newsroom, Pagination, Query, SortOrder } from '../../types';
+import type { CultureRef, Newsroom, Pagination, Query, QueryString, SortOrder } from '../../types';
 
 export interface ListOptions {
     limit?: number;
@@ -14,7 +14,7 @@ export interface SearchOptions extends ListOptions {
     /**
      * Filter query using Prezly JSON Query Language
      */
-    query?: Query;
+    query?: Query | QueryString;
 }
 
 export interface ListResponse {

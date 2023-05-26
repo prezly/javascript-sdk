@@ -1,6 +1,6 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Campaign, Contact, ContactsScope, EmailRecipient } from '../../types';
+import type { Campaign, Contact, ContactsScope, EmailRecipient, QueryString } from '../../types';
 import { Query, SortOrder } from '../../types';
 import type { RecipientsOperationResponse } from '../Campaigns';
 
@@ -63,7 +63,7 @@ export class Client {
 
     async addContacts(
         campaignId: CampaignId,
-        contacts: { query?: Query; scope?: ContactsScope },
+        contacts: { query?: Query | QueryString; scope?: ContactsScope },
     ): Promise<RecipientsOperationResponse> {
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));
         return this.apiClient.post(url, {
@@ -81,7 +81,7 @@ export class Client {
 
     async removeRecipients(
         campaignId: CampaignId,
-        params?: { query: Query },
+        params?: { query: Query | QueryString },
     ): Promise<RecipientsOperationResponse> {
         const { query } = params || {};
         const url = routing.campaignRecipientsUrl.replace(':campaign_id', String(campaignId));

@@ -1,10 +1,17 @@
 /**
  * @see https://developers.prezly.com/docs/api/docs/06-prezly-query-language.md
  */
-export type Query<F extends Query.Filter = Query.Filter> = Query.QueryObject<F> | string;
+export type Query<F extends Query.Filter = Query.Filter> = F | Query.CombinedQuery<F>;
+
+/**
+ * @deprecated Please use Query object interface instead.
+ */
+export type QueryString = string;
 
 export namespace Query {
-    export function stringify(query: Query | undefined | null): string | undefined {
+    export function stringify<T extends Query>(
+        query: T | QueryString | undefined | null,
+    ): string | undefined {
         if (!query) {
             return undefined;
         }
@@ -90,8 +97,6 @@ export namespace Query {
     export type CombinedQuery<F extends Filter = Filter> = {
         [operator in `${LogicalOperator}`]: F[];
     };
-
-    export type QueryObject<F extends Filter = Filter> = F | CombinedQuery<F>;
 }
 
 /**

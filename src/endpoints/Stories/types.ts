@@ -36,13 +36,13 @@ export type StoriesQuery = Query<
     | Query.Filter<'uuid', Query.OneToManyPredicate | Query.EqualityPredicate, Story['uuid']>
     | Query.Filter<'slug', Query.OneToManyPredicate | Query.EqualityPredicate, Story['slug']>
     | Query.Filter<'format_version', Query.EqualityPredicate, Story['format_version']>
-    | Query.Filter<'status', Query.OneToManyPredicate, Story['status']>
-    | Query.Filter<'visibility', Query.OneToManyPredicate, Story['visibility']>
+    | Query.Filter<'status', Query.OneToManyPredicate, `${Story['status']}`>
+    | Query.Filter<'visibility', Query.OneToManyPredicate, `${Story['visibility']}`>
     | Query.Filter<'language', Query.OneToManyPredicate, CultureRef['language_code']>
     | Query.Filter<'locale', Query.OneToManyPredicate, CultureRef['code']>
     | Query.Filter<'newsroom.id', Query.OneToManyPredicate, Newsroom['id']>
     | Query.Filter<'newsroom.uuid', Query.OneToManyPredicate, Newsroom['uuid']>
-    | Query.Filter<'newsroom.status', Query.OneToManyPredicate, Newsroom['status']>
+    | Query.Filter<'newsroom.status', Query.OneToManyPredicate, `${Newsroom['status']}`>
     | Query.Filter<'author.id', Query.OneToManyPredicate, UserRef['id']>
     | Query.Filter<'tag.id', Query.OneToManyPredicate, number>
     | Query.Filter<'tag.name', Query.OneToManyPredicate, number>
