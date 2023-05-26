@@ -53,29 +53,29 @@ export namespace Query {
 
     export type ManyToManyPredicate = Predicate.EVERY | Predicate.SOME | Predicate.NONE;
 
-    export type PredicateFieldFilter<F extends string, P extends Predicate, V> = {
-        [field in F]: Partial<{
+    export type GenericFilter<F extends string, P extends Predicate, V> = {
+        [field in F]: ExactlyOne<{
             [predicate in P]: P extends OneToManyPredicate | ManyToManyPredicate ? V[] : V;
         }>;
     };
 
-    export type ManyToManyFieldFilter<F extends string, V extends Value> = PredicateFieldFilter<
+    export type ManyToManyFilter<F extends string, V extends Value> = GenericFilter<
         F,
         ManyToManyPredicate,
         V
     >;
-    export type OneToManyFieldFilter<F extends string, V extends Value> = PredicateFieldFilter<
+    export type OneToManyFilter<F extends string, V extends Value> = GenericFilter<
         F,
         OneToManyPredicate,
         V
     >;
-    export type TextFieldFilter<F extends string> = PredicateFieldFilter<F, TextPredicate, string>;
-    export type EqualityFieldFilter<F extends string, V extends Value> = PredicateFieldFilter<
+    export type TextFilter<F extends string> = GenericFilter<F, TextPredicate, string>;
+    export type EqualityFilter<F extends string, V extends Value> = GenericFilter<
         F,
         EqualityPredicate,
         V
     >;
-    export type ComparableFieldFilter<F extends string, V extends Value> = PredicateFieldFilter<
+    export type ComparableFilter<F extends string, V extends Value> = GenericFilter<
         F,
         ComparablePredicate,
         V
@@ -85,7 +85,7 @@ export namespace Query {
         F extends string = string,
         P extends Predicate = Predicate,
         V = Value,
-    > = PredicateFieldFilter<F, P, V>;
+    > = GenericFilter<F, P, V>;
 
     export type CombinedQuery<F extends Filter = Filter> = {
         [operator in `${LogicalOperator}`]: F[];
@@ -93,3 +93,10 @@ export namespace Query {
 
     export type QueryObject<F extends Filter = Filter> = F | CombinedQuery<F>;
 }
+
+/**
+ * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#distributive-conditional-types
+ */
+type ExactlyOne<TObj, TKey extends keyof TObj = keyof TObj> = TKey extends string
+    ? { [key in TKey]: TObj[TKey] } & { [key in Exclude<keyof TObj, TKey>]?: never }
+    : never;
