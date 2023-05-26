@@ -36,7 +36,7 @@ export type StoriesQuery = Query<
     | Query.Filter<'uuid', Query.OneToManyPredicate | Query.EqualityPredicate, Story['uuid']>
     | Query.Filter<'slug', Query.OneToManyPredicate | Query.EqualityPredicate, Story['slug']>
     | Query.Filter<'format_version', Query.EqualityPredicate, Story['format_version']>
-    | Query.Filter<'lifecycle_status', Query.OneToManyPredicate, Story['lifecycle_status']>
+    | Query.Filter<'status', Query.OneToManyPredicate, Story['status']>
     | Query.Filter<'visibility', Query.OneToManyPredicate, Story['visibility']>
     | Query.Filter<'language', Query.OneToManyPredicate, CultureRef['language_code']>
     | Query.Filter<'locale', Query.OneToManyPredicate, CultureRef['code']>
@@ -55,6 +55,7 @@ export type StoriesQuery = Query<
     | Query.Filter<'social_image', Query.EqualityPredicate, UploadedImage | null>
     | Query.Filter<'images.count', Query.ComparablePredicate, number>
     | Query.Filter<'videos.count', Query.ComparablePredicate, number>
+    | Query.Filter<'is_pinned', Query.EqualityPredicate, boolean>
 >;
 
 interface BaseWarning {
@@ -114,7 +115,6 @@ export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[
 
 export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
     extends ListOptions<Include> {
-    scope?: StoriesQuery;
     query?: StoriesQuery;
     scope?: StoriesQuery;
 }
