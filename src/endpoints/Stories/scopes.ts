@@ -1,8 +1,9 @@
-import type { Query } from '../../types';
 import { Newsroom } from '../../types';
 
-export const Scope: Record<string, Query> = {
+import type { StoriesQuery } from './types';
+
+export const Scope = {
     EXCLUDE_ARCHIVED_NEWSROOMS: {
         'newsroom.status': { $nin: [Newsroom.Status.ARCHIVED] },
     },
-};
+} satisfies Record<string, StoriesQuery>;

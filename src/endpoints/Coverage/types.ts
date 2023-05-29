@@ -9,6 +9,7 @@ import type {
     Story,
     Query,
     SortOrder,
+    QueryString,
 } from '../../types';
 
 export type Scope = { story: Story['id'] } | null;
@@ -64,7 +65,7 @@ export interface ListOptions {
     sortOrder?: SortOrder | string;
 }
 export interface SearchOptions extends ListOptions {
-    query?: Query;
+    query?: Query | QueryString;
 }
 
 export interface ListResponse {

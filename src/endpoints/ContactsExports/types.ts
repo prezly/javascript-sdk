@@ -1,4 +1,4 @@
-import type { ContactsExport, Pagination, Query, SortOrder } from '../../types';
+import type { ContactsExport, Pagination, Query, QueryString, SortOrder } from '../../types';
 
 // Convenience shortcuts
 export type { ContactsBulkSelector, ContactsScope } from '../../types';
@@ -10,7 +10,7 @@ export interface ListOptions {
 }
 
 export interface SearchOptions extends ListOptions {
-    query?: Query;
+    query?: Query | QueryString;
 }
 
 export interface ListResponse {

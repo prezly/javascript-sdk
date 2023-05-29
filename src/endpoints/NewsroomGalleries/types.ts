@@ -1,4 +1,4 @@
-import type { NewsroomGallery, Pagination, Query, SortOrder } from '../../types';
+import type { NewsroomGallery, Pagination, Query, QueryString, SortOrder } from '../../types';
 
 export interface ListOptions {
     limit?: number;
@@ -7,8 +7,8 @@ export interface ListOptions {
 }
 
 export interface SearchOptions extends ListOptions {
-    scope?: Query;
-    query?: Query;
+    scope?: Query | QueryString;
+    query?: Query | QueryString;
 }
 
 export interface ReorderRequest {
