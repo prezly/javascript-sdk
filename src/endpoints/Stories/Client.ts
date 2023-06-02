@@ -50,8 +50,9 @@ export class Client {
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Exactly<ListOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include } = options ?? {};
+        const { limit, offset, sortOrder, include, formats } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
+            headers: acceptHeaders(formats),
             query: {
                 limit,
                 offset,
@@ -68,8 +69,9 @@ export class Client {
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Exactly<SearchOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include, query } = options ?? {};
+        const { limit, offset, sortOrder, include, query, formats } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
+            headers: acceptHeaders(formats),
             payload: {
                 query,
                 limit,
@@ -480,4 +482,13 @@ export class Client {
         });
         return preview;
     }
+}
+
+function acceptHeaders(formats?: Story.FormatVersion[]): Record<string, string> {
+    if (!formats) {
+        return {};
+    }
+    return {
+        Accept: formats.map((format) => `application/json; content-format=v${format}`).join(','),
+    };
 }

@@ -83,6 +83,7 @@ export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[
     offset?: number;
     sortOrder?: SortOrder | string;
     include?: Include;
+    formats?: Story.FormatVersion[];
 }
 
 export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
