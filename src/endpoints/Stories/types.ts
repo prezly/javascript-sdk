@@ -184,6 +184,7 @@ export interface SlateV4StoryCreateRequest extends GenericCreateRequest {
 }
 
 export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
+    format_version?: Story.FormatVersion.HTML;
     header_image?: UploadedImage | null;
     title?: string;
     subtitle?: string;
@@ -197,6 +198,7 @@ export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
 }
 
 export interface SlateV3StoryUpdateRequest extends GenericUpdateRequest {
+    format_version?: Story.FormatVersion.SLATEJS_V3;
     header_image?: UploadedImage | null;
     title?: string;
     subtitle?: string;
@@ -210,6 +212,7 @@ export interface SlateV3StoryUpdateRequest extends GenericUpdateRequest {
 }
 
 export interface SlateV4StoryUpdateRequest extends GenericUpdateRequest {
+    format_version?: Story.FormatVersion.SLATEJS_V4;
     header_image?: never;
     title?: never;
     subtitle?: never;
