@@ -51,9 +51,7 @@ export class Client {
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
-    >(
-        options?: Exactly<ListOptions<Include>, Options> & { formats?: Formats },
-    ): Promise<ListResponse<StoryRecord>> {
+    >(options?: Exactly<ListOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, formats } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
             headers: acceptedFormatsHeader(formats),
@@ -72,9 +70,7 @@ export class Client {
         StoryRecord extends Story = Options['include'] extends Include
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
-    >(
-        options?: Exactly<SearchOptions<Include> & { formats?: Formats }, Options>,
-    ): Promise<ListResponse<StoryRecord>> {
+    >(options?: Exactly<SearchOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
         const { limit, offset, sortOrder, include, query, formats } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
             headers: acceptedFormatsHeader(formats),
