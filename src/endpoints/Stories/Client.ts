@@ -520,6 +520,6 @@ function acceptedFormatsHeader(formats: Story.FormatVersion[] = []): Record<stri
         return {};
     }
     return {
-        Accept: formats.map((format) => `application/json; content-format=v${format}`).join(','),
+        Accept: formats.map((format) => `application/json; content-format=v${format}`).join(', '),
     };
 }
