@@ -386,7 +386,7 @@ export namespace Story {
 
     export function isSlateV3Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
-            return isSlateV3Format(arg.format_version);
+            return arg.format_version === FormatVersion.SLATEJS_V3;
         }
         return arg === FormatVersion.SLATEJS_V3;
     }
@@ -399,7 +399,7 @@ export namespace Story {
 
     export function isSlateV4Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
-            return isSlateV4Format(arg.format_version);
+            return arg.format_version === FormatVersion.SLATEJS_V4;
         }
         return arg === FormatVersion.SLATEJS_V4;
     }
