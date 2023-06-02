@@ -386,7 +386,7 @@ export namespace Story {
 
     export function isSlateV3Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
-            return isSlateFormat(arg.format_version);
+            return isSlateV3Format(arg.format_version);
         }
         return arg === FormatVersion.SLATEJS_V3;
     }
