@@ -156,7 +156,8 @@ export interface Story {
 export namespace Story {
     export enum FormatVersion {
         HTML = 1,
-        SLATEJS = 3,
+        SLATEJS_V3 = 3,
+        SLATEJS_V4 = 4,
     }
 
     export enum Status {
@@ -348,9 +349,11 @@ export namespace Story {
      */
 
     export function isLegacyHtmlFormat(format: FormatVersion): format is FormatVersion.HTML;
+
     export function isLegacyHtmlFormat<T extends Pick<Story, 'format_version'>>(
         story: T,
     ): story is T & { format_version: FormatVersion.HTML };
+
     export function isLegacyHtmlFormat(
         arg: FormatVersion | Pick<Story, 'format_version'>,
     ): boolean {
@@ -360,15 +363,45 @@ export namespace Story {
         return arg === FormatVersion.HTML;
     }
 
-    export function isSlateFormat(format: FormatVersion): format is FormatVersion.SLATEJS;
+    export function isSlateFormat(
+        format: FormatVersion,
+    ): format is FormatVersion.SLATEJS_V3 | FormatVersion.SLATEJS_V4;
+
     export function isSlateFormat<T extends Pick<Story, 'format_version'>>(
         story: Pick<Story, 'format_version'>,
-    ): story is T & { format_version: FormatVersion.SLATEJS };
+    ): story is T & { format_version: FormatVersion.SLATEJS_V3 | FormatVersion.SLATEJS_V4 };
+
     export function isSlateFormat(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isSlateFormat(arg.format_version);
         }
-        return arg === FormatVersion.SLATEJS;
+        return arg === FormatVersion.SLATEJS_V3 || arg === FormatVersion.SLATEJS_V4;
+    }
+
+    export function isSlateV3Format(format: FormatVersion): format is FormatVersion.SLATEJS_V3;
+
+    export function isSlateV3Format<T extends Pick<Story, 'format_version'>>(
+        story: Pick<Story, 'format_version'>,
+    ): story is T & { format_version: FormatVersion.SLATEJS_V3 };
+
+    export function isSlateV3Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
+        if (typeof arg === 'object' && arg !== null) {
+            return isSlateFormat(arg.format_version);
+        }
+        return arg === FormatVersion.SLATEJS_V3;
+    }
+
+    export function isSlateV4Format(format: FormatVersion): format is FormatVersion.SLATEJS_V4;
+
+    export function isSlateV4Format<T extends Pick<Story, 'format_version'>>(
+        story: Pick<Story, 'format_version'>,
+    ): story is T & { format_version: FormatVersion.SLATEJS_V4 };
+
+    export function isSlateV4Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
+        if (typeof arg === 'object' && arg !== null) {
+            return isSlateFormat(arg.format_version);
+        }
+        return arg === FormatVersion.SLATEJS_V4;
     }
 }
 

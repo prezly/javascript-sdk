@@ -100,13 +100,10 @@ export interface ListResponse<S extends Story = Story> {
 interface GenericCreateRequest {
     newsroom?: Newsroom['id'] | Newsroom['uuid'];
 
-    title?: string;
-    subtitle?: string;
     published_at?: Iso8601DateTime;
     visibility?: Story.Visibility;
     culture?: CultureRef['code'];
 
-    header_image?: UploadedImage | null;
     preview_image?: UploadedImage | null;
     social_image?: UploadedImage | null;
     social_text?: string;
@@ -118,13 +115,10 @@ interface GenericCreateRequest {
 }
 
 interface GenericUpdateRequest {
-    title?: string;
-    subtitle?: string;
     published_at?: Iso8601DateTime;
     visibility?: Story.Visibility;
     culture?: CultureRef['code'];
 
-    header_image?: UploadedImage | null;
     preview_image?: UploadedImage | null;
     social_image?: UploadedImage | null;
     social_text?: string;
@@ -146,6 +140,9 @@ export interface HtmlStoryCreateRequest extends GenericCreateRequest {
      * If format version is omitted, license default editor version will be implied.
      */
     format_version?: Story.FormatVersion.HTML;
+    header_image?: UploadedImage | null;
+    title?: string;
+    subtitle?: string;
     intro?: Html;
     content?: Html;
     attached_attachments_content?: Json;
@@ -155,11 +152,29 @@ export interface HtmlStoryCreateRequest extends GenericCreateRequest {
     attached_videos_content?: Json;
 }
 
-export interface SlateStoryCreateRequest extends GenericCreateRequest {
+export interface SlateV3StoryCreateRequest extends GenericCreateRequest {
     /**
      * If format version is omitted, license default editor version will be implied.
      */
-    format_version?: Story.FormatVersion.SLATEJS;
+    format_version?: Story.FormatVersion.SLATEJS_V3;
+    header_image?: UploadedImage | null;
+    title?: string;
+    subtitle?: string;
+    /**
+     * Intro field is not supported for Prezly Content Format stories.
+     */
+    intro?: never;
+    content?: PrezlyContentFormat;
+}
+
+export interface SlateV4StoryCreateRequest extends GenericCreateRequest {
+    /**
+     * If format version is omitted, license default editor version will be implied.
+     */
+    format_version?: Story.FormatVersion.SLATEJS_V4;
+    header_image?: never;
+    title?: never;
+    subtitle?: never;
     /**
      * Intro field is not supported for Prezly Content Format stories.
      */
@@ -168,6 +183,9 @@ export interface SlateStoryCreateRequest extends GenericCreateRequest {
 }
 
 export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
+    header_image?: UploadedImage | null;
+    title?: string;
+    subtitle?: string;
     intro?: Html;
     content?: Html;
     attached_attachments_content?: Json;
@@ -177,7 +195,23 @@ export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
     attached_videos_content?: Json;
 }
 
-export interface SlateStoryUpdateRequest extends GenericUpdateRequest {
+export interface SlateV3StoryUpdateRequest extends GenericUpdateRequest {
+    header_image?: UploadedImage | null;
+    title?: string;
+    subtitle?: string;
+    /**
+     * Intro field is not supported for Prezly Content Format stories.
+     */
+    intro?: never;
+    content?: PrezlyContentFormat;
+    autosaved_content?: PrezlyContentFormat;
+    content_version?: number;
+}
+
+export interface SlateV4StoryUpdateRequest extends GenericUpdateRequest {
+    header_image?: never;
+    title?: never;
+    subtitle?: never;
     /**
      * Intro field is not supported for Prezly Content Format stories.
      */
@@ -202,8 +236,15 @@ export interface PreviewOptions {
 export import Alignment = Campaign.StoryAlignment;
 export import Appearance = Campaign.StoryAppearance;
 
-export type CreateRequest = HtmlStoryCreateRequest | SlateStoryCreateRequest;
-export type UpdateRequest = HtmlStoryUpdateRequest | SlateStoryUpdateRequest;
+export type CreateRequest =
+    | HtmlStoryCreateRequest
+    | SlateV3StoryCreateRequest
+    | SlateV4StoryCreateRequest;
+
+export type UpdateRequest =
+    | HtmlStoryUpdateRequest
+    | SlateV3StoryUpdateRequest
+    | SlateV4StoryUpdateRequest;
 
 export interface AutosaveRequest {
     autosaved_content: PrezlyContentFormat;
