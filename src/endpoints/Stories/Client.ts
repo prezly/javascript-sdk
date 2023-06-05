@@ -30,6 +30,8 @@ import type {
  */
 type StoryId = Story['uuid'] | Story['id'];
 
+type Formats = Story.FormatVersion[];
+
 /**
  * Utility type to forbid arbitrary ad-hoc extensions of generic parameters.
  * @see https://stackoverflow.com/a/69666350
@@ -50,8 +52,9 @@ export class Client {
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Exactly<ListOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include } = options ?? {};
+        const { limit, offset, sortOrder, include, formats } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
+            headers: acceptedFormatsHeader(formats),
             query: {
                 limit,
                 offset,
@@ -68,8 +71,9 @@ export class Client {
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Exactly<SearchOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include, query } = options ?? {};
+        const { limit, offset, sortOrder, include, query, formats } = options ?? {};
         return this.apiClient.post<ListResponse<StoryRecord>>(routing.storiesSearchUrl, {
+            headers: acceptedFormatsHeader(formats),
             payload: {
                 query,
                 limit,
@@ -89,7 +93,10 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: Story['uuid'], options?: Exactly<IncludeOptions<Include>, Options>): Promise<StoryRecord>;
+    >(
+        id: Story['uuid'],
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
+    ): Promise<StoryRecord>;
 
     /**
      * Get multiple stories by UUIDs.
@@ -102,7 +109,7 @@ export class Client {
             : ExtendedStory,
     >(
         ids: Story['uuid'][],
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord[]>;
 
     /**
@@ -117,7 +124,7 @@ export class Client {
             : ExtendedStory,
     >(
         id: Story['id'] | Story['uuid'],
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord>;
 
     /**
@@ -132,7 +139,7 @@ export class Client {
             : ExtendedStory,
     >(
         ids: Story['id'][],
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord[]>;
 
     /**
@@ -146,9 +153,9 @@ export class Client {
             : ExtendedStory,
     >(
         arg: Story['id'] | Story['uuid'] | Story['id'][] | Story['uuid'][],
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord | StoryRecord[]> {
-        const include = options?.include;
+        const { include, formats } = options ?? {};
         const isArray = Array.isArray(arg);
 
         if (isArray && arg.length === 0) {
@@ -161,6 +168,7 @@ export class Client {
                 limit: arg.length,
                 query: { id: { $in: arg } },
                 include,
+                formats,
             });
             return stories;
         }
@@ -170,6 +178,7 @@ export class Client {
                 limit: arg.length,
                 query: { uuid: { $in: arg } },
                 include,
+                formats,
             });
 
             return stories;
@@ -177,7 +186,10 @@ export class Client {
 
         const { story } = await this.apiClient.get<{ story: StoryRecord }>(
             `${routing.storiesUrl}/${arg}`,
-            { query: { include: include as undefined | string[] } },
+            {
+                headers: acceptedFormatsHeader(formats),
+                query: { include: include as undefined | string[] },
+            },
         );
         return story;
     }
@@ -190,11 +202,12 @@ export class Client {
             : ExtendedStory,
     >(
         payload: CreateRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(routing.storiesUrl, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -207,11 +220,15 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, options?: Exactly<IncludeOptions<Include>, Options>): Promise<StoryRecord> {
-        const include = options?.include;
+    >(
+        id: StoryId,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
+    ): Promise<StoryRecord> {
+        const { include, formats } = options ?? {};
         const url = `${routing.storiesUrl}/${id}/duplicate`;
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             query: { include: include as string[] | undefined },
         });
 
@@ -227,13 +244,14 @@ export class Client {
     >(
         id: StoryId,
         payload: TranslateRequest = {},
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const { culture } = payload ?? {};
-        const include = options?.include;
+        const { include, formats } = options ?? {};
         const url = `${routing.storiesUrl}/${id}/translate`;
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             query: { include: include as string[] | undefined },
             payload: {
                 culture,
@@ -252,14 +270,14 @@ export class Client {
     >(
         id: StoryId,
         payload: MoveRequest,
-        options?: Exactly<IncludeOptions<Include>, Options> & { force?: true },
+        options?: Exactly<IncludeOptions<Include>, Options> & { force?: true; formats?: Formats },
     ): Promise<ChangeNewsroomSuccessResponse<StoryRecord> | ChangeNewsroomUnsafeResponse> {
-        const include = options?.include;
-        const force = options?.force;
+        const { include, force, formats } = options ?? {};
         const url = `${routing.storiesUrl}/${id}/move`;
 
         try {
             const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+                headers: acceptedFormatsHeader(formats),
                 query: { include: include as string[] | undefined, force },
                 payload,
             });
@@ -282,12 +300,13 @@ export class Client {
     >(
         id: StoryId,
         payload: UpdateRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.patch<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -306,12 +325,13 @@ export class Client {
     >(
         id: StoryId,
         payload: AutosaveRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/autosave`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.patch<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -330,12 +350,13 @@ export class Client {
     >(
         id: StoryId,
         payload?: RevertRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/revert`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -351,12 +372,13 @@ export class Client {
     >(
         id: StoryId,
         payload?: PublishRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/publish`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -372,12 +394,13 @@ export class Client {
     >(
         id: StoryId,
         payload?: UnpublishRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -393,12 +416,13 @@ export class Client {
     >(
         id: StoryId,
         payload?: ScheduleRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/schedule`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -414,12 +438,13 @@ export class Client {
     >(
         id: StoryId,
         payload?: UnscheduleRequest,
-        options?: Exactly<IncludeOptions<Include>, Options>,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             payload,
             query: { include: include as string[] | undefined },
         });
@@ -434,15 +459,19 @@ export class Client {
             : ExtendedStory,
     >(
         id: StoryId,
-        options?: Exactly<IncludeOptions<Include>, Options> & { force?: boolean },
+        options?: Exactly<IncludeOptions<Include>, Options> & {
+            force?: boolean;
+            formats?: Formats;
+        },
     ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/pin`;
-        const include = options?.include;
+        const { include, force, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             query: {
                 include: include as string[] | undefined,
-                force: options?.force || undefined,
+                force: force || undefined,
             },
         });
         return story;
@@ -454,11 +483,15 @@ export class Client {
         StoryRecord extends ExtendedStory = Options['include'] extends Include
             ? ExtendedStory & Pick<Story.ExtraFields, Options['include'][number]>
             : ExtendedStory,
-    >(id: StoryId, options?: Exactly<IncludeOptions<Include>, Options>): Promise<StoryRecord> {
+    >(
+        id: StoryId,
+        options?: Exactly<IncludeOptions<Include>, Options> & { formats?: Formats },
+    ): Promise<StoryRecord> {
         const url = `${routing.storiesUrl}/${id}/unpin`;
-        const include = options?.include;
+        const { include, formats } = options ?? {};
 
         const { story } = await this.apiClient.post<{ story: StoryRecord }>(url, {
+            headers: acceptedFormatsHeader(formats),
             query: { include: include as string[] | undefined },
         });
         return story;
@@ -480,4 +513,13 @@ export class Client {
         });
         return preview;
     }
+}
+
+function acceptedFormatsHeader(formats: Story.FormatVersion[] = []): Record<string, string> {
+    if (formats.length === 0) {
+        return {};
+    }
+    return {
+        Accept: formats.map((format) => `application/json; content-format=v${format}`).join(', '),
+    };
 }
