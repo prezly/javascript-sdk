@@ -34,6 +34,7 @@ export namespace NewsroomTheme {
         HOMEPAGE_CONTACTS = 'homepage_contacts',
         SUBSCRIBE_FORM = 'subscribe_form',
         STORY_PINNING = 'story_pinning',
+        TITLE_FORMATTING = 'title_formatting',
     }
 
     export function isFeatureSupported(theme: NewsroomTheme, feature: NewsroomTheme.Feature) {
