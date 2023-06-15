@@ -22,6 +22,7 @@ export interface CreateRequest {
     name: string;
     description?: string | null;
     status?: NewsroomGallery.Status;
+    type?: NewsroomGallery.Type;
     /**
      * Slate JSON content.
      */
