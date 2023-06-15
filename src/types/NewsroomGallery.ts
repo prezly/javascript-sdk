@@ -15,6 +15,7 @@ export interface NewsroomGallery {
     thumbnail_image: string | null;
     url: string;
     status: NewsroomGallery.Status;
+    type: NewsroomGallery.Type;
     creator: UserRef | null;
     created_at: string;
     updated_at: string;
@@ -32,6 +33,11 @@ export namespace NewsroomGallery {
     export enum Status {
         PRIVATE = 'private',
         PUBLIC = 'public',
+    }
+
+    export enum Type {
+        IMAGE = 'image',
+        VIDEO = 'video',
     }
 
     export interface Image {
