@@ -116,4 +116,5 @@ export interface UpdateRequest {
     status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
 
     is_plausible_enabled?: boolean;
+    is_white_labeled?: boolean;
 }
