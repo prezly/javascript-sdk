@@ -299,45 +299,78 @@ export namespace Story {
      * Lifecycle status checks
      */
 
-    export function isUninitialized(status: Status): boolean;
-    export function isUninitialized(story: Pick<Story, 'status'>): boolean;
-    export function isUninitialized(arg: Status | Pick<Story, 'status'>): boolean {
+    export function isUninitialized(status: Status): status is Status.UNINITIALIZED;
+    export function isUninitialized<T extends Pick<Story, 'status'>>(
+        story: T,
+    ): story is T & {
+        status: Status.UNINITIALIZED;
+    };
+    export function isUninitialized<T extends Pick<Story, 'status'>>(arg: Status | T): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isUninitialized(arg.status);
         }
         return arg === Status.UNINITIALIZED;
     }
 
-    export function isDraft(status: Status): boolean;
-    export function isDraft(story: Pick<Story, 'status'>): boolean;
-    export function isDraft(arg: Status | Pick<Story, 'status'>): boolean {
+    export function isDraft(status: Status): status is Status.DRAFT;
+    export function isDraft<T extends Pick<Story, 'status'>>(
+        story: T,
+    ): story is T & {
+        status: Status.DRAFT;
+    };
+    export function isDraft<T extends Pick<Story, 'status'>>(arg: Status | T): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isDraft(arg.status);
         }
         return arg === Status.DRAFT;
     }
 
-    export function isScheduled(status: Status): boolean;
-    export function isScheduled(story: Pick<Story, 'status'>): boolean;
-    export function isScheduled(arg: Status | Pick<Story, 'status'>): boolean {
+    export function isUninitializedOrDraft(
+        status: Status,
+    ): status is Status.UNINITIALIZED | Status.DRAFT;
+    export function isUninitializedOrDraft<T extends Pick<Story, 'status'>>(
+        story: T,
+    ): story is T & {
+        status: Status.UNINITIALIZED | Status.DRAFT;
+    };
+    export function isUninitializedOrDraft<T extends Pick<Story, 'status'>>(
+        arg: Status | T,
+    ): boolean {
+        if (typeof arg === 'object' && arg !== null) {
+            return isUninitializedOrDraft(arg.status);
+        }
+        return arg === Status.UNINITIALIZED || arg === Status.DRAFT;
+    }
+
+    export function isScheduled(status: Status): status is Status.SCHEDULED;
+    export function isScheduled<T extends Pick<Story, 'status'>>(
+        story: T,
+    ): story is T & { status: Status.SCHEDULED };
+    export function isScheduled<T extends Pick<Story, 'status'>>(arg: Status | T): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isScheduled(arg.status);
         }
         return arg === Status.SCHEDULED;
     }
 
-    export function isScheduledEmbargo(status: Status): boolean;
-    export function isScheduledEmbargo(story: Pick<Story, 'status'>): boolean;
-    export function isScheduledEmbargo(arg: Status | Pick<Story, 'status'>): boolean {
+    export function isScheduledEmbargo(status: Status): status is Status.EMBARGO;
+    export function isScheduledEmbargo<T extends Pick<Story, 'status'>>(
+        story: T,
+    ): story is T & {
+        status: Status.EMBARGO;
+    };
+    export function isScheduledEmbargo<T extends Pick<Story, 'status'>>(arg: Status | T): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isScheduledEmbargo(arg.status);
         }
         return arg === Status.EMBARGO;
     }
 
-    export function isPublished(status: Status): boolean;
-    export function isPublished(story: Pick<Story, 'status'>): boolean;
-    export function isPublished(arg: Status | Pick<Story, 'status'>): boolean {
+    export function isPublished(status: Status): status is Status.PUBLISHED;
+    export function isPublished<T extends Pick<Story, 'status'>>(
+        story: T,
+    ): story is T & { status: Status.PUBLISHED };
+    export function isPublished<T extends Pick<Story, 'status'>>(arg: Status | T): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isPublished(arg.status);
         }
@@ -349,11 +382,9 @@ export namespace Story {
      */
 
     export function isLegacyHtmlFormat(format: FormatVersion): format is FormatVersion.HTML;
-
     export function isLegacyHtmlFormat<T extends Pick<Story, 'format_version'>>(
         story: T,
     ): story is T & { format_version: FormatVersion.HTML };
-
     export function isLegacyHtmlFormat(
         arg: FormatVersion | Pick<Story, 'format_version'>,
     ): boolean {
@@ -366,11 +397,9 @@ export namespace Story {
     export function isSlateFormat(
         format: FormatVersion,
     ): format is FormatVersion.SLATEJS_V3 | FormatVersion.SLATEJS_V4;
-
     export function isSlateFormat<T extends Pick<Story, 'format_version'>>(
         story: Pick<Story, 'format_version'>,
     ): story is T & { format_version: FormatVersion.SLATEJS_V3 | FormatVersion.SLATEJS_V4 };
-
     export function isSlateFormat(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return isSlateFormat(arg.format_version);
@@ -379,11 +408,9 @@ export namespace Story {
     }
 
     export function isSlateV3Format(format: FormatVersion): format is FormatVersion.SLATEJS_V3;
-
     export function isSlateV3Format<T extends Pick<Story, 'format_version'>>(
         story: Pick<Story, 'format_version'>,
     ): story is T & { format_version: FormatVersion.SLATEJS_V3 };
-
     export function isSlateV3Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return arg.format_version === FormatVersion.SLATEJS_V3;
@@ -392,11 +419,9 @@ export namespace Story {
     }
 
     export function isSlateV4Format(format: FormatVersion): format is FormatVersion.SLATEJS_V4;
-
     export function isSlateV4Format<T extends Pick<Story, 'format_version'>>(
         story: Pick<Story, 'format_version'>,
     ): story is T & { format_version: FormatVersion.SLATEJS_V4 };
-
     export function isSlateV4Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
             return arg.format_version === FormatVersion.SLATEJS_V4;
