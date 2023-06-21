@@ -301,7 +301,7 @@ export namespace Story {
 
     export function isUninitialized(status: Status): status is Status.UNINITIALIZED;
     export function isUninitialized<T extends Pick<Story, 'status'>>(
-        story: Pick<Story, 'status'>,
+        story: T,
     ): story is T & {
         status: Status.UNINITIALIZED;
     };
@@ -314,7 +314,7 @@ export namespace Story {
 
     export function isDraft(status: Status): status is Status.DRAFT;
     export function isDraft<T extends Pick<Story, 'status'>>(
-        story: Pick<Story, 'status'>,
+        story: T,
     ): story is T & {
         status: Status.DRAFT;
     };
@@ -329,7 +329,7 @@ export namespace Story {
         status: Status,
     ): status is Status.UNINITIALIZED | Status.DRAFT;
     export function isUninitializedOrDraft<T extends Pick<Story, 'status'>>(
-        story: Pick<Story, 'status'>,
+        story: T,
     ): story is T & {
         status: Status.UNINITIALIZED | Status.DRAFT;
     };
