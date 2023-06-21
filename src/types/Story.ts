@@ -325,6 +325,23 @@ export namespace Story {
         return arg === Status.DRAFT;
     }
 
+    export function isUninitializedOrDraft(
+        status: Status,
+    ): status is Status.UNINITIALIZED | Status.DRAFT;
+    export function isUninitializedOrDraft<T extends Pick<Story, 'status'>>(
+        story: Pick<Story, 'status'>,
+    ): story is T & {
+        status: Status.UNINITIALIZED | Status.DRAFT;
+    };
+    export function isUninitializedOrDraft<T extends Pick<Story, 'status'>>(
+        arg: Status | T,
+    ): boolean {
+        if (typeof arg === 'object' && arg !== null) {
+            return isUninitializedOrDraft(arg.status);
+        }
+        return arg === Status.UNINITIALIZED || arg === Status.DRAFT;
+    }
+
     export function isScheduled(status: Status): status is Status.SCHEDULED;
     export function isScheduled<T extends Pick<Story, 'status'>>(
         story: T,
