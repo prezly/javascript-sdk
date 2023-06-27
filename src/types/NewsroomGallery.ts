@@ -26,6 +26,7 @@ export interface NewsroomGallery {
      */
     content: string;
     images_number: number;
+    videos_number: number;
     images: NewsroomGallery.Image[];
 }
 
