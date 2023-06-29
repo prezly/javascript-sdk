@@ -79,6 +79,7 @@ export interface IncludeOptions<Include extends readonly (keyof Story.ExtraField
 }
 
 export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
+    search?: string;
     limit?: number;
     offset?: number;
     sortOrder?: SortOrder | string;
