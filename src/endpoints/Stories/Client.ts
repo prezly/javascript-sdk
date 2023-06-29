@@ -52,10 +52,11 @@ export class Client {
             ? Story & Pick<Story.ExtraFields, Options['include'][number]>
             : Story,
     >(options?: Exactly<ListOptions<Include>, Options>): Promise<ListResponse<StoryRecord>> {
-        const { limit, offset, sortOrder, include, formats } = options ?? {};
+        const { search, limit, offset, sortOrder, include, formats } = options ?? {};
         return this.apiClient.get<ListResponse<StoryRecord>>(routing.storiesUrl, {
             headers: acceptedFormatsHeader(formats),
             query: {
+                search,
                 limit,
                 offset,
                 sort: SortOrder.stringify(sortOrder),
