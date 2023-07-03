@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { Story, StoryRef } from './Story';
 
-// @ts-expect-error
-const story: Story = {};
+describe('StoryRef', () => {
+    it('should be subset of Story interface', () => {
+        // @ts-expect-error
+        const story: Story = {};
 
-const storyRef: StoryRef = story;
+        const storyRef: StoryRef = story; // this is the actual test
 
-console.log(storyRef);
+        expect(storyRef).toBe(story);
+    });
+});
