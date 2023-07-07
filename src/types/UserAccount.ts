@@ -46,6 +46,7 @@ export interface UserAccount {
     last_seen_at: string | null;
     license: LicenseRef;
     joined_license_at: string;
+    is_license_owner: boolean;
     last_seen_license_at: string | null;
     time_format: string;
     timezone_offset: string;
