@@ -23,5 +23,6 @@ export namespace NotificationSubscription {
         CAMPAIGNS = 'Campaigns',
         CONTACTS = 'Contacts',
         BILLING_AND_LEGAL = 'Billing & Legal',
+        ORGANIZATION_AND_LEGAL = 'Organization & Legal',
     }
 }
