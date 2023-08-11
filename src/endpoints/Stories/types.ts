@@ -184,6 +184,14 @@ export interface SlateV4StoryCreateRequest extends GenericCreateRequest {
     content?: PrezlyContentFormat;
 }
 
+export interface SlateV5StoryCreateRequest
+    extends Omit<SlateV4StoryCreateRequest, 'format_version'> {
+    /**
+     * If format version is omitted, license default editor version will be implied.
+     */
+    format_version?: Story.FormatVersion.SLATEJS_V5;
+}
+
 export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
     format_version?: Story.FormatVersion.HTML;
     header_image?: UploadedImage | null;
@@ -226,6 +234,11 @@ export interface SlateV4StoryUpdateRequest extends GenericUpdateRequest {
     content_version?: number;
 }
 
+export interface SlateV5StoryUpdateRequest
+    extends Omit<SlateV4StoryUpdateRequest, 'format_version'> {
+    format_version?: Story.FormatVersion.SLATEJS_V5;
+}
+
 export interface PreviewResponse {
     content: {
         'text/html': Html;
@@ -244,12 +257,14 @@ export import Appearance = Campaign.StoryAppearance;
 export type CreateRequest =
     | HtmlStoryCreateRequest
     | SlateV3StoryCreateRequest
-    | SlateV4StoryCreateRequest;
+    | SlateV4StoryCreateRequest
+    | SlateV5StoryCreateRequest;
 
 export type UpdateRequest =
     | HtmlStoryUpdateRequest
     | SlateV3StoryUpdateRequest
-    | SlateV4StoryUpdateRequest;
+    | SlateV4StoryUpdateRequest
+    | SlateV5StoryUpdateRequest;
 
 export interface AutosaveRequest {
     autosaved_content: PrezlyContentFormat;
