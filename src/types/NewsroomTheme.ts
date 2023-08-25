@@ -37,6 +37,7 @@ export namespace NewsroomTheme {
         TITLE_FORMATTING = 'title_formatting',
         CTA_BUTTONS = 'cta_buttons',
         VIDEO_LAYOUT = 'video_layout', // DEV-7588
+        EMBED_LAYOUT = 'embed_layout', // DEV-11475
     }
 
     export function isFeatureSupported(theme: NewsroomTheme, feature: NewsroomTheme.Feature) {
