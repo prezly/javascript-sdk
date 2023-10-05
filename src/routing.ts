@@ -3,6 +3,7 @@ export const routing = {
     billing: 'v2/billing',
     campaignsUrl: '/v2/campaigns',
     campaignRecipientsUrl: '/v2/campaigns/:campaign_id/recipients',
+    contactDuplicatesUrl: '/v2/contacts/:contact_id/duplicates',
     contactsExportsUrl: '/v2/contacts/exports',
     contactsUrl: '/v2/contacts',
     coverageUrl: '/v2/coverage',
