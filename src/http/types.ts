@@ -1,4 +1,4 @@
-import type { Fetch } from '../api/types';
+import type { Fetch } from '../api';
 
 export enum HttpCodes {
     ACCEPTED = 202,
