@@ -1,4 +1,4 @@
-import { ApiClient, DeferredJobsApiClient } from './api';
+import { ApiClient, DeferredJobsApiClient, type Fetch } from './api';
 import { Contacts } from './endpoints';
 import {
     Accounts,
@@ -27,6 +27,7 @@ import {
     NotificationSubscriptions,
 } from './endpoints';
 import type { HeadersMap } from './http';
+import { createHttpClient } from './http';
 
 const DEFAULT_BASE_URL = 'https://api.prezly.com';
 
@@ -34,6 +35,7 @@ export interface ClientOptions {
     accessToken: string;
     baseUrl?: string;
     headers?: HeadersMap;
+    fetch?: Fetch;
 }
 
 export interface Client {
@@ -69,9 +71,12 @@ export function createClient({
     accessToken,
     baseUrl = DEFAULT_BASE_URL,
     headers = {},
+    fetch,
 }: ClientOptions): Client {
+    const http = createHttpClient({ fetch });
     const apiClient = new DeferredJobsApiClient(
-        new ApiClient({
+        http,
+        new ApiClient(http, {
             accessToken,
             baseUrl,
             headers,
