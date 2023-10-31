@@ -100,3 +100,15 @@ const { createPrezlyClient } = require('@prezly/sdk');
 
 We recommend referring to the [official `cross-fetch` module documentation](https://www.npmjs.com/package/cross-fetch) for more information.
 
+#### Custom `fetch` implementation
+
+Additionally, you can initialize the API client with your own implementation of `fetch`:
+
+```js
+import { createPrezlyClient } = from '@prezly/sdk';
+
+const prezlyClient = createPrezlyClient({
+    accessToken: 'your-access-token',
+    fetch: customFetch,
+});
+```
