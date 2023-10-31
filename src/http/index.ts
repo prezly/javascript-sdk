@@ -1,5 +1,5 @@
 export { ApiError } from './ApiError';
-export { Http } from './Http';
+export { type HttpClient, createHttpClient } from './HttpClient';
 export { isDeferredJobResponse } from './lib';
 export {
     type ApiResponse,

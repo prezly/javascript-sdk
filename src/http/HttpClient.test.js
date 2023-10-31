@@ -1,6 +1,6 @@
-import { createUrlWithQuery } from './lib';
 import { createFakeErrorPayload } from './createRequest';
-import { Http } from './Http';
+import { createHttpClient } from './HttpClient';
+import { createUrlWithQuery } from './lib';
 import { Method } from './types';
 
 const API_URL_CORRECT = 'http://rock.prezly.test/api/v1/contacts';
@@ -34,7 +34,9 @@ function errorJSONResponse(body) {
     });
 }
 
-describe('Http', () => {
+describe('HttpClient', () => {
+    const http = createHttpClient({ fetch });
+
     beforeEach(() => {
         fetch.resetMocks();
     });
@@ -47,7 +49,7 @@ describe('Http', () => {
         const expectedResponse = successJsonResponse(expectedPayload);
         fetch.mockResolvedValueOnce(expectedResponse);
 
-        const actualResponse = await Http.get(API_URL_CORRECT);
+        const actualResponse = await http.get(API_URL_CORRECT);
 
         expect(actualResponse.status).toEqual(200);
         expect(actualResponse.payload).toEqual(expectedPayload);
@@ -62,7 +64,7 @@ describe('Http', () => {
         fetch.mockResolvedValueOnce(expectedResponse);
 
         try {
-            await Http.get(API_URL_CORRECT);
+            await http.get(API_URL_CORRECT);
         } catch ({ status, payload }) {
             expect(status).toEqual(500);
             expect(payload).toEqual(expectedPayload);
@@ -74,7 +76,7 @@ describe('Http', () => {
         // Fetch mock doesn't validate the URL so we mock the error.
         fetch.mockRejectOnce(new Error(errorMessage));
         try {
-            await Http.get(API_URL_INCORRECT);
+            await http.get(API_URL_INCORRECT);
         } catch ({ payload }) {
             const expectedErrorResponse = createFakeErrorPayload({
                 status: undefined,
@@ -90,7 +92,7 @@ describe('Http', () => {
 
         fetch.mockResolvedValueOnce(response);
 
-        await Http.get(API_URL_CORRECT);
+        await http.get(API_URL_CORRECT);
 
         const expectedUrl = createUrlWithQuery(API_URL_CORRECT).href;
 
@@ -105,7 +107,7 @@ describe('Http', () => {
         fetch.mockResolvedValueOnce(response);
 
         const query = { foo: 'bar' };
-        await Http.get(API_URL_CORRECT, {
+        await http.get(API_URL_CORRECT, {
             query,
         });
 
@@ -129,7 +131,7 @@ describe('Http', () => {
             foo: 'bar',
         };
 
-        await Http.post(API_URL_CORRECT, {
+        await http.post(API_URL_CORRECT, {
             payload,
             query,
         });
@@ -155,7 +157,7 @@ describe('Http', () => {
             foo: 'bar',
         };
 
-        await Http.put(API_URL_CORRECT, {
+        await http.put(API_URL_CORRECT, {
             payload,
             query,
         });
@@ -181,7 +183,7 @@ describe('Http', () => {
             foo: 'bar',
         };
 
-        await Http.patch(API_URL_CORRECT, {
+        await http.patch(API_URL_CORRECT, {
             payload,
             query,
         });
@@ -203,7 +205,7 @@ describe('Http', () => {
             foo: 'bar',
         };
 
-        await Http.delete(API_URL_CORRECT, {
+        await http.delete(API_URL_CORRECT, {
             query,
         });
 
@@ -227,7 +229,7 @@ describe('Http', () => {
             foo: 'bar',
         };
 
-        await Http.delete(API_URL_CORRECT, {
+        await http.delete(API_URL_CORRECT, {
             payload,
             query,
         });

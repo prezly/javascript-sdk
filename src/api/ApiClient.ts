@@ -1,5 +1,4 @@
-import type { ApiResponse, HeadersMap, Params, ParamsWithPayload } from '../http';
-import { Http } from '../http';
+import type { ApiResponse, HeadersMap, HttpClient, Params, ParamsWithPayload } from '../http';
 import { stripSlashes } from '../utils';
 
 import { DEFAULT_USER_AGENT } from './constants';
@@ -11,10 +10,12 @@ export interface Options {
 }
 
 export class ApiClient {
+    private readonly http: HttpClient;
     private readonly baseUrl: string;
     private readonly headers: HeadersMap;
 
-    constructor({ accessToken, baseUrl, headers }: Options) {
+    constructor(http: HttpClient, { accessToken, baseUrl, headers }: Options) {
+        this.http = http;
         this.baseUrl = baseUrl;
         this.headers = {
             authorization: `Bearer ${accessToken}`,
@@ -27,7 +28,7 @@ export class ApiClient {
         endpointUri: string,
         { headers, query }: Params = {},
     ): Promise<ApiResponse<V>> {
-        return Http.get<V>(this.buildEndpointUrl(endpointUri), {
+        return this.http.get<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -40,7 +41,7 @@ export class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Http.post<V>(this.buildEndpointUrl(endpointUri), {
+        return this.http.post<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -54,7 +55,7 @@ export class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Http.put<V>(this.buildEndpointUrl(endpointUri), {
+        return this.http.put<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -68,7 +69,7 @@ export class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Http.patch<V>(this.buildEndpointUrl(endpointUri), {
+        return this.http.patch<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,
@@ -82,7 +83,7 @@ export class ApiClient {
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return Http.delete<V>(this.buildEndpointUrl(endpointUri), {
+        return this.http.delete<V>(this.buildEndpointUrl(endpointUri), {
             headers: {
                 ...this.headers,
                 ...headers,

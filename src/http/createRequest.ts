@@ -1,3 +1,5 @@
+import type { Fetch } from '../api';
+
 import { ApiError } from './ApiError';
 import {
     CONTENT_TYPE,
@@ -49,22 +51,19 @@ export function createFakeErrorPayload({
 }
 
 export async function createRequest<P = any>(
+    fetchImpl: Fetch,
     url: string,
-    {
-        headers,
-        method,
-        payload,
-        query,
-    }: {
+    options: {
         headers?: HeadersMap;
         method: Method;
         payload?: object;
         query?: object;
     },
 ): Promise<ApiResponse<P>> {
+    const { headers, method, payload, query } = options;
     try {
         const urlWithQuery = createUrlWithQuery(url, query);
-        const response = await fetch(urlWithQuery.href, {
+        const response = await fetchImpl(urlWithQuery.href, {
             method,
             headers: {
                 Accept: 'application/json',

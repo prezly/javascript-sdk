@@ -1,3 +1,5 @@
+import type { Fetch } from '../api';
+
 export enum HttpCodes {
     ACCEPTED = 202,
     NO_CONTENT = 204,
@@ -20,6 +22,7 @@ export interface HeadersMap {
 }
 
 export interface Params {
+    fetch?: Fetch;
     headers?: HeadersMap;
     query?: Record<string, undefined | boolean | number | string | number[] | string[]>;
 }
