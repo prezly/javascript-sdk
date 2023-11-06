@@ -1,13 +1,10 @@
-type LangCode = `${Lowercase<string>}`;
-type UnderscoreCode = `${LangCode}` | `${LangCode}_${string}`;
-
 export interface CultureRef {
-    code: UnderscoreCode;
-    locale: UnderscoreCode;
+    code: Culture.Code;
+    locale: Culture.Code;
     name: string;
     native_name: string;
     direction: `${Culture.TextDirection}`;
-    language_code: LangCode;
+    language_code: Culture.LangCode;
 }
 
 export type Culture = CultureRef;
@@ -17,4 +14,8 @@ export namespace Culture {
         LTR = 'ltr',
         RTL = 'rtl',
     }
+
+    export type LangCode = `${Lowercase<string>}`;
+
+    export type Code = `${LangCode}` | `${LangCode}_${string}`;
 }
