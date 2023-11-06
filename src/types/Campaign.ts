@@ -89,6 +89,7 @@ export namespace Campaign {
     export enum StoryAppearance {
         INTRO = 'intro',
         FULL = 'full',
+        AUTO = 'auto',
     }
 
     export enum SenderDomainVerificationStatus {
