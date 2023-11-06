@@ -27,4 +27,13 @@ export namespace Culture {
         | `${LangCode}_${RegionCode}`
         | `${LangCode}_${ScriptCode}`
         | `${LangCode}_${ScriptCode}_${RegionCode}`;
+
+    /**
+     * Locale ISO code to be used in HTML attributes.
+     */
+    export type IsoCode =
+        | `${LangCode}`
+        | `${LangCode}-${RegionCode}`
+        | `${LangCode}-${ScriptCode}`
+        | `${LangCode}-${ScriptCode}-${RegionCode}`;
 }
