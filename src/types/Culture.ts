@@ -15,10 +15,6 @@ export namespace Culture {
         RTL = 'rtl',
     }
 
-    export type LangCode = `${Lowercase<string>}`;
-    export type ScriptCode = string;
-    export type RegionCode = `${Uppercase<string>}`;
-
     /**
      * Primary locale code used everywhere in the Prezly app.
      */
@@ -36,4 +32,8 @@ export namespace Culture {
         | `${LangCode}-${RegionCode}`
         | `${LangCode}-${ScriptCode}`
         | `${LangCode}-${ScriptCode}-${RegionCode}`;
+
+    export type LangCode = `${Lowercase<string>}`;
+    export type ScriptCode = string;
+    export type RegionCode = `${Uppercase<string>}`;
 }
