@@ -36,4 +36,8 @@ export namespace Culture {
     export type LangCode = `${Lowercase<string>}`;
     export type ScriptCode = string;
     export type RegionCode = `${Uppercase<string>}`;
+
+    export function isoCode(code: Code): IsoCode {
+        return code.replace('_', '-') as IsoCode;
+    }
 }
