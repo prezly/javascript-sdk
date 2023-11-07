@@ -5,7 +5,7 @@ export interface CategoryRef {
     display_name: string;
     display_description: string | null;
     i18n: {
-        [localeCode: string]: {
+        [localeCode: CultureRef['code']]: {
             description: string | null;
             locale: CultureRef;
             name: string;
