@@ -56,19 +56,21 @@ export namespace Category {
         const code = locale ? localeCode(locale) : undefined;
         const categories = Array.isArray(input) ? input : [input];
 
-        return categories.flatMap((category) => {
-            const translations = code ? [category.i18n[code]] : Object.values(category.i18n);
+        return categories.reduce<TranslatedCategory[]>((result, category) => {
+            const translated = (code ? [category.i18n[code]] : Object.values(category.i18n))
+                .filter(isNonEmpty)
+                .map((translation) => {
+                    return {
+                        id: category.id,
+                        locale: translation.locale.code,
+                        slug: translation.slug,
+                        name: translation.name,
+                        description: translation.description,
+                    };
+                });
 
-            return translations.filter(isNonEmpty).map((translation) => {
-                return {
-                    id: category.id,
-                    locale: translation.locale.code,
-                    slug: translation.slug,
-                    name: translation.name,
-                    description: translation.description,
-                };
-            });
-        });
+            return [...result, ...translated];
+        }, []);
     }
 }
 
@@ -96,7 +98,7 @@ type WithNonEmptyTranslation<T extends Category, LocaleCode extends Culture['cod
 function isNonEmpty(
     translation: Category.Translation | undefined,
 ): translation is NonEmptyTranslation {
-    return Boolean(translation?.name && translation?.slug);
+    return Boolean(translation && translation.name && translation.slug);
 }
 
 function localeCode(locale: LocaleIdentifier): Culture['code'] {
