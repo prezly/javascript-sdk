@@ -31,12 +31,14 @@ export namespace Category {
         return isNonEmpty(translation);
     }
 
-    export function translation(
-        category: Category,
-        locale: LocaleIdentifier,
-    ): TranslatedCategory | undefined {
+    export function translation<T extends Category, LocaleCode extends Culture['code']>(
+        category: T,
+        locale: LocaleIdentifier<LocaleCode>,
+    ) {
         const [translation] = Category.translations(category, locale);
-        return translation;
+        return translation as T extends WithNonEmptyTranslation<Category, LocaleCode>
+            ? TranslatedCategory
+            : TranslatedCategory | undefined;
     }
 
     export function translations(
