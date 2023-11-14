@@ -4,9 +4,9 @@ export interface CategoryRef {
     id: number;
     display_name: string;
     display_description: string | null;
-    i18n: Partial<{
-        [localeCode: Culture.Code]: Category.Translation;
-    }>;
+    i18n: {
+        [localeCode in Culture.Code]: Category.Translation;
+    };
     stories_number: number;
 }
 
