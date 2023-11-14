@@ -91,12 +91,12 @@ function toObject(sortOrder: string | SortOrder): SortOrder {
 
 function parseColumn(column: string): SortOrder.Column {
     if (column.startsWith('+')) {
-        const [, name] = column.split('+');
+        const [, name = ''] = column.split('+');
         validateColumnName(name);
         return { name, direction: SortOrder.Direction.ASC };
     }
     if (column.startsWith('-')) {
-        const [, name] = column.split('-');
+        const [, name = ''] = column.split('-');
         validateColumnName(name);
         return { name, direction: SortOrder.Direction.DESC };
     }

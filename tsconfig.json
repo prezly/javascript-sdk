@@ -12,6 +12,8 @@
         "isolatedModules": true,
         "downlevelIteration": true,
         "strict": true,
+        // @see https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess
+        "noUncheckedIndexedAccess": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
