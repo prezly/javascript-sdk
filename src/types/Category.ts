@@ -5,7 +5,7 @@ export interface CategoryRef {
     display_name: string;
     display_description: string | null;
     i18n: {
-        [localeCode in Culture.Code]: Category.Translation;
+        [localeCode: Culture.Code]: Category.Translation;
     };
     stories_number: number;
 }
