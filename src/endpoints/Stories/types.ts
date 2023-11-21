@@ -74,20 +74,20 @@ export type ChangeNewsroomWarning =
     | StoryEmbeddedContactsWillBeRemovedWarning
     | StoryTranslationsWillMoveWarning;
 
-export interface IncludeOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
-    include?: Include;
+export interface IncludeOptions<Include extends keyof Story.ExtraFields = keyof Story.ExtraFields> {
+    include?: Include[];
 }
 
-export interface ListOptions<Include extends readonly (keyof Story.ExtraFields)[]> {
+export interface ListOptions<Include extends keyof Story.ExtraFields = keyof Story.ExtraFields> {
     search?: string;
     limit?: number;
     offset?: number;
     sortOrder?: SortOrder | string;
-    include?: Include;
+    include?: Include[];
     formats?: Story.FormatVersion[];
 }
 
-export interface SearchOptions<Include extends readonly (keyof Story.ExtraFields)[]>
+export interface SearchOptions<Include extends keyof Story.ExtraFields = keyof Story.ExtraFields>
     extends ListOptions<Include> {
     query?: Query;
     scope?: Query;
