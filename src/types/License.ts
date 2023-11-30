@@ -83,6 +83,7 @@ export interface License extends LicenseRef {
     total_seats: number;
     type: License.Type;
     vat_nr: string;
+    po_number: string | null;
     /**
      * A combination of a number and the interval type ("day", "week", "month", "year"), separated by "/".
      *
