@@ -1,7 +1,7 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
-import type { ExtendedStory, Story } from '../../types';
+import type { ExtendedStory, Query, Story } from '../../types';
 import { SortOrder } from '../../types';
 
 import type {
@@ -171,6 +171,27 @@ export class Client {
             headers: acceptedFormatsHeader(formats),
             query: { include },
         });
+        return story;
+    }
+
+    async getBySlug<Options extends IncludeOptions & { formats?: Formats; query?: Query }>(
+        slug: Story['slug'],
+        options?: Exactly<Options, IncludeOptions & { formats?: Formats; query?: Query }>,
+    ): Promise<ExtendedStory & InferExtraFields<Options>> {
+        if (slug.includes('/') || slug.includes('\\')) {
+            throw new Error('Story slugs cannot contain slashes.');
+        }
+
+        const { include, query, formats } = options ?? {};
+
+        const { story } = await this.apiClient.post<{
+            story: ExtendedStory & InferExtraFields<Options>;
+        }>(`${routing.storiesUrl}/by-slug/${slug}`, {
+            headers: acceptedFormatsHeader(formats),
+            query: { include },
+            payload: { query },
+        });
+
         return story;
     }
 
