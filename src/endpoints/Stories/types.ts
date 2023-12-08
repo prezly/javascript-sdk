@@ -100,6 +100,16 @@ export interface ListResponse<S extends Story = Story> {
 }
 
 interface GenericCreateRequest {
+    /**
+     * Set a custom slug for a Story.
+     *
+     * - If there is another story with exactly the same slug value, the Create request will throw [HTTP 409 Conflict].
+     *
+     * - Conflicts can be force-resolved by passing `?force` GET parameter.
+     *   This will update other conflicting stories slugs to something else (i.e. adding random suffix).
+     */
+    slug?: Story['slug'];
+
     newsroom?: Newsroom['id'] | Newsroom['uuid'];
 
     published_at?: Iso8601DateTime;
@@ -117,6 +127,17 @@ interface GenericCreateRequest {
 }
 
 interface GenericUpdateRequest {
+    /**
+     * Set a custom slug for a Story.
+     * Updating it to `null` will revert back to automatically generated slugs.
+     *
+     * - If there is another story with exactly the same slug value, the Update request will throw [HTTP 409 Conflict].
+     *
+     * - Conflicts can be force-resolved by passing `?force` GET parameter.
+     *   This will update other conflicting stories slugs to something else (i.e. adding random suffix).
+     */
+    slug?: Story['slug'] | null;
+
     published_at?: Iso8601DateTime;
     visibility?: Story.Visibility;
     culture?: CultureRef['code'];
