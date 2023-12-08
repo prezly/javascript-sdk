@@ -195,18 +195,21 @@ export class Client {
         return story;
     }
 
-    async create<Options extends IncludeOptions & { formats?: Formats }>(
+    async create<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         payload: CreateRequest,
-        options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
+        options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
-        const { include, formats } = options ?? {};
+        const { include, formats, force = false } = options ?? {};
 
         const { story } = await this.apiClient.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(routing.storiesUrl, {
             headers: acceptedFormatsHeader(formats),
+            query: {
+                include,
+                force: force || undefined, // only pass it if it's true
+            },
             payload,
-            query: { include },
         });
         return story;
     }
@@ -252,15 +255,15 @@ export class Client {
         return story;
     }
 
-    async move<Options extends IncludeOptions & { force?: true; formats?: Formats }>(
+    async move<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         id: StoryId,
         payload: MoveRequest,
-        options?: Exactly<Options, IncludeOptions & { force?: true; formats?: Formats }>,
+        options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
     ): Promise<
         | ChangeNewsroomSuccessResponse<ExtendedStory & InferExtraFields<Options>>
         | ChangeNewsroomUnsafeResponse
     > {
-        const { include, force, formats } = options ?? {};
+        const { include, formats, force = false } = options ?? {};
 
         const url = `${routing.storiesUrl}/${id}/move`;
 
@@ -269,7 +272,10 @@ export class Client {
                 story: ExtendedStory & InferExtraFields<Options>;
             }>(url, {
                 headers: acceptedFormatsHeader(formats),
-                query: { include: include as string[] | undefined, force },
+                query: {
+                    include,
+                    force: force || undefined, // only pass it if it's true
+                },
                 payload,
             });
 
@@ -282,20 +288,23 @@ export class Client {
         }
     }
 
-    async update<Options extends IncludeOptions & { formats?: Formats }>(
+    async update<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         id: StoryId,
         payload: UpdateRequest,
-        options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
+        options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
         const url = `${routing.storiesUrl}/${id}`;
-        const { include, formats } = options ?? {};
+        const { include, formats, force = false } = options ?? {};
 
         const { story } = await this.apiClient.patch<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
+            query: {
+                include,
+                force: force || undefined, // only pass it if it's true
+            },
             payload,
-            query: { include: include as string[] | undefined },
         });
         return story;
     }
@@ -316,7 +325,7 @@ export class Client {
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             payload,
-            query: { include: include as string[] | undefined },
+            query: { include },
         });
         return story;
     }
@@ -337,7 +346,7 @@ export class Client {
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             payload,
-            query: { include: include as string[] | undefined },
+            query: { include },
         });
         return story;
     }
@@ -355,7 +364,7 @@ export class Client {
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             payload,
-            query: { include: include as string[] | undefined },
+            query: { include },
         });
         return story;
     }
@@ -373,7 +382,7 @@ export class Client {
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             payload,
-            query: { include: include as string[] | undefined },
+            query: { include },
         });
         return story;
     }
@@ -391,7 +400,7 @@ export class Client {
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             payload,
-            query: { include: include as string[] | undefined },
+            query: { include },
         });
         return story;
     }
@@ -409,25 +418,25 @@ export class Client {
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             payload,
-            query: { include: include as string[] | undefined },
+            query: { include },
         });
         return story;
     }
 
-    async pin<Options extends IncludeOptions & { force?: boolean; formats?: Formats }>(
+    async pin<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         id: StoryId,
-        options?: Exactly<Options, IncludeOptions & { force?: boolean; formats?: Formats }>,
+        options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
         const url = `${routing.storiesUrl}/${id}/pin`;
-        const { include, force, formats } = options ?? {};
+        const { include, formats, force = false } = options ?? {};
 
         const { story } = await this.apiClient.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
             query: {
-                include: include as string[] | undefined,
-                force: force || undefined,
+                include: include,
+                force: force || undefined, // only pass it if it's true
             },
         });
         return story;
@@ -444,7 +453,7 @@ export class Client {
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
-            query: { include: include as string[] | undefined },
+            query: { include: include },
         });
         return story;
     }
