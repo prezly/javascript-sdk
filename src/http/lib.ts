@@ -39,7 +39,7 @@ export function createUrlWithQuery(url = '', query?: object): URL {
         });
     }
 
-    return urlWithQuery;
+    return urlWithQuery as URL;
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
