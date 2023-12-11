@@ -1,4 +1,4 @@
-import { vi, beforeEach, describe, expect, test } from 'vitest';
+import { vi, beforeEach, describe, expect, it } from 'vitest';
 import type { MockResponseInitFunction } from 'vitest-fetch-mock';
 import createFetchMock from 'vitest-fetch-mock';
 
@@ -54,7 +54,7 @@ describe('HttpClient', () => {
         fetch.resetMocks();
     });
 
-    test('it should resolve with correct payload', async () => {
+    it('should resolve with correct payload', async () => {
         const expectedPayload = {
             foo: 'bar',
         };
@@ -67,7 +67,7 @@ describe('HttpClient', () => {
         expect(actualResponse.payload).toEqual(expectedPayload);
     });
 
-    test('it should reject with correct payload', async () => {
+    it('should reject with correct payload', async () => {
         const expectedPayload = {
             foo: 'bar',
         };
@@ -86,7 +86,7 @@ describe('HttpClient', () => {
         }
     });
 
-    test('it should reject with Invalid URL provided', async () => {
+    it('should reject with Invalid URL provided', async () => {
         const errorMessage = 'Invalid URL provided';
         // Fetch mock doesn't validate the URL so we mock the error.
         fetch.mockRejectOnce(new Error(errorMessage));
@@ -106,7 +106,7 @@ describe('HttpClient', () => {
         }
     });
 
-    test('it should create a GET request', async () => {
+    it('should create a GET request', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         await http.get(API_URL_CORRECT);
@@ -119,7 +119,7 @@ describe('HttpClient', () => {
         });
     });
 
-    test('it should create a GET request with query params', async () => {
+    it('should create a GET request with query params', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = { foo: 'bar' };
@@ -135,7 +135,7 @@ describe('HttpClient', () => {
         });
     });
 
-    test('it should create a POST request', async () => {
+    it('should create a POST request', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
@@ -160,7 +160,7 @@ describe('HttpClient', () => {
         });
     });
 
-    test('it should create a PUT request', async () => {
+    it('should create a PUT request', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
@@ -185,7 +185,7 @@ describe('HttpClient', () => {
         });
     });
 
-    test('it should create a PATCH request', async () => {
+    it('should create a PATCH request', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
@@ -210,7 +210,7 @@ describe('HttpClient', () => {
         });
     });
 
-    test('it should create a DELETE request', async () => {
+    it('should create a DELETE request', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
@@ -229,7 +229,7 @@ describe('HttpClient', () => {
         });
     });
 
-    test('it should create a DELETE request (with body)', async () => {
+    it('should create a DELETE request (with body)', async () => {
         fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
