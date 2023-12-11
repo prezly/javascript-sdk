@@ -1,7 +1,14 @@
+import { vi, beforeEach, describe, expect, it } from 'vitest';
+import type { MockResponseInitFunction } from 'vitest-fetch-mock';
+import createFetchMock from 'vitest-fetch-mock';
+
+import { ApiError } from './ApiError';
 import { createFakeErrorPayload } from './createRequest';
 import { createHttpClient } from './HttpClient';
 import { createUrlWithQuery } from './lib';
 import { Method } from './types';
+
+const fetch = createFetchMock(vi);
 
 const API_URL_CORRECT = 'http://rock.prezly.test/api/v1/contacts';
 const API_URL_INCORRECT = 'htp:/rock.prezly.test/api/v1/contacts';
@@ -14,28 +21,34 @@ const DEFAULT_REQUEST_PROPS = {
     },
 };
 
-function successJsonResponse(body) {
-    return new Response(JSON.stringify(body), {
-        status: 200,
-        statusText: 'OK',
-        headers: {
-            'Content-Type': 'application/json',
+function successJsonResponse(body: any): MockResponseInitFunction {
+    return () => ({
+        body: JSON.stringify(body),
+        init: {
+            status: 200,
+            statusText: 'OK',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
     });
 }
 
-function errorJSONResponse(body) {
-    return new Response(JSON.stringify(body), {
-        status: 500,
-        statusText: 'Internal Server Error',
-        headers: {
-            'Content-Type': 'application/json',
+function errorJSONResponse(body: any): MockResponseInitFunction {
+    return () => ({
+        body: JSON.stringify(body),
+        init: {
+            status: 500,
+            statusText: 'Internal Server Error',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
     });
 }
 
 describe('HttpClient', () => {
-    const http = createHttpClient({ fetch });
+    const http = createHttpClient({ fetch: fetch as typeof global.fetch });
 
     beforeEach(() => {
         fetch.resetMocks();
@@ -46,8 +59,7 @@ describe('HttpClient', () => {
             foo: 'bar',
         };
 
-        const expectedResponse = successJsonResponse(expectedPayload);
-        fetch.mockResolvedValueOnce(expectedResponse);
+        fetch.mockResponseOnce(successJsonResponse(expectedPayload));
 
         const actualResponse = await http.get(API_URL_CORRECT);
 
@@ -60,14 +72,17 @@ describe('HttpClient', () => {
             foo: 'bar',
         };
 
-        const expectedResponse = errorJSONResponse(expectedPayload);
-        fetch.mockResolvedValueOnce(expectedResponse);
+        fetch.mockResponseOnce(errorJSONResponse(expectedPayload));
 
         try {
             await http.get(API_URL_CORRECT);
-        } catch ({ status, payload }) {
-            expect(status).toEqual(500);
-            expect(payload).toEqual(expectedPayload);
+        } catch (error) {
+            expect(error).instanceOf(ApiError);
+
+            if (!(error instanceof ApiError)) throw error;
+
+            expect(error.status).toEqual(500);
+            expect(error.payload).toEqual(expectedPayload);
         }
     });
 
@@ -77,20 +92,22 @@ describe('HttpClient', () => {
         fetch.mockRejectOnce(new Error(errorMessage));
         try {
             await http.get(API_URL_INCORRECT);
-        } catch ({ payload }) {
+        } catch (error) {
+            expect(error).instanceOf(ApiError);
+
+            if (!(error instanceof ApiError)) throw error;
+
             const expectedErrorResponse = createFakeErrorPayload({
                 status: undefined,
                 statusText: errorMessage,
             });
 
-            expect(payload).toEqual(expectedErrorResponse);
+            expect(error.payload).toEqual(expectedErrorResponse);
         }
     });
 
     it('should create a GET request', async () => {
-        const response = successJsonResponse({});
-
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         await http.get(API_URL_CORRECT);
 
@@ -103,8 +120,7 @@ describe('HttpClient', () => {
     });
 
     it('should create a GET request with query params', async () => {
-        const response = successJsonResponse({});
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = { foo: 'bar' };
         await http.get(API_URL_CORRECT, {
@@ -120,8 +136,7 @@ describe('HttpClient', () => {
     });
 
     it('should create a POST request', async () => {
-        const response = successJsonResponse({});
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
             foo: 'bar',
@@ -146,8 +161,7 @@ describe('HttpClient', () => {
     });
 
     it('should create a PUT request', async () => {
-        const response = successJsonResponse({});
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
             foo: 'bar',
@@ -172,8 +186,7 @@ describe('HttpClient', () => {
     });
 
     it('should create a PATCH request', async () => {
-        const response = successJsonResponse({});
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
             foo: 'bar',
@@ -198,8 +211,7 @@ describe('HttpClient', () => {
     });
 
     it('should create a DELETE request', async () => {
-        const response = successJsonResponse({});
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
             foo: 'bar',
@@ -218,8 +230,7 @@ describe('HttpClient', () => {
     });
 
     it('should create a DELETE request (with body)', async () => {
-        const response = successJsonResponse({});
-        fetch.mockResolvedValueOnce(response);
+        fetch.mockResponseOnce(successJsonResponse({}));
 
         const query = {
             foo: 'bar',
