@@ -1,9 +1,15 @@
 import { readFileSync } from 'fs';
-
-const { version: packageVersion, repository } = JSON.parse(readFileSync('package.json'));
+import { vi, beforeEach, describe, expect, it, afterEach } from 'vitest';
+import type { MockResponseInitFunction } from 'vitest-fetch-mock';
+import createFetchMock from 'vitest-fetch-mock';
 
 import { createClient } from './Client';
 import { Method } from './http';
+import type { CoverageEntry } from './types';
+
+const { version: packageVersion, repository } = JSON.parse(readFileSync('package.json').toString());
+
+const fetch = createFetchMock(vi);
 
 const BASE_URL = 'https://api.prezly.com';
 const DEFAULT_USER_AGENT = `prezly-javascript-sdk/${packageVersion} (+${repository.url})`;
@@ -18,12 +24,15 @@ const DEFAULT_REQUEST_PROPS = {
     },
 };
 
-function successJsonResponse(body, status = 200) {
-    return new Response(JSON.stringify(body), {
-        status,
-        statusText: 'OK',
-        headers: {
-            'Content-Type': 'application/json',
+function successJsonResponse(body: any, status = 200): MockResponseInitFunction {
+    return () => ({
+        body: JSON.stringify(body),
+        init: {
+            status,
+            statusText: 'OK',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
     });
 }
@@ -34,23 +43,30 @@ describe('Client', () => {
 
     beforeEach(() => {
         fetch.resetMocks();
+        fetch.enableMocks();
+    });
+
+    afterEach(() => {
+        fetch.disableMocks();
     });
 
     describe('Coverage', () => {
-        const getListPayload = (coverage) => ({
-            sort: '-published_at',
-            pagination: {
-                offset: 0,
-                limit: 20,
-                matched_records_number: coverage.length,
-                total_records_number: coverage.length,
-            },
-            coverage,
-        });
+        function getListPayload(coverage: Partial<CoverageEntry>[]) {
+            return {
+                sort: '-published_at',
+                pagination: {
+                    offset: 0,
+                    limit: 20,
+                    matched_records_number: coverage.length,
+                    total_records_number: coverage.length,
+                },
+                coverage,
+            };
+        }
 
         it('should call the list endpoint', async () => {
             const expectedPayload = getListPayload([]);
-            fetch.mockResolvedValueOnce(successJsonResponse(expectedPayload));
+            fetch.mockResponseOnce(successJsonResponse(expectedPayload));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -66,7 +82,7 @@ describe('Client', () => {
 
         it('should call the GET :id endpoint', async () => {
             const coverage = { id: 123 };
-            fetch.mockResolvedValueOnce(successJsonResponse({ coverage }));
+            fetch.mockResponseOnce(successJsonResponse({ coverage }));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -82,9 +98,10 @@ describe('Client', () => {
 
         it('should allow filtering by externalReferenceId', async () => {
             const externalReferenceId = 'external-ref-id';
+
             const coverage = { id: 123 };
             const expectedPayload = getListPayload([coverage]);
-            fetch.mockResolvedValueOnce(successJsonResponse(expectedPayload));
+            fetch.mockResponseOnce(successJsonResponse(expectedPayload));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -101,7 +118,7 @@ describe('Client', () => {
 
         it('should return null from externalReferenceId no results found', async () => {
             const expectedPayload = getListPayload([]);
-            fetch.mockResolvedValueOnce(successJsonResponse(expectedPayload));
+            fetch.mockResponseOnce(successJsonResponse(expectedPayload));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -115,7 +132,7 @@ describe('Client', () => {
             const coverage = {
                 url: 'https://example.com',
             };
-            fetch.mockResolvedValueOnce(successJsonResponse({ coverage }));
+            fetch.mockResponseOnce(successJsonResponse({ coverage }));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -135,7 +152,7 @@ describe('Client', () => {
             const coverage = {
                 url: 'https://prezly.com',
             };
-            fetch.mockResolvedValueOnce(successJsonResponse({ coverage }));
+            fetch.mockResponseOnce(successJsonResponse({ coverage }));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -152,7 +169,7 @@ describe('Client', () => {
 
         it('should call delete endpoint', async () => {
             const id = 123;
-            fetch.mockResolvedValueOnce(successJsonResponse(undefined, 204));
+            fetch.mockResponseOnce(successJsonResponse(undefined, 204));
 
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
@@ -169,7 +186,7 @@ describe('Client', () => {
 
     describe('custom options', () => {
         it('should allow overriding the url', async () => {
-            fetch.mockResolvedValueOnce(successJsonResponse({}));
+            fetch.mockResponseOnce(successJsonResponse({}));
 
             // Intentionally using trailing `/` to test url sanitizing.
             const baseUrl = 'https://api.prezly.test/';
@@ -186,7 +203,7 @@ describe('Client', () => {
         });
 
         it('should allow overriding the headers', async () => {
-            fetch.mockResolvedValueOnce(successJsonResponse({}));
+            fetch.mockResponseOnce(successJsonResponse({}));
 
             const customHeaders = {
                 'User-Agent': 'Test',
