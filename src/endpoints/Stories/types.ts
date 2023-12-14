@@ -108,7 +108,7 @@ interface GenericCreateRequest {
      * - Conflicts can be force-resolved by passing `?force` GET parameter.
      *   This will update other conflicting stories slugs to something else (i.e. adding random suffix).
      */
-    slug?: Story['slug'];
+    custom_slug?: Story['custom_slug'];
 
     newsroom?: Newsroom['id'] | Newsroom['uuid'];
 
@@ -136,7 +136,7 @@ interface GenericUpdateRequest {
      * - Conflicts can be force-resolved by passing `?force` GET parameter.
      *   This will update other conflicting stories slugs to something else (i.e. adding random suffix).
      */
-    slug?: Story['slug'] | null;
+    custom_slug?: Story['custom_slug'];
 
     published_at?: Iso8601DateTime;
     visibility?: Story.Visibility;
