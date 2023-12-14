@@ -17,6 +17,7 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
+    custom_slug: string | null;
 
     status: Story.Status;
     /**
@@ -63,6 +64,7 @@ export interface Story {
     intro: string;
     summary: string;
     slug: string;
+    custom_slug: string | null;
     format_version: Story.FormatVersion;
     culture: CultureRef;
     author: UserRef | null;
