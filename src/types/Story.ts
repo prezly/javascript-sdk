@@ -63,7 +63,18 @@ export interface Story {
     subtitle: string;
     intro: string;
     summary: string;
+    /**
+     * The effective Story slug.
+     * Calculated as `custom_slug ?? auto_slug`.
+     */
     slug: string;
+    /**
+     * Automatically generated Story slug.
+     */
+    auto_slug: string;
+    /**
+     * Custom-set Story slug.
+     */
     custom_slug: string | null;
     format_version: Story.FormatVersion;
     culture: CultureRef;
