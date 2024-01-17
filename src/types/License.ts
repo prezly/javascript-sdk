@@ -68,6 +68,7 @@ export interface License extends LicenseRef {
     plan: PlanReference | null;
     status: License.Status;
     subscription_lockout: boolean;
+    is_auto_renew_enabled: boolean;
     /**
      * Tax rate percent as a full number. (e.g. 21)
      */
