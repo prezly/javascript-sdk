@@ -30,6 +30,7 @@ export interface Campaign {
     newsroom: NewsroomRef | null;
     story_alignment: Campaign.StoryAlignment;
     story_appearance: Campaign.StoryAppearance;
+    story_header_footer: Campaign.StoryHeaderFooter;
 
     // Sender address & domain
     sender: SenderAddress | null;
@@ -88,6 +89,12 @@ export namespace Campaign {
 
     export enum StoryAppearance {
         INTRO = 'intro',
+        FULL = 'full',
+    }
+
+    export enum StoryHeaderFooter {
+        NONE = 'none',
+        STANDARD = 'standard',
         FULL = 'full',
     }
 
