@@ -86,6 +86,7 @@ export interface Newsroom extends NewsroomRef {
     square_logo: UploadedImage | null;
     newsroom_logo: UploadedImage | null;
     icon: UploadedImage | null;
+    email_logo: UploadedImage | null;
 
     email_branding_mode: Newsroom.EmailBrandingMode;
     email_branding: Newsroom.EmailBranding;
