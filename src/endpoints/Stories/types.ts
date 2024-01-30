@@ -270,10 +270,12 @@ export interface PreviewResponse {
 export interface PreviewOptions {
     alignment?: Alignment;
     appearance?: Appearance;
+    headerFooter?: HeaderFooter;
 }
 
 export import Alignment = Campaign.StoryAlignment;
 export import Appearance = Campaign.StoryAppearance;
+export import HeaderFooter = Campaign.StoryHeaderFooter;
 
 export type CreateRequest =
     | HtmlStoryCreateRequest

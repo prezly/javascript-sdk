@@ -15,6 +15,7 @@ export interface CreateRequest {
     story?: Story['id'];
     story_alignment?: Campaign['story_alignment'];
     story_appearance?: Campaign['story_appearance'];
+    story_header_footer?: Campaign['story_header_footer'];
     recipients?: {
         query: Query;
     };
@@ -29,6 +30,7 @@ export interface UpdateRequest {
     story?: Story['id'];
     story_alignment?: Campaign['story_alignment'];
     story_appearance?: Campaign['story_appearance'];
+    story_header_footer?: Campaign['story_header_footer'];
     is_open_tracking_enabled?: boolean;
     is_click_tracking_enabled?: boolean;
 }
