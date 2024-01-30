@@ -470,6 +470,7 @@ export class Client {
             query: {
                 alignment: options?.alignment,
                 appearance: options?.appearance,
+                header_footer: options?.headerFooter,
             },
         });
         return preview;
