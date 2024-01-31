@@ -28,7 +28,7 @@
     "dependencies": {
         "@prezly/progress-promise": "^2.0.1",
         "@prezly/uploads": "^0.2.1",
-        "query-string": "^8.1.0"
+        "query-string": "^6.14.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.19.3",
