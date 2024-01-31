@@ -1,3 +1,5 @@
+import type { UploadedImage } from '@prezly/uploads';
+
 import type { CultureRef, Newsroom, Pagination, Query, SortOrder } from '../../types';
 
 export interface ListOptions {
@@ -96,6 +98,8 @@ export interface UpdateRequest {
 
     email_branding_mode?: Newsroom.EmailBrandingMode;
     email_branding?: Newsroom.EmailBranding;
+    email_logo?: UploadedImage | null;
+    email_logo_alignment?: Newsroom.EmailLogoAlignment;
 
     is_privacy_portal_enabled?: boolean;
     /**

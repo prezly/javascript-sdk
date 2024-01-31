@@ -87,6 +87,7 @@ export interface Newsroom extends NewsroomRef {
     newsroom_logo: UploadedImage | null;
     icon: UploadedImage | null;
     email_logo: UploadedImage | null;
+    email_logo_alignment: Newsroom.EmailLogoAlignment;
 
     email_branding_mode: Newsroom.EmailBrandingMode;
     email_branding: Newsroom.EmailBranding;
@@ -135,7 +136,8 @@ export namespace Newsroom {
 
     export interface EmailBranding {
         background_color: string;
-        header_color: string;
+        header_background_color: string;
+        header_link_color: string;
         title_color: string;
         text_color: string;
         link_color: string;
@@ -152,6 +154,12 @@ export namespace Newsroom {
         DEFAULT = 'default',
         DISABLED = 'disabled',
         CONSENT_TO_IDENTIFY = 'consent-to-identify',
+    }
+
+    export enum EmailLogoAlignment {
+        LEFT = 'left',
+        CENTER = 'center',
+        RIGHT = 'right',
     }
 
     /*
