@@ -113,6 +113,7 @@ export interface UpdateRequest {
      * "subscription_form" feature flag
      */
     is_subscription_form_enabled?: boolean;
+    auto_create_contacts_from_subscribers?: boolean;
     status?: Newsroom.Status.ACTIVE | Newsroom.Status.INACTIVE;
 
     is_plausible_enabled?: boolean;

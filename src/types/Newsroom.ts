@@ -110,6 +110,7 @@ export interface Newsroom extends NewsroomRef {
     segment_analytics_id: string | null;
 
     is_subscription_form_enabled: boolean;
+    auto_create_contacts_from_subscribers: boolean;
     is_white_labeled: boolean;
 
     is_plausible_enabled: boolean;
