@@ -28,7 +28,7 @@
     "dependencies": {
         "@prezly/progress-promise": "^2.0.1",
         "@prezly/uploads": "^0.2.1",
-        "query-string": "^6.9.0"
+        "query-string": "^8.1.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.19.3",
@@ -42,14 +42,14 @@
         "babel-plugin-add-import-extension": "^1.6.0",
         "babel-plugin-transform-inline-environment-variables": "^0.4.4",
         "cross-env": "^7.0.3",
-        "eslint": "^8.25.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-import": "^2.26.0",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^8.10.0",
+        "eslint-plugin-import": "^2.29.1",
         "np": "^9.2.0",
-        "prettier": "^2.7.1",
+        "prettier": "^2.8.8",
         "rimraf": "^3.0.0",
         "typescript": "^5.3.3",
-        "vitest": "^1.0.4",
+        "vitest": "^1.2.2",
         "vitest-fetch-mock": "^0.2.2"
     },
     "scripts": {
