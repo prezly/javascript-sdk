@@ -1,8 +1,10 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Contact, EmailSubscription, Newsroom } from '../../types';
+import { SortOrder, type Contact, type EmailSubscription, type Newsroom } from '../../types';
 
 import type {
+    ListOptions,
+    ListResponse,
     SubscribeRequest,
     UnsubscribeRequest,
     UpdateUnsubscribeDetailsRequest,
@@ -88,5 +90,20 @@ export class Client {
         );
 
         return subscription;
+    }
+
+    public async list(
+        newsroomId: NewsroomId,
+        { limit, offset, search, sortOrder }: ListOptions = {},
+    ): Promise<ListResponse> {
+        const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));
+        return this.apiClient.get<ListResponse>(url, {
+            query: {
+                limit,
+                offset,
+                search,
+                sort: SortOrder.stringify(sortOrder),
+            },
+        });
     }
 }
