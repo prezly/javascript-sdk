@@ -7,9 +7,6 @@ import type { CreateRequest, ListOptions, ListResponse } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-/**
- * @deprecated Use Subscriptions instead
- */
 export class Client {
     private readonly apiClient: DeferredJobsApiClient;
 
@@ -17,6 +14,9 @@ export class Client {
         this.apiClient = apiClient;
     }
 
+    /**
+     * @deprecated Use `subscribeToNewsroom` from `Subscriptions` instead
+     */
     public async subscribe(newsroomId: NewsroomId, payload: CreateRequest): Promise<void> {
         const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));
         return this.apiClient.post(url, {
