@@ -3,6 +3,7 @@ import { Contacts } from './endpoints';
 import {
     Accounts,
     Billing,
+    NewsroomSubscriptions,
     Campaigns,
     CampaignRecipients,
     ContactsExports,
@@ -59,6 +60,7 @@ export interface Client {
     newsroomDomains: NewsroomDomains.Client;
     newsroomGalleries: NewsroomGalleries.Client;
     newsroomHub: NewsroomHub.Client;
+    newsroomSubscriptions: NewsroomSubscriptions.Client;
     pricingTables: PricingTables.Client;
     senderAddresses: SenderAddresses.Client;
     stories: Stories.Client;
@@ -104,6 +106,7 @@ export function createClient({
         newsroomDomains: new NewsroomDomains.Client(apiClient),
         newsroomGalleries: new NewsroomGalleries.Client(apiClient),
         newsroomHub: new NewsroomHub.Client(apiClient),
+        newsroomSubscriptions: new NewsroomSubscriptions.Client(apiClient),
         pricingTables: new PricingTables.Client(apiClient),
         senderAddresses: new SenderAddresses.Client(apiClient),
         stories: new Stories.Client(apiClient),
