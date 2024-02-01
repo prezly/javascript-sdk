@@ -1,6 +1,6 @@
 import type { UploadedImage } from '@prezly/uploads';
 
-import type { Contact, NewsroomSubscription, Pagination, SortOrder, Utm } from '../../types';
+import type { Contact, Utm } from '../../types';
 
 interface Person {
     contact_type: Contact.Type.PERSON;
@@ -72,20 +72,4 @@ export interface UpdateUnsubscribeDetailsRequest {
     session_uid?: string;
     comment?: string;
     reason?: UnsubscribeReason;
-}
-
-export interface ListOptions {
-    limit?: number;
-    offset?: number;
-    /**
-     * Text search keyword.
-     */
-    search?: string;
-    sortOrder?: SortOrder | string;
-}
-
-export interface ListResponse {
-    subscriptions: NewsroomSubscription[];
-    pagination: Pagination;
-    sort: string;
 }

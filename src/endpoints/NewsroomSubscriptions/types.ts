@@ -1,6 +1,6 @@
 import type { UploadedImage } from '@prezly/uploads';
 
-import type { Contact } from '../../types';
+import type { Contact, NewsroomSubscription, Pagination, SortOrder } from '../../types';
 
 export interface CreateRequest {
     email_address: string;
@@ -55,4 +55,20 @@ export interface CreateRequest {
             country?: Contact['address']['country'];
         };
     };
+}
+
+export interface ListOptions {
+    limit?: number;
+    offset?: number;
+    /**
+     * Text search keyword.
+     */
+    search?: string;
+    sortOrder?: SortOrder | string;
+}
+
+export interface ListResponse {
+    subscriptions: NewsroomSubscription[];
+    pagination: Pagination;
+    sort: string;
 }
