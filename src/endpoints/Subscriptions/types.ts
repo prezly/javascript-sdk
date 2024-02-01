@@ -18,11 +18,16 @@ interface Organisation {
 
 export interface SubscribeRequest<Type extends Contact.Type> {
     email_address: string;
+    first_name?: string | null;
+    last_name?: string | null;
     locale?: string;
     url?: string;
     visitor_uid?: string;
     session_uid?: string;
     comment?: string;
+    /**
+     * @deprecated Please use Contacts instead
+     */
     contact?: (Type extends Contact.Type.PERSON ? Person : Organisation) & {
         avatar_image?: UploadedImage | null;
         languages?: string[];
