@@ -18,6 +18,8 @@ interface Organisation {
 
 export interface SubscribeRequest<Type extends Contact.Type> {
     email_address: string;
+    first_name?: string | null;
+    last_name?: string | null;
     locale?: string;
     url?: string;
     visitor_uid?: string;
