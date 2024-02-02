@@ -63,6 +63,11 @@ export interface PersonUpdateRequest extends BaseContactPayload {
 
 export interface PersonCreateRequest extends PersonUpdateRequest {
     contact_type: `${Contact.Type.PERSON}`;
+    /**
+     * UUID of a subscriber.
+     * If this property is provided, subscriber's data will be applied to the created contact.
+     */
+    subscriber?: string;
 }
 
 export interface BulkDeleteResponse {
