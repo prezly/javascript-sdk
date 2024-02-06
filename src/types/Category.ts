@@ -7,7 +7,6 @@ export interface CategoryRef {
     i18n: {
         [localeCode: Culture.Code]: Category.Translation;
     };
-    stories_number: number;
 }
 
 export interface Category extends CategoryRef {
