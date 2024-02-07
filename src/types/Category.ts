@@ -5,21 +5,30 @@ export interface CategoryRef {
     display_name: string;
     display_description: string | null;
     i18n: {
-        [localeCode: Culture.Code]: Category.Translation;
+        [localeCode: Culture.Code]: CategoryRef.Translation;
     };
 }
 
-export interface Category extends CategoryRef {
-    stories_number: number;
-    public_stories_number: number;
-}
-
-export namespace Category {
+export namespace CategoryRef {
     export interface Translation {
         locale: CultureRef;
         slug: string | null;
         name: string;
         description: string | null;
+    }
+}
+
+export interface Category extends Omit<CategoryRef, 'i18n'> {
+    stories_number: number;
+    public_stories_number: number;
+    i18n: {
+        [localeCode: Culture.Code]: Category.Translation; // Extension over `CategoryRef.Translation`
+    };
+}
+
+export namespace Category {
+    export interface Translation extends CategoryRef.Translation {
+        public_stories_number: number;
     }
 
     export function isTranslated<T extends Category, LocaleCode extends Culture['code']>(
@@ -67,6 +76,7 @@ export namespace Category {
                         slug: translation.slug,
                         name: translation.name,
                         description: translation.description,
+                        public_stories_number: translation.public_stories_number,
                     };
                 });
 
@@ -81,6 +91,7 @@ export interface TranslatedCategory {
     slug: NonNullable<Category.Translation['slug']>;
     name: Category.Translation['name'];
     description: Category.Translation['description'];
+    public_stories_number: Category.Translation['public_stories_number'];
 }
 
 type LocaleIdentifier<Locale extends Culture['code'] = Culture['code']> = Locale | { code: Locale };
