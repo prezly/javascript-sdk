@@ -18,7 +18,7 @@ export class Client {
      * @deprecated Use `subscribeToNewsroom` from `Subscriptions` instead
      */
     public async subscribe(newsroomId: NewsroomId, payload: CreateRequest): Promise<void> {
-        const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));
+        const url = generateUrl(newsroomId);
         return this.apiClient.post(url, {
             payload,
         });
@@ -28,7 +28,7 @@ export class Client {
         newsroomId: NewsroomId,
         { limit, offset, search, sortOrder }: ListOptions = {},
     ): Promise<ListResponse> {
-        const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));
+        const url = generateUrl(newsroomId);
         return this.apiClient.get<ListResponse>(url, {
             query: {
                 limit,
@@ -38,4 +38,15 @@ export class Client {
             },
         });
     }
+
+    public async export(newsroomId: NewsroomId): Promise<{ downloadUrl: string }> {
+        const url = generateUrl(newsroomId, '/export');
+        const response = await this.apiClient.post<{ download_url: string }>(url);
+        return { downloadUrl: response.download_url };
+    }
+}
+
+function generateUrl(newsroomId: NewsroomId, suffix = '') {
+    const url = routing.newsroomSubscriptionsUrl.replace(':newsroom_id', String(newsroomId));
+    return url + suffix;
 }
