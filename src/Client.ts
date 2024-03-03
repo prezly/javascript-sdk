@@ -1,4 +1,5 @@
-import { ApiClient, DeferredJobsApiClient, type Fetch } from './api';
+import type { DeferredJobsApiClient } from './api';
+import { createApiClient, createDeferredJobsApiClient, type Fetch } from './api';
 import { Contacts } from './endpoints';
 import {
     Accounts,
@@ -76,9 +77,9 @@ export function createClient({
     fetch,
 }: ClientOptions): Client {
     const http = createHttpClient({ fetch });
-    const api = new DeferredJobsApiClient(
+    const api = createDeferredJobsApiClient(
         http,
-        new ApiClient(http, {
+        createApiClient(http, {
             accessToken,
             baseUrl,
             headers,

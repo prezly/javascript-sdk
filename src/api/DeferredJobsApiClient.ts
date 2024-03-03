@@ -46,59 +46,55 @@ async function handleDeferredJob<V = any, P = any>(
     return ProgressPromise.resolve(response.payload);
 }
 
-export class DeferredJobsApiClient {
-    private readonly http: HttpClient;
-    private readonly api: ApiClient;
+export type DeferredJobsApiClient = ReturnType<typeof createDeferredJobsApiClient>;
 
-    constructor(httpClient: HttpClient, apiClient: ApiClient) {
-        this.http = httpClient;
-        this.api = apiClient;
-    }
-
-    public get<V = any, P = any>(
+export function createDeferredJobsApiClient(http: HttpClient, api: ApiClient) {
+    function get<V = any, P = any>(
         endpointUri: string,
         { headers, query }: Params = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(this.http, this.api.get<V>(endpointUri, { headers, query }));
+        return handleDeferredJob<V, P>(http, api.get<V>(endpointUri, { headers, query }));
     }
 
-    public post<V = any, P = any>(
+    function post<V = any, P = any>(
+        endpointUri: string,
+        { headers, payload, query }: ParamsWithPayload = {},
+    ): ProgressPromise<V, P> {
+        return handleDeferredJob<V, P>(http, api.post<V>(endpointUri, { headers, payload, query }));
+    }
+
+    function put<V = any, P = any>(
+        endpointUri: string,
+        { headers, payload, query }: ParamsWithPayload = {},
+    ): ProgressPromise<V, P> {
+        return handleDeferredJob<V, P>(http, api.put<V>(endpointUri, { headers, payload, query }));
+    }
+
+    function patch<V = any, P = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): ProgressPromise<V, P> {
         return handleDeferredJob<V, P>(
-            this.http,
-            this.api.post<V>(endpointUri, { headers, payload, query }),
+            http,
+            api.patch<V>(endpointUri, { headers, payload, query }),
         );
     }
 
-    public put<V = any, P = any>(
+    function doDelete<V = any, P = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): ProgressPromise<V, P> {
         return handleDeferredJob<V, P>(
-            this.http,
-            this.api.put<V>(endpointUri, { headers, payload, query }),
+            http,
+            api.delete<V>(endpointUri, { headers, payload, query }),
         );
     }
 
-    public patch<V = any, P = any>(
-        endpointUri: string,
-        { headers, payload, query }: ParamsWithPayload = {},
-    ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(
-            this.http,
-            this.api.patch<V>(endpointUri, { headers, payload, query }),
-        );
-    }
-
-    public delete<V = any, P = any>(
-        endpointUri: string,
-        { headers, payload, query }: ParamsWithPayload = {},
-    ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(
-            this.http,
-            this.api.delete<V>(endpointUri, { headers, payload, query }),
-        );
-    }
+    return {
+        get,
+        post,
+        put,
+        patch,
+        delete: doDelete,
+    };
 }
