@@ -2,16 +2,14 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { License } from '../../types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async get(): Promise<License> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function get(): Promise<License> {
         const url = routing.licenseUrl;
-        const { license } = await this.apiClient.get<{ license: License }>(`${url}/self`);
+        const { license } = await api.get<{ license: License }>(`${url}/self`);
         return license;
     }
+
+    return { get };
 }

@@ -4,15 +4,13 @@ import type { JobState } from '../../types';
 
 import type { StatusResponse } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async get(id: string): Promise<JobState> {
-        const { job } = await this.apiClient.get<StatusResponse>(`${routing.jobsUrl}/${id}`);
+export function createClient(api: DeferredJobsApiClient) {
+    async function get(id: string): Promise<JobState> {
+        const { job } = await api.get<StatusResponse>(`${routing.jobsUrl}/${id}`);
         return job.state;
     }
+
+    return { get };
 }

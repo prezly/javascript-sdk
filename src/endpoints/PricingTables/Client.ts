@@ -4,22 +4,23 @@ import { routing } from '../../routing';
 import type { PricingTable } from './types';
 import type { TableId } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async list(): Promise<PricingTable[]> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(): Promise<PricingTable[]> {
         const url = routing.pricingTablesUrl;
-        const { tables } = await this.apiClient.get<{ tables: PricingTable[] }>(url);
+        const { tables } = await api.get<{ tables: PricingTable[] }>(url);
         return tables;
     }
 
-    public async get(tableId: TableId.STANDARD): Promise<PricingTable> {
+    async function get(tableId: TableId.STANDARD): Promise<PricingTable> {
         const url = routing.pricingTablesUrl;
-        const { table } = await this.apiClient.get<{ table: PricingTable }>(`${url}/${tableId}`);
+        const { table } = await api.get<{ table: PricingTable }>(`${url}/${tableId}`);
         return table;
     }
+
+    return {
+        list,
+        get,
+    };
 }

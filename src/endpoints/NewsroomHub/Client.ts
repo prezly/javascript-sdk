@@ -6,47 +6,54 @@ import type { ListResponse, LinkOptions, HubMember, LinkManyRequest } from './ty
 
 type NewsroomId = NewsroomRef['uuid'] | NewsroomRef['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async list(newsroomId: NewsroomId): Promise<HubMember[]> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(newsroomId: NewsroomId): Promise<HubMember[]> {
         const url = generateUrl(newsroomId);
-        const { members } = await this.apiClient.get<ListResponse>(url);
+        const { members } = await api.get<ListResponse>(url);
         return members;
     }
 
-    public async linkMany(newsroomId: NewsroomId, payload: LinkManyRequest): Promise<HubMember[]> {
-        const url = generateUrl(newsroomId);
-        const { members } = await this.apiClient.post<ListResponse>(url, { payload });
-        return members;
-    }
-
-    public async member(newsroomId: NewsroomId, memberId: NewsroomId): Promise<HubMember> {
+    async function member(newsroomId: NewsroomId, memberId: NewsroomId): Promise<HubMember> {
         const url = generateUrl(newsroomId, memberId);
-        const { member } = await this.apiClient.get<{ member: HubMember }>(url);
+        const { member } = await api.get<{ member: HubMember }>(url);
         return member;
     }
 
-    public async link(
+    async function link(
         newsroomId: NewsroomId,
         memberId: NewsroomId,
         options: LinkOptions = {},
     ): Promise<HubMember> {
         const { is_displaying_stories_in_hub } = options;
         const url = generateUrl(newsroomId, memberId);
-        const { member } = await this.apiClient.post<{ member: HubMember }>(url, {
+        const { member } = await api.post<{ member: HubMember }>(url, {
             payload: { is_displaying_stories_in_hub },
         });
         return member;
     }
 
-    public async unlink(newsroomId: NewsroomId, memberId: NewsroomId): Promise<void> {
-        await this.apiClient.delete(generateUrl(newsroomId, memberId));
+    async function linkMany(
+        newsroomId: NewsroomId,
+        payload: LinkManyRequest,
+    ): Promise<HubMember[]> {
+        const url = generateUrl(newsroomId);
+        const { members } = await api.post<ListResponse>(url, { payload });
+        return members;
     }
+
+    async function unlink(newsroomId: NewsroomId, memberId: NewsroomId): Promise<void> {
+        await api.delete(generateUrl(newsroomId, memberId));
+    }
+
+    return {
+        list,
+        member,
+        link,
+        linkMany,
+        unlink,
+    };
 }
 
 function generateUrl(newsroomId: NewsroomId, memberId?: NewsroomId) {

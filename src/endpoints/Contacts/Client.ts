@@ -19,19 +19,15 @@ import type {
 type TagId = number;
 type TagName = string;
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
+export function createClient(api: DeferredJobsApiClient) {
     /**
      * List Contacts Exports with sorting, and pagination.
      */
-    async list(options: ListOptions): Promise<ListResponse> {
+    async function list(options: ListOptions): Promise<ListResponse> {
         const { limit, offset, sortOrder } = options;
-        const { contacts, pagination, sort } = await this.apiClient.get<{
+        const { contacts, pagination, sort } = await api.get<{
             contacts: Contact[];
             pagination: Pagination;
             sort: string;
@@ -49,10 +45,10 @@ export class Client {
     /**
      * List Contacts Exports with sorting, pagination, and filtering.
      */
-    async search(options: SearchOptions): Promise<SearchResponse> {
+    async function search(options: SearchOptions): Promise<SearchResponse> {
         const { limit, offset, query, sortOrder } = options;
         const url = `${routing.contactsUrl}/search`;
-        const { contacts, pagination, sort } = await this.apiClient.post<{
+        const { contacts, pagination, sort } = await api.post<{
             contacts: Contact[];
             pagination: Pagination;
             sort: string;
@@ -68,15 +64,15 @@ export class Client {
         return { contacts, pagination, sortOrder: SortOrder.parse(sort) };
     }
 
-    async get(id: Contact['id']): Promise<Contact> {
+    async function get(id: Contact['id']): Promise<Contact> {
         const url = `${routing.contactsUrl}/${id}`;
-        const { contact } = await this.apiClient.get<{ contact: Contact }>(url);
+        const { contact } = await api.get<{ contact: Contact }>(url);
 
         return contact;
     }
 
-    async getMany(ids: Contact['id'][]): Promise<Contact[]> {
-        const { contacts } = await this.search({
+    async function getMany(ids: Contact['id'][]): Promise<Contact[]> {
+        const { contacts } = await search({
             query: { id: { $in: ids } },
             limit: ids.length,
         });
@@ -84,24 +80,24 @@ export class Client {
         return contacts.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
     }
 
-    async create(payload: CreateRequest): Promise<Contact> {
-        const { contact } = await this.apiClient.post<{ contact: Contact }>(routing.contactsUrl, {
+    async function create(payload: CreateRequest): Promise<Contact> {
+        const { contact } = await api.post<{ contact: Contact }>(routing.contactsUrl, {
             payload,
         });
         return contact;
     }
 
-    async update(id: Contact['id'], payload: UpdateRequest): Promise<Contact> {
+    async function update(id: Contact['id'], payload: UpdateRequest): Promise<Contact> {
         const url = `${routing.contactsUrl}/${id}`;
-        const { contact } = await this.apiClient.patch<{ contact: Contact }>(url, {
+        const { contact } = await api.patch<{ contact: Contact }>(url, {
             payload,
         });
         return contact;
     }
 
-    async tag(id: Contact['id'], tags: (TagId | TagName)[]): Promise<Contact> {
+    async function tag(id: Contact['id'], tags: (TagId | TagName)[]): Promise<Contact> {
         const url = `${routing.contactsUrl}/${id}`;
-        const { contact } = await this.apiClient.patch<{ contact: Contact }>(url, {
+        const { contact } = await api.patch<{ contact: Contact }>(url, {
             payload: {
                 '+tags': tags,
             },
@@ -109,9 +105,9 @@ export class Client {
         return contact;
     }
 
-    async untag(id: Contact['id'], tags: (TagId | TagName)[]): Promise<Contact> {
+    async function untag(id: Contact['id'], tags: (TagId | TagName)[]): Promise<Contact> {
         const url = `${routing.contactsUrl}/${id}`;
-        const { contact } = await this.apiClient.patch<{ contact: Contact }>(url, {
+        const { contact } = await api.patch<{ contact: Contact }>(url, {
             payload: {
                 '-tags': tags,
             },
@@ -119,29 +115,50 @@ export class Client {
         return contact;
     }
 
-    async bulkTag(selector: BulkSelector, tags: (TagId | TagName)[]): ProgressPromise<undefined> {
+    async function bulkTag(
+        selector: BulkSelector,
+        tags: (TagId | TagName)[],
+    ): ProgressPromise<undefined> {
         const { scope, query } = selector;
-        return this.apiClient.patch(routing.contactsUrl, {
+        return api.patch(routing.contactsUrl, {
             payload: { query, scope, '+tags': tags },
         });
     }
 
-    async bulkUntag(selector: BulkSelector, tags: (TagId | TagName)[]): ProgressPromise<undefined> {
+    async function bulkUntag(
+        selector: BulkSelector,
+        tags: (TagId | TagName)[],
+    ): ProgressPromise<undefined> {
         const { query, scope } = selector;
-        return this.apiClient.patch(routing.contactsUrl, {
+        return api.patch(routing.contactsUrl, {
             payload: { query, scope, '-tags': tags },
         });
     }
 
-    async delete(id: Contact['id']) {
+    async function doDelete(id: Contact['id']) {
         const url = `${routing.contactsUrl}/${id}`;
-        await this.apiClient.delete(url);
+        await api.delete(url);
     }
 
-    async bulkDelete(selector: BulkSelector) {
+    async function bulkDelete(selector: BulkSelector) {
         const { query, scope } = selector;
-        return this.apiClient.delete<BulkDeleteResponse>(routing.contactsUrl, {
+        return api.delete<BulkDeleteResponse>(routing.contactsUrl, {
             payload: { query, scope },
         });
     }
+
+    return {
+        list,
+        search,
+        get,
+        getMany,
+        create,
+        update,
+        tag,
+        untag,
+        bulkTag,
+        bulkUntag,
+        delete: doDelete,
+        bulkDelete,
+    };
 }

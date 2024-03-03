@@ -16,20 +16,16 @@ import type {
 
 type CoverageId = CoverageEntry['uuid'] | CoverageEntry['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async list(options: ListOptions = {}, scope?: Scope): Promise<ListResponse> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(options: ListOptions = {}, scope?: Scope): Promise<ListResponse> {
         const { includeDeleted, limit, offset, sortOrder } = options;
         // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
             : routing.coverageUrl;
-        return this.apiClient.get<ListResponse>(url, {
+        return api.get<ListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 limit,
@@ -39,14 +35,14 @@ export class Client {
         });
     }
 
-    async search(options: SearchOptions = {}, scope?: Scope): Promise<ListResponse> {
+    async function search(options: SearchOptions = {}, scope?: Scope): Promise<ListResponse> {
         const { includeDeleted, query, limit, offset, sortOrder } = options;
         // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
             : routing.coverageUrl;
         // TODO: Introduce dedicated Search POST API
-        return this.apiClient.get<ListResponse>(url, {
+        return api.get<ListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 query: Query.stringify(query),
@@ -57,9 +53,9 @@ export class Client {
         });
     }
 
-    async get(id: CoverageId, includeDeleted = false): Promise<CoverageEntry> {
+    async function get(id: CoverageId, includeDeleted = false): Promise<CoverageEntry> {
         const url = `${routing.coverageUrl}/${id}`;
-        const { coverage } = await this.apiClient.get<{ coverage: CoverageEntry }>(url, {
+        const { coverage } = await api.get<{ coverage: CoverageEntry }>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
             },
@@ -67,46 +63,56 @@ export class Client {
         return coverage;
     }
 
-    async getByExternalReferenceId(externalReferenceId: string): Promise<CoverageEntry | null> {
+    async function getByExternalReferenceId(
+        externalReferenceId: string,
+    ): Promise<CoverageEntry | null> {
         const query = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
-        const { coverage } = await this.search({
+        const { coverage } = await search({
             includeDeleted: true,
             query,
         });
         return coverage[0] || null;
     }
 
-    async create(payload: CreateRequest): Promise<CoverageEntry> {
-        const { coverage } = await this.apiClient.post<{ coverage: CoverageEntry }>(
-            routing.coverageUrl,
-            {
-                payload,
-            },
-        );
+    async function create(payload: CreateRequest): Promise<CoverageEntry> {
+        const { coverage } = await api.post<{ coverage: CoverageEntry }>(routing.coverageUrl, {
+            payload,
+        });
         return coverage;
     }
 
-    async update(id: CoverageId, payload: UpdateRequest): Promise<CoverageEntry> {
-        const { coverage } = await this.apiClient.patch<{ coverage: CoverageEntry }>(
+    async function update(id: CoverageId, payload: UpdateRequest): Promise<CoverageEntry> {
+        const { coverage } = await api.patch<{ coverage: CoverageEntry }>(
             `${routing.coverageUrl}/${id}`,
             { payload },
         );
         return coverage;
     }
 
-    async remove(id: CoverageId): Promise<void> {
-        return this.apiClient.delete(`${routing.coverageUrl}/${id}`);
+    async function doDelete(id: CoverageId): Promise<void> {
+        return api.delete(`${routing.coverageUrl}/${id}`);
     }
 
-    async bulkRemove(
+    async function bulkDelete(
         options: Partial<{
             selection: SelectionValue;
             query: string;
         }>,
     ): ProgressPromise<{ records_deleted_number: number }> {
         const { selection, query } = options;
-        return this.apiClient.delete(routing.coverageUrl, {
+        return api.delete(routing.coverageUrl, {
             payload: { selection, query },
         });
     }
+
+    return {
+        list,
+        search,
+        get,
+        getByExternalReferenceId,
+        create,
+        update,
+        delete: doDelete,
+        bulkDelete,
+    };
 }

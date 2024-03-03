@@ -4,20 +4,21 @@ import type { Plan } from '../../types';
 
 import type { SignupRequest, SignupResponse } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async signup(payload: SignupRequest): Promise<SignupResponse> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function signup(payload: SignupRequest): Promise<SignupResponse> {
         const url = `${routing.billing}/signup`;
-        return this.apiClient.post<SignupResponse>(url, { payload });
+        return api.post<SignupResponse>(url, { payload });
     }
 
-    async getPlan(): Promise<Plan> {
-        const { plan } = await this.apiClient.get<{ plan: Plan }>(`${routing.billing}/plan`);
+    async function getPlan(): Promise<Plan> {
+        const { plan } = await api.get<{ plan: Plan }>(`${routing.billing}/plan`);
         return plan;
     }
+
+    return {
+        signup,
+        getPlan,
+    };
 }

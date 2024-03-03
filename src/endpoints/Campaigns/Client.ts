@@ -15,16 +15,12 @@ import type {
     SearchOptions,
 } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async list(options: SearchOptions): Promise<ListResponse> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(options: SearchOptions): Promise<ListResponse> {
         const { query, limit, offset, sortOrder } = options;
-        return this.apiClient.get<ListResponse>(routing.campaignsUrl, {
+        return api.get<ListResponse>(routing.campaignsUrl, {
             query: {
                 limit,
                 offset,
@@ -34,9 +30,9 @@ export class Client {
         });
     }
 
-    async search(options: SearchOptions): Promise<ListResponse> {
+    async function search(options: SearchOptions): Promise<ListResponse> {
         const { query, limit, offset, sortOrder } = options;
-        return this.apiClient.post<ListResponse>(routing.campaignsUrl, {
+        return api.post<ListResponse>(routing.campaignsUrl, {
             payload: {
                 limit,
                 offset,
@@ -46,30 +42,30 @@ export class Client {
         });
     }
 
-    async get(id: Campaign['id']): Promise<CampaignResponse> {
-        return this.apiClient.get<CampaignResponse>(`${routing.campaignsUrl}/${id}`);
+    async function get(id: Campaign['id']): Promise<CampaignResponse> {
+        return api.get<CampaignResponse>(`${routing.campaignsUrl}/${id}`);
     }
 
-    async duplicate(id: Campaign['id']): Promise<CampaignResponse> {
-        return this.apiClient.post<CampaignResponse>(`${routing.campaignsUrl}/${id}/duplicate`);
+    async function duplicate(id: Campaign['id']): Promise<CampaignResponse> {
+        return api.post<CampaignResponse>(`${routing.campaignsUrl}/${id}/duplicate`);
     }
 
-    async delete(id: Campaign['id']): Promise<void> {
-        return this.apiClient.delete(`${routing.campaignsUrl}/${id}`);
+    async function doDelete(id: Campaign['id']): Promise<void> {
+        return api.delete(`${routing.campaignsUrl}/${id}`);
     }
 
-    async test(id: Campaign['id'], emails: string[]): Promise<void> {
-        return this.apiClient.post(`${routing.campaignsUrl}/${id}/test`, {
+    async function test(id: Campaign['id'], emails: string[]): Promise<void> {
+        return api.post(`${routing.campaignsUrl}/${id}/test`, {
             payload: { emails },
         });
     }
 
-    async send(id: Campaign['id']): Promise<void> {
-        return this.apiClient.post(`${routing.campaignsUrl}/${id}/send`);
+    async function send(id: Campaign['id']): Promise<void> {
+        return api.post(`${routing.campaignsUrl}/${id}/send`);
     }
 
-    async schedule(id: Campaign['id'], sendAt: Date): Promise<Campaign> {
-        const { campaign } = await this.apiClient.post<{ campaign: Campaign }>(
+    async function schedule(id: Campaign['id'], sendAt: Date): Promise<Campaign> {
+        const { campaign } = await api.post<{ campaign: Campaign }>(
             `${routing.campaignsUrl}/${id}/schedule`,
             {
                 payload: {
@@ -80,22 +76,36 @@ export class Client {
         return campaign;
     }
 
-    async unschedule(id: Campaign['id']): Promise<Campaign> {
-        const { campaign } = await this.apiClient.post<{ campaign: Campaign }>(
+    async function unschedule(id: Campaign['id']): Promise<Campaign> {
+        const { campaign } = await api.post<{ campaign: Campaign }>(
             `${routing.campaignsUrl}/${id}/unschedule`,
         );
         return campaign;
     }
 
-    async create(
+    async function create(
         payload: CreateRequest,
     ): ProgressPromise<RecipientsOperationResponse, { recipients_number: number }> {
-        return this.apiClient.post<RecipientsOperationResponse>(routing.campaignsUrl, {
+        return api.post<RecipientsOperationResponse>(routing.campaignsUrl, {
             payload,
         });
     }
 
-    async update(id: Campaign['id'], payload: UpdateRequest): Promise<CampaignResponse> {
-        return this.apiClient.patch<CampaignResponse>(`${routing.campaignsUrl}/${id}`, { payload });
+    async function update(id: Campaign['id'], payload: UpdateRequest): Promise<CampaignResponse> {
+        return api.patch<CampaignResponse>(`${routing.campaignsUrl}/${id}`, { payload });
     }
+
+    return {
+        list,
+        search,
+        get,
+        duplicate,
+        test,
+        send,
+        schedule,
+        unschedule,
+        create,
+        update,
+        delete: doDelete,
+    };
 }

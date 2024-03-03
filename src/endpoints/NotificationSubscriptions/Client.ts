@@ -4,28 +4,29 @@ import type { NotificationSubscription } from '../../types';
 
 import type { UpdateRequest } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async list(): Promise<NotificationSubscription[]> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(): Promise<NotificationSubscription[]> {
         const url = routing.notificationSubscriptionsUrl;
-        const { subscriptions } = await this.apiClient.get<{
+        const { subscriptions } = await api.get<{
             subscriptions: NotificationSubscription[];
         }>(url);
         return subscriptions;
     }
 
-    public async update(payload: UpdateRequest): Promise<NotificationSubscription[]> {
+    async function update(payload: UpdateRequest): Promise<NotificationSubscription[]> {
         const url = routing.notificationSubscriptionsUrl;
-        const { subscriptions } = await this.apiClient.patch<{
+        const { subscriptions } = await api.patch<{
             subscriptions: NotificationSubscription[];
         }>(url, {
             payload,
         });
         return subscriptions;
     }
+
+    return {
+        list,
+        update,
+    };
 }

@@ -46,58 +46,48 @@ type InferExtraFields<T> = T extends Required<IncludeOptions<infer I>>
 
 type MaybeArray<T> = T | T[];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async list<Options extends ListOptions>(
+export function createClient(api: DeferredJobsApiClient) {
+    async function list<Options extends ListOptions>(
         options?: Exactly<Options, ListOptions>,
     ): Promise<ListResponse<Story & InferExtraFields<Options>>> {
         const { search, limit, offset, sortOrder, include, formats } = options ?? {};
 
-        return this.apiClient.get<ListResponse<Story & InferExtraFields<Options>>>(
-            routing.storiesUrl,
-            {
-                headers: acceptedFormatsHeader(formats),
-                query: {
-                    search,
-                    limit,
-                    offset,
-                    sort: SortOrder.stringify(sortOrder),
-                    include: include ? include.join(',') : undefined,
-                },
+        return api.get<ListResponse<Story & InferExtraFields<Options>>>(routing.storiesUrl, {
+            headers: acceptedFormatsHeader(formats),
+            query: {
+                search,
+                limit,
+                offset,
+                sort: SortOrder.stringify(sortOrder),
+                include: include ? include.join(',') : undefined,
             },
-        );
+        });
     }
 
-    async search<Options extends SearchOptions>(
+    async function search<Options extends SearchOptions>(
         options?: Exactly<Options, SearchOptions>,
     ): Promise<ListResponse<Story & InferExtraFields<Options>>> {
         const { search, limit, offset, sortOrder, include, query, formats } = options ?? {};
 
-        return this.apiClient.post<ListResponse<Story & InferExtraFields<Options>>>(
-            routing.storiesSearchUrl,
-            {
-                headers: acceptedFormatsHeader(formats),
-                payload: {
-                    search,
-                    query,
-                    limit,
-                    offset,
-                    sort: SortOrder.stringify(sortOrder),
-                    include: include ? include.join(',') : undefined,
-                },
+        return api.post<ListResponse<Story & InferExtraFields<Options>>>(routing.storiesSearchUrl, {
+            headers: acceptedFormatsHeader(formats),
+            payload: {
+                search,
+                query,
+                limit,
+                offset,
+                sort: SortOrder.stringify(sortOrder),
+                include: include ? include.join(',') : undefined,
             },
-        );
+        });
     }
 
     /**
      * Get story by UUID.
      */
-    async get<Options extends IncludeOptions & { formats?: Formats }>(
+    async function get<Options extends IncludeOptions & { formats?: Formats }>(
         id: Story['uuid'],
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>>;
@@ -105,7 +95,7 @@ export class Client {
     /**
      * Get multiple stories by UUIDs.
      */
-    async get<Options extends IncludeOptions & { formats?: Formats }>(
+    async function get<Options extends IncludeOptions & { formats?: Formats }>(
         ids: Story['uuid'][],
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<(ExtendedStory & InferExtraFields<Options>)[]>;
@@ -114,7 +104,7 @@ export class Client {
      * Get story by deprecated numeric ID, or UUID.
      * @deprecated Please use UUID instead.
      */
-    async get<Options extends IncludeOptions & { formats?: Formats }>(
+    async function get<Options extends IncludeOptions & { formats?: Formats }>(
         id: Story['id'] | Story['uuid'],
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>>;
@@ -123,7 +113,7 @@ export class Client {
      * Get multiple stories by numeric IDs.
      * @deprecated Please use UUID instead.
      */
-    async get<Options extends IncludeOptions & { formats?: Formats }>(
+    async function get<Options extends IncludeOptions & { formats?: Formats }>(
         ids: Story['id'][],
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<(ExtendedStory & InferExtraFields<Options>)[]>;
@@ -131,7 +121,7 @@ export class Client {
     /**
      * Implementation
      */
-    async get(
+    async function get(
         arg: Story['id'] | Story['uuid'] | Story['id'][] | Story['uuid'][],
         options?: IncludeOptions & { formats?: Formats },
     ): Promise<MaybeArray<ExtendedStory & Partial<Story.ExtraFields>>> {
@@ -145,7 +135,7 @@ export class Client {
         }
 
         if (isArray && typeof arg[0] === 'number') {
-            const { stories } = await this.search({
+            const { stories } = await search({
                 limit: arg.length,
                 query: { id: { $in: arg } },
                 include: [...EXTENDED_STORY_INCLUDED_EXTRA_FIELDS, ...(include ?? [])],
@@ -155,7 +145,7 @@ export class Client {
         }
 
         if (isArray && typeof arg[0] === 'string') {
-            const { stories } = await this.search({
+            const { stories } = await search({
                 limit: arg.length,
                 query: { uuid: { $in: arg } },
                 include: [...EXTENDED_STORY_INCLUDED_EXTRA_FIELDS, ...(include ?? [])],
@@ -165,7 +155,7 @@ export class Client {
             return stories;
         }
 
-        const { story } = await this.apiClient.get<{
+        const { story } = await api.get<{
             story: ExtendedStory & Partial<Story.ExtraFields>;
         }>(`${routing.storiesUrl}/${arg}`, {
             headers: acceptedFormatsHeader(formats),
@@ -174,7 +164,7 @@ export class Client {
         return story;
     }
 
-    async getBySlug<Options extends IncludeOptions & { formats?: Formats; query?: Query }>(
+    async function getBySlug<Options extends IncludeOptions & { formats?: Formats; query?: Query }>(
         slug: Story['slug'],
         options?: Exactly<Options, IncludeOptions & { formats?: Formats; query?: Query }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
@@ -184,7 +174,7 @@ export class Client {
 
         const { include, query, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(`${routing.storiesUrl}/by-slug/${slug}`, {
             headers: acceptedFormatsHeader(formats),
@@ -195,13 +185,13 @@ export class Client {
         return story;
     }
 
-    async create<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
+    async function create<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         payload: CreateRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
         const { include, formats, force = false } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(routing.storiesUrl, {
             headers: acceptedFormatsHeader(formats),
@@ -214,7 +204,7 @@ export class Client {
         return story;
     }
 
-    async duplicate<Options extends IncludeOptions & { formats?: Formats }>(
+    async function duplicate<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
@@ -222,7 +212,7 @@ export class Client {
 
         const url = `${routing.storiesUrl}/${id}/duplicate`;
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -232,7 +222,7 @@ export class Client {
         return story;
     }
 
-    async translate<Options extends IncludeOptions & { formats?: Formats }>(
+    async function translate<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload: TranslateRequest = {},
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -242,7 +232,7 @@ export class Client {
 
         const url = `${routing.storiesUrl}/${id}/translate`;
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -255,7 +245,7 @@ export class Client {
         return story;
     }
 
-    async move<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
+    async function move<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         id: StoryId,
         payload: MoveRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
@@ -268,7 +258,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/move`;
 
         try {
-            const { story } = await this.apiClient.post<{
+            const { story } = await api.post<{
                 story: ExtendedStory & InferExtraFields<Options>;
             }>(url, {
                 headers: acceptedFormatsHeader(formats),
@@ -288,7 +278,7 @@ export class Client {
         }
     }
 
-    async update<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
+    async function update<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         id: StoryId,
         payload: UpdateRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
@@ -296,7 +286,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}`;
         const { include, formats, force = false } = options ?? {};
 
-        const { story } = await this.apiClient.patch<{
+        const { story } = await api.patch<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -312,7 +302,7 @@ export class Client {
     /**
      * This operation is only allowed for V3 stories
      */
-    async autosave<Options extends IncludeOptions & { formats?: Formats }>(
+    async function autosave<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload: AutosaveRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -320,7 +310,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/autosave`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.patch<{
+        const { story } = await api.patch<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -333,7 +323,7 @@ export class Client {
     /**
      * This operation is only allowed for V3 stories
      */
-    async revert<Options extends IncludeOptions & { formats?: Formats }>(
+    async function revert<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload?: RevertRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -341,7 +331,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/revert`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -351,7 +341,7 @@ export class Client {
         return story;
     }
 
-    async publish<Options extends IncludeOptions & { formats?: Formats }>(
+    async function publish<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload?: PublishRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -359,7 +349,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/publish`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -369,7 +359,7 @@ export class Client {
         return story;
     }
 
-    async unpublish<Options extends IncludeOptions & { formats?: Formats }>(
+    async function unpublish<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload?: UnpublishRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -377,7 +367,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -387,7 +377,7 @@ export class Client {
         return story;
     }
 
-    async schedule<Options extends IncludeOptions & { formats?: Formats }>(
+    async function schedule<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload?: ScheduleRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -395,7 +385,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/schedule`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -405,7 +395,7 @@ export class Client {
         return story;
     }
 
-    async unschedule<Options extends IncludeOptions & { formats?: Formats }>(
+    async function unschedule<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         payload?: UnscheduleRequest,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
@@ -413,7 +403,7 @@ export class Client {
         const url = `${routing.storiesUrl}/${id}/unpublish`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -423,14 +413,14 @@ export class Client {
         return story;
     }
 
-    async pin<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
+    async function pin<Options extends IncludeOptions & { formats?: Formats; force?: boolean }>(
         id: StoryId,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats; force?: boolean }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
         const url = `${routing.storiesUrl}/${id}/pin`;
         const { include, formats, force = false } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -442,14 +432,14 @@ export class Client {
         return story;
     }
 
-    async unpin<Options extends IncludeOptions & { formats?: Formats }>(
+    async function unpin<Options extends IncludeOptions & { formats?: Formats }>(
         id: StoryId,
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
         const url = `${routing.storiesUrl}/${id}/unpin`;
         const { include, formats } = options ?? {};
 
-        const { story } = await this.apiClient.post<{
+        const { story } = await api.post<{
             story: ExtendedStory & InferExtraFields<Options>;
         }>(url, {
             headers: acceptedFormatsHeader(formats),
@@ -458,15 +448,15 @@ export class Client {
         return story;
     }
 
-    async delete(id: StoryId): Promise<void> {
+    async function doDelete(id: StoryId): Promise<void> {
         const url = `${routing.storiesUrl}/${id}`;
-        await this.apiClient.delete(url);
+        await api.delete(url);
     }
 
-    async preview(id: StoryId, options?: PreviewOptions): Promise<PreviewResponse> {
+    async function preview(id: StoryId, options?: PreviewOptions): Promise<PreviewResponse> {
         const url = `${routing.storiesUrl}/${id}/preview`;
 
-        const { preview } = await this.apiClient.get<{ preview: PreviewResponse }>(url, {
+        const { preview } = await api.get<{ preview: PreviewResponse }>(url, {
             query: {
                 alignment: options?.alignment,
                 appearance: options?.appearance,
@@ -475,6 +465,28 @@ export class Client {
         });
         return preview;
     }
+
+    return {
+        list,
+        search,
+        get,
+        getBySlug,
+        create,
+        duplicate,
+        translate,
+        move,
+        update,
+        autosave,
+        revert,
+        publish,
+        unpublish,
+        schedule,
+        unschedule,
+        pin,
+        unpin,
+        delete: doDelete,
+        preview,
+    };
 }
 
 function acceptedFormatsHeader(formats: Story.FormatVersion[] = []): Record<string, string> {
