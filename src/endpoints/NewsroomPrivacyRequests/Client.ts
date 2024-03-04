@@ -9,14 +9,10 @@ import type {
     OtherPrivacyRequestCreateRequest,
 } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async create(
+export function createClient(api: DeferredJobsApiClient) {
+    async function create(
         newsroomId: Newsroom['uuid'],
         payload:
             | DeletePrivacyRequestCreateRequest
@@ -25,23 +21,27 @@ export class Client {
             | OtherPrivacyRequestCreateRequest,
     ): Promise<PrivacyRequest> {
         const url = routing.newsroomPrivacyRequestsUrl.replace(':newsroom_id', String(newsroomId));
-        const { privacy_request } = await this.apiClient.post<{ privacy_request: PrivacyRequest }>(
-            url,
-            {
-                payload,
-            },
-        );
+        const { privacy_request } = await api.post<{
+            privacy_request: PrivacyRequest;
+        }>(url, {
+            payload,
+        });
         return privacy_request;
     }
 
-    public async confirm(
+    async function confirm(
         newsroomId: Newsroom['uuid'],
         privacyRequestId: PrivacyRequest['id'],
     ): Promise<PrivacyRequest> {
         const url = routing.newsroomPrivacyRequestsUrl.replace(':newsroom_id', String(newsroomId));
-        const { privacy_request } = await this.apiClient.post<{ privacy_request: PrivacyRequest }>(
-            `${url}/${privacyRequestId}/confirm`,
-        );
+        const { privacy_request } = await api.post<{
+            privacy_request: PrivacyRequest;
+        }>(`${url}/${privacyRequestId}/confirm`);
         return privacy_request;
     }
+
+    return {
+        create,
+        confirm,
+    };
 }

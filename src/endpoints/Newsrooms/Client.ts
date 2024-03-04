@@ -13,15 +13,16 @@ import type {
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async list({ limit, offset, search, sortOrder }: ListOptions = {}): Promise<ListResponse> {
-        return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list({
+        limit,
+        offset,
+        search,
+        sortOrder,
+    }: ListOptions = {}): Promise<ListResponse> {
+        return api.get<ListResponse>(routing.newsroomsUrl, {
             query: {
                 limit,
                 offset,
@@ -31,10 +32,10 @@ export class Client {
         });
     }
 
-    async search(options: SearchOptions = {}): Promise<ListResponse> {
+    async function search(options: SearchOptions = {}): Promise<ListResponse> {
         const { query, limit, offset, search, sortOrder } = options;
         // TODO: Introduce dedicated Search POST API
-        return this.apiClient.get<ListResponse>(routing.newsroomsUrl, {
+        return api.get<ListResponse>(routing.newsroomsUrl, {
             query: {
                 query: Query.stringify(query),
                 limit,
@@ -45,25 +46,20 @@ export class Client {
         });
     }
 
-    async get(id: NewsroomId): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.get<{ newsroom: Newsroom }>(
-            `${routing.newsroomsUrl}/${id}`,
-        );
+    async function get(id: NewsroomId): Promise<Newsroom> {
+        const { newsroom } = await api.get<{ newsroom: Newsroom }>(`${routing.newsroomsUrl}/${id}`);
         return newsroom;
     }
 
-    async create(payload: CreateRequest): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
-            routing.newsroomsUrl,
-            {
-                payload,
-            },
-        );
+    async function create(payload: CreateRequest): Promise<Newsroom> {
+        const { newsroom } = await api.post<{ newsroom: Newsroom }>(routing.newsroomsUrl, {
+            payload,
+        });
         return newsroom;
     }
 
-    async update(id: NewsroomId, payload: UpdateRequest): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.patch<{ newsroom: Newsroom }>(
+    async function update(id: NewsroomId, payload: UpdateRequest): Promise<Newsroom> {
+        const { newsroom } = await api.patch<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}`,
             {
                 payload,
@@ -72,35 +68,48 @@ export class Client {
         return newsroom;
     }
 
-    async archive(id: NewsroomId): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
+    async function archive(id: NewsroomId): Promise<Newsroom> {
+        const { newsroom } = await api.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/archive`,
         );
         return newsroom;
     }
 
-    async unarchive(id: NewsroomId): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
+    async function unarchive(id: NewsroomId): Promise<Newsroom> {
+        const { newsroom } = await api.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/unarchive`,
         );
         return newsroom;
     }
 
-    async remove(id: NewsroomId): Promise<void> {
-        return this.apiClient.delete(`${routing.newsroomsUrl}/${id}`);
+    async function doDelete(id: NewsroomId): Promise<void> {
+        return api.delete(`${routing.newsroomsUrl}/${id}`);
     }
 
-    async takeOffline(id: NewsroomId): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
+    async function takeOffline(id: NewsroomId): Promise<Newsroom> {
+        const { newsroom } = await api.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/offline`,
         );
         return newsroom;
     }
 
-    async takeOnline(id: NewsroomId): Promise<Newsroom> {
-        const { newsroom } = await this.apiClient.post<{ newsroom: Newsroom }>(
+    async function takeOnline(id: NewsroomId): Promise<Newsroom> {
+        const { newsroom } = await api.post<{ newsroom: Newsroom }>(
             `${routing.newsroomsUrl}/${id}/online`,
         );
         return newsroom;
     }
+
+    return {
+        list,
+        search,
+        get,
+        create,
+        update,
+        archive,
+        unarchive,
+        delete: doDelete,
+        takeOnline,
+        takeOffline,
+    };
 }

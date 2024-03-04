@@ -10,50 +10,40 @@ import type {
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async subscribeToNewsroom<Type extends Contact.Type>(
+export function createClient(api: DeferredJobsApiClient) {
+    async function subscribeToNewsroom<Type extends Contact.Type>(
         newsroomId: NewsroomId,
         payload: SubscribeRequest<Type>,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomSubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
-            url,
-            {
-                payload,
-            },
-        );
+        const { subscription } = await api.post<{ subscription: EmailSubscription }>(url, {
+            payload,
+        });
 
         return subscription;
     }
 
-    public async unsubscribeFromNewsroom(
+    async function unsubscribeFromNewsroom(
         newsroomId: NewsroomId,
         payload: UnsubscribeRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
-            url,
-            {
-                payload,
-            },
-        );
+        const { subscription } = await api.post<{ subscription: EmailSubscription }>(url, {
+            payload,
+        });
 
         return subscription;
     }
 
-    public async updateNewsroomUnsubscribeDetails(
+    async function updateNewsroomUnsubscribeDetails(
         newsroomId: NewsroomId,
         subscriptionId: EmailSubscription['id'],
         payload: UpdateUnsubscribeDetailsRequest,
     ): Promise<EmailSubscription> {
         const url = routing.newsroomUnsubscribeUrl.replace(':newsroom_id', String(newsroomId));
-        const { subscription } = await this.apiClient.patch<{ subscription: EmailSubscription }>(
+        const { subscription } = await api.patch<{ subscription: EmailSubscription }>(
             `${url}/${subscriptionId}`,
             {
                 payload,
@@ -63,24 +53,21 @@ export class Client {
         return subscription;
     }
 
-    public async unsubscribeFromLicense(payload: UnsubscribeRequest): Promise<EmailSubscription> {
+    async function unsubscribeFromLicense(payload: UnsubscribeRequest): Promise<EmailSubscription> {
         const url = routing.licenseUnsubscribeUrl;
-        const { subscription } = await this.apiClient.post<{ subscription: EmailSubscription }>(
-            url,
-            {
-                payload,
-            },
-        );
+        const { subscription } = await api.post<{ subscription: EmailSubscription }>(url, {
+            payload,
+        });
 
         return subscription;
     }
 
-    public async updateLicenseUnsubscribeDetails(
+    async function updateLicenseUnsubscribeDetails(
         subscriptionId: EmailSubscription['id'],
         payload: UpdateUnsubscribeDetailsRequest,
     ): Promise<EmailSubscription> {
         const url = routing.licenseUnsubscribeUrl;
-        const { subscription } = await this.apiClient.patch<{ subscription: EmailSubscription }>(
+        const { subscription } = await api.patch<{ subscription: EmailSubscription }>(
             `${url}/${subscriptionId}`,
             {
                 payload,
@@ -89,4 +76,12 @@ export class Client {
 
         return subscription;
     }
+
+    return {
+        subscribeToNewsroom,
+        unsubscribeFromNewsroom,
+        unsubscribeFromLicense,
+        updateNewsroomUnsubscribeDetails,
+        updateLicenseUnsubscribeDetails,
+    };
 }

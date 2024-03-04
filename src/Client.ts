@@ -1,4 +1,5 @@
-import { ApiClient, DeferredJobsApiClient, type Fetch } from './api';
+import type { DeferredJobsApiClient } from './api';
+import { createApiClient, createDeferredJobsApiClient, type Fetch } from './api';
 import { Contacts } from './endpoints';
 import {
     Accounts,
@@ -76,9 +77,9 @@ export function createClient({
     fetch,
 }: ClientOptions): Client {
     const http = createHttpClient({ fetch });
-    const apiClient = new DeferredJobsApiClient(
+    const api = createDeferredJobsApiClient(
         http,
-        new ApiClient(http, {
+        createApiClient(http, {
             accessToken,
             baseUrl,
             headers,
@@ -86,32 +87,32 @@ export function createClient({
     );
 
     return {
-        api: apiClient,
-        accounts: new Accounts.Client(apiClient),
-        billing: new Billing.Client(apiClient),
-        campaigns: new Campaigns.Client(apiClient),
-        campaignRecipients: new CampaignRecipients.Client(apiClient),
-        contacts: new Contacts.Client(apiClient),
-        contactsExports: new ContactsExports.Client(apiClient),
-        coverage: new Coverage.Client(apiClient),
-        jobs: new Jobs.Client(apiClient),
-        licenses: new Licenses.Client(apiClient),
-        newsrooms: new Newsrooms.Client(apiClient),
-        newsroomCategories: new NewsroomCategories.Client(apiClient),
-        newsroomContacts: new NewsroomContacts.Client(apiClient),
-        newsroomLanguages: new NewsroomLanguages.Client(apiClient),
-        newsroomThemes: new NewsroomThemes.Client(apiClient),
-        newsroomWebhooks: new NewsroomWebhooks.Client(apiClient),
-        newsroomPrivacyRequests: new NewsroomPrivacyRequests.Client(apiClient),
-        newsroomDomains: new NewsroomDomains.Client(apiClient),
-        newsroomGalleries: new NewsroomGalleries.Client(apiClient),
-        newsroomHub: new NewsroomHub.Client(apiClient),
-        newsroomSubscriptions: new NewsroomSubscriptions.Client(apiClient),
-        pricingTables: new PricingTables.Client(apiClient),
-        senderAddresses: new SenderAddresses.Client(apiClient),
-        stories: new Stories.Client(apiClient),
-        snippets: new Snippets.Client(apiClient),
-        subscriptions: new Subscriptions.Client(apiClient),
-        notificationSubscriptions: new NotificationSubscriptions.Client(apiClient),
+        api,
+        accounts: Accounts.createClient(api),
+        billing: Billing.createClient(api),
+        campaigns: Campaigns.createClient(api),
+        campaignRecipients: CampaignRecipients.createClient(api),
+        contacts: Contacts.createClient(api),
+        contactsExports: ContactsExports.createClient(api),
+        coverage: Coverage.createClient(api),
+        jobs: Jobs.createClient(api),
+        licenses: Licenses.createClient(api),
+        newsrooms: Newsrooms.createClient(api),
+        newsroomCategories: NewsroomCategories.createClient(api),
+        newsroomContacts: NewsroomContacts.createClient(api),
+        newsroomLanguages: NewsroomLanguages.createClient(api),
+        newsroomThemes: NewsroomThemes.createClient(api),
+        newsroomWebhooks: NewsroomWebhooks.createClient(api),
+        newsroomPrivacyRequests: NewsroomPrivacyRequests.createClient(api),
+        newsroomDomains: NewsroomDomains.createClient(api),
+        newsroomGalleries: NewsroomGalleries.createClient(api),
+        newsroomHub: NewsroomHub.createClient(api),
+        newsroomSubscriptions: NewsroomSubscriptions.createClient(api),
+        pricingTables: PricingTables.createClient(api),
+        senderAddresses: SenderAddresses.createClient(api),
+        stories: Stories.createClient(api),
+        snippets: Snippets.createClient(api),
+        subscriptions: Subscriptions.createClient(api),
+        notificationSubscriptions: NotificationSubscriptions.createClient(api),
     };
 }

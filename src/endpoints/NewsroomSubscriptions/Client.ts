@@ -7,29 +7,25 @@ import type { CreateRequest, ListOptions, ListResponse } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
+export function createClient(api: DeferredJobsApiClient) {
     /**
      * @deprecated Use `subscribeToNewsroom` from `Subscriptions` instead
      */
-    public async subscribe(newsroomId: NewsroomId, payload: CreateRequest): Promise<void> {
+    async function subscribe(newsroomId: NewsroomId, payload: CreateRequest): Promise<void> {
         const url = generateUrl(newsroomId);
-        return this.apiClient.post(url, {
+        return api.post(url, {
             payload,
         });
     }
 
-    public async list(
+    async function list(
         newsroomId: NewsroomId,
         { limit, offset, search, sortOrder }: ListOptions = {},
     ): Promise<ListResponse> {
         const url = generateUrl(newsroomId);
-        return this.apiClient.get<ListResponse>(url, {
+        return api.get<ListResponse>(url, {
             query: {
                 limit,
                 offset,
@@ -39,11 +35,17 @@ export class Client {
         });
     }
 
-    public async export(newsroomId: NewsroomId): Promise<{ downloadUrl: string }> {
+    async function doExport(newsroomId: NewsroomId): Promise<{ downloadUrl: string }> {
         const url = generateUrl(newsroomId, '/export');
-        const response = await this.apiClient.post<{ download_url: string }>(url);
+        const response = await api.post<{ download_url: string }>(url);
         return { downloadUrl: response.download_url };
     }
+
+    return {
+        subscribe,
+        list,
+        export: doExport,
+    };
 }
 
 function generateUrl(newsroomId: NewsroomId, suffix = '') {

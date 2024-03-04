@@ -7,19 +7,15 @@ import type { ListOptions, CreateRequest, UpdateRequest } from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async list(
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(
         newsroomId: NewsroomId,
         { sortOrder }: ListOptions = {},
     ): Promise<Category[]> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const { categories } = await this.apiClient.get<{ categories: Category[] }>(url, {
+        const { categories } = await api.get<{ categories: Category[] }>(url, {
             query: {
                 sort: SortOrder.stringify(sortOrder),
             },
@@ -27,39 +23,42 @@ export class Client {
         return categories;
     }
 
-    public async get(newsroomId: NewsroomId, categoryId: Category['id']): Promise<Category> {
+    async function get(newsroomId: NewsroomId, categoryId: Category['id']): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const { category } = await this.apiClient.get<{ category: Category }>(
-            `${url}/${categoryId}`,
-        );
+        const { category } = await api.get<{ category: Category }>(`${url}/${categoryId}`);
         return category;
     }
 
-    public async create(newsroomId: NewsroomId, payload: CreateRequest): Promise<Category> {
+    async function create(newsroomId: NewsroomId, payload: CreateRequest): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const { category } = await this.apiClient.post<{ category: Category }>(url, {
+        const { category } = await api.post<{ category: Category }>(url, {
             payload,
         });
         return category;
     }
 
-    public async update(
+    async function update(
         newsroomId: NewsroomId,
         categoryId: Category['id'],
         payload: UpdateRequest,
     ): Promise<Category> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        const { category } = await this.apiClient.patch<{ category: Category }>(
-            `${url}/${categoryId}`,
-            {
-                payload,
-            },
-        );
+        const { category } = await api.patch<{ category: Category }>(`${url}/${categoryId}`, {
+            payload,
+        });
         return category;
     }
 
-    public async remove(newsroomId: NewsroomId, categoryId: Category['id']): Promise<void> {
+    async function doDelete(newsroomId: NewsroomId, categoryId: Category['id']): Promise<void> {
         const url = routing.newsroomCategoriesUrl.replace(':newsroom_id', String(newsroomId));
-        return this.apiClient.delete<void>(`${url}/${categoryId}`);
+        return api.delete<void>(`${url}/${categoryId}`);
     }
+
+    return {
+        list,
+        get,
+        create,
+        update,
+        delete: doDelete,
+    };
 }

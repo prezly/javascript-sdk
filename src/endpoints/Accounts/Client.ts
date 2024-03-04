@@ -10,25 +10,27 @@ import type {
     UpdateResponse,
 } from './types';
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    async list(): Promise<ListResponse> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(): Promise<ListResponse> {
         const url = routing.accounts;
-        return this.apiClient.get<ListResponse>(url);
+        return api.get<ListResponse>(url);
     }
 
-    async create(payload: CreateRequest): Promise<CreateResponse> {
+    async function create(payload: CreateRequest): Promise<CreateResponse> {
         const url = routing.accounts;
-        return this.apiClient.post<CreateResponse>(url, { payload });
+        return api.post<CreateResponse>(url, { payload });
     }
 
-    async update(id: UserAccount['id'], payload: UpdateRequest): Promise<UpdateResponse> {
+    async function update(id: UserAccount['id'], payload: UpdateRequest): Promise<UpdateResponse> {
         const url = `${routing.accounts}/${id}`;
-        return this.apiClient.patch<UpdateResponse>(url, { payload });
+        return api.patch<UpdateResponse>(url, { payload });
     }
+
+    return {
+        list,
+        create,
+        update,
+    };
 }

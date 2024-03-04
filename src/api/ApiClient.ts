@@ -9,41 +9,39 @@ export interface Options {
     headers: HeadersMap;
 }
 
-export class ApiClient {
-    private readonly http: HttpClient;
-    private readonly baseUrl: string;
-    private readonly headers: HeadersMap;
+export type ApiClient = ReturnType<typeof createApiClient>;
 
-    constructor(http: HttpClient, { accessToken, baseUrl, headers }: Options) {
-        this.http = http;
-        this.baseUrl = baseUrl;
-        this.headers = {
-            authorization: `Bearer ${accessToken}`,
-            'User-Agent': DEFAULT_USER_AGENT,
-            ...headers,
-        };
+export function createApiClient(http: HttpClient, { accessToken, baseUrl, headers }: Options) {
+    const defaultHeaders = {
+        authorization: `Bearer ${accessToken}`,
+        'User-Agent': DEFAULT_USER_AGENT,
+        ...headers,
+    };
+
+    function buildEndpointUrl(endpointUri: string): string {
+        return `${stripSlashes(baseUrl)}/${stripSlashes(endpointUri)}`;
     }
 
-    public get<V = any>(
+    function get<V = any>(
         endpointUri: string,
         { headers, query }: Params = {},
     ): Promise<ApiResponse<V>> {
-        return this.http.get<V>(this.buildEndpointUrl(endpointUri), {
+        return http.get<V>(buildEndpointUrl(endpointUri), {
             headers: {
-                ...this.headers,
+                ...defaultHeaders,
                 ...headers,
             },
             query,
         });
     }
 
-    public post<V = any>(
+    function post<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return this.http.post<V>(this.buildEndpointUrl(endpointUri), {
+        return http.post<V>(buildEndpointUrl(endpointUri), {
             headers: {
-                ...this.headers,
+                ...defaultHeaders,
                 ...headers,
             },
             payload,
@@ -51,13 +49,13 @@ export class ApiClient {
         });
     }
 
-    public put<V = any>(
+    function put<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return this.http.put<V>(this.buildEndpointUrl(endpointUri), {
+        return http.put<V>(buildEndpointUrl(endpointUri), {
             headers: {
-                ...this.headers,
+                ...defaultHeaders,
                 ...headers,
             },
             payload,
@@ -65,13 +63,13 @@ export class ApiClient {
         });
     }
 
-    public patch<V = any>(
+    function patch<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return this.http.patch<V>(this.buildEndpointUrl(endpointUri), {
+        return http.patch<V>(buildEndpointUrl(endpointUri), {
             headers: {
-                ...this.headers,
+                ...defaultHeaders,
                 ...headers,
             },
             payload,
@@ -79,13 +77,13 @@ export class ApiClient {
         });
     }
 
-    public delete<V = any>(
+    function doDelete<V = any>(
         endpointUri: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return this.http.delete<V>(this.buildEndpointUrl(endpointUri), {
+        return http.delete<V>(buildEndpointUrl(endpointUri), {
             headers: {
-                ...this.headers,
+                ...defaultHeaders,
                 ...headers,
             },
             payload,
@@ -93,7 +91,11 @@ export class ApiClient {
         });
     }
 
-    private buildEndpointUrl(endpointUri: string): string {
-        return `${stripSlashes(this.baseUrl)}/${stripSlashes(endpointUri)}`;
-    }
+    return {
+        get,
+        post,
+        put,
+        patch,
+        delete: doDelete,
+    };
 }

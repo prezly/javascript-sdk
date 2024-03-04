@@ -174,7 +174,7 @@ describe('Client', () => {
             const prezlySdk = createClient({
                 accessToken: ACCESS_TOKEN,
             });
-            const result = await prezlySdk.coverage.remove(id);
+            const result = await prezlySdk.coverage.delete(id);
 
             expect(fetch).toHaveBeenCalledWith(`${defaultCoverageApiUrl}/${id}`, {
                 ...DEFAULT_REQUEST_PROPS,

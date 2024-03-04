@@ -6,46 +6,47 @@ import type { CreateRequest, UpdateRequest } from './types';
 
 type SnippetId = Snippet['uuid'] | Snippet['id'];
 
-export class Client {
-    private readonly apiClient: DeferredJobsApiClient;
+export type Client = ReturnType<typeof createClient>;
 
-    constructor(apiClient: DeferredJobsApiClient) {
-        this.apiClient = apiClient;
-    }
-
-    public async list(): Promise<Snippet[]> {
+export function createClient(api: DeferredJobsApiClient) {
+    async function list(): Promise<Snippet[]> {
         const url = routing.snippetsUrl;
-        const { snippets } = await this.apiClient.get<{ snippets: Snippet[] }>(url);
+        const { snippets } = await api.get<{ snippets: Snippet[] }>(url);
         return snippets;
     }
 
-    public async get(snippetId: SnippetId): Promise<Snippet> {
+    async function get(snippetId: SnippetId): Promise<Snippet> {
         const url = routing.snippetsUrl;
-        const { snippet } = await this.apiClient.get<{ snippet: Snippet }>(`${url}/${snippetId}`);
+        const { snippet } = await api.get<{ snippet: Snippet }>(`${url}/${snippetId}`);
         return snippet;
     }
 
-    public async create(payload: CreateRequest): Promise<Snippet> {
+    async function create(payload: CreateRequest): Promise<Snippet> {
         const url = routing.snippetsUrl;
-        const { snippet } = await this.apiClient.post<{ snippet: Snippet }>(url, {
+        const { snippet } = await api.post<{ snippet: Snippet }>(url, {
             payload,
         });
         return snippet;
     }
 
-    public async update(snippetId: SnippetId, payload: UpdateRequest): Promise<Snippet> {
+    async function update(snippetId: SnippetId, payload: UpdateRequest): Promise<Snippet> {
         const url = routing.snippetsUrl;
-        const { snippet } = await this.apiClient.patch<{ snippet: Snippet }>(
-            `${url}/${snippetId}`,
-            {
-                payload,
-            },
-        );
+        const { snippet } = await api.patch<{ snippet: Snippet }>(`${url}/${snippetId}`, {
+            payload,
+        });
         return snippet;
     }
 
-    public async remove(snippetId: SnippetId): Promise<void> {
+    async function doDelete(snippetId: SnippetId): Promise<void> {
         const url = routing.snippetsUrl;
-        return this.apiClient.delete(`${url}/${snippetId}`);
+        return api.delete(`${url}/${snippetId}`);
     }
+
+    return {
+        list,
+        get,
+        create,
+        update,
+        delete: doDelete,
+    };
 }
