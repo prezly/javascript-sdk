@@ -48,6 +48,7 @@ export interface UserAccount {
     joined_license_at: string;
     is_license_owner: boolean;
     last_seen_license_at: string | null;
+    two_factor_provider: 'email' | 'totp';
     time_format: string;
     timezone_offset: string;
     timezone: string;
