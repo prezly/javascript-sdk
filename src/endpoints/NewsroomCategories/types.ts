@@ -1,6 +1,6 @@
-import type { SortOrder } from '../../types';
-
 import type { UploadedImage } from '@prezly/uploads';
+
+import type { SortOrder } from '../../types';
 
 export interface ListOptions {
     /**

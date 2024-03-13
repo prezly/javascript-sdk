@@ -1,6 +1,6 @@
-import type { Culture, CultureRef } from './Culture';
-
 import type { UploadedImage } from '@prezly/uploads';
+
+import type { Culture, CultureRef } from './Culture';
 
 export interface CategoryRef {
     id: number;
