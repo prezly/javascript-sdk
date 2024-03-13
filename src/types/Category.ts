@@ -1,4 +1,5 @@
 import type { Culture, CultureRef } from './Culture';
+import type { UploadedImage } from '@prezly/uploads';
 
 export interface CategoryRef {
     id: number;
@@ -24,6 +25,8 @@ export interface Category extends Omit<CategoryRef, 'i18n'> {
     i18n: {
         [localeCode: Culture.Code]: Category.Translation; // Extension over `CategoryRef.Translation`
     };
+    image: UploadedImage | null;
+    is_featured: boolean;
 }
 
 export namespace Category {
