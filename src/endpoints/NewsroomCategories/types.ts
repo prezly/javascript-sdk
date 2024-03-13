@@ -1,4 +1,5 @@
 import type { SortOrder } from '../../types';
+
 import type { UploadedImage } from '@prezly/uploads';
 
 export interface ListOptions {

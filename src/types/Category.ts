@@ -1,4 +1,5 @@
 import type { Culture, CultureRef } from './Culture';
+
 import type { UploadedImage } from '@prezly/uploads';
 
 export interface CategoryRef {
