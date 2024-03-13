@@ -20,6 +20,7 @@ export namespace NotificationSubscription {
     }
 
     export enum Area {
+        SITES = 'Sites',
         CAMPAIGNS = 'Campaigns',
         CONTACTS = 'Contacts',
         BILLING_AND_LEGAL = 'Billing & Legal',
