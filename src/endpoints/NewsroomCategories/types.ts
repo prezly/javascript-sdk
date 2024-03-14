@@ -1,3 +1,5 @@
+import type { UploadedImage } from '@prezly/uploads';
+
 import type { SortOrder } from '../../types';
 
 export interface ListOptions {
@@ -18,10 +20,12 @@ export interface CreateRequest {
             description?: string;
         };
     };
+    image?: UploadedImage | null;
+    is_featured?: boolean;
 }
 
 export interface UpdateRequest {
-    i18n: {
+    i18n?: {
         /**
          * Pass `null` to erase category translation.
          */
@@ -30,4 +34,6 @@ export interface UpdateRequest {
             description?: string;
         };
     };
+    image?: UploadedImage | null;
+    is_featured?: boolean;
 }
