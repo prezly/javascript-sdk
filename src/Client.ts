@@ -1,12 +1,13 @@
 import type { DeferredJobsApiClient } from './api';
 import { createApiClient, createDeferredJobsApiClient, type Fetch } from './api';
-import { Contacts } from './endpoints';
 import {
     Accounts,
     Billing,
     NewsroomSubscriptions,
     Campaigns,
     CampaignRecipients,
+    Contacts,
+    ContactTags,
     ContactsExports,
     Coverage,
     Jobs,
@@ -47,6 +48,7 @@ export interface Client {
     campaigns: Campaigns.Client;
     campaignRecipients: CampaignRecipients.Client;
     contacts: Contacts.Client;
+    contactTags: ContactTags.Client;
     contactsExports: ContactsExports.Client;
     coverage: Coverage.Client;
     jobs: Jobs.Client;
@@ -93,6 +95,7 @@ export function createClient({
         campaigns: Campaigns.createClient(api),
         campaignRecipients: CampaignRecipients.createClient(api),
         contacts: Contacts.createClient(api),
+        contactTags: ContactTags.createClient(api),
         contactsExports: ContactsExports.createClient(api),
         coverage: Coverage.createClient(api),
         jobs: Jobs.createClient(api),
