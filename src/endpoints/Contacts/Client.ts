@@ -25,7 +25,7 @@ export function createClient(api: DeferredJobsApiClient) {
     /**
      * List Contacts Exports with sorting, and pagination.
      */
-    async function list(options: ListOptions): Promise<ListResponse> {
+    async function list(options: ListOptions = {}): Promise<ListResponse> {
         const { limit, offset, sortOrder } = options;
         const { contacts, pagination, sort } = await api.get<{
             contacts: Contact[];
@@ -45,7 +45,7 @@ export function createClient(api: DeferredJobsApiClient) {
     /**
      * List Contacts Exports with sorting, pagination, and filtering.
      */
-    async function search(options: SearchOptions): Promise<SearchResponse> {
+    async function search(options: SearchOptions = {}): Promise<SearchResponse> {
         const { limit, offset, query, sortOrder } = options;
         const url = `${routing.contactsUrl}/search`;
         const { contacts, pagination, sort } = await api.post<{
