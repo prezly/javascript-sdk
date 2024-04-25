@@ -1,4 +1,4 @@
-import type { ContactTag } from '../../types';
+import type { ContactTag, Query } from '../../types';
 import type { SortOrder } from '../../types';
 
 export interface ListOptions {
@@ -9,7 +9,9 @@ export interface ListResponse {
     tags: ContactTag[];
 }
 
-export type SearchOptions = ListOptions;
+export interface SearchOptions extends ListOptions {
+    query?: Query;
+}
 
 export type SearchResponse = ListResponse;
 

@@ -1,6 +1,6 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Contact, ContactTag } from '../../types';
+import { type Contact, type ContactTag, Query } from '../../types';
 import { SortOrder } from '../../types';
 
 import type {
@@ -43,13 +43,14 @@ export function createClient(api: DeferredJobsApiClient) {
         return { tags };
     }
 
-    async function search(options: SearchOptions): Promise<SearchResponse> {
-        const { sortOrder } = options;
-        const { tags } = await api.get<{
+    async function search(options: SearchOptions = {}): Promise<SearchResponse> {
+        const { query, sortOrder } = options;
+        const { tags } = await api.post<{
             tags: ContactTag[];
         }>(routing.contactsTagsUrl, {
             query: {
                 sort: SortOrder.stringify(sortOrder),
+                query: Query.stringify(query),
             },
         });
 
