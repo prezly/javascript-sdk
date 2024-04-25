@@ -2,6 +2,7 @@ export * as Accounts from './Accounts';
 export * as Billing from './Billing';
 export * as CampaignRecipients from './CampaignRecipients';
 export * as Campaigns from './Campaigns';
+export * as ContactTags from './ContactTags';
 export * as Contacts from './Contacts';
 export * as ContactsExports from './ContactsExports';
 export * as Coverage from './Coverage';
