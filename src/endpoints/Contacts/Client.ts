@@ -2,7 +2,7 @@ import type { ProgressPromise } from '@prezly/progress-promise';
 
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Contact, Pagination } from '../../types';
+import type { ContactTag, Contact, Pagination } from '../../types';
 import { SortOrder } from '../../types';
 
 import type {
@@ -15,9 +15,6 @@ import type {
     SearchResponse,
     UpdateRequest,
 } from './types';
-
-type TagId = number;
-type TagName = string;
 
 export type Client = ReturnType<typeof createClient>;
 
@@ -95,7 +92,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return contact;
     }
 
-    async function tag(id: Contact['id'], tags: (TagId | TagName)[]): Promise<Contact> {
+    async function tag(id: Contact['id'], tags: ContactTag.Identifier[]): Promise<Contact> {
         const url = `${routing.contactsUrl}/${id}`;
         const { contact } = await api.patch<{ contact: Contact }>(url, {
             payload: {
@@ -105,7 +102,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return contact;
     }
 
-    async function untag(id: Contact['id'], tags: (TagId | TagName)[]): Promise<Contact> {
+    async function untag(id: Contact['id'], tags: ContactTag.Identifier[]): Promise<Contact> {
         const url = `${routing.contactsUrl}/${id}`;
         const { contact } = await api.patch<{ contact: Contact }>(url, {
             payload: {
@@ -117,7 +114,7 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function bulkTag(
         selector: BulkSelector,
-        tags: (TagId | TagName)[],
+        tags: ContactTag.Identifier[],
     ): ProgressPromise<undefined> {
         const { scope, query } = selector;
         return api.patch(routing.contactsUrl, {
@@ -127,7 +124,7 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function bulkUntag(
         selector: BulkSelector,
-        tags: (TagId | TagName)[],
+        tags: ContactTag.Identifier[],
     ): ProgressPromise<undefined> {
         const { query, scope } = selector;
         return api.patch(routing.contactsUrl, {
