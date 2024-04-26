@@ -1,7 +1,6 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import { type Contact, type ContactTag, Query } from '../../types';
-import { SortOrder } from '../../types';
+import { type Contact, type ContactTag, Query, SortOrder } from '../../types';
 
 import type {
     CreateOptions,
@@ -115,6 +114,15 @@ export function createClient(api: DeferredJobsApiClient) {
         return { deleted: data.deleted_tags_ids };
     }
 
+    async function doDeleteMany(ids: ContactTag['id'][]) {
+        const data = await api.delete<RawDeleteResponse>(routing.contactsTagsUrl, {
+            query: {
+                id: ids,
+            },
+        });
+        return { deleted: data.deleted_tags_ids };
+    }
+
     async function doDeleteUnused() {
         const data = await api.delete<RawDeleteResponse>(routing.contactsTagsUrl, {
             query: {
@@ -133,6 +141,7 @@ export function createClient(api: DeferredJobsApiClient) {
         update,
         merge,
         delete: doDelete,
+        deleteMany: doDeleteMany,
         deleteUnused: doDeleteUnused,
     };
 }
