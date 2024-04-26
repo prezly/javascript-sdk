@@ -33,7 +33,7 @@ export function createClient(api: DeferredJobsApiClient) {
         const { sortOrder } = options;
         const { tags } = await api.get<{
             tags: ContactTag[];
-        }>(routing.contactsTagsUrl, {
+        }>(routing.contactTagsUrl, {
             query: {
                 sort: SortOrder.stringify(sortOrder),
             },
@@ -46,7 +46,7 @@ export function createClient(api: DeferredJobsApiClient) {
         const { query, sortOrder } = options;
         const { tags } = await api.post<{
             tags: ContactTag[];
-        }>(routing.contactsTagsUrl, {
+        }>(routing.contactTagsUrl, {
             query: {
                 sort: SortOrder.stringify(sortOrder),
                 query: Query.stringify(query),
@@ -57,7 +57,7 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function get(id: ContactTag['id']): Promise<ContactTag> {
-        const url = `${routing.contactsTagsUrl}/${id}`;
+        const url = `${routing.contactTagsUrl}/${id}`;
         const { tag } = await api.get<{ tag: ContactTag }>(url);
 
         return tag;
@@ -67,7 +67,7 @@ export function createClient(api: DeferredJobsApiClient) {
         payload: CreateRequest,
         { force = false }: CreateOptions = {},
     ): Promise<CreateResponse> {
-        const data = await api.post<RawModificationResponse>(routing.contactsTagsUrl, {
+        const data = await api.post<RawModificationResponse>(routing.contactTagsUrl, {
             payload,
             query: {
                 force: force || undefined, // Convert `false` to `undefined`
@@ -84,7 +84,7 @@ export function createClient(api: DeferredJobsApiClient) {
         payload: UpdateRequest,
         { force = false }: UpdateOptions = {},
     ): Promise<UpdateResponse> {
-        const url = `${routing.contactsTagsUrl}/${id}`;
+        const url = `${routing.contactTagsUrl}/${id}`;
         const data = await api.patch<RawModificationResponse>(url, {
             payload,
             query: {
@@ -98,7 +98,7 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function merge({ name, tags }: MergeRequest): Promise<MergeResponse> {
-        const url = `${routing.contactsTagsUrl}/merge`;
+        const url = `${routing.contactTagsUrl}/merge`;
         const data = await api.post<RawModificationResponse>(url, {
             payload: { name, tags },
         });
@@ -109,13 +109,13 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function doDelete(id: ContactTag['id']) {
-        const url = `${routing.contactsTagsUrl}/${id}`;
+        const url = `${routing.contactTagsUrl}/${id}`;
         const data = await api.delete<RawDeleteResponse>(url);
         return { deleted: data.deleted_tags_ids };
     }
 
     async function doDeleteMany(ids: ContactTag['id'][]) {
-        const data = await api.delete<RawDeleteResponse>(routing.contactsTagsUrl, {
+        const data = await api.delete<RawDeleteResponse>(routing.contactTagsUrl, {
             query: {
                 id: ids,
             },
@@ -124,7 +124,7 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function doDeleteUnused() {
-        const data = await api.delete<RawDeleteResponse>(routing.contactsTagsUrl, {
+        const data = await api.delete<RawDeleteResponse>(routing.contactTagsUrl, {
             query: {
                 filter: 'unused',
             },
