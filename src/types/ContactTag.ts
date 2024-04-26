@@ -7,10 +7,10 @@ export interface ContactTag {
     name: string;
     contacts_number: number;
     contacts_url: string;
-    created_at: Iso8601DateTime | undefined; // May be undefined for older tags
-    updated_at: Iso8601DateTime | undefined; // May be undefined for older tags
-    creator: UserRef | undefined; // May be undefined for older tags
-    last_updated_by_user: UserRef | undefined; // May be undefined for older tags
+    created_at: Iso8601DateTime | null; // May be null for older tags
+    updated_at: Iso8601DateTime | null; // May be null for older tags
+    creator: UserRef | null; // May be null for older tags
+    last_updated_by_user: UserRef | null; // May be null for older tags
 }
 
 export namespace ContactTag {
