@@ -122,4 +122,10 @@ export interface UpdateRequest {
 
     is_plausible_enabled?: boolean;
     is_white_labeled?: boolean;
+
+    onetrust_cookie_consent?: {
+        is_enabled?: boolean;
+        category?: string;
+        script?: string;
+    };
 }

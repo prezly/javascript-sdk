@@ -97,9 +97,10 @@ export interface Newsroom extends NewsroomRef {
     custom_data_request_link: string | null;
 
     tracking_policy: Newsroom.TrackingPolicy;
-    cookiepro: {
+    onetrust_cookie_consent: {
         is_enabled: boolean;
-        category: string | null;
+        category: string;
+        script: string;
     };
     google_analytics_id: string | null;
     /**
