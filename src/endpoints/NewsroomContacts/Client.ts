@@ -3,7 +3,13 @@ import { routing } from '../../routing';
 import type { Newsroom, NewsroomContact } from '../../types';
 import { Query } from '../../types';
 
-import type { ListOptions, SearchOptions, CreateRequest, UpdateRequest } from './types';
+import type {
+    ListOptions,
+    SearchOptions,
+    CreateRequest,
+    UpdateRequest,
+    ReorderRequest,
+} from './types';
 
 type NewsroomId = Newsroom['uuid'] | Newsroom['id'];
 type NewsroomContactId = NewsroomContact['uuid'] | NewsroomContact['id'];
@@ -45,6 +51,13 @@ export function createClient(api: DeferredJobsApiClient) {
         return contacts;
     }
 
+    async function order(newsroomId: NewsroomId, payload: ReorderRequest): Promise<void> {
+        const url = routing.newsroomContactsOrderUrl.replace(':newsroom_id', String(newsroomId));
+        api.post(url, {
+            payload,
+        });
+    }
+
     async function create(
         newsroomId: NewsroomId,
         payload: CreateRequest,
@@ -83,6 +96,7 @@ export function createClient(api: DeferredJobsApiClient) {
         list,
         get,
         search,
+        order,
         create,
         update,
         delete: doDelete,

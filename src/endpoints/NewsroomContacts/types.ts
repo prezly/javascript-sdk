@@ -16,6 +16,13 @@ export interface SearchOptions extends ListOptions {
     query?: Query;
 }
 
+export interface ReorderRequest {
+    order: {
+        contact: number | string;
+        order: number;
+    }[];
+}
+
 export interface CreateRequest {
     name: string;
     email?: string | null;
