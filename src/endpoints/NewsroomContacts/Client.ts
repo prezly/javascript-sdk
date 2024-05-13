@@ -53,7 +53,7 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function order(newsroomId: NewsroomId, payload: ReorderRequest): Promise<void> {
         const url = routing.newsroomContactsOrderUrl.replace(':newsroom_id', String(newsroomId));
-        api.post(url, {
+        return api.post(url, {
             payload,
         });
     }
