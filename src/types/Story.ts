@@ -17,7 +17,6 @@ export interface StoryRef {
     id: number;
     title: string;
     slug: string;
-    custom_slug: string | null;
 
     status: Story.Status;
     /**
