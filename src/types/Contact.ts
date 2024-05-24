@@ -79,11 +79,14 @@ export interface Contact {
     unsubscribed_newsrooms: string[];
     duplicate_contacts: ContactDuplicateSuggestionRef[];
 
+    last_contacted_at: string | null;
+
     created_at: string | null; // there are contacts in DB that do have `created_at = null`
     modified_at: string | null;
 
     stats: {
         clicked: number;
+        delivered: number;
         clicked_rate: number;
         opened: number;
         opened_rate: number;
