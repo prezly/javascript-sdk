@@ -42,6 +42,7 @@ export interface Campaign {
     scheduled_at: string | null;
     sent_at: string | null;
     delivered_at: string | null;
+    is_demo: boolean;
 
     is_open_tracking_enabled: boolean;
     is_click_tracking_enabled: boolean;
