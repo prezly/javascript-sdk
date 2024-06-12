@@ -11,6 +11,7 @@ export interface ContactTag {
     updated_at: Iso8601DateTime | null; // May be null for older tags
     creator: UserRef | null; // May be null for older tags
     last_updated_by_user: UserRef | null; // May be null for older tags
+    is_demo: boolean;
 }
 
 export namespace ContactTag {
