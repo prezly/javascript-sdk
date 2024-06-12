@@ -20,6 +20,7 @@ export interface Contact {
     contact_type: Contact.Type;
     is_deleted: boolean;
     is_person: boolean;
+    is_demo: boolean;
 
     company_name: string;
     first_name: string;

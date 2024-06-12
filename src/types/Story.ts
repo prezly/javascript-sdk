@@ -150,6 +150,7 @@ export interface Story {
     is_sharable: boolean;
     is_analytics_available: boolean;
     is_shared_to_prpro: boolean;
+    is_demo: boolean;
 
     /**
      * @deprecated Please use `status` instead.
