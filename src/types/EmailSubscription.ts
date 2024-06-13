@@ -9,4 +9,5 @@ export interface EmailSubscription {
      * This field will be present only if user has permission to view contacts.
      */
     contacts?: ContactRef[];
+    is_demo: boolean;
 }
