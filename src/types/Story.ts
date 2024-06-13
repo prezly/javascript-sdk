@@ -172,6 +172,7 @@ export namespace Story {
         SLATEJS_V3 = 3,
         SLATEJS_V4 = 4,
         SLATEJS_V5 = 5,
+        SLATEJS_V6 = 6,
     }
 
     export enum Status {
