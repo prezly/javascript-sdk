@@ -25,6 +25,7 @@ export interface NewsroomRef {
      * @see status
      */
     is_archived: boolean;
+    is_demo: boolean;
     is_multilingual: boolean;
     is_indexable: boolean;
 
@@ -126,7 +127,6 @@ export interface Newsroom extends NewsroomRef {
         visits_last_7_days: number | null;
         visits_last_7_days_previous: number | null;
     };
-    is_demo: boolean;
 }
 
 export namespace Newsroom {
