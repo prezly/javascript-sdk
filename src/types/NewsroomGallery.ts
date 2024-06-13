@@ -28,6 +28,7 @@ export interface NewsroomGallery {
     images_number: number;
     videos_number: number;
     images: NewsroomGallery.Image[];
+    is_demo: boolean;
 }
 
 export namespace NewsroomGallery {

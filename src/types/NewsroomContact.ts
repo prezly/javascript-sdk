@@ -19,6 +19,7 @@ export interface NewsroomContactRef {
     twitter: string | null;
     facebook: string | null;
     avatar_url: string | null;
+    is_demo: boolean;
 }
 
 // TODO: Add `avatar_url` to the full NewsroomContact API object presentation
