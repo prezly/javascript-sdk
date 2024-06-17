@@ -176,9 +176,6 @@ export interface HtmlStoryCreateRequest extends GenericCreateRequest {
 }
 
 export interface SlateV3StoryCreateRequest extends GenericCreateRequest {
-    /**
-     * If format version is omitted, license default editor version will be implied.
-     */
     format_version?: Story.FormatVersion.SLATEJS_V3;
     header_image?: UploadedImage | null;
     title?: string;
@@ -191,9 +188,6 @@ export interface SlateV3StoryCreateRequest extends GenericCreateRequest {
 }
 
 export interface SlateV4StoryCreateRequest extends GenericCreateRequest {
-    /**
-     * If format version is omitted, license default editor version will be implied.
-     */
     format_version?: Story.FormatVersion.SLATEJS_V4;
     header_image?: never;
     title?: never;
@@ -207,10 +201,7 @@ export interface SlateV4StoryCreateRequest extends GenericCreateRequest {
 
 export interface SlateV5StoryCreateRequest
     extends Omit<SlateV4StoryCreateRequest, 'format_version'> {
-    /**
-     * If format version is omitted, license default editor version will be implied.
-     */
-    format_version?: Story.FormatVersion.SLATEJS_V5;
+    format_version?: Story.FormatVersion.SLATEJS_V5 | Story.FormatVersion.SLATEJS_V6;
 }
 
 export interface HtmlStoryUpdateRequest extends GenericUpdateRequest {
@@ -257,7 +248,7 @@ export interface SlateV4StoryUpdateRequest extends GenericUpdateRequest {
 
 export interface SlateV5StoryUpdateRequest
     extends Omit<SlateV4StoryUpdateRequest, 'format_version'> {
-    format_version?: Story.FormatVersion.SLATEJS_V5;
+    format_version?: Story.FormatVersion.SLATEJS_V5 | Story.FormatVersion.SLATEJS_V6;
 }
 
 export interface PreviewResponse {

@@ -172,6 +172,7 @@ export namespace Story {
         SLATEJS_V3 = 3,
         SLATEJS_V4 = 4,
         SLATEJS_V5 = 5,
+        SLATEJS_V6 = 6,
     }
 
     export enum Status {
@@ -410,14 +411,19 @@ export namespace Story {
 
     export function isSlateFormat(
         format: FormatVersion,
-    ): format is FormatVersion.SLATEJS_V3 | FormatVersion.SLATEJS_V4 | FormatVersion.SLATEJS_V5;
+    ): format is
+        | FormatVersion.SLATEJS_V3
+        | FormatVersion.SLATEJS_V4
+        | FormatVersion.SLATEJS_V5
+        | FormatVersion.SLATEJS_V6;
     export function isSlateFormat<T extends Pick<Story, 'format_version'>>(
         story: Pick<Story, 'format_version'>,
     ): story is T & {
         format_version:
             | FormatVersion.SLATEJS_V3
             | FormatVersion.SLATEJS_V4
-            | FormatVersion.SLATEJS_V5;
+            | FormatVersion.SLATEJS_V5
+            | FormatVersion.SLATEJS_V6;
     };
     export function isSlateFormat(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
         if (typeof arg === 'object' && arg !== null) {
@@ -426,7 +432,8 @@ export namespace Story {
         return (
             arg === FormatVersion.SLATEJS_V3 ||
             arg === FormatVersion.SLATEJS_V4 ||
-            arg === FormatVersion.SLATEJS_V5
+            arg === FormatVersion.SLATEJS_V5 ||
+            arg === FormatVersion.SLATEJS_V6
         );
     }
 
@@ -461,6 +468,17 @@ export namespace Story {
             return arg.format_version === FormatVersion.SLATEJS_V5;
         }
         return arg === FormatVersion.SLATEJS_V5;
+    }
+
+    export function isSlateV6Format(format: FormatVersion): format is FormatVersion.SLATEJS_V6;
+    export function isSlateV6Format<T extends Pick<Story, 'format_version'>>(
+        story: Pick<Story, 'format_version'>,
+    ): story is T & { format_version: FormatVersion.SLATEJS_V6 };
+    export function isSlateV6Format(arg: FormatVersion | Pick<Story, 'format_version'>): boolean {
+        if (typeof arg === 'object' && arg !== null) {
+            return arg.format_version === FormatVersion.SLATEJS_V6;
+        }
+        return arg === FormatVersion.SLATEJS_V6;
     }
 }
 
