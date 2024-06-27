@@ -6,6 +6,7 @@ export * from './Campaign';
 export * from './Category';
 export * from './Contact';
 export * from './ContactDuplicateSuggestion';
+export * from './ContactTagGroup';
 export * from './ContactTag';
 export * from './ContactsBulkSelector';
 export * from './ContactsExport';

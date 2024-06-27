@@ -5,6 +5,7 @@ export const routing = {
     campaignRecipientsUrl: '/v2/campaigns/:campaign_id/recipients',
     contactsExportsUrl: '/v2/contacts/exports',
     contactsUrl: '/v2/contacts',
+    contactTagGroupsUrl: '/v2/contact-tag-groups',
     contactTagsUrl: '/v2/contact-tags',
     coverageUrl: '/v2/coverage',
     jobsUrl: '/v2/jobs',
