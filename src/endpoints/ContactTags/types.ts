@@ -17,7 +17,7 @@ export type SearchResponse = ListResponse;
 
 export interface CreateRequest {
     name: string;
-    group: ContactTagGroup['id'] | null;
+    group?: ContactTagGroup['id'] | null;
 }
 
 export interface CreateOptions {
@@ -31,7 +31,7 @@ export interface CreateResponse {
 
 export interface UpdateRequest {
     name: string;
-    group: ContactTagGroup['id'] | null;
+    group?: ContactTagGroup['id'] | null;
 }
 
 export interface UpdateOptions {
