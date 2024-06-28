@@ -39,7 +39,7 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function addTags(groupId: GroupId, payload: AddTagsRequest): Promise<ContactTagGroup> {
         const url = routing.contactTagGroupsUrl;
-        const { group } = await api.patch<{ group: ContactTagGroup }>(`${url}/${groupId}`, {
+        const { group } = await api.post<{ group: ContactTagGroup }>(`${url}/${groupId}/tags`, {
             payload,
         });
         return group;
