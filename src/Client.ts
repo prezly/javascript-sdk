@@ -8,6 +8,7 @@ import {
     CampaignRecipients,
     Contacts,
     ContactTags,
+    ContactTagGroups,
     ContactsExports,
     Coverage,
     Jobs,
@@ -49,6 +50,7 @@ export interface Client {
     campaignRecipients: CampaignRecipients.Client;
     contacts: Contacts.Client;
     contactTags: ContactTags.Client;
+    contactTagGroups: ContactTagGroups.Client;
     contactsExports: ContactsExports.Client;
     coverage: Coverage.Client;
     jobs: Jobs.Client;
@@ -96,6 +98,7 @@ export function createClient({
         campaignRecipients: CampaignRecipients.createClient(api),
         contacts: Contacts.createClient(api),
         contactTags: ContactTags.createClient(api),
+        contactTagGroups: ContactTagGroups.createClient(api),
         contactsExports: ContactsExports.createClient(api),
         coverage: Coverage.createClient(api),
         jobs: Jobs.createClient(api),
