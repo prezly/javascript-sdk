@@ -27,3 +27,7 @@ export interface UpdateRequest {
 export interface AddTagsRequest {
     tags: ContactTag['id'][];
 }
+
+export interface UngroupTagsRequest {
+    tags: ContactTag['id'][];
+}
