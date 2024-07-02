@@ -2,7 +2,7 @@ import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
 import type { ContactTagGroup } from '../../types';
 
-import type { CreateRequest, UpdateRequest, AddTagsRequest } from './types';
+import type { CreateRequest, UpdateRequest, AddTagsRequest, UngroupTagsRequest } from './types';
 
 type GroupId = ContactTagGroup['id'];
 
@@ -45,6 +45,13 @@ export function createClient(api: DeferredJobsApiClient) {
         return group;
     }
 
+    async function ungroupTags(payload: UngroupTagsRequest): Promise<void> {
+        const url = routing.contactTagGroupsUrl;
+        return api.delete(`${url}/tags`, {
+            payload,
+        });
+    }
+
     async function doDelete(groupId: GroupId): Promise<void> {
         const url = routing.contactTagGroupsUrl;
         return api.delete(`${url}/${groupId}`);
@@ -56,6 +63,7 @@ export function createClient(api: DeferredJobsApiClient) {
         create,
         update,
         addTags,
+        ungroupTags,
         delete: doDelete,
     };
 }
