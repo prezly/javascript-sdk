@@ -3,6 +3,12 @@ import type { UserRef } from './User';
 
 type Iso8601DateTime = string;
 
+export interface ContactTagRef {
+    id: number;
+    name: string;
+    group: ContactTagGroupRef | null;
+}
+
 export interface ContactTag {
     id: number;
     name: string;
