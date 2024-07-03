@@ -1,6 +1,7 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { ContactDuplicateSuggestionRef } from './ContactDuplicateSuggestion';
+import type { ContactTagRef } from "./ContactTag";
 
 export interface ContactRef {
     id: number;
@@ -70,6 +71,7 @@ export interface Contact {
 
     employees_number: number;
     tags: string[];
+    tag_entities: ContactTagRef[];
 
     has_enrichments: boolean;
     is_bounced: boolean;
