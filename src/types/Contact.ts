@@ -1,7 +1,7 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { ContactDuplicateSuggestionRef } from './ContactDuplicateSuggestion';
-import type { ContactTagRef } from "./ContactTag";
+import type { ContactTagRef } from './ContactTag';
 
 export interface ContactRef {
     id: number;
