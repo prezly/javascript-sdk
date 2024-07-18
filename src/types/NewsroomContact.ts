@@ -1,6 +1,7 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { CultureRef } from './Culture';
+import type { NewsroomRef } from './Newsroom';
 
 export interface NewsroomContactRef {
     uuid: string;
@@ -33,4 +34,5 @@ export interface NewsroomContact extends Omit<NewsroomContactRef, 'avatar_url'> 
      * List of locales this contact can be displayed for.
      */
     display_locales: CultureRef[];
+    site: NewsroomRef;
 }
