@@ -24,6 +24,7 @@ export interface Contact {
     is_demo: boolean;
 
     company_name: string;
+    domain: string;
     first_name: string;
     last_name: string;
 
