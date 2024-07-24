@@ -24,7 +24,7 @@ export interface StoryRef {
      * @see status
      * @see Story.Status
      */
-    lifecycle_status: Story.LifecycleStatus;
+    lifecycle_status: Story.Status;
     /**
      * @deprecated Please use `status` instead.
      * @see status
@@ -182,12 +182,6 @@ export namespace Story {
         EMBARGO = 'embargo',
         PUBLISHED = 'published',
     }
-
-    /**
-     * @deprecated Please use `Status` instead.
-     * @see Status
-     */
-    export import LifecycleStatus = Status;
 
     /**
      * @deprecated Please use `Status` instead.
