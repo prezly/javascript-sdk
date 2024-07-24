@@ -46,11 +46,13 @@ interface BaseContactPayload {
 }
 export interface OrganisationUpdateRequest extends BaseContactPayload {
     company_name?: string;
+    domain?: string;
 }
 
 export interface OrganisationCreateRequest extends BaseContactPayload {
     contact_type: `${Contact.Type.ORGANISATION}`;
     company_name: string;
+    domain?: string;
 }
 
 export interface PersonUpdateRequest extends BaseContactPayload {
