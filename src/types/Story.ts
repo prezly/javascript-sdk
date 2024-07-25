@@ -187,7 +187,8 @@ export namespace Story {
      * @deprecated Please use `Status` instead.
      * @see Status
      */
-    export import LifecycleStatus = Status;
+    export const LifecycleStatus = Status;
+    export type LifecycleStatus = Status;
 
     /**
      * @deprecated Please use `Status` instead.
