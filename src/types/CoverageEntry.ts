@@ -1,4 +1,4 @@
-import type { UploadedFile } from '@prezly/uploads';
+import type { UploadedFile, UploadedImage } from '@prezly/uploads';
 
 import type { OEmbedInfo } from './common';
 import type { Contact } from './Contact';
@@ -27,7 +27,7 @@ export interface CoverageEntry {
     note_content_html: string;
     note_content_json: string;
     note_content_text: string;
-    attachment: UploadedFile | null;
+    attachment: UploadedFile | UploadedImage | null;
     attachment_oembed: OEmbedInfo | null;
 
     published_at: string | null;
