@@ -264,9 +264,12 @@ export interface PreviewOptions {
     headerFooter?: HeaderFooter;
 }
 
-export import Alignment = Campaign.StoryAlignment;
-export import Appearance = Campaign.StoryAppearance;
-export import HeaderFooter = Campaign.StoryHeaderFooter;
+export const Alignment = Campaign.StoryAlignment;
+export type Alignment = Campaign.StoryAlignment;
+export const Appearance = Campaign.StoryAppearance;
+export type Appearance = Campaign.StoryAppearance;
+export const HeaderFooter = Campaign.StoryHeaderFooter;
+export type HeaderFooter = Campaign.StoryHeaderFooter;
 
 export type CreateRequest =
     | HtmlStoryCreateRequest
