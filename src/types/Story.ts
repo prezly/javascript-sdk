@@ -4,6 +4,7 @@ import type { CultureRef } from './Culture';
 import { Newsroom, type NewsroomRef } from './Newsroom';
 import type { SEOSettings } from './SEOSettings';
 import type { UserRef } from './User';
+import type { CoverageEntry } from "./CoverageEntry";
 
 type Html = string;
 type Json = string;
@@ -282,6 +283,7 @@ export namespace Story {
 
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
+            coverages: Record<number, CoverageEntry>;
         };
 
         /**
@@ -496,4 +498,5 @@ export interface ExtendedStory
             | 'content'
             | 'attached_gallery_content'
             | 'referenced_entities'
-        > {}
+        > {
+}
