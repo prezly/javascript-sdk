@@ -498,5 +498,4 @@ export interface ExtendedStory
             | 'content'
             | 'attached_gallery_content'
             | 'referenced_entities'
-        > {
-}
+        > {}
