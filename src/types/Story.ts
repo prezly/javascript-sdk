@@ -1,5 +1,6 @@
 import type { Category } from './Category';
 import type { OEmbedInfo } from './common';
+import type { CoverageEntry } from './CoverageEntry';
 import type { CultureRef } from './Culture';
 import { Newsroom, type NewsroomRef } from './Newsroom';
 import type { SEOSettings } from './SEOSettings';
@@ -282,6 +283,7 @@ export namespace Story {
 
         referenced_entities: {
             stories: Record<string, OEmbedInfo>;
+            coverages: Record<number, CoverageEntry>;
         };
 
         /**
