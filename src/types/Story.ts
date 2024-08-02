@@ -1,10 +1,10 @@
 import type { Category } from './Category';
 import type { OEmbedInfo } from './common';
+import type { CoverageEntry } from './CoverageEntry';
 import type { CultureRef } from './Culture';
 import { Newsroom, type NewsroomRef } from './Newsroom';
 import type { SEOSettings } from './SEOSettings';
 import type { UserRef } from './User';
-import type { CoverageEntry } from "./CoverageEntry";
 
 type Html = string;
 type Json = string;
