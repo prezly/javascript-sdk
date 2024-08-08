@@ -29,6 +29,7 @@ export interface CoverageEntry {
     note_content_text: string;
     attachment: UploadedFile | UploadedImage | null;
     attachment_oembed: OEmbedInfo | null;
+    screenshot: UploadedImage | null;
 
     published_at: string | null;
     created_at: string;
