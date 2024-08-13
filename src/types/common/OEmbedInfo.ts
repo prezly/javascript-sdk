@@ -10,6 +10,7 @@ export interface OEmbedInfo {
     thumbnail_url?: string;
     thumbnail_width?: number;
     thumbnail_height?: number;
+    publication_date?: string; // ISO8601
     author_name?: string;
     author_url?: string;
     provider_name?: string;
