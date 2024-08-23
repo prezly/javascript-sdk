@@ -37,11 +37,11 @@ export interface CreateRequest {
     /**
      * Uploadcare Image JSON
      */
-    newsroom_logo?: string;
+    newsroom_logo?: string | null;
     /**
      * Uploadcare Image JSON
      */
-    square_logo?: string;
+    square_logo?: string | null;
     /**
      * Theme ID or codename
      */
@@ -68,11 +68,11 @@ export interface UpdateRequest {
     /**
      * Uploadcare Image JSON
      */
-    newsroom_logo?: string;
+    newsroom_logo?: string | null;
     /**
      * Uploadcare Image JSON
      */
-    square_logo?: string;
+    square_logo?: string | null;
     /**
      * Uploadcare Image JSON
      */
