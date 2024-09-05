@@ -1,21 +1,18 @@
+import { CoverageEntry } from '../../dist';
+
 import type { CoverageIntegrationRun } from './CoverageIntegrationRun';
 import type { NewsroomRef } from './Newsroom';
 
-type Iso8601DateTime = string;
+import Provider = CoverageEntry.Provider;
 
-export enum PROVIDER {
-    BELGA = 'belga',
-    RSS = 'rss',
-    AUXIPRESS = 'auxipress',
-    GOOGLE_ALERTS = 'google_alerts',
-}
+type Iso8601DateTime = string;
 
 export interface CoverageIntegration {
     id: number;
     name: string;
     description: string | null;
     newsroom: NewsroomRef;
-    provider: PROVIDER;
+    provider: Provider;
     input: string;
     skip_author: boolean;
     skip_organisation: boolean;

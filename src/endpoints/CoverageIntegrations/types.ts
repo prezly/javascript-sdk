@@ -1,9 +1,10 @@
-import type { PROVIDER } from '../../types';
-import { type Newsroom } from '../../types';
+import { CoverageEntry, type Newsroom } from '../../types';
+
+import Provider = CoverageEntry.Provider;
 
 export interface CreateRequest {
     newsroom: Newsroom['id'] | Newsroom['uuid'];
-    provider: PROVIDER;
+    provider: Provider;
     input: string;
     name: string;
     description?: string;
