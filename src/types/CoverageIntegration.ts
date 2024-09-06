@@ -1,9 +1,6 @@
-import { CoverageEntry } from '../../dist';
-
+import type { CoverageEntry } from './CoverageEntry';
 import type { CoverageIntegrationRun } from './CoverageIntegrationRun';
 import type { NewsroomRef } from './Newsroom';
-
-import Provider = CoverageEntry.Provider;
 
 type Iso8601DateTime = string;
 
@@ -12,7 +9,7 @@ export interface CoverageIntegration {
     name: string;
     description: string | null;
     newsroom: NewsroomRef;
-    provider: Provider;
+    provider: CoverageEntry.Provider;
     input: string;
     skip_author: boolean;
     skip_organisation: boolean;
