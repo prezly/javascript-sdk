@@ -68,7 +68,6 @@ export namespace CoverageEntry {
         AUXIPRESS = 'auxipress',
         BELGA = 'belga',
         FEED = 'feed',
-        GOOGLE_ALERTS = 'google_alerts',
         KANTAR = 'kantar',
         KNEWIN = 'knewin',
         MEDIAWEB = 'mediaweb',
