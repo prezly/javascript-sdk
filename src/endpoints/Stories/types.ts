@@ -310,6 +310,7 @@ export type UnscheduleRequest = UnpublishRequest;
 
 export interface TranslateRequest {
     culture?: CultureRef['code'];
+    auto?: boolean;
 }
 
 export interface MoveRequest {
