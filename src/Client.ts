@@ -29,6 +29,7 @@ import {
     Snippets,
     Subscriptions,
     NotificationSubscriptions,
+    CoverageIntegrations,
 } from './endpoints';
 import type { HeadersMap } from './http';
 import { createHttpClient } from './http';
@@ -53,6 +54,7 @@ export interface Client {
     contactTagGroups: ContactTagGroups.Client;
     contactsExports: ContactsExports.Client;
     coverage: Coverage.Client;
+    coverageIntegrations: CoverageIntegrations.Client;
     jobs: Jobs.Client;
     licenses: Licenses.Client;
     newsrooms: Newsrooms.Client;
@@ -101,6 +103,7 @@ export function createClient({
         contactTagGroups: ContactTagGroups.createClient(api),
         contactsExports: ContactsExports.createClient(api),
         coverage: Coverage.createClient(api),
+        coverageIntegrations: CoverageIntegrations.createClient(api),
         jobs: Jobs.createClient(api),
         licenses: Licenses.createClient(api),
         newsrooms: Newsrooms.createClient(api),

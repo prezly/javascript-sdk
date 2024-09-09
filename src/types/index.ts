@@ -13,6 +13,8 @@ export * from './ContactsExport';
 export * from './ContactsScope';
 export * from './Country';
 export * from './CoverageEntry';
+export * from './CoverageIntegration';
+export * from './CoverageIntegrationRun';
 export * from './Culture';
 export * from './Currency';
 export * from './DnsConfigurationInstruction';
