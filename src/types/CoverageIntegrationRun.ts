@@ -1,6 +1,6 @@
 type Iso8601DateTime = string;
 
-export enum STATUS {
+export enum Status {
     DONE = 'done',
     ERROR = 'error',
     RUNNING = 'running',
@@ -11,7 +11,7 @@ export interface CoverageIntegrationRun {
     uuid: string;
     created_at: Iso8601DateTime;
     updated_at: Iso8601DateTime;
-    status: STATUS;
+    status: Status;
     /**
      * Following properties will be `null` when status = 'running'
      */
