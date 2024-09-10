@@ -16,6 +16,13 @@ export interface ContactRef {
     };
 }
 
+interface Language {
+    code: string;
+    direction: string;
+    locale: string;
+    name: string;
+}
+
 export interface Contact {
     id: number;
     contact_type: Contact.Type;
@@ -36,16 +43,12 @@ export interface Contact {
     periodicity: Contact.Periodicity | null;
     medium_types: Contact.MediumType[];
     bio: string;
-    languages: {
-        code: string;
-        direction: string;
-        locale: string;
-        name: string;
-    }[];
+    languages: Language[];
 
     primary_email: string | null;
     emails: string[];
     phone_numbers: Contact.PhoneNumber[];
+    social: { type: Contact.SocialNetwork; username: string }[];
     function_name: string;
     address: {
         street: string;
@@ -108,7 +111,23 @@ export interface Contact {
         view: string;
     };
 
-    social: { type: Contact.SocialNetwork; username: string }[];
+    enrichments: {
+        languages: Language['code'][];
+        medium_types: Contact.MediumType[];
+        urls: string[];
+        phone_numbers: Contact.PhoneNumber[];
+        social: { type: Contact.SocialNetwork; username: string }[];
+        periodicity: Contact.Periodicity | null;
+        address: {
+            street: string | null;
+            number: string | null;
+            box: string | null;
+            zip: string | null;
+            city: string | null;
+            region: string | null;
+            country: string | null;
+        };
+    };
 }
 
 export namespace Contact {
