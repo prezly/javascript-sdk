@@ -91,6 +91,13 @@ export interface Contact {
     created_at: string | null; // there are contacts in DB that do have `created_at = null`
     modified_at: string | null;
 
+    external_metrics: {
+        open_page_rank: number | null;
+        similarweb_country_rank: number | null;
+        similarweb_global_rank: number | null;
+        similarweb_visitors_monthly: number | null;
+    };
+
     stats: {
         clicked: number;
         delivered: number;
