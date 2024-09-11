@@ -93,6 +93,7 @@ export interface Contact {
 
     external_metrics: {
         open_page_rank: number | null;
+        similarweb_country: string | null;
         similarweb_country_rank: number | null;
         similarweb_global_rank: number | null;
         similarweb_visitors_monthly: number | null;
