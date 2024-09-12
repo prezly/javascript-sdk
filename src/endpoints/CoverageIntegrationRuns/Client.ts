@@ -21,8 +21,8 @@ export function createClient(api: DeferredJobsApiClient) {
         return api.get<ListResponse>(url, {
             query: {
                 sort: SortOrder.stringify(sortOrder),
-                limit: limit,
-                offset: offset,
+                limit,
+                offset,
             },
         });
     }
