@@ -8,7 +8,6 @@ export * as Contacts from './Contacts';
 export * as ContactsExports from './ContactsExports';
 export * as Coverage from './Coverage';
 export * as CoverageIntegrations from './CoverageIntegrations';
-export * as CoverageIntegrationRuns from './CoverageIntegrationRuns';
 export * as Jobs from './Jobs';
 export * as Licenses from './Licenses';
 export * as NewsroomCategories from './NewsroomCategories';

@@ -30,7 +30,6 @@ import {
     Subscriptions,
     NotificationSubscriptions,
     CoverageIntegrations,
-    CoverageIntegrationRuns,
 } from './endpoints';
 import type { HeadersMap } from './http';
 import { createHttpClient } from './http';
@@ -56,7 +55,6 @@ export interface Client {
     contactsExports: ContactsExports.Client;
     coverage: Coverage.Client;
     coverageIntegrations: CoverageIntegrations.Client;
-    coverageIntegrationRuns: CoverageIntegrationRuns.Client;
     jobs: Jobs.Client;
     licenses: Licenses.Client;
     newsrooms: Newsrooms.Client;
@@ -106,7 +104,6 @@ export function createClient({
         contactsExports: ContactsExports.createClient(api),
         coverage: Coverage.createClient(api),
         coverageIntegrations: CoverageIntegrations.createClient(api),
-        coverageIntegrationRuns: CoverageIntegrationRuns.createClient(api),
         jobs: Jobs.createClient(api),
         licenses: Licenses.createClient(api),
         newsrooms: Newsrooms.createClient(api),
