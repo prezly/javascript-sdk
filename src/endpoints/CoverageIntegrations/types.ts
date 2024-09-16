@@ -1,4 +1,10 @@
-import { CoverageEntry, type Newsroom } from '../../types';
+import {
+    CoverageEntry,
+    type CoverageIntegrationRun,
+    type Newsroom,
+    type Pagination,
+    type SortOrder,
+} from '../../types';
 
 import Provider = CoverageEntry.Provider;
 
@@ -18,4 +24,16 @@ export interface UpdateRequest {
     description?: string;
     skip_author?: boolean;
     skip_organisation?: boolean;
+}
+
+export interface ListRunsOptions {
+    limit?: number;
+    offset?: number;
+    sortOrder?: SortOrder | string;
+}
+
+export interface ListRunsResponse {
+    runs: CoverageIntegrationRun[];
+    pagination: Pagination;
+    sort: string;
 }

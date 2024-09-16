@@ -1,8 +1,8 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { CoverageIntegration } from '../../types';
+import { type CoverageIntegration, SortOrder } from '../../types';
 
-import type { CreateRequest, UpdateRequest } from './types';
+import type { CreateRequest, ListRunsOptions, ListRunsResponse, UpdateRequest } from './types';
 
 type IntegrationId = CoverageIntegration['id'];
 
@@ -50,11 +50,27 @@ export function createClient(api: DeferredJobsApiClient) {
         return api.delete(`${url}/${integrationId}`);
     }
 
+    async function listRuns(
+        integrationId: IntegrationId,
+        options: ListRunsOptions = {},
+    ): Promise<ListRunsResponse> {
+        const { sortOrder, limit, offset } = options;
+        const url = routing.coverageIntegrationsUrl;
+        return api.get<ListRunsResponse>(`${url}/${integrationId}/runs`, {
+            query: {
+                sort: SortOrder.stringify(sortOrder),
+                limit,
+                offset,
+            },
+        });
+    }
+
     return {
         list,
         get,
         create,
         update,
         delete: doDelete,
+        listRuns,
     };
 }
