@@ -45,7 +45,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return integration;
     }
 
-    async function trigger(integrationId: IntegrationId,): Promise<void> {
+    async function trigger(integrationId: IntegrationId): Promise<void> {
         const url = routing.coverageIntegrationsUrl;
         return api.post(`${url}/${integrationId}/trigger`);
     }
