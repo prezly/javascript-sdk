@@ -45,6 +45,11 @@ export function createClient(api: DeferredJobsApiClient) {
         return integration;
     }
 
+    async function trigger(integrationId: IntegrationId): Promise<void> {
+        const url = routing.coverageIntegrationsUrl;
+        return api.post(`${url}/${integrationId}/trigger`);
+    }
+
     async function doDelete(integrationId: IntegrationId): Promise<void> {
         const url = routing.coverageIntegrationsUrl;
         return api.delete(`${url}/${integrationId}`);
@@ -70,6 +75,7 @@ export function createClient(api: DeferredJobsApiClient) {
         get,
         create,
         update,
+        trigger,
         delete: doDelete,
         listRuns,
     };
