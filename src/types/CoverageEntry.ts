@@ -3,6 +3,7 @@ import type { UploadedFile, UploadedImage } from '@prezly/uploads';
 import type { OEmbedInfo } from './common';
 import type { Contact } from './Contact';
 import type { CountryRef } from './Country';
+import type { CoverageIntegrationRun } from './CoverageIntegrationRun';
 import type { CultureRef } from './Culture';
 import type { NewsroomRef } from './Newsroom';
 import type { Story } from './Story';
@@ -15,6 +16,7 @@ export interface CoverageEntry {
      * @see uuid
      */
     id: number;
+    integration_run: CoverageIntegrationRun['id'] | CoverageIntegrationRun['uuid'] | null;
     display_name: string;
     is_deleted: boolean;
     headline: string;

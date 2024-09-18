@@ -55,7 +55,9 @@ export interface UpdateRequest {
     page?: number | null;
 }
 
-export interface CreateRequest extends UpdateRequest {}
+export interface CreateRequest extends UpdateRequest {
+    integration_run?: CoverageEntry['integration_run'];
+}
 
 export interface ListOptions {
     includeDeleted?: boolean;
