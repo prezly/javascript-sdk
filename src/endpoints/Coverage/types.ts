@@ -9,6 +9,7 @@ import type {
     Story,
     Query,
     SortOrder,
+    CoverageIntegrationRun,
 } from '../../types';
 
 export type Scope = { story: Story['id'] } | null;
@@ -55,7 +56,9 @@ export interface UpdateRequest {
     page?: number | null;
 }
 
-export interface CreateRequest extends UpdateRequest {}
+export interface CreateRequest extends UpdateRequest {
+    integrationRunUuid?: CoverageIntegrationRun['uuid'] | null;
+}
 
 export interface ListOptions {
     includeDeleted?: boolean;
