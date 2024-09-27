@@ -34,6 +34,7 @@ export interface UpdateRequest {
      */
     type?: CoverageEntry.Type;
     culture?: CultureRef['code'] | null;
+    pdf_url?: string | null;
     country?: CountryRef['code'] | null;
     management_url?: string | null;
     provider?: CoverageEntry.Provider | null;
@@ -53,6 +54,7 @@ export interface UpdateRequest {
      * For print type.
      */
     page?: number | null;
+    sentiment?: CoverageEntry.Sentiment | null;
 }
 
 export interface CreateRequest extends UpdateRequest {
