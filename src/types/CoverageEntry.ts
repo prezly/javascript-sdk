@@ -48,12 +48,14 @@ export interface CoverageEntry {
     type: CoverageEntry.Type;
     country: CountryRef | null;
     culture: CultureRef | null;
+    pdf_url: string | null;
     management_url: string | null;
     provider: CoverageEntry.Provider | null;
     fragment_duration: number | null;
     fragment_start_time: string | null;
     fragment_end_time: string | null;
     page: number | null;
+    sentiment: CoverageEntry.Sentiment | null;
 }
 
 export namespace CoverageEntry {
@@ -76,5 +78,11 @@ export namespace CoverageEntry {
         MEDIAWEB = 'mediaweb',
         MELTWATER = 'meltwater',
         MANUAL = 'manual',
+    }
+
+    export enum Sentiment {
+        POSITIVE = 'positive',
+        NEGATIVE = 'negative',
+        NEUTRAL = 'neutral',
     }
 }
