@@ -48,6 +48,7 @@ export interface CoverageEntry {
     type: CoverageEntry.Type;
     country: CountryRef | null;
     culture: CultureRef | null;
+    pdf_url: string | null;
     management_url: string | null;
     provider: CoverageEntry.Provider | null;
     fragment_duration: number | null;
