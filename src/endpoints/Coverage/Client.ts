@@ -6,6 +6,7 @@ import type { CoverageEntry, SelectionValue } from '../../types';
 import { Query, SortOrder } from '../../types';
 
 import type {
+    CreateOptions,
     CreateRequest,
     ListOptions,
     ListResponse,
@@ -74,9 +75,15 @@ export function createClient(api: DeferredJobsApiClient) {
         return coverage[0] || null;
     }
 
-    async function create(payload: CreateRequest): Promise<CoverageEntry> {
+    async function create(
+        payload: CreateRequest,
+        { enrich = false }: CreateOptions = {},
+    ): Promise<CoverageEntry> {
         const { coverage } = await api.post<{ coverage: CoverageEntry }>(routing.coverageUrl, {
             payload,
+            query: {
+                enrich: enrich || undefined,
+            },
         });
         return coverage;
     }
