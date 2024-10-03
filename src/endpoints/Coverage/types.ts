@@ -61,6 +61,10 @@ export interface CreateRequest extends UpdateRequest {
     integration_run?: CoverageEntry['integration_run'];
 }
 
+export interface CreateOptions {
+    enrich?: boolean;
+}
+
 export interface ListOptions {
     includeDeleted?: boolean;
     limit?: number;
