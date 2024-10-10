@@ -1,3 +1,5 @@
+import type { CoverageIntegrationRef } from './CoverageIntegration';
+
 type Iso8601DateTime = string;
 
 export enum Status {
@@ -17,4 +19,5 @@ export interface CoverageIntegrationRun {
      */
     stats_processed: number | null;
     stats_added: number | null;
+    integration: CoverageIntegrationRef;
 }

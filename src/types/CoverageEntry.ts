@@ -16,7 +16,7 @@ export interface CoverageEntry {
      * @see uuid
      */
     id: number;
-    integration_run: CoverageIntegrationRun['id'] | CoverageIntegrationRun['uuid'] | null;
+    integration_run: CoverageIntegrationRun | null;
     display_name: string;
     is_deleted: boolean;
     headline: string;

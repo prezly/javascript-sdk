@@ -28,3 +28,10 @@ export interface CoverageIntegration {
     status: CoverageIntegrationStatus;
     trial_ends_at: Iso8601DateTime | null;
 }
+
+export interface CoverageIntegrationRef {
+    id: number;
+    name: string;
+    status: CoverageIntegrationStatus;
+    trial_ends_at: Iso8601DateTime | null;
+}
