@@ -5,6 +5,12 @@ import type { UserRef } from './User';
 
 type Iso8601DateTime = string;
 
+export enum CoverageIntegrationStatus {
+    ACTIVE = 'active',
+    PAUSED = 'paused',
+    TRIAL = 'trial',
+}
+
 export interface CoverageIntegration {
     id: number;
     name: string;
@@ -19,4 +25,6 @@ export interface CoverageIntegration {
     created_at: Iso8601DateTime;
     stats_added: number;
     creator: UserRef | null;
+    status: CoverageIntegrationStatus;
+    trial_ends_at: Iso8601DateTime | null;
 }
