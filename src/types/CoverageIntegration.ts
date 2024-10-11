@@ -9,6 +9,7 @@ export enum CoverageIntegrationStatus {
     ACTIVE = 'active',
     PAUSED = 'paused',
     TRIAL = 'trial',
+    DELETED = 'deleted',
 }
 
 export interface CoverageIntegration {
