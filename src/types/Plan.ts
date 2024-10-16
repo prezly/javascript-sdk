@@ -27,9 +27,28 @@ export interface Plan extends PlanReference {
     total_after_discount: number;
     usage: Usage[];
     possible_changes: Change[];
+    add_ons: PlanAddOn[];
     ends_at: string | null;
     ended_at: string | null;
     current_period_end: string | null;
+}
+
+export interface PlanAddOn {
+    add_on: AddOn;
+    quantity: number;
+}
+
+export interface AddOn {
+    id: string;
+    display_name: string;
+    prices: PricingPlan[];
+}
+
+export interface PricingPlan {
+    billing_cycle: BillingCycle;
+    currency: Currency;
+    amount: number;
+    unit: string | null;
 }
 
 export interface Usage {
