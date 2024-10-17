@@ -9,7 +9,7 @@ export interface CoverageIntegration {
     id: number;
     name: string;
     description: string | null;
-    newsroom: NewsroomRef;
+    newsroom: NewsroomRef | null;
     provider: CoverageEntry.Provider;
     input: string;
     skip_author: boolean;

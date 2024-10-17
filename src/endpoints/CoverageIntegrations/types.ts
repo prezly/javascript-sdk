@@ -9,7 +9,7 @@ import {
 import Provider = CoverageEntry.Provider;
 
 export interface CreateRequest {
-    newsroom: Newsroom['id'] | Newsroom['uuid'];
+    newsroom?: Newsroom['id'] | Newsroom['uuid'];
     provider: Provider;
     input: string;
     name: string;
@@ -19,6 +19,7 @@ export interface CreateRequest {
 }
 
 export interface UpdateRequest {
+    newsroom?: Newsroom['id'] | Newsroom['uuid'];
     input?: string;
     name?: string;
     description?: string;
