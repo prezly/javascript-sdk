@@ -98,6 +98,11 @@ export interface License extends LicenseRef {
      */
     send_emails_limit: string;
     sent_emails_in_period: number;
+
+    coverage_integration_belga_limit: number | null;
+    coverage_integration_google_alerts_limit: number | null;
+    coverage_integration_rss_limit: number | null;
+    coverage_integration_auxipress_limit: number | null;
 }
 
 export namespace License {
