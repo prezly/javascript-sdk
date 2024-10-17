@@ -75,9 +75,10 @@ export namespace CoverageEntry {
         GOOGLE_ALERTS = 'google_alerts',
         KANTAR = 'kantar',
         KNEWIN = 'knewin',
+        MANUAL = 'manual',
         MEDIAWEB = 'mediaweb',
         MELTWATER = 'meltwater',
-        MANUAL = 'manual',
+        OPOINT = 'opoint',
     }
 
     export enum Sentiment {
