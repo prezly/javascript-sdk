@@ -1,14 +1,15 @@
 import type {
-    CultureRef,
-    CountryRef,
     Contact,
+    CountryRef,
     CoverageEntry,
+    CoverageIntegrationRun,
+    CultureRef,
     NewsroomRef,
     OEmbedInfo,
     Pagination,
-    Story,
     Query,
     SortOrder,
+    Story,
 } from '../../types';
 
 export type Scope = { story: Story['id'] } | null;
@@ -58,7 +59,7 @@ export interface UpdateRequest {
 }
 
 export interface CreateRequest extends UpdateRequest {
-    integration_run?: CoverageEntry['integration_run'];
+    integration_run?: CoverageIntegrationRun['id'] | CoverageIntegrationRun['uuid'];
 }
 
 export interface CreateOptions {
@@ -71,6 +72,7 @@ export interface ListOptions {
     offset?: number;
     sortOrder?: SortOrder | string;
 }
+
 export interface SearchOptions extends ListOptions {
     query?: Query;
 }
