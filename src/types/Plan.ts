@@ -52,10 +52,10 @@ export interface PricingPlan {
     amount: number | null;
     unit: string | null;
     tiers_mode: TiersMode | null;
-    tiers: PricingTire[] | null;
+    tiers: PricingTier[] | null;
 }
 
-export interface PricingTire {
+export interface PricingTier {
     flat_amount: number;
     unit_amount: number;
     up_to: number | null;
