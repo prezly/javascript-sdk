@@ -32,6 +32,7 @@ export * from './NewsroomSubscription';
 export * from './NewsroomTheme';
 export * from './NewsroomWebhook';
 export * from './Plan';
+export * from './Price';
 export * from './PrivacyRequest';
 export * from './SenderAddress';
 export * from './SenderDomain';

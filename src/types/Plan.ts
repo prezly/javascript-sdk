@@ -4,6 +4,7 @@ import type { TableId } from '../endpoints/PricingTables';
 
 import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
+import type { TiersMode, BillingSchema } from './Price';
 
 export interface PlanReference {
     display_name: string;
@@ -47,8 +48,17 @@ export interface AddOn {
 export interface PricingPlan {
     billing_cycle: BillingCycle;
     currency: Currency;
-    amount: number;
+    billing_schema: BillingSchema;
+    amount: number | null;
     unit: string | null;
+    tiers_mode: TiersMode | null;
+    tiers: PricingTire[] | null;
+}
+
+export interface PricingTire {
+    flat_amount: number;
+    unit_amount: number;
+    up_to: number | null;
 }
 
 export interface Usage {
