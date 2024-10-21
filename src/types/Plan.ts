@@ -4,7 +4,7 @@ import type { TableId } from '../endpoints/PricingTables';
 
 import type { BillingCycle } from './BillingCycle';
 import type { Currency } from './Currency';
-import type { TiersMode, BillingSchema } from './Price';
+import type { TiersMode, BillingSchema, Tier } from './Price';
 
 export interface PlanReference {
     display_name: string;
@@ -52,13 +52,7 @@ export interface PricingPlan {
     amount: number | null;
     unit: string | null;
     tiers_mode: TiersMode | null;
-    tiers: PricingTier[] | null;
-}
-
-export interface PricingTier {
-    flat_amount: number;
-    unit_amount: number;
-    up_to: number | null;
+    tiers: Tier[] | null;
 }
 
 export interface Usage {
