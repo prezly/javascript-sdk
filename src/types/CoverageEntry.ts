@@ -56,6 +56,10 @@ export interface CoverageEntry {
     fragment_end_time: string | null;
     page: number | null;
     sentiment: CoverageEntry.Sentiment | null;
+    /**
+     * Available in Get Coverage endpoint.
+     */
+    article_content_preview?: string | null;
 }
 
 export namespace CoverageEntry {
