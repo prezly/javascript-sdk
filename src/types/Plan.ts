@@ -48,7 +48,7 @@ export interface AddOn {
 export interface PricingPlan {
     billing_cycle: BillingCycle;
     currency: Currency;
-    billing_schema: BillingSchema;
+    billing_scheme: BillingSchema;
     amount: number | null;
     unit: string | null;
     tiers_mode: TiersMode | null;
