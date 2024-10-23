@@ -37,6 +37,7 @@ export interface Plan extends PlanReference {
 export interface PlanAddOn {
     add_on: AddOn;
     quantity: number;
+    price: PricingPlan | null;
 }
 
 export interface AddOn {
