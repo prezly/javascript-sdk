@@ -103,6 +103,7 @@ export interface License extends LicenseRef {
     coverage_integration_google_alerts_limit: number | null;
     coverage_integration_rss_limit: number | null;
     coverage_integration_auxipress_limit: number | null;
+    coverage_integration_opoint_limit: number | null;
 }
 
 export namespace License {
