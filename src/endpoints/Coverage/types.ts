@@ -13,16 +13,23 @@ import type {
 
 export type Scope = { story: Story['id'] } | null;
 
+type ContactPointer =
+    | Contact['id']
+    | Contact['display_name']
+    | { id: Contact['id'] }
+    | { name: Contact['display_name'] }
+    | { name: Contact['display_name']; url: Contact['urls'][number] };
+
 export interface UpdateRequest {
     attachment_oembed?: OEmbedInfo | null;
     attachment_plaintext_content?: string | null;
     attachment?: string | null;
-    author?: Contact['id'] | string | null;
+    author?: ContactPointer | null;
     external_reference_id?: string;
     headline?: string;
     newsroom?: NewsroomRef['id'] | null;
     note_content?: string | { json: string } | { text: string };
-    organisation?: Contact['id'] | string | null;
+    organisation?: ContactPointer | null;
     original_metadata_source?: string;
     published_at?: string | null;
     story?: Story['id'] | null;
