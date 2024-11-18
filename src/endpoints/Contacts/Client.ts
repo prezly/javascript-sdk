@@ -112,7 +112,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return contact;
     }
 
-    async function bulkTag(
+    function bulkTag(
         selector: BulkSelector,
         tags: ContactTag.Identifier[],
     ): ProgressPromise<undefined> {
@@ -122,7 +122,7 @@ export function createClient(api: DeferredJobsApiClient) {
         });
     }
 
-    async function bulkUntag(
+    function bulkUntag(
         selector: BulkSelector,
         tags: ContactTag.Identifier[],
     ): ProgressPromise<undefined> {

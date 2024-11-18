@@ -83,7 +83,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return campaign;
     }
 
-    async function create(
+    function create(
         payload: CreateRequest,
     ): ProgressPromise<RecipientsOperationResponse, { recipients_number: number }> {
         return api.post<RecipientsOperationResponse>(routing.campaignsUrl, {

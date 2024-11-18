@@ -100,7 +100,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return api.delete(`${routing.coverageUrl}/${id}`);
     }
 
-    async function bulkDelete(
+    function bulkDelete(
         options: Partial<{
             selection: SelectionValue;
             query: string;
