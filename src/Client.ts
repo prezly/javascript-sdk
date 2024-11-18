@@ -3,33 +3,33 @@ import { createApiClient, createDeferredJobsApiClient, type Fetch } from './api'
 import {
     Accounts,
     Billing,
-    NewsroomSubscriptions,
-    Campaigns,
     CampaignRecipients,
+    Campaigns,
     Contacts,
-    ContactTags,
-    ContactTagGroups,
     ContactsExports,
+    ContactTagGroups,
+    ContactTags,
     Coverage,
+    CoverageIntegrations,
     Jobs,
     Licenses,
-    Newsrooms,
     NewsroomCategories,
     NewsroomContacts,
-    NewsroomLanguages,
-    NewsroomThemes,
-    NewsroomWebhooks,
-    NewsroomPrivacyRequests,
     NewsroomDomains,
     NewsroomGalleries,
     NewsroomHub,
+    NewsroomLanguages,
+    NewsroomPrivacyRequests,
+    Newsrooms,
+    NewsroomSubscriptions,
+    NewsroomThemes,
+    NewsroomWebhooks,
+    NotificationSubscriptions,
     PricingTables,
     SenderAddresses,
-    Stories,
     Snippets,
+    Stories,
     Subscriptions,
-    NotificationSubscriptions,
-    CoverageIntegrations,
 } from './endpoints';
 import type { HeadersMap } from './http';
 import { createHttpClient } from './http';
@@ -82,9 +82,8 @@ export function createClient({
     headers = {},
     fetch,
 }: ClientOptions): Client {
-    const http = createHttpClient({ fetch, baseUrl });
     const api = createDeferredJobsApiClient(
-        createApiClient(http, {
+        createApiClient(createHttpClient({ fetch, baseUrl }), {
             accessToken,
             headers,
         }),
