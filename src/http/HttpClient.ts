@@ -12,12 +12,20 @@ export interface HttpClient {
     delete<V = any>(url: string, params?: ParamsWithPayload): Promise<ApiResponse<V>>;
 }
 
-export function createHttpClient(options: { fetch?: Fetch } = {}): HttpClient {
+export function createHttpClient(options: { baseUrl?: string; fetch?: Fetch } = {}): HttpClient {
+    const baseUrl = options.baseUrl ?? null;
     const fetchImpl = options.fetch ?? fetch;
+
+    function resolveUrl(url: string) {
+        if (baseUrl) {
+            return new URL(url, baseUrl).toString();
+        }
+        return url;
+    }
 
     return {
         get(url, { headers, query } = {}) {
-            return createRequest(fetchImpl, url, {
+            return createRequest(fetchImpl, resolveUrl(url), {
                 headers,
                 method: Method.GET,
                 query,
@@ -25,7 +33,7 @@ export function createHttpClient(options: { fetch?: Fetch } = {}): HttpClient {
         },
 
         post(url: string, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, url, {
+            return createRequest(fetchImpl, resolveUrl(url), {
                 headers,
                 method: Method.POST,
                 payload,
@@ -34,7 +42,7 @@ export function createHttpClient(options: { fetch?: Fetch } = {}): HttpClient {
         },
 
         put(url, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, url, {
+            return createRequest(fetchImpl, resolveUrl(url), {
                 headers,
                 method: Method.PUT,
                 payload,
@@ -43,7 +51,7 @@ export function createHttpClient(options: { fetch?: Fetch } = {}): HttpClient {
         },
 
         patch(url: string, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, url, {
+            return createRequest(fetchImpl, resolveUrl(url), {
                 headers,
                 method: Method.PATCH,
                 payload,
@@ -52,7 +60,7 @@ export function createHttpClient(options: { fetch?: Fetch } = {}): HttpClient {
         },
 
         delete(url: string, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, url, {
+            return createRequest(fetchImpl, resolveUrl(url), {
                 headers,
                 method: Method.DELETE,
                 payload,

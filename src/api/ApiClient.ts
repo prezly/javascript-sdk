@@ -1,32 +1,23 @@
 import type { ApiResponse, HeadersMap, HttpClient, Params, ParamsWithPayload } from '../http';
-import { stripSlashes } from '../utils';
 
 import { DEFAULT_USER_AGENT } from './constants';
 
 export interface Options {
     accessToken: string;
-    baseUrl: string;
     headers: HeadersMap;
 }
 
 export type ApiClient = ReturnType<typeof createApiClient>;
 
-export function createApiClient(http: HttpClient, { accessToken, baseUrl, headers }: Options) {
+export function createApiClient(http: HttpClient, { accessToken, headers }: Options) {
     const defaultHeaders = {
         authorization: `Bearer ${accessToken}`,
         'User-Agent': DEFAULT_USER_AGENT,
         ...headers,
     };
 
-    function buildEndpointUrl(endpointUri: string): string {
-        return `${stripSlashes(baseUrl)}/${stripSlashes(endpointUri)}`;
-    }
-
-    function get<V = any>(
-        endpointUri: string,
-        { headers, query }: Params = {},
-    ): Promise<ApiResponse<V>> {
-        return http.get<V>(buildEndpointUrl(endpointUri), {
+    function get<V = any>(url: string, { headers, query }: Params = {}): Promise<ApiResponse<V>> {
+        return http.get<V>(url, {
             headers: {
                 ...defaultHeaders,
                 ...headers,
@@ -36,10 +27,10 @@ export function createApiClient(http: HttpClient, { accessToken, baseUrl, header
     }
 
     function post<V = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return http.post<V>(buildEndpointUrl(endpointUri), {
+        return http.post<V>(url, {
             headers: {
                 ...defaultHeaders,
                 ...headers,
@@ -50,10 +41,10 @@ export function createApiClient(http: HttpClient, { accessToken, baseUrl, header
     }
 
     function put<V = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return http.put<V>(buildEndpointUrl(endpointUri), {
+        return http.put<V>(url, {
             headers: {
                 ...defaultHeaders,
                 ...headers,
@@ -64,10 +55,10 @@ export function createApiClient(http: HttpClient, { accessToken, baseUrl, header
     }
 
     function patch<V = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return http.patch<V>(buildEndpointUrl(endpointUri), {
+        return http.patch<V>(url, {
             headers: {
                 ...defaultHeaders,
                 ...headers,
@@ -78,10 +69,10 @@ export function createApiClient(http: HttpClient, { accessToken, baseUrl, header
     }
 
     function doDelete<V = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): Promise<ApiResponse<V>> {
-        return http.delete<V>(buildEndpointUrl(endpointUri), {
+        return http.delete<V>(url, {
             headers: {
                 ...defaultHeaders,
                 ...headers,
