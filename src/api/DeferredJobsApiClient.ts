@@ -7,11 +7,17 @@ import type { JobState } from '../types';
 import { JobStatus } from '../types';
 
 import type { ApiClient } from './ApiClient';
+
 const JOB_STATUS_POLLING_INTERVAL = 2000; // ms
 
 async function sleep(milliseconds: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
+
+type Job<V, P> = {
+    id: string;
+    state: JobState<V, P>;
+};
 
 async function handleDeferredJob<V = any, P = any>(
     api: ApiClient,
@@ -23,24 +29,21 @@ async function handleDeferredJob<V = any, P = any>(
         const id = response.payload.progress.id;
         return new ProgressPromise<V, P>(async function (resolve, reject, progress) {
             do {
-                const response = await api.get<{ job: JobState<V, P> }>(
-                    `${routing.jobsUrl}/${id}`,
-                    {
-                        fetch,
-                    },
-                );
-                const { job } = response.payload;
+                const response = await api.get<{ job: Job<V, P> }>(`${routing.jobsUrl}/${id}`, {
+                    fetch,
+                });
+                const state = response.payload.job.state;
 
-                if (job.status === JobStatus.RESOLVED) {
-                    resolve(job.value);
+                if (state.status === JobStatus.RESOLVED) {
+                    resolve(state.value);
                     return;
                 }
-                if (job.status === JobStatus.REJECTED) {
-                    reject(job.value);
+                if (state.status === JobStatus.REJECTED) {
+                    reject(state.value);
                     return;
                 }
 
-                progress(job.progress, job.value);
+                progress(state.progress, state.value);
 
                 await sleep(JOB_STATUS_POLLING_INTERVAL);
             } while (true); // eslint-disable-line no-constant-condition
