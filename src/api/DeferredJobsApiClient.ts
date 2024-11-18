@@ -19,15 +19,15 @@ type Job<V, P> = {
     state: JobState<V, P>;
 };
 
-async function handleDeferredJob<V = any, P = any>(
+function handleDeferredJob<V = any, P = any>(
     api: ApiClient,
     request: Promise<ApiResponse<V>>,
 ): ProgressPromise<V, P> {
-    const response = await request;
+    return new ProgressPromise<V, P>(async (resolve, reject, update) => {
+        const response = await request;
 
-    if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
-        const id = response.payload.progress.id;
-        return new ProgressPromise<V, P>(async function (resolve, reject, progress) {
+        if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
+            const id = response.payload.progress.id;
             do {
                 const response = await api.get<{ job: Job<V, P> }>(`${routing.jobsUrl}/${id}`, {
                     fetch,
@@ -43,14 +43,14 @@ async function handleDeferredJob<V = any, P = any>(
                     return;
                 }
 
-                progress(state.progress, state.value);
+                update(state.progress, state.value);
 
                 await sleep(JOB_STATUS_POLLING_INTERVAL);
             } while (true); // eslint-disable-line no-constant-condition
-        });
-    }
+        }
 
-    return ProgressPromise.resolve(response.payload);
+        resolve(response.payload);
+    });
 }
 
 export type DeferredJobsApiClient = ReturnType<typeof createDeferredJobsApiClient>;
