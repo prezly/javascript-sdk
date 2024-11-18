@@ -82,12 +82,11 @@ export function createClient({
     headers = {},
     fetch,
 }: ClientOptions): Client {
-    const http = createHttpClient({ fetch });
+    const http = createHttpClient({ fetch, baseUrl });
     const api = createDeferredJobsApiClient(
         http,
         createApiClient(http, {
             accessToken,
-            baseUrl,
             headers,
         }),
     );
