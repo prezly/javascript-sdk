@@ -1,6 +1,6 @@
 import { ProgressPromise } from '@prezly/progress-promise';
 
-import type { ApiResponse, HttpClient, Params, ParamsWithPayload } from '../http';
+import type { ApiResponse, Params, ParamsWithPayload } from '../http';
 import { HttpCodes, isDeferredJobResponse } from '../http';
 import { routing } from '../routing';
 import type { JobState } from '../types';
@@ -14,7 +14,7 @@ async function sleep(milliseconds: number): Promise<void> {
 }
 
 async function handleDeferredJob<V = any, P = any>(
-    http: HttpClient,
+    api: ApiClient,
     request: Promise<ApiResponse<V>>,
 ): ProgressPromise<V, P> {
     const response = await request;
@@ -22,7 +22,7 @@ async function handleDeferredJob<V = any, P = any>(
     if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
         return new ProgressPromise<V, P>(async function (resolve, reject, progress) {
             do {
-                const response = await http.get<{ job: JobState<V, P> }>(routing.jobsUrl, {
+                const response = await api.get<{ job: JobState<V, P> }>(routing.jobsUrl, {
                     fetch,
                 });
                 const { job } = response.payload;
@@ -48,46 +48,40 @@ async function handleDeferredJob<V = any, P = any>(
 
 export type DeferredJobsApiClient = ReturnType<typeof createDeferredJobsApiClient>;
 
-export function createDeferredJobsApiClient(http: HttpClient, api: ApiClient) {
+export function createDeferredJobsApiClient(api: ApiClient) {
     function get<V = any, P = any>(
-        endpointUri: string,
+        url: string,
         { headers, query }: Params = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(http, api.get<V>(endpointUri, { headers, query }));
+        return handleDeferredJob<V, P>(api, api.get<V>(url, { headers, query }));
     }
 
     function post<V = any, P = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(http, api.post<V>(endpointUri, { headers, payload, query }));
+        return handleDeferredJob<V, P>(api, api.post<V>(url, { headers, payload, query }));
     }
 
     function put<V = any, P = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(http, api.put<V>(endpointUri, { headers, payload, query }));
+        return handleDeferredJob<V, P>(api, api.put<V>(url, { headers, payload, query }));
     }
 
     function patch<V = any, P = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(
-            http,
-            api.patch<V>(endpointUri, { headers, payload, query }),
-        );
+        return handleDeferredJob<V, P>(api, api.patch<V>(url, { headers, payload, query }));
     }
 
     function doDelete<V = any, P = any>(
-        endpointUri: string,
+        url: string,
         { headers, payload, query }: ParamsWithPayload = {},
     ): ProgressPromise<V, P> {
-        return handleDeferredJob<V, P>(
-            http,
-            api.delete<V>(endpointUri, { headers, payload, query }),
-        );
+        return handleDeferredJob<V, P>(api, api.delete<V>(url, { headers, payload, query }));
     }
 
     return {

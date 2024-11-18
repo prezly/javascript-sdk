@@ -84,7 +84,6 @@ export function createClient({
 }: ClientOptions): Client {
     const http = createHttpClient({ fetch, baseUrl });
     const api = createDeferredJobsApiClient(
-        http,
         createApiClient(http, {
             accessToken,
             headers,
