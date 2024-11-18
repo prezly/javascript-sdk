@@ -20,11 +20,15 @@ async function handleDeferredJob<V = any, P = any>(
     const response = await request;
 
     if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
+        const id = response.payload.progress.id;
         return new ProgressPromise<V, P>(async function (resolve, reject, progress) {
             do {
-                const response = await api.get<{ job: JobState<V, P> }>(routing.jobsUrl, {
-                    fetch,
-                });
+                const response = await api.get<{ job: JobState<V, P> }>(
+                    `${routing.jobsUrl}/${id}`,
+                    {
+                        fetch,
+                    },
+                );
                 const { job } = response.payload;
 
                 if (job.status === JobStatus.RESOLVED) {
