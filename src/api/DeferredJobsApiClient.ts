@@ -24,32 +24,37 @@ function handleDeferredJob<V = any, P = any>(
     request: Promise<ApiResponse<V>>,
 ): ProgressPromise<V, P> {
     return new ProgressPromise<V, P>(async (resolve, reject, update) => {
-        const response = await request;
+        try {
+            const response = await request;
 
-        if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
-            const id = response.payload.progress.id;
-            do {
-                const response = await api.get<{ job: Job<V, P> }>(`${routing.jobsUrl}/${id}`, {
-                    fetch,
-                });
-                const state = response.payload.job.state;
+            if (response.status === HttpCodes.ACCEPTED && isDeferredJobResponse(response.payload)) {
+                const id = response.payload.progress.id;
+                do {
+                    const response = await api.get<{ job: Job<V, P> }>(`${routing.jobsUrl}/${id}`, {
+                        fetch,
+                    });
 
-                if (state.status === JobStatus.RESOLVED) {
-                    resolve(state.value);
-                    return;
-                }
-                if (state.status === JobStatus.REJECTED) {
-                    reject(state.value);
-                    return;
-                }
+                    const state = response.payload.job.state;
 
-                update(state.progress, state.value);
+                    if (state.status === JobStatus.RESOLVED) {
+                        resolve(state.value);
+                        return;
+                    }
+                    if (state.status === JobStatus.REJECTED) {
+                        reject(state.value);
+                        return;
+                    }
 
-                await sleep(JOB_STATUS_POLLING_INTERVAL);
-            } while (true); // eslint-disable-line no-constant-condition
+                    update(state.progress, state.value);
+
+                    await sleep(JOB_STATUS_POLLING_INTERVAL);
+                } while (true); // eslint-disable-line no-constant-condition
+            }
+
+            resolve(response.payload);
+        } catch (error) {
+            reject(error);
         }
-
-        resolve(response.payload);
     });
 }
 
