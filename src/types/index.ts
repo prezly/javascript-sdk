@@ -21,6 +21,7 @@ export * from './DnsConfigurationInstruction';
 export * from './EmailRecipient';
 export * from './EmailSubscription';
 export * from './JobState';
+export * from './Language';
 export * from './License';
 export * from './Newsroom';
 export * from './NewsroomCompanyInformation';
