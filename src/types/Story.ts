@@ -92,6 +92,7 @@ export interface Story {
     oembed: OEmbedInfo;
 
     coverage_number: number;
+    auto_matched_coverage_number: number;
     language: string;
     last_coverage_at: string | null;
 
