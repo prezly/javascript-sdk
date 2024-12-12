@@ -21,7 +21,18 @@ export interface CoverageEntry {
     is_deleted: boolean;
     headline: string;
     user: UserRef;
+
     story: Story | null;
+    /**
+     * Tells whether the story reference has been manually set, or automatically matched.
+     * `none` means no information (which is only used for null references).
+     */
+    story_reference_origin: 'manual' | 'auto' | 'none';
+    /**
+     * Number of displayed story suggestions (if the automatic matching was not sure enough about it).
+     */
+    suggested_stories_count: number;
+
     newsroom: NewsroomRef | null;
     author_contact: Contact | null;
     organisation_contact: Contact | null;
