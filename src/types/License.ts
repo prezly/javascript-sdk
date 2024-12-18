@@ -9,6 +9,7 @@ export interface LicenseRef {
     is_sso_required: boolean;
     avatar_url: string;
     status: License.Status;
+    subscription_status: License.SubscriptionStatus | null;
 }
 
 export interface License extends LicenseRef {
@@ -124,6 +125,13 @@ export namespace License {
         INCOMPLETE = 'incomplete',
         CANCELED = 'canceled',
         UNPAID = 'unpaid',
+    }
+
+    export enum SubscriptionStatus {
+        TRIALING = 'trialing',
+        EXPIRED = 'expired',
+        ACTIVE = 'active',
+        CANCELED = 'canceled',
     }
 
     export enum CompanyType {

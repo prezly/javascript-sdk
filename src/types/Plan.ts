@@ -7,6 +7,7 @@ import type { Currency } from './Currency';
 import type { TiersMode, BillingSchema, Tier } from './Price';
 
 export interface PlanReference {
+    id: string;
     display_name: string;
     description: string | null;
     is_legacy: boolean;
