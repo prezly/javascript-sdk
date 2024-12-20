@@ -66,10 +66,11 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function getByExternalReferenceId(
         externalReferenceId: string,
+        options: { includeDeleted?: boolean } = {},
     ): Promise<CoverageEntry | null> {
         const query = JSON.stringify({ external_reference_id: { $in: [externalReferenceId] } });
         const { coverage } = await search({
-            includeDeleted: true,
+            includeDeleted: options.includeDeleted ?? true,
             query,
             sortOrder: 'deleted_at', // Prefer non-deleted records first
         });
