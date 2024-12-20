@@ -108,7 +108,7 @@ describe('Client', () => {
             });
             const result = await prezlySdk.coverage.getByExternalReferenceId(externalReferenceId);
 
-            const search = `?include_deleted=on&query=%7B%22external_reference_id%22%3A%7B%22%24in%22%3A%5B%22${externalReferenceId}%22%5D%7D%7D&sort=-id`;
+            const search = `?include_deleted=on&query=%7B%22external_reference_id%22%3A%7B%22%24in%22%3A%5B%22${externalReferenceId}%22%5D%7D%7D&sort=deleted_at`;
             expect(fetch).toHaveBeenCalledWith(`${defaultCoverageApiUrl}${search}`, {
                 ...DEFAULT_REQUEST_PROPS,
                 method: Method.GET,
