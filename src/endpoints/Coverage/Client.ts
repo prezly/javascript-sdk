@@ -71,6 +71,7 @@ export function createClient(api: DeferredJobsApiClient) {
         const { coverage } = await search({
             includeDeleted: true,
             query,
+            sortOrder: '-id', // Prefer newer records
         });
         return coverage[0] || null;
     }
