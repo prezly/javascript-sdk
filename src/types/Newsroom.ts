@@ -1,6 +1,6 @@
-import type { UploadedImage } from '@prezly/uploads';
+import type {UploadedImage} from '@prezly/uploads';
 
-import type { CultureRef } from './Culture';
+import type {CultureRef} from './Culture';
 
 export interface NewsroomRef {
     uuid: string;
@@ -94,8 +94,26 @@ export interface Newsroom extends NewsroomRef {
     email_branding: Newsroom.EmailBranding;
 
     is_privacy_portal_enabled: boolean;
+    /**
+     * @deprecated Please use `policies.privacy_policy.link` instead.
+     */
     custom_privacy_policy_link: string | null;
     custom_data_request_link: string | null;
+
+    policies: {
+        privacy_policy: {
+            link: string;
+        } | {
+            content: string;
+            origin: 'default' | 'custom';
+        };
+        cookie_policy: {
+            link: string;
+        } | {
+            content: string;
+            origin: 'default' | 'custom';
+        };
+    };
 
     tracking_policy: Newsroom.TrackingPolicy;
     onetrust_cookie_consent: {
