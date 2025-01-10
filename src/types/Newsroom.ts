@@ -171,9 +171,19 @@ export namespace Newsroom {
     }
 
     export enum TrackingPolicy {
+        /**
+         * @deprecated Please use `NORMAL` instead.
+         */
         DEFAULT = 'default',
         DISABLED = 'disabled',
+        /**
+         * @deprecated Please use `STRICT` instead.
+         */
         CONSENT_TO_IDENTIFY = 'consent-to-identify',
+
+        STRICT = 'strict',
+        NORMAL = 'normal',
+        LENIENT = 'lenient',
     }
 
     export enum EmailLogoAlignment {
