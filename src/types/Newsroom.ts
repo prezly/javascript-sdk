@@ -1,6 +1,6 @@
-import type {UploadedImage} from '@prezly/uploads';
+import type { UploadedImage } from '@prezly/uploads';
 
-import type {CultureRef} from './Culture';
+import type { CultureRef } from './Culture';
 
 export interface NewsroomRef {
     uuid: string;
@@ -101,18 +101,22 @@ export interface Newsroom extends NewsroomRef {
     custom_data_request_link: string | null;
 
     policies: {
-        privacy_policy: {
-            link: string;
-        } | {
-            content: string;
-            origin: 'default' | 'custom';
-        };
-        cookie_policy: {
-            link: string;
-        } | {
-            content: string;
-            origin: 'default' | 'custom';
-        };
+        privacy_policy:
+            | {
+                  link: string;
+              }
+            | {
+                  content: string;
+                  origin: 'default' | 'custom';
+              };
+        cookie_policy:
+            | {
+                  link: string;
+              }
+            | {
+                  content: string;
+                  origin: 'default' | 'custom';
+              };
     };
 
     tracking_policy: Newsroom.TrackingPolicy;
