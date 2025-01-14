@@ -94,8 +94,30 @@ export interface Newsroom extends NewsroomRef {
     email_branding: Newsroom.EmailBranding;
 
     is_privacy_portal_enabled: boolean;
+    /**
+     * @deprecated Please use `policies.privacy_policy.link` instead.
+     */
     custom_privacy_policy_link: string | null;
     custom_data_request_link: string | null;
+
+    policies: {
+        privacy_policy:
+            | {
+                  link: string;
+              }
+            | {
+                  content: string;
+                  origin: 'default' | 'custom';
+              };
+        cookie_policy:
+            | {
+                  link: string;
+              }
+            | {
+                  content: string;
+                  origin: 'default' | 'custom';
+              };
+    };
 
     tracking_policy: Newsroom.TrackingPolicy;
     onetrust_cookie_consent: {
@@ -153,9 +175,19 @@ export namespace Newsroom {
     }
 
     export enum TrackingPolicy {
+        /**
+         * @deprecated Please use `NORMAL` instead.
+         */
         DEFAULT = 'default',
         DISABLED = 'disabled',
+        /**
+         * @deprecated Please use `STRICT` instead.
+         */
         CONSENT_TO_IDENTIFY = 'consent-to-identify',
+
+        STRICT = 'strict',
+        NORMAL = 'normal',
+        LENIENT = 'lenient',
     }
 
     export enum EmailLogoAlignment {

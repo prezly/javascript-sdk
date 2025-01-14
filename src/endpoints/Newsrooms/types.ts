@@ -109,6 +109,21 @@ export interface UpdateRequest {
     custom_privacy_policy_link?: string | null;
     /**
      * Available only when license has
+     * "custom_privacy_policy_link" feature flag
+     */
+    custom_privacy_policy_content?: string | null;
+    /**
+     * Available only when license has
+     * "custom_privacy_policy_link" feature flag
+     */
+    custom_privacy_cookie_link?: string | null;
+    /**
+     * Available only when license has
+     * "custom_privacy_policy_link" feature flag
+     */
+    custom_privacy_cookie_content?: string | null;
+    /**
+     * Available only when license has
      * "custom_data_request_link" feature flag
      */
     custom_data_request_link?: string | null;
