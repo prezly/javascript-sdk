@@ -38,6 +38,7 @@ export namespace NewsroomTheme {
         CTA_BUTTONS = 'cta_buttons',
         VIDEO_LAYOUT = 'video_layout', // DEV-7588
         EMBED_LAYOUT = 'embed_layout', // DEV-11475
+        STRICT_TRACKING_POLICY = 'strict_tracking_policy', // DEV-19123
     }
 
     export function isFeatureSupported(theme: NewsroomTheme, feature: NewsroomTheme.Feature) {
