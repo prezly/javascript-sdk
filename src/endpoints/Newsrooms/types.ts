@@ -143,4 +143,6 @@ export interface UpdateRequest {
         category?: string;
         script?: string;
     };
+
+    tracking_policy?: Newsroom.TrackingPolicy | null;
 }
