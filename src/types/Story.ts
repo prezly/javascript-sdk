@@ -296,6 +296,8 @@ export namespace Story {
          * Number of pitches linked to this story.
          */
         'pitches.count': number;
+
+        uploadcare_assets_group_uuid: string | null;
     }
 
     /*
