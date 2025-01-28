@@ -64,6 +64,7 @@ export namespace NewsroomThemePreset {
                 enum?: (string | null)[];
                 'prezly:feature'?: string;
                 type: string | (string | null)[];
+                items?: string | string[] | { enum: (string | null)[] };
             }
         >;
         required: string[];
