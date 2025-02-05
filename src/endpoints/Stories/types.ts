@@ -330,7 +330,7 @@ export interface ChangeNewsroomUnsafeResponse {
 }
 
 const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE: Record<
-    keyof Omit<ExtendedStory, keyof Story | 'uploadcare_assets_group_uuid'>,
+    keyof Omit<ExtendedStory, keyof Story>,
     boolean
 > = {
     thumbnail_image: true,
@@ -363,7 +363,6 @@ const ALL_EXTRA_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
     referenced_entities: true,
     'campaigns.count': true,
     'pitches.count': true,
-    uploadcare_assets_group_uuid: true,
 }; // satisfies Record<keyof Story.OnDemandFields, boolean>; // TODO: Use Typescript `satisfies` operator, when it's out of beta
 
 export const ALL_EXTRA_FIELDS = Object.keys(
