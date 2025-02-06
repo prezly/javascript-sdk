@@ -166,6 +166,8 @@ export interface Story {
     pinned_by: UserRef | null;
 
     seo_settings: SEOSettings;
+
+    uploadcare_assets_group_uuid: string | null;
 }
 
 export namespace Story {
@@ -296,8 +298,6 @@ export namespace Story {
          * Number of pitches linked to this story.
          */
         'pitches.count': number;
-
-        uploadcare_assets_group_uuid: string | null;
     }
 
     /*
@@ -501,5 +501,4 @@ export interface ExtendedStory
             | 'content'
             | 'attached_gallery_content'
             | 'referenced_entities'
-            | 'uploadcare_assets_group_uuid'
         > {}
