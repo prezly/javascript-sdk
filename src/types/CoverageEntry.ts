@@ -93,6 +93,7 @@ export namespace CoverageEntry {
         MANUAL = 'manual',
         MEDIAWEB = 'mediaweb',
         MELTWATER = 'meltwater',
+        NETFEEDR = 'netfeedr',
         OPOINT = 'opoint',
     }
 
