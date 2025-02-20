@@ -48,5 +48,5 @@ export interface PreviewEntry {
 
 export interface PreviewResponse {
     total: number;
-    entries: PreviewEntry;
+    entries: PreviewEntry[];
 }
