@@ -38,3 +38,15 @@ export interface ListRunsResponse {
     pagination: Pagination;
     sort: string;
 }
+
+export interface PreviewEntry {
+    image: string;
+    link: string;
+    title: string;
+    view_count?: number;
+}
+
+export interface PreviewResponse {
+    total: number;
+    entries: PreviewEntry;
+}
