@@ -40,10 +40,10 @@ export interface ListRunsResponse {
 }
 
 export interface PreviewEntry {
-    image: string;
-    link: string;
+    image: string | null;
+    link: string | null;
     title: string;
-    view_count?: number;
+    username: string | null;
 }
 
 export interface PreviewResponse {
