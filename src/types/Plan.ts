@@ -47,6 +47,7 @@ export enum AddonId {
     COVERAGE_INTEGRATION_BELGA = 'coverage_integration_belga',
     COVERAGE_INTEGRATION_GOOGLE_ALERTS = 'coverage_integration_google_alerts',
     COVERAGE_INTEGRATION_OPOINT = 'coverage_integration_opoint',
+    COVERAGE_INTEGRATION_NETFEEDR = 'coverage_integration_netfeedr',
     COVERAGE_INTEGRATION_RSS = 'coverage_integration_rss',
     PREMIUM_USER = 'premium_user',
     SITE = 'site',
