@@ -1,8 +1,15 @@
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
+import type { CoverageEntry } from '../../types';
 import { type CoverageIntegration, SortOrder } from '../../types';
 
-import type { CreateRequest, ListRunsOptions, ListRunsResponse, UpdateRequest } from './types';
+import type {
+    CreateRequest,
+    ListRunsOptions,
+    ListRunsResponse,
+    PreviewResponse,
+    UpdateRequest,
+} from './types';
 
 type IntegrationId = CoverageIntegration['id'];
 
@@ -78,6 +85,20 @@ export function createClient(api: DeferredJobsApiClient) {
         });
     }
 
+    async function preview(
+        provider: CoverageEntry.Provider,
+        options: { input: CoverageIntegration['input']; oldest?: boolean },
+    ): Promise<PreviewResponse> {
+        const { input, oldest } = options;
+        return api.post(`${routing.coverageIntegrationsUrl}/preview`, {
+            payload: {
+                provider,
+                input,
+                oldest,
+            },
+        });
+    }
+
     return {
         list,
         get,
@@ -87,5 +108,6 @@ export function createClient(api: DeferredJobsApiClient) {
         trigger,
         delete: doDelete,
         listRuns,
+        preview,
     };
 }

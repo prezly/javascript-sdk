@@ -8,7 +8,7 @@ export const routing = {
     contactTagGroupsUrl: '/v2/contact-tag-groups',
     contactTagsUrl: '/v2/contact-tags',
     coverageUrl: '/v2/coverage',
-    coverageIntegrationsUrl: '/v2/coverage-integrations',
+    coverageIntegrationsUrl: '/v2/coverage/integrations',
     jobsUrl: '/v2/jobs',
     licenseUrl: '/v2/licenses',
     licenseUnsubscribeUrl: '/v2/unsubscribe',
