@@ -50,6 +50,7 @@ export interface CampaignResponse {
 export interface ListOptions {
     limit?: number;
     offset?: number;
+    search?: string;
     sortOrder?: SortOrder | string;
 }
 

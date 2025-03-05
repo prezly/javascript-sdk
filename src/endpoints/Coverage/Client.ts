@@ -21,7 +21,7 @@ export type Client = ReturnType<typeof createClient>;
 
 export function createClient(api: DeferredJobsApiClient) {
     async function list(options: ListOptions = {}, scope?: Scope): Promise<ListResponse> {
-        const { includeDeleted, limit, offset, sortOrder } = options;
+        const { includeDeleted, limit, offset, search, sortOrder } = options;
         // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
@@ -31,13 +31,14 @@ export function createClient(api: DeferredJobsApiClient) {
                 include_deleted: includeDeleted ? 'on' : undefined,
                 limit,
                 offset,
+                search,
                 sort: SortOrder.stringify(sortOrder),
             },
         });
     }
 
     async function search(options: SearchOptions = {}, scope?: Scope): Promise<ListResponse> {
-        const { includeDeleted, query, limit, offset, sortOrder } = options;
+        const { includeDeleted, search, query, limit, offset, sortOrder } = options;
         // TODO: Switch to `scope` API parameter
         const url = scope?.story
             ? routing.storyCoverageUrl.replace(':story_id', String(scope.story))
@@ -46,6 +47,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return api.get<ListResponse>(url, {
             query: {
                 include_deleted: includeDeleted ? 'on' : undefined,
+                search,
                 query: Query.stringify(query),
                 limit,
                 offset,

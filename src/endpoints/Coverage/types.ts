@@ -77,6 +77,7 @@ export interface ListOptions {
     includeDeleted?: boolean;
     limit?: number;
     offset?: number;
+    search?: string;
     sortOrder?: SortOrder | string;
 }
 
