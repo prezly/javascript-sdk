@@ -19,11 +19,12 @@ export type Client = ReturnType<typeof createClient>;
 
 export function createClient(api: DeferredJobsApiClient) {
     async function list(options: SearchOptions): Promise<ListResponse> {
-        const { query, limit, offset, sortOrder } = options;
+        const { search, query, limit, offset, sortOrder } = options;
         return api.get<ListResponse>(routing.campaignsUrl, {
             query: {
                 limit,
                 offset,
+                search,
                 query: Query.stringify(query),
                 sort: SortOrder.stringify(sortOrder),
             },
@@ -31,11 +32,12 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function search(options: SearchOptions): Promise<ListResponse> {
-        const { query, limit, offset, sortOrder } = options;
+        const { search, query, limit, offset, sortOrder } = options;
         return api.post<ListResponse>(routing.campaignsUrl, {
             payload: {
                 limit,
                 offset,
+                search,
                 query,
                 sort: SortOrder.stringify(sortOrder),
             },
