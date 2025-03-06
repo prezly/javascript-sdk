@@ -7,6 +7,7 @@ export type { ContactsBulkSelector as BulkSelector, ContactsScope as Scope } fro
 export interface ListOptions {
     limit?: number;
     offset?: number;
+    search?: string;
     sortOrder?: SortOrder | string;
 }
 
