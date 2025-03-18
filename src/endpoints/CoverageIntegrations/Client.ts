@@ -87,14 +87,15 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function preview(
         provider: CoverageEntry.Provider,
-        options: { input: CoverageIntegration['input']; oldest?: boolean },
+        options: { input: CoverageIntegration['input']; oldest?: number; limit?: number },
     ): Promise<PreviewResponse> {
-        const { input, oldest } = options;
+        const { input, oldest, limit } = options;
         return api.post(`${routing.coverageIntegrationsUrl}/preview`, {
             payload: {
                 provider,
                 input,
                 oldest,
+                limit,
             },
         });
     }
