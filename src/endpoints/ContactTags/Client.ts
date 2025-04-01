@@ -44,7 +44,7 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function search(options: SearchOptions = {}): Promise<SearchResponse> {
         const { query, sortOrder } = options;
-        const { tags } = await api.post<{
+        const { tags } = await api.get<{
             tags: ContactTag[];
         }>(routing.contactTagsUrl, {
             query: {
