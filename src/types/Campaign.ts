@@ -109,6 +109,7 @@ export namespace Campaign {
     export enum ClickTrackingVersion {
         DEPRECATED = 1,
         ENHANCED = 2,
+        INHOUSE = 3,
     }
 
     export function isDraft(status: LifecycleStatus): boolean;
