@@ -1,6 +1,7 @@
 import type { UploadedImage } from '@prezly/uploads';
 
 import type { CultureRef } from './Culture';
+import type { NewroomThemeRef } from './NewsroomTheme';
 
 export interface NewsroomRef {
     uuid: string;
@@ -71,6 +72,7 @@ export interface NewsroomRef {
         privacy_settings: string;
         widget_settings: string;
     };
+    active_theme?: NewroomThemeRef | null;
 }
 
 export interface Newsroom extends NewsroomRef {
