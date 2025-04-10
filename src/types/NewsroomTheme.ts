@@ -16,6 +16,8 @@ export interface NewsroomTheme {
     status: NewsroomTheme.Status;
 }
 
+export type NewroomThemeRef = Pick<NewsroomTheme, 'id' | 'codename' | 'name'>;
+
 export namespace NewsroomTheme {
     export enum Status {
         BETA = 'beta',
