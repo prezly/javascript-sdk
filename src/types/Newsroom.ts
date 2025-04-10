@@ -72,6 +72,7 @@ export interface NewsroomRef {
         privacy_settings: string;
         widget_settings: string;
     };
+    active_theme?: NewroomThemeRef | null;
 }
 
 export interface Newsroom extends NewsroomRef {
@@ -150,7 +151,6 @@ export interface Newsroom extends NewsroomRef {
         visits_last_7_days: number | null;
         visits_last_7_days_previous: number | null;
     };
-    active_theme?: NewroomThemeRef | null;
 }
 
 export namespace Newsroom {
