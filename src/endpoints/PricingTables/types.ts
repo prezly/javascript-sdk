@@ -1,4 +1,4 @@
-import type { PricingPlan } from "../../types";
+import type { PricingPlan } from '../../types';
 
 export interface PricingTable {
     id: TableId;
