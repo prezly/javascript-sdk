@@ -1,3 +1,5 @@
+import type { PricingPlan } from '../../types';
+
 export interface PricingTable {
     id: TableId;
     options: Option[];
@@ -78,7 +80,13 @@ export interface Row {
     cells: Record<string, Cell>;
 }
 
+export enum CellType {
+    TEXT = 'text',
+    PRICING = 'pricing',
+}
+
 export interface Cell {
-    value: string | null;
+    type: CellType;
+    value: string | PricingPlan[] | null;
     description: string | null;
 }
