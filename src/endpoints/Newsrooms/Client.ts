@@ -118,6 +118,6 @@ export function createClient(api: DeferredJobsApiClient) {
         delete: doDelete,
         takeOnline,
         takeOffline,
-        convert: convertToHub,
+        convertToHub,
     };
 }
