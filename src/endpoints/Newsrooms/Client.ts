@@ -100,6 +100,13 @@ export function createClient(api: DeferredJobsApiClient) {
         return newsroom;
     }
 
+    async function convert(id: NewsroomId): Promise<Newsroom> {
+        const { newsroom } = await api.post<{ newsroom: Newsroom }>(
+            `${routing.newsroomsUrl}/${id}/convert`,
+        );
+        return newsroom;
+    }
+
     return {
         list,
         search,
@@ -111,5 +118,6 @@ export function createClient(api: DeferredJobsApiClient) {
         delete: doDelete,
         takeOnline,
         takeOffline,
+        convert,
     };
 }
