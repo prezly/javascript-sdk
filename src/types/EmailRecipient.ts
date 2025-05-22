@@ -28,9 +28,21 @@ export interface EmailRecipient extends EmailRecipientRef {
      * List of all contact email addresses with their statuses in context of the current campaign.
      */
     email_addresses: EmailRecipient.EmailAddressRecord[];
+
+    /**
+     * List of known problems detected for the recipient with its currently selected email address.
+     */
+    problems: EmailRecipient.Problem[];
 }
 
 export namespace EmailRecipient {
+    export enum Problem {
+        BOUNCED = 'bounced',
+        UNSUBSCRIBED = 'unsubscribed',
+        UNSUBSCRIBED_FROM_ALL_COMMUNICATIONS = 'unsubscribed_from_all_communications',
+        DUPLICATE = 'duplicate',
+    }
+
     export enum EmailAddressStatus {
         OK = 'ok',
         BOUNCED = 'bounced',
