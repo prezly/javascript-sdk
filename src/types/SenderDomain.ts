@@ -34,6 +34,10 @@ export interface SenderDomain {
      * Expirable URL linking to the domain-specific instructions page users can share with their IT departments.
      */
     shareable_dns_instructions_url: string | null;
+    /**
+     * Indicates whether microsoft Prezly IP whitelisting is required for the domain
+     */
+    microsoft_setup_recommended: boolean;
 }
 
 export namespace SenderDomain {
