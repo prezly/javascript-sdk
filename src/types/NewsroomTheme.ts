@@ -14,6 +14,7 @@ export interface NewsroomTheme {
     preview_image: UploadedImage | null;
     demo_url: string | null;
     status: NewsroomTheme.Status;
+    content_width: number | null;
 }
 
 export type NewroomThemeRef = Pick<NewsroomTheme, 'id' | 'codename' | 'name'>;
