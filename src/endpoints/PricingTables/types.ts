@@ -1,9 +1,6 @@
-import type { PricingPlan } from '../../types';
-
 export interface PricingTable {
     id: TableId;
     options: Option[];
-    rows: Row[];
 }
 
 export enum TableId {
@@ -68,25 +65,4 @@ export interface AddOn {
 
 export enum AddOnId {
     SITE = 'site',
-}
-
-export interface Row {
-    display_name: string;
-    description: string | null;
-    link: string | null;
-    area: string | null;
-    status: 'beta' | null;
-    is_key_item: boolean;
-    cells: Record<string, Cell>;
-}
-
-export enum CellType {
-    TEXT = 'text',
-    PRICING = 'pricing',
-}
-
-export interface Cell {
-    type: CellType;
-    value: string | PricingPlan[] | null;
-    description: string | null;
 }
