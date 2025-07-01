@@ -115,8 +115,8 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function doDeleteMany(ids: ContactTag['id'][]) {
-        const data = await api.delete<RawDeleteResponse>(routing.contactTagsUrl, {
-            query: {
+        const data = await api.post<RawDeleteResponse>(routing.contactTagsDeleteManyUrl, {
+            payload: {
                 id: ids,
             },
         });
@@ -124,8 +124,8 @@ export function createClient(api: DeferredJobsApiClient) {
     }
 
     async function doDeleteUnused() {
-        const data = await api.delete<RawDeleteResponse>(routing.contactTagsUrl, {
-            query: {
+        const data = await api.post<RawDeleteResponse>(routing.contactTagsDeleteManyUrl, {
+            payload: {
                 filter: 'unused',
             },
         });
