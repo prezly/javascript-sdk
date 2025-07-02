@@ -7,6 +7,7 @@ export const routing = {
     contactsUrl: '/v2/contacts',
     contactTagGroupsUrl: '/v2/contact-tag-groups',
     contactTagsUrl: '/v2/contact-tags',
+    contactTagsDeleteManyUrl: '/v2/contact-tags/delete-many',
     coverageUrl: '/v2/coverage',
     coverageIntegrationsUrl: '/v2/coverage/integrations',
     jobsUrl: '/v2/jobs',
