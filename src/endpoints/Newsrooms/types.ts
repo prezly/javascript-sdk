@@ -20,7 +20,7 @@ export interface SearchOptions extends ListOptions {
 }
 
 export interface ListResponse {
-    newsrooms: Newsroom[];
+    newsrooms: Omit<Newsroom, 'policies'>[];
     pagination: Pagination;
     sort: string;
 }
