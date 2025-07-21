@@ -47,6 +47,7 @@ export interface License extends LicenseRef {
      * At the end of this period, a new invoice will be created.
      */
     current_period_end: string | null;
+    demo_at: string | null;
     demo_content_created_at: string | null;
     demo_content_deleted_at: string | null;
     display_name: string;
