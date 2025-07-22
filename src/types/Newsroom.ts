@@ -73,6 +73,7 @@ export interface NewsroomRef {
         widget_settings: string;
     };
     active_theme?: NewroomThemeRef | null;
+    is_auto_created: boolean;
 }
 
 export interface Newsroom extends NewsroomRef {
