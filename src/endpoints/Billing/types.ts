@@ -1,9 +1,10 @@
 import type { BillingCycle } from '../../types/BillingCycle';
 
 export enum SignupPlan {
-    STARTER = 'starter',
-    CORE = 'core',
-    PREMIUM = 'premium',
+    ESSENTIAL = 'essential',
+    STANDARD = 'standard',
+    AGENCY_ESSENTIAL = 'agency_essential',
+    AGENCY_STANDARD = 'agency_standard',
 }
 
 export enum SignupCurrency {
