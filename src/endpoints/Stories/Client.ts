@@ -1,8 +1,11 @@
+import type { ProgressPromise } from '@prezly/progress-promise';
+
 import type { DeferredJobsApiClient } from '../../api';
 import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
 import type { ExtendedStory, Query, Story } from '../../types';
 import { SortOrder } from '../../types';
+import type { StoriesBulkSelector } from '../../types/StoriesBulkSelector';
 
 import type {
     AutosaveRequest,
@@ -454,6 +457,15 @@ export function createClient(api: DeferredJobsApiClient) {
         await api.delete(url);
     }
 
+    async function bulkDelete(
+        selector: StoriesBulkSelector,
+    ): ProgressPromise<{ records_deleted_number: number }> {
+        const { query } = selector;
+        return api.delete(routing.storiesUrl, {
+            payload: { query },
+        });
+    }
+
     async function preview(id: StoryId, options?: PreviewOptions): Promise<PreviewResponse> {
         const url = `${routing.storiesUrl}/${id}/preview`;
 
@@ -486,6 +498,7 @@ export function createClient(api: DeferredJobsApiClient) {
         pin,
         unpin,
         delete: doDelete,
+        bulkDelete,
         preview,
     };
 }
