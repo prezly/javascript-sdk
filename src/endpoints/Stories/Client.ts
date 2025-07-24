@@ -3,9 +3,8 @@ import type { ProgressPromise } from '@prezly/progress-promise';
 import type { DeferredJobsApiClient } from '../../api';
 import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
-import type { ExtendedStory, Query, Story } from '../../types';
 import { SortOrder } from '../../types';
-import type { StoriesBulkSelector } from '../../types/StoriesBulkSelector';
+import type { ExtendedStory, Query, Story, StoriesBulkSelector } from '../../types';
 
 import type {
     AutosaveRequest,

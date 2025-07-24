@@ -39,6 +39,7 @@ export * from './SenderAddress';
 export * from './SenderDomain';
 export * from './Snippet';
 export * from './SortOrder';
+export * from './StoriesBulkSelector';
 export * from './Story';
 export * from './User';
 export * from './UserAccount';
