@@ -16,6 +16,7 @@ export interface NewsroomRef {
     thumbnail_url: string;
     name: string;
     subdomain: string;
+    domain: string;
 
     status: Newsroom.Status;
     /**
@@ -80,7 +81,6 @@ export interface NewsroomRef {
 }
 
 export interface Newsroom extends NewsroomRef {
-    domain: string;
     is_hub: boolean;
     // extended details
     cultures: CultureRef[];
