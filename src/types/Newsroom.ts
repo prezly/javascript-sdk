@@ -3,6 +3,8 @@ import type { UploadedImage } from '@prezly/uploads';
 import type { CultureRef } from './Culture';
 import type { NewroomThemeRef, NewsroomThemePreset } from './NewsroomTheme';
 
+type Iso8601DateTime = string;
+
 export interface NewsroomRef {
     uuid: string;
     /**
@@ -74,6 +76,7 @@ export interface NewsroomRef {
     };
     active_theme?: NewroomThemeRef | null;
     is_auto_created: boolean;
+    created_at: Iso8601DateTime;
 }
 
 export interface Newsroom extends NewsroomRef {
