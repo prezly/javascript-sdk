@@ -1,9 +1,8 @@
+import type { Iso8601DateTime } from './common';
 import type { CoverageEntry } from './CoverageEntry';
 import type { CoverageIntegrationRun } from './CoverageIntegrationRun';
 import type { NewsroomRef } from './Newsroom';
 import type { UserRef } from './User';
-
-type Iso8601DateTime = string;
 
 export interface CoverageIntegration {
     id: number;

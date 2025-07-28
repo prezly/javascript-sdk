@@ -1,5 +1,6 @@
 import type { UploadedImage } from '@prezly/uploads';
 
+import type { Iso8601DateTime } from './common';
 import type { CultureRef } from './Culture';
 import type { NewroomThemeRef, NewsroomThemePreset } from './NewsroomTheme';
 
@@ -14,6 +15,7 @@ export interface NewsroomRef {
     thumbnail_url: string;
     name: string;
     subdomain: string;
+    domain: string;
 
     status: Newsroom.Status;
     /**
@@ -74,10 +76,10 @@ export interface NewsroomRef {
     };
     active_theme?: NewroomThemeRef | null;
     is_auto_created: boolean;
+    created_at: Iso8601DateTime;
 }
 
 export interface Newsroom extends NewsroomRef {
-    domain: string;
     is_hub: boolean;
     // extended details
     cultures: CultureRef[];
