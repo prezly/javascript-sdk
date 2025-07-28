@@ -1,6 +1,5 @@
+import type { Iso8601DateTime } from './common';
 import type { CoverageIntegrationRef } from './CoverageIntegration';
-
-type Iso8601DateTime = string;
 
 export interface CoverageIntegrationRun {
     id: number;

@@ -1,9 +1,8 @@
 import type { UploadedImage } from '@prezly/uploads';
 
+import type { Iso8601DateTime } from './common';
 import type { CultureRef } from './Culture';
 import type { NewroomThemeRef, NewsroomThemePreset } from './NewsroomTheme';
-
-type Iso8601DateTime = string;
 
 export interface NewsroomRef {
     uuid: string;

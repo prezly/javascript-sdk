@@ -1,6 +1,5 @@
+import type { Iso8601DateTime } from './common';
 import type { UserRef } from './User';
-
-type Iso8601DateTime = string;
 
 export interface ContactsExport {
     uuid: string;
