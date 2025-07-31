@@ -1,3 +1,4 @@
+import type { Iso8601DateTime } from "./common";
 import type { UserRef } from './User';
 
 export interface Template {
@@ -6,6 +7,6 @@ export interface Template {
     content: string;
     creator: UserRef | null;
     last_modifying_user: UserRef | null;
-    created_at: string;
-    modified_at: string;
+    created_at: Iso8601DateTime;
+    modified_at: Iso8601DateTime;
 }
