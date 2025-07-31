@@ -56,7 +56,7 @@ export function createClient(api: DeferredJobsApiClient) {
         return api.delete(`${routing.campaignsUrl}/${id}`);
     }
 
-    async function bulkDelete(
+    function bulkDelete(
         payload: BulkDeletePayload,
     ): ProgressPromise<{ records_deleted_number: number }> {
         const { search, query } = payload;
