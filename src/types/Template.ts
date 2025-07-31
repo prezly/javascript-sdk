@@ -1,8 +1,7 @@
 import type { UserRef } from './User';
 
 export interface Template {
-    id: number;
-    uuid: string;
+    id: string;
     title: string;
     content: string;
     creator: UserRef | null;
