@@ -2,7 +2,7 @@ import type { ProgressPromise } from '@prezly/progress-promise';
 
 import type { DeferredJobsApiClient } from '../../api';
 import { routing } from '../../routing';
-import type { Campaign } from '../../types';
+import type { BulkDeletePayload, Campaign } from '../../types';
 import { Query, SortOrder } from '../../types';
 import { toIso8601 } from '../../utils';
 
@@ -54,6 +54,15 @@ export function createClient(api: DeferredJobsApiClient) {
 
     async function doDelete(id: Campaign['id']): Promise<void> {
         return api.delete(`${routing.campaignsUrl}/${id}`);
+    }
+
+    function bulkDelete(
+        payload: BulkDeletePayload,
+    ): ProgressPromise<{ records_deleted_number: number }> {
+        const { search, query } = payload;
+        return api.delete(routing.campaignsUrl, {
+            payload: { search, query },
+        });
     }
 
     async function test(id: Campaign['id'], emails: string[]): Promise<void> {
@@ -109,5 +118,6 @@ export function createClient(api: DeferredJobsApiClient) {
         create,
         update,
         delete: doDelete,
+        bulkDelete,
     };
 }

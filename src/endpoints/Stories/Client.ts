@@ -4,7 +4,7 @@ import type { DeferredJobsApiClient } from '../../api';
 import { ApiError, HttpCodes } from '../../http';
 import { routing } from '../../routing';
 import { SortOrder } from '../../types';
-import type { ExtendedStory, Query, Story, StoriesBulkSelector } from '../../types';
+import type { BulkDeletePayload, ExtendedStory, Query, Story } from '../../types';
 
 import type {
     AutosaveRequest,
@@ -456,12 +456,12 @@ export function createClient(api: DeferredJobsApiClient) {
         await api.delete(url);
     }
 
-    async function bulkDelete(
-        selector: StoriesBulkSelector,
+    function bulkDelete(
+        payload: BulkDeletePayload,
     ): ProgressPromise<{ records_deleted_number: number }> {
-        const { query } = selector;
+        const { search, query } = payload;
         return api.delete(routing.storiesUrl, {
-            payload: { query },
+            payload: { search, query },
         });
     }
 
