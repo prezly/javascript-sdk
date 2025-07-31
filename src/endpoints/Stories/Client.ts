@@ -456,12 +456,15 @@ export function createClient(api: DeferredJobsApiClient) {
         await api.delete(url);
     }
 
-    async function bulkDelete(
-        selector: StoriesBulkSelector,
+    function bulkDelete(
+        options: Partial<{
+            selection: StoriesBulkSelector;
+            query: string;
+        }>,
     ): ProgressPromise<{ records_deleted_number: number }> {
-        const { query } = selector;
+        const { selection, query } = options;
         return api.delete(routing.storiesUrl, {
-            payload: { query },
+            payload: { selection, query },
         });
     }
 
