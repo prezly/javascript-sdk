@@ -30,6 +30,7 @@ import {
     Snippets,
     Stories,
     Subscriptions,
+    Templates,
 } from './endpoints';
 import type { HeadersMap } from './http';
 import { createHttpClient } from './http';
@@ -68,12 +69,13 @@ export interface Client {
     newsroomGalleries: NewsroomGalleries.Client;
     newsroomHub: NewsroomHub.Client;
     newsroomSubscriptions: NewsroomSubscriptions.Client;
+    notificationSubscriptions: NotificationSubscriptions.Client;
     pricingTables: PricingTables.Client;
     senderAddresses: SenderAddresses.Client;
     stories: Stories.Client;
     snippets: Snippets.Client;
     subscriptions: Subscriptions.Client;
-    notificationSubscriptions: NotificationSubscriptions.Client;
+    templates: Templates.Client;
 }
 
 export function createClient({
@@ -114,11 +116,12 @@ export function createClient({
         newsroomGalleries: NewsroomGalleries.createClient(api),
         newsroomHub: NewsroomHub.createClient(api),
         newsroomSubscriptions: NewsroomSubscriptions.createClient(api),
+        notificationSubscriptions: NotificationSubscriptions.createClient(api),
         pricingTables: PricingTables.createClient(api),
         senderAddresses: SenderAddresses.createClient(api),
         stories: Stories.createClient(api),
         snippets: Snippets.createClient(api),
         subscriptions: Subscriptions.createClient(api),
-        notificationSubscriptions: NotificationSubscriptions.createClient(api),
+        templates: Templates.createClient(api),
     };
 }
