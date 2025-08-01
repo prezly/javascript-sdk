@@ -35,4 +35,5 @@ export const routing = {
     storiesSearchUrl: '/v2/stories/search',
     storyCoverageUrl: '/v1/stories/:story_id/reports/coverage',
     snippetsUrl: '/v2/snippets',
+    templatesUrl: '/v2/templates',
 };

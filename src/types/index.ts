@@ -41,6 +41,7 @@ export * from './Snippet';
 export * from './SortOrder';
 export * from './BulkDeletePayload';
 export * from './Story';
+export * from './Template';
 export * from './User';
 export * from './UserAccount';
 export * from './NotificationSubscription';

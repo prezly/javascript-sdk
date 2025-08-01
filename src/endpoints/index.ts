@@ -26,4 +26,5 @@ export * as SenderAddresses from './SenderAddresses';
 export * as Snippets from './Snippets';
 export * as Stories from './Stories';
 export * as Subscriptions from './Subscriptions';
+export * as Templates from './Templates';
 export * as NotificationSubscriptions from './NotificationSubscriptions';
