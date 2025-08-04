@@ -29,11 +29,17 @@ export function createClient(api: DeferredJobsApiClient) {
         return template;
     }
 
-    async function update(templateId: TemplateId, payload: UpdateRequest): Promise<ExtendedTemplate> {
+    async function update(
+        templateId: TemplateId,
+        payload: UpdateRequest,
+    ): Promise<ExtendedTemplate> {
         const url = routing.templatesUrl;
-        const { template } = await api.patch<{ template: ExtendedTemplate }>(`${url}/${templateId}`, {
-            payload,
-        });
+        const { template } = await api.patch<{ template: ExtendedTemplate }>(
+            `${url}/${templateId}`,
+            {
+                payload,
+            },
+        );
         return template;
     }
 
