@@ -15,6 +15,7 @@ export interface PlanReference {
     is_superior: boolean;
     is_trial: boolean;
     can_upgrade: boolean;
+    can_self_activate: boolean;
     pricing_table_id: TableId | null;
     pricing_table_option_id: OptionId | null;
 }
