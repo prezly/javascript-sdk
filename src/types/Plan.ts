@@ -43,15 +43,17 @@ export interface PlanAddOn {
 }
 
 export enum AddonId {
+    AGENCY_USER = 'agency_user',
     CORE_USER = 'core_user',
     COVERAGE_INTEGRATION_AUXIPRESS = 'coverage_integration_auxipress',
     COVERAGE_INTEGRATION_BELGA = 'coverage_integration_belga',
     COVERAGE_INTEGRATION_GOOGLE_ALERTS = 'coverage_integration_google_alerts',
-    COVERAGE_INTEGRATION_OPOINT = 'coverage_integration_opoint',
     COVERAGE_INTEGRATION_NETFEEDR = 'coverage_integration_netfeedr',
+    COVERAGE_INTEGRATION_OPOINT = 'coverage_integration_opoint',
     COVERAGE_INTEGRATION_RSS = 'coverage_integration_rss',
     PREMIUM_USER = 'premium_user',
     SITE = 'site',
+    STANDARD_USER = 'standard_user',
     STARTER_USER = 'starter_user',
 }
 
@@ -91,16 +93,20 @@ export enum ChangeType {
 
 /** @deprecated Will be dropped in future */
 export enum PlanLevel {
+    AGENCY_ESSENTIAL = 'agency_essential',
+    AGENCY_HUGE = 'agency_huge',
+    AGENCY_LARGE = 'agency_large',
+    AGENCY_MEDIUM = 'agency_medium',
+    AGENCY_SMALL = 'agency_small',
+    AGENCY_STANDARD = 'agency_standard',
     BASIC = 'basic',
     CORE = 'core',
     ENTERPRISE = 'enterprise',
+    ESSENTIAL = 'essential',
     EXPERT = 'expert',
     NONE = '',
     PREMIUM = 'premium',
     PROFESSIONAL = 'professional',
+    STANDARD = 'standard',
     STARTER = 'starter',
-    AGENCY_SMALL = 'agency_small',
-    AGENCY_MEDIUM = 'agency_medium',
-    AGENCY_LARGE = 'agency_large',
-    AGENCY_HUGE = 'agency_huge',
 }
