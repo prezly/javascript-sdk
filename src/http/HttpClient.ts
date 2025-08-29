@@ -1,5 +1,6 @@
 import type { Fetch } from '../api';
 
+import type { ApiError } from './ApiError';
 import { createRequest } from './createRequest';
 import type { ApiResponse, Params, ParamsWithPayload } from './types';
 import { Method } from './types';
@@ -12,9 +13,16 @@ export interface HttpClient {
     delete<V = any>(url: string, params?: ParamsWithPayload): Promise<ApiResponse<V>>;
 }
 
-export function createHttpClient(options: { baseUrl?: string; fetch?: Fetch } = {}): HttpClient {
+interface Options {
+    baseUrl?: string;
+    fetch?: Fetch;
+    onError?: (error: ApiError) => void;
+}
+
+export function createHttpClient(options: Options = {}): HttpClient {
     const baseUrl = options.baseUrl ?? null;
     const fetchImpl = options.fetch ?? fetch;
+    const onError = options.onError;
 
     function resolveUrl(url: string) {
         if (baseUrl) {
@@ -25,47 +33,72 @@ export function createHttpClient(options: { baseUrl?: string; fetch?: Fetch } = 
 
     return {
         get(url, { headers, query } = {}) {
-            return createRequest(fetchImpl, resolveUrl(url), {
-                headers,
-                method: Method.GET,
-                query,
-            });
+            return createRequest(
+                fetchImpl,
+                resolveUrl(url),
+                {
+                    headers,
+                    method: Method.GET,
+                    query,
+                },
+                onError,
+            );
         },
 
         post(url: string, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, resolveUrl(url), {
-                headers,
-                method: Method.POST,
-                payload,
-                query,
-            });
+            return createRequest(
+                fetchImpl,
+                resolveUrl(url),
+                {
+                    headers,
+                    method: Method.POST,
+                    payload,
+                    query,
+                },
+                onError,
+            );
         },
 
         put(url, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, resolveUrl(url), {
-                headers,
-                method: Method.PUT,
-                payload,
-                query,
-            });
+            return createRequest(
+                fetchImpl,
+                resolveUrl(url),
+                {
+                    headers,
+                    method: Method.PUT,
+                    payload,
+                    query,
+                },
+                onError,
+            );
         },
 
         patch(url: string, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, resolveUrl(url), {
-                headers,
-                method: Method.PATCH,
-                payload,
-                query,
-            });
+            return createRequest(
+                fetchImpl,
+                resolveUrl(url),
+                {
+                    headers,
+                    method: Method.PATCH,
+                    payload,
+                    query,
+                },
+                onError,
+            );
         },
 
         delete(url: string, { headers, payload, query } = {}) {
-            return createRequest(fetchImpl, resolveUrl(url), {
-                headers,
-                method: Method.DELETE,
-                payload,
-                query,
-            });
+            return createRequest(
+                fetchImpl,
+                resolveUrl(url),
+                {
+                    headers,
+                    method: Method.DELETE,
+                    payload,
+                    query,
+                },
+                onError,
+            );
         },
     };
 }

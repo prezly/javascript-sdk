@@ -32,8 +32,8 @@ import {
     Subscriptions,
     Templates,
 } from './endpoints';
-import type { HeadersMap } from './http';
-import { createHttpClient } from './http';
+import type { ApiError } from './http';
+import { createHttpClient, type HeadersMap } from './http';
 
 const DEFAULT_BASE_URL = 'https://api.prezly.com';
 
@@ -42,6 +42,7 @@ export interface ClientOptions {
     baseUrl?: string;
     headers?: HeadersMap;
     fetch?: Fetch;
+    onError?: (error: ApiError) => void;
 }
 
 export interface Client {
@@ -83,9 +84,10 @@ export function createClient({
     baseUrl = DEFAULT_BASE_URL,
     headers = {},
     fetch,
+    onError,
 }: ClientOptions): Client {
     const api = createDeferredJobsApiClient(
-        createApiClient(createHttpClient({ fetch, baseUrl }), {
+        createApiClient(createHttpClient({ fetch, baseUrl, onError }), {
             accessToken,
             headers,
         }),
