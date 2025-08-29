@@ -7,7 +7,7 @@ import {
     NETWORK_PROBLEM_ERROR_MESSAGE,
 } from './constants';
 import { createUrlWithQuery } from './lib';
-import type { Method, HeadersMap, ApiResponse } from './types';
+import type { ApiResponse, HeadersMap, Method } from './types';
 import { HttpCodes } from './types';
 
 function extractHeaders(headers: Headers): HeadersMap {
@@ -59,6 +59,7 @@ export async function createRequest<P = any>(
         payload?: object;
         query?: object;
     },
+    onError?: (error: ApiError) => void,
 ): Promise<ApiResponse<P>> {
     const { headers, method, payload, query } = options;
     try {
@@ -91,10 +92,14 @@ export async function createRequest<P = any>(
                 responsePayload = createFakeErrorPayload(response);
             }
 
-            throw new ApiError({
+            const error = new ApiError({
                 payload: responsePayload,
                 ...extractResponse(response),
             });
+
+            onError?.(error);
+
+            throw error;
         }
 
         const responsePayload =
