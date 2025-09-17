@@ -35,6 +35,10 @@ export interface UpdateRequest {
     is_click_tracking_enabled?: boolean;
 }
 
+export interface DuplicateOptions {
+    with_recipients?: boolean;
+}
+
 export interface RecipientsOperationResponse {
     campaign: Campaign;
     warnings: Warning[];
