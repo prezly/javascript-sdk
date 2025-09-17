@@ -13,6 +13,7 @@ import type {
     UpdateRequest,
     ListResponse,
     SearchOptions,
+    DuplicateOptions,
 } from './types';
 
 export type Client = ReturnType<typeof createClient>;
@@ -48,8 +49,13 @@ export function createClient(api: DeferredJobsApiClient) {
         return api.get<CampaignResponse>(`${routing.campaignsUrl}/${id}`);
     }
 
-    async function duplicate(id: Campaign['id']): Promise<CampaignResponse> {
-        return api.post<CampaignResponse>(`${routing.campaignsUrl}/${id}/duplicate`);
+    async function duplicate(
+        id: Campaign['id'],
+        options?: DuplicateOptions,
+    ): Promise<CampaignResponse> {
+        return api.post<CampaignResponse>(`${routing.campaignsUrl}/${id}/duplicate`, {
+            payload: options,
+        });
     }
 
     async function doDelete(id: Campaign['id']): Promise<void> {
