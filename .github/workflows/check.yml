@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build, Test & Prettier
+    name: Lint, Build & Test
 
     runs-on: ubuntu-latest
 
