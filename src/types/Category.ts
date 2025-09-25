@@ -114,7 +114,7 @@ type WithNonEmptyTranslation<T extends Category, LocaleCode extends Culture['cod
 function isNonEmpty(
     translation: Category.Translation | undefined,
 ): translation is NonEmptyTranslation {
-    return Boolean(translation && translation.name && translation.slug);
+    return Boolean(translation?.name && translation.slug);
 }
 
 function localeCode(locale: LocaleIdentifier): Culture['code'] {
