@@ -85,7 +85,7 @@ export async function createRequest<P = any>(
         if (!response.ok) {
             // Try to parse the response as JSON, if it contains any error messages
             // from backend. If not, fake the error message.
-            let responsePayload: undefined | ApiResponse<P>;
+            let responsePayload: any;
             try {
                 responsePayload = await response.json();
             } catch {
