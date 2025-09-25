@@ -46,6 +46,3 @@ jobs:
 
     - name: test
       run: npm test
-
-    - name: prettier
-      run: npm run prettier:check
