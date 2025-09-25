@@ -1,3 +1,14 @@
 {
-    "extends": ["@prezly/biome-config"]
+    "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+    "extends": ["@prezly/biome-config"],
+    "files": {
+        "includes": ["src/**"]
+    },
+    "linter": {
+        "rules": {
+            "suspicious": {
+                "noShadowRestrictedNames": "off"
+            }
+        }
+    }
 }
