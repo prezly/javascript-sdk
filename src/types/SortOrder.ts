@@ -120,7 +120,7 @@ function toString(arg: SortOrder | SortOrder.Column | SortOrder.Direction): stri
     return `${toString(arg.direction)}${arg.name}`;
 }
 
-function validateColumnName(name: string): void | never {
+function validateColumnName(name: string): undefined | never {
     if (name.length === 0) {
         throw new Error(`Invalid sort column name: '${name}'.`);
     }

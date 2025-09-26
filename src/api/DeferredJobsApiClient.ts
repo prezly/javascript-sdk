@@ -48,7 +48,8 @@ function handleDeferredJob<V = any, P = any>(
                     update(state.progress, state.value);
 
                     await sleep(JOB_STATUS_POLLING_INTERVAL);
-                } while (true); // eslint-disable-line no-constant-condition
+                    // biome-ignore lint/correctness/noConstantCondition: <This infinite loop is expected and safe. There are two return statements breaking it when needed>
+                } while (true);
             }
 
             resolve(response.payload);

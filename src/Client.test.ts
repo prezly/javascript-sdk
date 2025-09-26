@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import { vi, beforeEach, describe, expect, it, afterEach } from 'vitest';
 import type { MockResponseInitFunction } from 'vitest-fetch-mock';
 import createFetchMock from 'vitest-fetch-mock';

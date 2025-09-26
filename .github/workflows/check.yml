@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build, Test & Prettier
+    name: Lint, Build & Test
 
     runs-on: ubuntu-latest
 
@@ -46,6 +46,3 @@ jobs:
 
     - name: test
       run: npm test
-
-    - name: prettier
-      run: npm run prettier:check
