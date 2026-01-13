@@ -2,7 +2,16 @@ import type { UploadedImage } from '@prezly/uploads';
 
 import type { CultureRef, Newsroom, Pagination, Query, SortOrder } from '../../types';
 
-export interface ListOptions {
+export interface IncludeOptions<
+    Include extends keyof Newsroom.ExtraFields = keyof Newsroom.ExtraFields,
+> {
+    include?: Include[];
+}
+
+export interface ListOptions<
+    Include extends keyof Newsroom.ExtraFields = keyof Newsroom.ExtraFields,
+> {
+    include?: Include[];
     limit?: number;
     offset?: number;
     /**
@@ -12,15 +21,17 @@ export interface ListOptions {
     sortOrder?: SortOrder | string;
 }
 
-export interface SearchOptions extends ListOptions {
+export interface SearchOptions<
+    Include extends keyof Newsroom.ExtraFields = keyof Newsroom.ExtraFields,
+> extends ListOptions<Include> {
     /**
      * Filter query using Prezly JSON Query Language
      */
     query?: Query;
 }
 
-export interface ListResponse {
-    newsrooms: Omit<Newsroom, 'policies'>[];
+export interface ListResponse<T extends Newsroom = Newsroom> {
+    newsrooms: T[];
     pagination: Pagination;
     sort: string;
 }

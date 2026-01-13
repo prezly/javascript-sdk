@@ -105,25 +105,6 @@ export interface Newsroom extends NewsroomRef {
     custom_privacy_policy_link: string | null;
     custom_data_request_link: string | null;
 
-    policies: {
-        privacy_policy:
-            | {
-                  link: string;
-              }
-            | {
-                  content: string;
-                  origin: 'default' | 'custom';
-              };
-        cookie_policy:
-            | {
-                  link: string;
-              }
-            | {
-                  content: string;
-                  origin: 'default' | 'custom';
-              };
-    };
-
     tracking_policy: Newsroom.TrackingPolicy;
     onetrust_cookie_consent: {
         is_enabled: boolean;
@@ -232,5 +213,34 @@ export namespace Newsroom {
             return isArchived(arg.status);
         }
         return arg === Status.ARCHIVED;
+    }
+
+    export interface ExtraFields {
+        policies: {
+            privacy_policy:
+                | {
+                      link: string;
+                  }
+                | {
+                      content: string;
+                      origin: 'default' | 'custom';
+                  };
+            cookie_policy:
+                | {
+                      link: string;
+                  }
+                | {
+                      content: string;
+                      origin: 'default' | 'custom';
+                  };
+        };
+        draft_stories_number: number;
+        published_stories_number: number;
+        draft_campaigns_number: number;
+        scheduled_campaigns_number: number;
+        sent_campaigns_number: number;
+        draft_pitches_number: number;
+        sent_pitches_number: number;
+        online_coverage_number: number;
     }
 }
