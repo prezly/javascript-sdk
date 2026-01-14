@@ -31,11 +31,11 @@
         "query-string": "^6.14.1"
     },
     "devDependencies": {
-        "@babel/cli": "^7.19.3",
-        "@babel/core": "^7.7.2",
+        "@babel/cli": "^7.28.6",
+        "@babel/core": "^7.28.6",
         "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-        "@babel/preset-env": "^7.7.1",
-        "@babel/preset-typescript": "^7.18.6",
+        "@babel/preset-env": "^7.28.6",
+        "@babel/preset-typescript": "^7.28.5",
         "@biomejs/biome": "^2.2.4",
         "@prezly/biome-config": "^1.0.1",
         "@types/node": "^20.10.4",
