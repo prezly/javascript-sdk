@@ -42,9 +42,8 @@ type Formats = Story.FormatVersion[];
 type Exactly<Concrete, Abstract> = Concrete &
     Record<Exclude<keyof Concrete, keyof Abstract>, never>;
 
-type InferExtraFields<T> = T extends Required<IncludeOptions<infer I>>
-    ? Pick<Story.ExtraFields, I>
-    : unknown;
+type InferExtraFields<T> =
+    T extends Required<IncludeOptions<infer I>> ? Pick<Story.ExtraFields, I> : unknown;
 
 type MaybeArray<T> = T | T[];
 
