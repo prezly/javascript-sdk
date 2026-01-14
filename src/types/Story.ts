@@ -298,6 +298,11 @@ export namespace Story {
          * Number of pitches linked to this story.
          */
         'pitches.count': number;
+
+        /**
+         * Number of coverage entries linked to this story.
+         */
+        'coverage.count': number;
     }
 
     /*

@@ -329,10 +329,7 @@ export interface ChangeNewsroomUnsafeResponse {
     warnings: ChangeNewsroomWarning[];
 }
 
-const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE: Record<
-    keyof Omit<ExtendedStory, keyof Story>,
-    boolean
-> = {
+const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE = {
     thumbnail_image: true,
     header_image: true,
     preview_image: true,
@@ -342,9 +339,9 @@ const EXTENDED_STORY_INCLUDED_EXTRA_FIELDS_SHAPE: Record<
     content: true,
     attached_gallery_content: true,
     referenced_entities: true,
-}; // satisfies Record<keyof Omit<ExtendedStory, keyof Story>, boolean>; // TODO: Use Typescript `satisfies` operator, when it's out of beta
+} satisfies Record<keyof Omit<ExtendedStory, keyof Story>, boolean>;
 
-const ALL_EXTRA_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
+const ALL_EXTRA_FIELDS_SHAPE = {
     thumbnail_image: true,
     header_image: true,
     preview_image: true,
@@ -363,7 +360,8 @@ const ALL_EXTRA_FIELDS_SHAPE: Record<keyof Story.ExtraFields, boolean> = {
     referenced_entities: true,
     'campaigns.count': true,
     'pitches.count': true,
-}; // satisfies Record<keyof Story.OnDemandFields, boolean>; // TODO: Use Typescript `satisfies` operator, when it's out of beta
+    'coverage.count': true,
+} satisfies Record<keyof Story.ExtraFields, boolean>;
 
 export const ALL_EXTRA_FIELDS = Object.keys(
     ALL_EXTRA_FIELDS_SHAPE,
