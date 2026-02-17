@@ -41,6 +41,7 @@ export namespace EmailRecipient {
         UNSUBSCRIBED = 'unsubscribed',
         UNSUBSCRIBED_FROM_ALL_COMMUNICATIONS = 'unsubscribed_from_all_communications',
         DUPLICATE = 'duplicate',
+        SPAM_REPORTED = 'spam_reported',
     }
 
     export enum EmailAddressStatus {
@@ -48,6 +49,7 @@ export namespace EmailRecipient {
         BOUNCED = 'bounced',
         UNSUBSCRIBED = 'unsubscribed',
         UNSUBSCRIBED_FROM_ALL_COMMUNICATIONS = 'unsubscribed_from_all_communications',
+        SPAM_REPORTED = 'spam_reported',
     }
 
     export interface EmailAddressRecord {
