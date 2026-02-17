@@ -41,10 +41,23 @@ export function createClient(api: DeferredJobsApiClient) {
         return themes;
     }
 
+    async function update(
+        newsroomId: NewsroomId,
+        themeId: NewsroomThemeId,
+        settings: NewsroomThemePreset['settings'],
+    ): Promise<NewsroomThemePreset> {
+        const url = routing.newsroomThemesUrl.replace(':newsroom_id', String(newsroomId));
+        const { theme } = await api.patch<{ theme: NewsroomThemePreset }>(`${url}/${themeId}`, {
+            payload: settings,
+        });
+        return theme;
+    }
+
     return {
         apply,
         get,
         getActive,
         list,
+        update,
     };
 }
