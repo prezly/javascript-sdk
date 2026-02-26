@@ -46,7 +46,13 @@ export interface Contact {
     languages: Language[];
 
     primary_email: string | null;
+
+    /**
+     * @deprecated Please use `email_addresses` instead.
+     */
     emails: string[];
+
+    email_addresses: Contact.EmailAddress[];
     phone_numbers: Contact.PhoneNumber[];
     social: { type: Contact.SocialNetwork; username: string }[];
     function_name: string;
@@ -200,6 +206,12 @@ export namespace Contact {
     export interface PhoneNumber {
         number: string;
         type: PhoneNumber.Type;
+    }
+
+    export interface EmailAddress {
+        email_address: string;
+        is_active: boolean;
+        is_primary: boolean;
     }
 
     export namespace PhoneNumber {
