@@ -31,7 +31,7 @@ interface BaseContactPayload {
     languages?: string[];
     emails?: string[];
     email_addresses?: (Pick<Contact.EmailAddress, 'email_address'> &
-        Partial<Omit<Contact.EmailAddress, 'email_address'>>)[];
+        Partial<Contact.EmailAddress>)[];
     phone_numbers?: Contact.PhoneNumber[];
     urls?: string[];
     social_accounts?: { type: Contact.SocialNetwork; username: string }[];
