@@ -6,6 +6,7 @@ import type { UserRef } from './User';
 
 export interface Campaign {
     id: number;
+    type: 'campaign';
     author: UserRef;
     lifecycle_status: Campaign.LifecycleStatus;
     subject: string;
