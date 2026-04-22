@@ -81,6 +81,7 @@ export interface NewsroomRef {
 
 export interface Newsroom extends NewsroomRef {
     is_hub: boolean;
+    hub: { parent: Newsroom.HubPeer; siblings: Newsroom.HubPeer[] } | null;
     // extended details
     cultures: CultureRef[];
     campaigns_number: number;
@@ -140,6 +141,10 @@ export interface Newsroom extends NewsroomRef {
 }
 
 export namespace Newsroom {
+    export interface HubPeer extends NewsroomRef {
+        cultures: (CultureRef & { is_default: boolean })[];
+    }
+
     export enum Status {
         ACTIVE = 'active', // i.e. "Live"
         INACTIVE = 'inactive', // i.e. "Not live"
