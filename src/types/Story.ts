@@ -303,6 +303,11 @@ export namespace Story {
          * Number of coverage entries linked to this story.
          */
         'coverage.count': number;
+
+        /**
+         * Translations of this story that exist in other newsrooms (cross-site translations).
+         */
+        cross_site_translations: StoryRef[];
     }
 
     /*

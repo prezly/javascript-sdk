@@ -311,6 +311,7 @@ export type UnscheduleRequest = UnpublishRequest;
 export interface TranslateRequest {
     culture?: CultureRef['code'];
     auto?: boolean;
+    newsroom?: Newsroom['uuid'] | Newsroom['id'];
 }
 
 export interface MoveRequest {
@@ -361,6 +362,7 @@ const ALL_EXTRA_FIELDS_SHAPE = {
     'campaigns.count': true,
     'pitches.count': true,
     'coverage.count': true,
+    cross_site_translations: true,
 } satisfies Record<keyof Story.ExtraFields, boolean>;
 
 export const ALL_EXTRA_FIELDS = Object.keys(
