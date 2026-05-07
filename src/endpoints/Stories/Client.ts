@@ -228,7 +228,7 @@ export function createClient(api: DeferredJobsApiClient) {
         payload: TranslateRequest = {},
         options?: Exactly<Options, IncludeOptions & { formats?: Formats }>,
     ): Promise<ExtendedStory & InferExtraFields<Options>> {
-        const { culture, auto = false } = payload ?? {};
+        const { culture, auto = false, newsroom } = payload ?? {};
         const { include, formats } = options ?? {};
 
         const url = `${routing.storiesUrl}/${id}/translate`;
@@ -241,6 +241,7 @@ export function createClient(api: DeferredJobsApiClient) {
             payload: {
                 culture,
                 auto,
+                newsroom,
             },
         });
 
