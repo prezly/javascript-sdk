@@ -124,6 +124,7 @@ export interface Newsroom extends NewsroomRef {
     is_subscription_form_enabled: boolean;
     auto_create_contacts_from_subscribers: boolean;
     is_white_labeled: boolean;
+    redirect_to_canonical_url: boolean;
 
     is_plausible_enabled: boolean;
     plausible_site_id: string;
