@@ -13,7 +13,6 @@ export namespace Notification {
         INFO = 'info',
         WARNING = 'warning',
         DANGER = 'danger',
-        SETUP = 'setup',
     }
 
     export interface Action {
