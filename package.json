@@ -45,7 +45,7 @@
         "np": "^9.2.0",
         "rimraf": "^3.0.0",
         "typescript": "^5.3.3",
-        "vitest": "^1.2.2",
+        "vitest": "^4.1.8",
         "vitest-fetch-mock": "^0.2.2"
     },
     "scripts": {
